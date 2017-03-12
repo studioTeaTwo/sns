@@ -24,5 +24,12 @@ $ bundle install --path=vendor/bundle
 
 ## 起動
 
+* development(手元のmac)
 ```bash
 $ bundle exec rails server
+```
+
+* production(AWS)
+```bash
+$ bundle exec rake unicorn:start
+```
