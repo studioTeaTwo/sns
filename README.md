@@ -12,7 +12,16 @@
   $ sudo apt-get install -y postgresql
   $ sudo apt-get install aptitude
   $ sudo aptitude install libpq-dev
-  $ gem install pg -v '0.18.4'
+  ```
+* imagemagick
+  * macインストール
+  ``` bash
+  $ brew install imagemagick
+  ```
+  * ubuntuインストール
+  ``` bash
+  $ sudo apt-get update
+  $ sudo apt-get install imagemagick --fix-missing
   ```
 
 ## セットアップ
@@ -26,10 +35,14 @@ $ bundle install --path=vendor/bundle
 
 * development(手元のmac)
 ```bash
+$ rails db:migrate
+$ rails test
 $ bundle exec rails server
 ```
 
 * production(AWS)
 ```bash
+$ rails db:migrate
+$ rails test
 $ bundle exec rake unicorn:start
 ```

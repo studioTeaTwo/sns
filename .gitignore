@@ -21,5 +21,11 @@
 # Ignore Byebug command history file.
 .byebug_history
 
+# Ignore Spring files.
+/spring/*.pid
+
+# アップロードされたテスト画像を無視する
+/public/uploads
+
 # OS/editor
 .DS_Store
