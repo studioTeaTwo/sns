@@ -40,6 +40,7 @@ $ git clone <repo>
 
 * development(手元のmac)
 ```bash
+$ git pull
 $ bundle update
 $ bundle install --path vendor/bundle
 $ bundle exec rails db:migrate
@@ -49,6 +50,7 @@ $ bundle exec rails server
 
 * production(AWS)
 ```bash
+$ git pull
 $ bundle update
 $ bundle install --path vendor/bundle
 $ bundle exec rails db:migrate

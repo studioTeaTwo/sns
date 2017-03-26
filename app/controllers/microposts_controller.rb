@@ -5,7 +5,7 @@ class MicropostsController < ApplicationController
   def create
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
-      flash[:success] = "Micropost created!"
+      flash[:success] = "投稿できました!"
       redirect_to root_url
     else
       @feed_items = []
@@ -15,7 +15,7 @@ class MicropostsController < ApplicationController
 
   def destroy
     @micropost.destroy
-    flash[:success] = "Micropost deleted"
+    flash[:success] = "投稿は削除されました"
     #redirect_to request.referrer || root_url
     redirect_back(fallback_location: root_url)
   end
