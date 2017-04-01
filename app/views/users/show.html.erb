@@ -1,21 +1,61 @@
 <% provide(:title, @user.name) %>
-<div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
-      <h1>
+<aside>
+  <section class="user_info">
+    <div class="row">
+      <div class="user_name col-md-1">
         <%= gravatar_for @user %>
-        <%= @user.name %>
-      </h1>
-    </section>
-  </aside>
-  <div class="col-md-8">
-    <%= render 'follow_form' if logged_in? %>
-    <% if @user.microposts.any? %>
-      <h3>投稿 (<%= @user.microposts.count %>)</h3>
-      <ol class="microposts">
-        <%= render @microposts %>
-      </ol>
-      <%= will_paginate(@microposts, :previous_label => '<<', :next_label => '>>') %>
-    <% end %>
+        <h1>
+          <%= @user.name %>
+        </h1>
+        <p><%= @user.self_introduction %></p>
+      </div>
+      <div class="user_summary col-md-1">
+        <div class="row">
+          <p><%= @user.rank %></p>
+          <p><%= @user.title_of_honor %></p>
+        </div>
+        <div class="row">
+          <p>IgE: -- </p>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <%= render 'shared/stats' %>
+          </div>
+          <div class="col-md-2">
+            <%= render 'follow_form' if logged_in? %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</aside>
+<section class="user_contents">
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation">
+      <a aria-controls="tab_treatment_history" data-toggle="tab" href="#tab_treatment_history" role="tab">治療歴</a>
+    </li>
+    <li class="active" role="presentation">
+      <a aria-controls="tab_post_list" data-toggle="tab" href="#tab_post_list" role="tab">投稿</a>
+    </li>
+    <li role="presentation">
+      <a aria-controls="tab_stock_list" data-toggle="tab" href="#tab_stock_list" role="tab">ストック一覧</a>
+    </li>
+  </ul>
+  <div class="tab-content col-md-8">
+    <div class="tab-pane" id="tab_treatment_history" role="tabpanel">
+    </div>
+    <div class="tab-pane active" id="tab_post_list" role="tabpanel">
+      <% if @user.microposts.any? %>
+        <h3>投稿 (<%= @user.microposts.count %>)</h3>
+        <ol class="microposts">
+          <%= render @microposts %>
+        </ol>
+        <%= will_paginate(@microposts, :previous_label => '<<', :next_label => '>>') %>
+      <% else %>
+        <p>投稿がありません</p>
+      <% end %>
+    </div>
+    <div class="tab-pane" id="tab_stock_list" role="tabpanel">
+    </div>
   </div>
-</div>
+</section>
