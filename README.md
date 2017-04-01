@@ -4,6 +4,7 @@
 
 * Ruby version
 2.3.0
+* rbenv
 * bundler
 * postgreSQL
   * macインストール http://qiita.com/_daisuke/items/13996621cf51f835494b
@@ -29,6 +30,10 @@
   ``` bash
   $ sudo apt-get install libgmp3-dev
   ```
+  nokogiriがインストールできない場合
+  ``` bash
+  $ sudo apt-get install ruby-dev libxml2 libxml2-dev zlib1g-dev
+  ```
 
 ## セットアップ
 
@@ -51,10 +56,10 @@ $ bundle exec rails server
 * production(AWS)
 ```bash
 $ git pull
-$ bundle update
-$ bundle install --path vendor/bundle
-$ bundle exec rails db:migrate
-$ bundle exec rails test
-$ bundle exec rake unicorn:stop
-$ bundle exec rake unicorn:start
+$ rbenv exec bundle update
+$ rbenv exec bundle install --path vendor/bundle --without test development
+$ rbenv exec bundle exec rails db:migrate RAILS_ENV=production
+$ rbenv exec bundle exec rails test
+$ rbenv exec bundle exec rake unicorn:stop
+$ rbenv exec bundle exec rake unicorn:start
 ```
