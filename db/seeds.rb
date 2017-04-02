@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'as-duration'
 
 User.create!(name:  "Example User",
              email: "example@railstutorial.org",
@@ -16,10 +17,14 @@ User.create!(name:  "Example User",
   name  = Faker::Name.name
   email = "example-#{n+1}@railstutorial.org"
   password = "password"
+  test_date = Faker::Time.between(10.years.ago, Date.today, :day)
   User.create!(name:  name,
                email: email,
                password:              password,
                password_confirmation: password)
+  Ige.create!(user_id: n+1,
+              test_date: test_date,
+              ige_value: Random.rand(10 .. 3000))
 end
 
 # マイクロポスト           

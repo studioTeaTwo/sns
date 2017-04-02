@@ -117,7 +117,6 @@ footer {
 
 aside {
   section.user_info {
-    width: 100%;
     padding: 10px 0;
     margin-top: 20px;
     &:first-child {
@@ -138,6 +137,9 @@ aside {
     .user_summary {
       width: 70%;
       padding: 20px;
+      input.btn {
+        font-size: 0.8em;
+      }
     }
   }
 }

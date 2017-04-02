@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(page: params[:page])
+    @ige = Ige.where(user_id: @user).select("ige_value").order("test_date DESC").limit(1)
   end
 
   def new
@@ -17,7 +18,7 @@ class UsersController < ApplicationController
   end
   
   def create
-    @user = User.new(user_params)    # 実装は終わっていないことに注意!
+    @user = User.new(user_params)
     if @user.save
       log_in @user
       flash[:success] = "Welcome to the #{Constants::SITE_TITLE}!"

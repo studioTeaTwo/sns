@@ -10,7 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170401114756) do
+ActiveRecord::Schema.define(version: 20170402113409) do
+
+  create_table "iges", force: :cascade do |t|
+    t.integer  "user_id"
+    t.date     "test_date"
+    t.integer  "test_category"
+    t.decimal  "ige_value",                 precision: 4, scale: 20
+    t.integer  "ige_unit"
+    t.decimal  "allergen_housedust1_value"
+    t.integer  "allergen_housedust1_unit"
+    t.integer  "allergen_housedust1_class"
+    t.decimal  "allergen_housedust2_value"
+    t.integer  "allergen_housedust2_unit"
+    t.integer  "allergen_housedust2_class"
+    t.decimal  "allergen_sugi_value"
+    t.integer  "allergen_sugi_unit"
+    t.integer  "allergen_sugi_class"
+    t.decimal  "allergen_hinoki_value"
+    t.integer  "allergen_hinoki_unit"
+    t.integer  "allergen_hinoki_class"
+    t.decimal  "allergen_hannoki_value"
+    t.integer  "allergen_hannoki_unit"
+    t.integer  "allergen_hannoki_class"
+    t.decimal  "allergen_shirakanba_value"
+    t.integer  "allergen_shirakanba_unit"
+    t.integer  "allergen_shirakanba_class"
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
+    t.index ["user_id"], name: "index_iges_on_user_id"
+  end
 
   create_table "microposts", force: :cascade do |t|
     t.text     "content"
@@ -39,10 +68,10 @@ ActiveRecord::Schema.define(version: 20170401114756) do
     t.datetime "updated_at",                        null: false
     t.string   "password_digest"
     t.boolean  "admin",             default: false
-    t.string   "self_introduction"
-    t.decimal  "rank"
+    t.text     "self_introduction"
+    t.integer  "rank"
     t.string   "title_of_honor"
-    t.decimal  "latest_ige_id"
+    t.integer  "latest_ige_id"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

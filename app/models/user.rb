@@ -8,7 +8,7 @@ class User < ApplicationRecord
                                    dependent:   :destroy
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
-  #has_many :iges, dependent:   :destroy
+  has_many :iges, dependent: :destroy
   
   before_save { self.email = email.downcase }
   #before_save {email.downcase!}
@@ -19,6 +19,7 @@ class User < ApplicationRecord
       uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  validates :self_introduction, length: { maximum: 140 }
   
   # 渡された文字列のハッシュ値を返す
   def User.digest(string)

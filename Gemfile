@@ -12,11 +12,15 @@ gem 'turbolinks',   '5.0.1'
 gem 'jbuilder',     '2.4.1'
 gem 'bcrypt',       '3.1.11'
 gem 'faker',        '1.6.6'
+gem 'as-duration'
 gem 'carrierwave',             '0.11.2'
 gem 'mini_magick',             '4.5.1'
 gem 'fog',                     '1.38.0'
 gem 'will_paginate',           '3.1.0'
 gem 'bootstrap-will_paginate', '0.0.10'
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
+gem "font-awesome-rails"
 
 group :development, :test do
   gem 'sqlite3', '1.3.11'

@@ -1,34 +1,50 @@
 <% provide(:title, @user.name) %>
 <aside>
   <section class="user_info">
-    <div class="row">
-      <div class="user_name col-md-1">
-        <%= gravatar_for @user %>
-        <h1>
-          <%= @user.name %>
-        </h1>
-        <p><%= @user.self_introduction %></p>
-      </div>
-      <div class="user_summary col-md-1">
-        <div class="row">
-          <p><%= @user.rank %></p>
-          <p><%= @user.title_of_honor %></p>
+    <div class="container">
+      <div class="row">
+
+        <div class="user_name col-md-2">
+          <%= gravatar_for @user %>
+          <h1>
+            <%= @user.name %>
+          </h1>
+          <p><%= @user.self_introduction %></p>
         </div>
-        <div class="row">
-          <p>IgE: -- </p>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <%= render 'shared/stats' %>
+
+        <div class="user_summary col-md-8">
+          <div class="row">
+            <div class="col-md-2">
+              <p><%= @user.rank %></p>
+            </div>
+            <div class="col-md-4">
+              <p><%= @user.title_of_honor %></p>
+            </div>
           </div>
-          <div class="col-md-2">
-            <%= render 'follow_form' if logged_in? %>
+          <div class="row">
+            <p>総IgE:
+              <% if @ige.exists? %>
+                <%= @ige[0].ige_value.to_s %>
+              <% else %>
+                --
+              <% end %>
+            </p>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <%= render 'shared/stats' %>
+            </div>
+            <div class="col-md-2">
+              <%= render 'follow_form' if logged_in? %>
+            </div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 </aside>
+
 <section class="user_contents">
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation">

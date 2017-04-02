@@ -13,8 +13,10 @@
   <%= f.label :password_confirmation, 'パスワードの確認' %>
   <%= f.password_field :password_confirmation, class: 'form-control' %>
 
-  <%= f.label :self_introduction, '自己紹介' %>
-  <%= f.text_area :self_introduction, class: 'form-control' %>
+  <% unless current_page?(signup_path) %>
+    <%= f.label :self_introduction, '自己紹介' %>
+    <%= f.text_area :self_introduction, class: 'form-control' %>
+  <% end %>
 
   <%= f.submit yield(:button_text), class: "btn btn-primary" %>
 <% end %>
