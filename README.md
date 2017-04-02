@@ -63,3 +63,10 @@ $ rbenv exec bundle exec rake assets:precompile RAILS_ENV=production
 $ rbenv exec bundle exec rails test
 $ rbenv exec bundle exec rake unicorn:stop && rbenv exec bundle exec rake unicorn:start
 ```
+
+* production(heroku)
+```bash
+$ git push heroku master
+$ heroku run rails db:migrate
+$ heroku run rails test
+```
