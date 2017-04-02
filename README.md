@@ -59,7 +59,7 @@ $ git pull
 $ rbenv exec bundle update
 $ rbenv exec bundle install --path vendor/bundle --without test development
 $ rbenv exec bundle exec rails db:migrate RAILS_ENV=production
+$ rbenv exec bundle exec ralis assets:precompile RAILS_ENV=production
 $ rbenv exec bundle exec rails test
-$ rbenv exec bundle exec rake unicorn:stop
-$ rbenv exec bundle exec rake unicorn:start
+$ rbenv exec bundle exec rake unicorn:stop && rbenv exec bundle exec rake unicorn:start
 ```

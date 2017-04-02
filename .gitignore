@@ -27,5 +27,9 @@
 # アップロードされたテスト画像を無視する
 /public/uploads
 
+# Ignore Production build
+.ruby-version
+/public/assets
+
 # OS/editor
 .DS_Store
