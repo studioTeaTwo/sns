@@ -9,7 +9,7 @@ class MicropostsController < ApplicationController
       redirect_to root_url
     else
       @feed_items = []
-      render 'static_pages/home'
+      redirect_to root_url
     end
   end
 
@@ -17,7 +17,7 @@ class MicropostsController < ApplicationController
     @micropost.destroy
     flash[:success] = "投稿は削除されました"
     #redirect_to request.referrer || root_url
-    redirect_back(fallback_location: root_url)
+    redirect_back(:fallback_location => root_url)
   end
 
   private
@@ -27,7 +27,7 @@ class MicropostsController < ApplicationController
     end
     
     def correct_user
-      @micropost = current_user.microposts.find_by(id: params[:id])
+      @micropost = current_user.microposts.find_by(:id => params[:id])
       redirect_to root_url if @micropost.nil?
     end
 end

@@ -23,8 +23,8 @@
           </div>
           <div class="row">
             <p>総IgE:
-              <% if @ige.exists? %>
-                <%= @ige[0].ige_value.to_s %>
+              <% if @iges.exists? %>
+                <%= @iges[0].ige_value.to_s %>
               <% else %>
                 --
               <% end %>
@@ -47,10 +47,10 @@
 
 <section class="user_contents">
   <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation">
+    <li class="active" role="presentation">
       <a aria-controls="tab_treatment_history" data-toggle="tab" href="#tab_treatment_history" role="tab">治療歴</a>
     </li>
-    <li class="active" role="presentation">
+    <li role="presentation">
       <a aria-controls="tab_post_list" data-toggle="tab" href="#tab_post_list" role="tab">投稿</a>
     </li>
     <li role="presentation">
@@ -58,9 +58,19 @@
     </li>
   </ul>
   <div class="tab-content col-md-8">
-    <div class="tab-pane" id="tab_treatment_history" role="tabpanel">
+    <div class="tab-pane active" id="tab_treatment_history" role="tabpanel">
+      <% if @iges.any? %>
+        <ol class="iges">
+          <%= render @iges %>
+        </ol>
+        <% if @iges.count > 5 %>
+          <%= link_to 'もっと見る', iges_path %>
+        <% end %>
+      <% else %>
+        まだ記録がありません
+      <% end %>
     </div>
-    <div class="tab-pane active" id="tab_post_list" role="tabpanel">
+    <div class="tab-pane" id="tab_post_list" role="tabpanel">
       <% if @user.microposts.any? %>
         <h3>投稿 (<%= @user.microposts.count %>)</h3>
         <ol class="microposts">

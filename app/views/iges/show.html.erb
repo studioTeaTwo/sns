@@ -1,2 +1,12 @@
-<h1>Iges#show</h1>
-<p>Find me in app/views/iges/show.html.erb</p>
+<% provide(:title, 'IgE') %>
+<h1><%= @ige.test_date %></h1>
+
+<p>検査種類: <%= get_test_category_name(@ige.test_category) %></p>
+<p>総IgE値: <%= @ige.ige_value %></p>
+<p>ハウスダスト1: <%= @ige.allergen_housedust1_value %> <%= get_unit_name(@ige.allergen_housedust1_unit) %></p>
+<p>スギ: <%= @ige.allergen_sugi_value %> <%= get_unit_name(@ige.allergen_sugi_unit) %></p>
+
+<%= button_to '修正する', edit_ige_path, method: :get, class: "btn btn-primary" %>
+<%= button_to '削除する', @ige, method: :delete, class: "btn btn-danger", data: { confirm: "削除してよいですか?" } %>
+
+<%= button_to 'ホームへ戻る', root_path, method: :get, class: "btn" %>

@@ -1,2 +1,8 @@
-<h1>Iges#edit</h1>
-<p>Find me in app/views/iges/edit.html.erb</p>
+<% provide(:title, '検査修正') %>
+<% provide(:url, ige_path) %>
+<% provide(:button_text, '修正する') %>
+<h1>IgE検査結果の修正</h1>
+
+<%= render 'ige_form' %>
+
+<%= button_to 'ホームへ戻る', root_path, method: :get, class: "btn" %>

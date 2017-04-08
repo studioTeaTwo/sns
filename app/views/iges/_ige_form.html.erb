@@ -1,0 +1,95 @@
+<%= form_for(@ige, url: yield(:url)) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+　<div class="container">
+
+    <div class="row">
+    	<div class="col-md-2">
+        <div class="input-group date datepicker">
+          <%= f.label :test_date, '検査日付' %>
+          <%= f.text_field :test_date, class: 'form-control' %>
+           <span class="input-group-addon">
+             <span class="fa fa-calendar"></span>
+          </span>
+        </div>
+      </div>
+      <div class="col-md-4">
+    	  <%= f.label :test_category, '検査項目名' %>
+    	  <%= f.select :test_category, [["IgE(非特異的IgE)〔CLEIA〕", "0"],
+    	                                ["IgE(非特異的IgE)〔FEIA〕", "1"],
+    	                                ["特異的IgE(MAST36アレルゲン)", "2"],
+    	                                ["汎用セット スクリーニング16　内科・呼吸器系", "3"],
+    	                                ["汎用セット スクリーニング16　小児科", "4"],
+    	                                ["汎用セット スクリーニング16　耳鼻科", "5"],
+    	                                ["汎用セット スクリーニング16　皮膚科", "6"],
+    	                                ["汎用セット コンビネーション6", "7"],
+    	                                ["特異的IgE(ミックスアレルゲン) ", "8"],
+    	                                ["特異的IgE(シングルアレルゲン) ", "9"],
+    	                                ["アトピー鑑別試験 (12種吸入性アレルゲン) ", "10"],
+    	                                ["特異的IgE (C-PAC16アレルゲン) 小児用 ", "11"],
+    	                                ["特異的IgE (C-PAC16アレルゲン) アトピー性皮膚炎用 ", "12"],
+    	                                ["特異的IgE (C-PAC16アレルゲン) 鼻炎・喘息用 ", "13"],
+    	                                ["特異的IgE (C-PAC5アレルゲン)　小児除去食用 ", "14"], 
+    	                                ["特異的IgE(マルチアレルゲン) ", "15"],
+    	                                ["特異的IgE(シングルアレルゲン) ", "16"],
+    	                                ["特異的IgE(Ara h 2)(ピーナッツ由来) ", "17"]], 
+    	                            class: 'form-control' %>
+      </div>
+      <div class="col-md-2">
+    	  <%= f.label :ige_value, '測定値（総IgE値）' %>
+    	  <%= f.text_field :ige_value, class: 'form-control' %>
+      </div>
+      <div class="col-md-1">
+    	  <%= f.label :ige_unit, '単位' %>
+    	  <%= f.select :ige_unit, [["IU/mL", "0"], 
+    	                            ["UA/mL", "1"], 
+    	                            ["IUA/mL", "2"], 
+    	                            ["LC", "3"]],
+    	                        class: 'form-control' %>
+    	</div>
+    </div>
+
+    <div class="row">
+    	<div class="col-md-2">
+    		<%= f.label :allergen_housedust1_value, 'ハウスダスト1' %>
+    		<%= f.text_field :allergen_housedust1_value, class: 'form-control' %>
+      </div>
+      <div class="col-md-1">
+    		<%= f.label :allergen_housedust1_unit, '単位' %>
+    		<%= f.select :allergen_housedust1_unit, [["IU/mL", "0"], 
+    		                        ["UA/mL", "1"], 
+    		                        ["IUA/mL", "2"], 
+    		                        ["LC", "3"]],
+    		                    class: 'form-control' %>
+      </div>
+      <div class="col-md-1">
+    		<%= f.label :allergen_housedust1_class, 'クラス' %>
+    		<%= f.text_field :allergen_housedust1_class, class: 'form-control' %>
+    	</div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2">
+        <%= f.label :allergen_sugi_value, 'スギ' %>
+        <%= f.text_field :allergen_sugi_value, class: 'form-control' %>
+      </div>
+      <div class="col-md-1">
+        <%= f.label :allergen_sugi_unit, '単位' %>
+        <%= f.select :allergen_sugi_unit, [["IU/mL", "0"], 
+                                ["UA/mL", "1"], 
+                                ["IUA/mL", "2"], 
+                                ["LC", "3"]],
+                            class: 'form-control' %>
+      </div>
+      <div class="col-md-1">
+        <%= f.label :allergen_sugi_class, 'クラス' %>
+        <%= f.text_field :allergen_sugi_class, class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <%= f.submit  yield(:button_text), class: "btn btn-primary" %>
+    <div class="col-md-2">
+  </div>
+
+<% end %>

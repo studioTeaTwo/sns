@@ -1,2 +1,14 @@
-<h1>Iges#index</h1>
-<p>Find me in app/views/iges/index.html.erb</p>
+<% provide(:title, 'IgE一覧') %>
+<h1>歴史</h1>
+
+<ul class="iges">
+  <% if @iges.any? %>
+    <%= render @iges %>
+  <% else %>
+    まだ記録がありません
+  <% end %>
+</ul>
+
+<%= will_paginate(:previous_label => '<<', :next_label => '>>') %>
+
+<%= button_to 'ホームへ戻る', root_path, method: :get, class: "btn" %>
