@@ -21,6 +21,8 @@ gem 'bootstrap-will_paginate', '0.0.10'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 gem "font-awesome-rails"
+gem 'webpacker', github: 'rails/webpacker'
+gem 'rb-readline'
 
 group :development, :test do
   gem 'sqlite3', '1.3.11'
