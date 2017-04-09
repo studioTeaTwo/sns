@@ -63,7 +63,7 @@
         <ol class="iges">
           <%= render @iges %>
         </ol>
-        <% if @iges.count > 5 %>
+        <% unless @more.nil? %>
           <%= link_to 'もっと見る', iges_path %>
         <% end %>
       <% else %>

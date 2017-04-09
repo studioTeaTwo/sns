@@ -8,7 +8,7 @@
     </section>
     <section class="iges">
       <%= render @iges %>
-      <% if @iges.count > 5 %>
+      <% unless @more.nil? %>
         <%= link_to 'もっと見る', iges_path %>
       <% end %>
       <%= button_to 'IgE検査結果を記録する', new_ige_path, method: :get, class: "btn btn-primary" %>
