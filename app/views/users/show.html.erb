@@ -24,7 +24,7 @@
           <div class="row">
             <p>総IgE:
               <% if @iges.exists? %>
-                <%= @iges[0].ige_value.to_s %>
+                <%= @iges[0].ige_value.to_s %> <%= get_unit_name(@iges[0].ige_unit) %>
               <% else %>
                 --
               <% end %>
