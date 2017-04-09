@@ -7,12 +7,27 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'as-duration'
 
-User.create!(name:  "Example User",
-             email: "example@railstutorial.org",
-             password:              "foobar",
-             password_confirmation: "foobar",
+User.create!(name:  "allergy.blue",
+             email: "allergy.blue@gmail.com",
+             password:              "allergy",
+             password_confirmation: "allergy",
              admin: true)
+10.times do |n|
+  test_date = Faker::Time.between(10.years.ago, Date.today, :day)
+  Ige.create!(user_id: 1,
+              test_date: test_date,
+              test_category: Random.rand(0 .. 17),
+              ige_value: Random.rand(10 .. 3000),
+              ige_unit: 0)
+end
 
+#User.create!(name:  "Example User",
+#             email: "example@railstutorial.org",
+#             password:              "foobar",
+#             password_confirmation: "foobar",
+#             admin: true)
+
+# モブキャラ
 99.times do |n|
   name  = Faker::Name.name
   email = "example-#{n+1}@railstutorial.org"
@@ -24,7 +39,9 @@ User.create!(name:  "Example User",
                password_confirmation: password)
   Ige.create!(user_id: n+1,
               test_date: test_date,
-              ige_value: Random.rand(10 .. 3000))
+              test_category: Random.rand(0 .. 17),
+              ige_value: Random.rand(10 .. 3000),
+              ige_unit: 0)
 end
 
 # マイクロポスト           
