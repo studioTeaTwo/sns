@@ -12,9 +12,12 @@ class CreateIges < ActiveRecord::Migration[5.0]
       t.decimal :allergen_housedust2_value
       t.integer :allergen_housedust2_unit
       t.integer :allergen_housedust2_class
-      t.decimal :allergen_yakehyoudani_value
-      t.integer :allergen_yakehyoudani_unit
-      t.integer :allergen_yakehyoudani_class 
+      t.decimal :allergen_yakehyouhidani_value
+      t.integer :allergen_yakehyouhidani_unit
+      t.integer :allergen_yakehyouhidani_class
+      t.decimal :allergen_konahyouhidani_value
+      t.integer :allergen_konahyouhidani_unit
+      t.integer :allergen_konahyouhidani_class 
       t.decimal :allergen_sugi_value
       t.integer :allergen_sugi_unit
       t.integer :allergen_sugi_class
@@ -27,6 +30,9 @@ class CreateIges < ActiveRecord::Migration[5.0]
       t.decimal :allergen_shirakanba_value
       t.integer :allergen_shirakanba_unit
       t.integer :allergen_shirakanba_class
+      t.decimal :allergen_gyougisiba_value
+      t.integer :allergen_gyougisiba_unit
+      t.integer :allergen_gyougisiba_class
       t.decimal :allergen_harugaya_value
       t.integer :allergen_harugaya_unit
       t.integer :allergen_harugaya_class

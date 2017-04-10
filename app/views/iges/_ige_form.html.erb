@@ -4,6 +4,8 @@
 
   <!-- 検査概要 -->
   <div class="row">
+
+  　<!-- 検査日付 -->
   	<div class="col-md-2">
       <%= f.label :test_date, '検査日付' %>
       <div class="input-group date datepicker">
@@ -13,6 +15,8 @@
         </span>
       </div>
     </div>
+
+    <!-- 検査項目名 -->
     <div class="col-md-4">
   	  <%= f.label :test_category, '検査項目名' %>
   	  <%= f.select :test_category, [[IgesHelper::TEST_CATEGORY[0], "0"],
@@ -36,6 +40,7 @@
   	                            class: 'form-control' %>
     </div>
 
+　　<!-- 総IgE値 -->
     <div class="col-md-2">
   	  <%= f.label :ige_value, '測定値（総IgE値）' %>
   	  <%= f.text_field :ige_value, class: 'form-control' %>
@@ -50,13 +55,15 @@
   	</div>
   </div>
 
-　<!-- 検査項目 -->
+　<!-- 構成アレルゲン -->
   <% IgesHelper::ALLERGEN_SORT.each do |name| %>
   <div class="row">
-    <div class="card">
+    <div class="card <%= name["en"] %>">
 
+      <!-- アレルゲン名 -->
       <h4><%= name["ja"] %></h4>
 
+      <!-- 検査結果 -->
       <div class="row">
         <div class="col-md-4">
           <%= f.label "allergen_#{name["en"]}_value".intern, '検査値' %>
@@ -72,6 +79,7 @@
         </div>
       </div>
 
+      <!-- クラス -->
       <div class="row">
         <div class="col-md-2">
           <%= f.label "allergen_#{name["en"]}_class".intern, 'クラス' %>

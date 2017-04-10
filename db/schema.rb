@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20170402113409) do
     t.integer  "user_id"
     t.date     "test_date"
     t.integer  "test_category"
-    t.decimal  "ige_value",                    precision: 24, scale: 20
+    t.decimal  "ige_value",                     precision: 24, scale: 20
     t.integer  "ige_unit"
     t.decimal  "allergen_housedust1_value"
     t.integer  "allergen_housedust1_unit"
@@ -24,9 +24,12 @@ ActiveRecord::Schema.define(version: 20170402113409) do
     t.decimal  "allergen_housedust2_value"
     t.integer  "allergen_housedust2_unit"
     t.integer  "allergen_housedust2_class"
-    t.decimal  "allergen_yakehyoudani_value"
-    t.integer  "allergen_yakehyoudani_unit"
-    t.integer  "allergen_yakehyoudani_class"
+    t.decimal  "allergen_yakehyouhidani_value"
+    t.integer  "allergen_yakehyouhidani_unit"
+    t.integer  "allergen_yakehyouhidani_class"
+    t.decimal  "allergen_konahyouhidani_value"
+    t.integer  "allergen_konahyouhidani_unit"
+    t.integer  "allergen_konahyouhidani_class"
     t.decimal  "allergen_sugi_value"
     t.integer  "allergen_sugi_unit"
     t.integer  "allergen_sugi_class"
@@ -39,6 +42,9 @@ ActiveRecord::Schema.define(version: 20170402113409) do
     t.decimal  "allergen_shirakanba_value"
     t.integer  "allergen_shirakanba_unit"
     t.integer  "allergen_shirakanba_class"
+    t.decimal  "allergen_gyougisiba_value"
+    t.integer  "allergen_gyougisiba_unit"
+    t.integer  "allergen_gyougisiba_class"
     t.decimal  "allergen_harugaya_value"
     t.integer  "allergen_harugaya_unit"
     t.integer  "allergen_harugaya_class"
@@ -144,8 +150,8 @@ ActiveRecord::Schema.define(version: 20170402113409) do
     t.decimal  "allergen_latex_value"
     t.integer  "allergen_latex_unit"
     t.integer  "allergen_latex_class"
-    t.datetime "created_at",                                             null: false
-    t.datetime "updated_at",                                             null: false
+    t.datetime "created_at",                                              null: false
+    t.datetime "updated_at",                                              null: false
     t.index ["user_id"], name: "index_iges_on_user_id"
   end
 
