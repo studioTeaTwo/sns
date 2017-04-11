@@ -15,5 +15,9 @@ Rails.application.routes.draw do
   end
   resources :microposts,          only: [:create, :destroy]
   resources :relationships,       only: [:create, :destroy]
-  resources :iges
+  resources :iges do
+    member do
+      get 'quote'
+    end
+  end
 end

@@ -21,6 +21,14 @@ class IgesController < ApplicationController
     @ige = current_user.iges.find(params[:id]);
   end
 
+  def quote
+    @ige = current_user.iges.find(params[:id]);
+    # 引用登録で必ず再記入させたい項目をnilにする
+    @ige.id = nil
+    @ige.test_date = nil
+    @ige.ige_value = nil
+  end
+
   def update
     @ige = Ige.find(params[:id])
     if @ige.update_attributes(ige_params)
