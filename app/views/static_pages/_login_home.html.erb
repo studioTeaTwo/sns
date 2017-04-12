@@ -7,6 +7,7 @@
       <%= render 'shared/stats' %>
     </section>
     <section class="iges">
+      <%= line_chart @chart_data %>
       <%= render @iges %>
       <% unless @more.nil? %>
         <%= link_to 'もっと見る', iges_path %>

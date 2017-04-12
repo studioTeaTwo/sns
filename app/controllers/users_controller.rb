@@ -10,10 +10,11 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(:page => params[:page])
-    @iges = @user.iges.order("test_date DESC").limit(5)
+    @iges = @user.iges.order('test_date DESC').limit(5)
     if @user.iges.count > 5
       @more = true
     end
+    @chart_data = @user.iges.select(:test_date, :ige_value).group(:test_date).sum(:ige_value)
   end
 
   def new

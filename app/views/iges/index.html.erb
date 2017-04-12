@@ -3,6 +3,7 @@
 
 <ul class="iges">
   <% if @iges.any? %>
+    <%= line_chart @chart_data %>
     <%= render @iges %>
   <% else %>
     まだ記録がありません
