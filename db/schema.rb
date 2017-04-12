@@ -184,7 +184,7 @@ ActiveRecord::Schema.define(version: 20170402113409) do
     t.boolean  "admin",             default: false
     t.text     "self_introduction"
     t.integer  "rank"
-    t.string   "title_of_honor"
+    t.integer  "title_of_honor"
     t.integer  "latest_ige_id"
     t.index ["email"], name: "index_users_on_email", unique: true
   end

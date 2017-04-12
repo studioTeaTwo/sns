@@ -11,6 +11,8 @@ User.create!(name:  "allergy.blue",
              email: "allergy.blue@gmail.com",
              password:              "allergy",
              password_confirmation: "allergy",
+             rank: 1,
+             title_of_honor: 11,
              admin: true)
 10.times do |n|
   test_date = Faker::Time.between(10.years.ago, Date.today, :day)
@@ -32,16 +34,21 @@ end
   name  = Faker::Name.name
   email = "example-#{n+1}@railstutorial.org"
   password = "password"
-  test_date = Faker::Time.between(10.years.ago, Date.today, :day)
   User.create!(name:  name,
                email: email,
                password:              password,
-               password_confirmation: password)
-  Ige.create!(user_id: n+1,
-              test_date: test_date,
-              test_category: Random.rand(0 .. 17),
-              ige_value: Random.rand(10 .. 3000),
-              ige_unit: 0)
+               password_confirmation: password,
+               rank: Random.rand(0 .. 4),
+               title_of_honor: Random.rand(10 .. 14))
+  ige_count = Random.rand(1 .. 10)
+  ige_count.times do |n2|
+    test_date = Faker::Time.between(10.years.ago, Date.today, :day)
+    Ige.create!(user_id: n+1,
+                test_date: test_date,
+                test_category: Random.rand(0 .. 17),
+                ige_value: Random.rand(10 .. 3000),
+                ige_unit: 0)
+  end
 end
 
 # マイクロポスト           
