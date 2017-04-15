@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     if @user.iges.count > 5
       @more = true
     end
-    @chart_data = @user.iges.select(:test_date, :ige_value).group(:test_date).sum(:ige_value)
+    @chart_data_history = @user.iges.select(:test_date, :ige_value).group(:test_date).sum(:ige_value)
   end
 
   def new

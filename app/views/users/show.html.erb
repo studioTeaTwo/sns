@@ -24,12 +24,19 @@
           <div class="row">
             <p>総IgE:
               <% if @iges.exists? %>
-                <%= @iges[0].ige_value.to_s %> <%= get_unit_name(@iges[0].ige_unit) %>
+                <%= @iges[0].ige_value.to_s %>
               <% else %>
                 --
               <% end %>
             </p>
-            <%= line_chart @chart_data %>
+          </div>
+          <div class="row">
+              <% @user.attributes.each do |allergen_sort| %>
+                <% allergen_sort_name = allergen_sort[0].match(/(allergen_sort_.+)/) %>
+                <% if allergen_sort_name && allergen_sort[1] %>
+                  <p><%= IgesHelper::ALLERGEN_SORT[allergen_sort_name.to_s] %>の絵に差し替える</p>
+                <% end %>
+              <% end %>
           </div>
           <div class="row">
             <div class="col-md-4">
@@ -61,6 +68,7 @@
   <div class="tab-content col-md-8">
     <div class="tab-pane active" id="tab_treatment_history" role="tabpanel">
       <% if @iges.any? %>
+        <%= line_chart @chart_data_history %>
         <ol class="iges">
           <%= render @iges %>
         </ol>

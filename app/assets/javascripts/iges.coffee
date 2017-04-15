@@ -241,7 +241,7 @@ syncValue = ->
 $ ->
   do ->
     # showページ
-    $('#allergen_sort').on
+    $('#allergen_detail').on
       'load': presentAllergen('.allergen', '#test_category', 'div')
     # editページ
     # 検査項目のイベント

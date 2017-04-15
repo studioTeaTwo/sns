@@ -7,7 +7,7 @@ class StaticPagesController < ApplicationController
       if current_user.iges.count > 3
         @more = true
       end
-      @chart_data = current_user.iges.select(:test_date, :ige_value).group(:test_date).sum(:ige_value)
+      @chart_data_history = current_user.iges.select(:test_date, :ige_value).group(:test_date).sum(:ige_value)
     end
   end
 

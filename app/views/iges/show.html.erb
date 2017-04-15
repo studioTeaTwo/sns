@@ -8,9 +8,9 @@
   <p>総IgE値: <%= @ige.ige_value %> <%= get_unit_name(@ige.ige_unit) %></p>
 </section>
 
-<!-- 構成アレルゲン -->
-<section id="allergen_sort">
-  <% IgesHelper::ALLERGEN_SORT.each do |name| %>
+<!-- アレルゲン詳細 -->
+<section id="allergen_detail">
+  <% IgesHelper::ALLERGEN_DETAIL.each do |name| %>
     <% unless @ige["allergen_#{name["en"]}_value"].blank? %>
       <p class="allergen <%= name["en"] %>"><%= name["ja"] %>: <%= @ige["allergen_#{name["en"]}_value"] %> <%= get_unit_name(@ige["allergen_#{name["en"]}_unit"]) %></p>
     <% else %>

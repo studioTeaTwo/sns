@@ -616,14 +616,39 @@ ActiveRecord::Schema.define(version: 20170402113409) do
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
     t.string   "password_digest"
-    t.boolean  "admin",             default: false
+    t.boolean  "admin",                     default: false
     t.text     "self_introduction"
     t.integer  "rank"
     t.integer  "title_of_honor"
     t.integer  "latest_ige_id"
+    t.integer  "latest_ige_value"
+    t.boolean  "allergen_sort_inekakafun",  default: false
+    t.boolean  "allergen_sort_zassoukafun", default: false
+    t.boolean  "allergen_sort_jyukikafun",  default: false
+    t.boolean  "allergen_sort_chiri",       default: false
+    t.boolean  "allergen_sort_dani",        default: false
+    t.boolean  "allergen_sort_shinkin",     default: false
+    t.boolean  "allergen_sort_saikin",      default: false
+    t.boolean  "allergen_sort_doubutsu",    default: false
+    t.boolean  "allergen_sort_syokugyou",   default: false
+    t.boolean  "allergen_sort_tamago",      default: false
+    t.boolean  "allergen_sort_nyuuseihin",  default: false
+    t.boolean  "allergen_sort_gyorui",      default: false
+    t.boolean  "allergen_sort_koukakurui",  default: false
+    t.boolean  "allergen_sort_ikatako",     default: false
+    t.boolean  "allergen_sort_komugi",      default: false
+    t.boolean  "allergen_sort_komugiigai",  default: false
+    t.boolean  "allergen_sort_nikurui",     default: false
+    t.boolean  "allergen_sort_mamerui",     default: false
+    t.boolean  "allergen_sort_kudamonorui", default: false
+    t.boolean  "allergen_sort_sonota",      default: false
+    t.boolean  "allergen_sort_kiseityuu",   default: false
+    t.boolean  "allergen_sort_yakubutsu",   default: false
+    t.boolean  "allergen_sort_kontyuu",     default: false
+    t.boolean  "allergen_sort_maruti",      default: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

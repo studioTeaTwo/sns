@@ -15,10 +15,39 @@ module IgesHelper
       'View 39'
     ]
 
-  # アレルゲン項目 
+  # アレルゲン種類
+  ALLERGEN_SORT =
+    {
+      'allergen_sort_inekakafun' => 'イネ科植物花粉',
+      'allergen_sort_zassoukafun' => '雑草花粉',
+      'allergen_sort_jyukikafun' => '樹木花粉',
+      'allergen_sort_chiri' => '室内塵',     
+      'allergen_sort_dani' => 'ダニ',      
+      'allergen_sort_shinkin' => '真菌',   
+      'allergen_sort_saikin' => '動物',    
+      'allergen_sort_doubutsu' => '職業性アレルゲン',  
+      'allergen_sort_syokugyou' => '卵', 
+      'allergen_sort_tamago' => '乳製品',    
+      'allergen_sort_nyuuseihin' => '魚類',
+      'allergen_sort_gyorui' => '甲殻類',    
+      'allergen_sort_koukakurui' => 'イカ・タコ',
+      'allergen_sort_ikatako' => '穀類（小麦）',   
+      'allergen_sort_komugi' => '穀類（小麦以外）',    
+      'allergen_sort_komugiigai' => '肉類',
+      'allergen_sort_nikurui' => '豆類',   
+      'allergen_sort_mamerui' => '果物類',   
+      'allergen_sort_kudamonorui' => '野菜',
+      'allergen_sort_sonota' => 'その他',    
+      'allergen_sort_kiseityuu' => '寄生虫', 
+      'allergen_sort_yakubutsu' => '薬物', 
+      'allergen_sort_kontyuu' => '昆虫',   
+      'allergen_sort_maruti' => 'マルチアレルゲン'
+    }
+
+  # アレルゲン詳細 
   # 項目の参考:http://data.medience.co.jp/allergy/allergy_ctg.cgi?ctg=1
   # 英名の参考:http://plaza.umin.ac.jp/~kuhp-kensa/reference/item/6444.html
-  ALLERGEN_SORT = 
+  ALLERGEN_DETAIL = 
     [
       {'en' => 'harugaya',           'ja' => 'ハルガヤ', 'category' => '吸入性アレルゲン（花粉）', 'sort' => 'イネ科植物花粉'},
       {'en' => 'gyougishiba',        'ja'  => 'ギョウギシバ', 'category' => '吸入性アレルゲン（花粉）', 'sort' => 'イネ科植物花粉'},
