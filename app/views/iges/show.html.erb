@@ -11,8 +11,8 @@
 <!-- アレルゲン詳細 -->
 <section id="allergen_detail">
   <% IgesHelper::ALLERGEN_DETAIL.each do |name| %>
-    <% unless @ige["allergen_#{name["en"]}_value"].blank? %>
-      <p class="allergen <%= name["en"] %>"><%= name["ja"] %>: <%= @ige["allergen_#{name["en"]}_value"] %> <%= get_unit_name(@ige["allergen_#{name["en"]}_unit"]) %></p>
+    <% unless @ige["allergen_#{name["en"]}_class"].blank? %>
+      <p class="allergen <%= name["en"] %>"><%= name["ja"] %>: クラス<%= @ige["allergen_#{name["en"]}_class"] %></p>
     <% else %>
       <p class="allergen <%= name["en"] %>"><%= name["ja"] %>: -- </p>
     <% end %>

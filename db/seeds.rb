@@ -23,7 +23,7 @@ User.create!( name:  "allergy.blue",
   test_date = Faker::Time.between(10.years.ago, Date.today, :day)
   Ige.create!(user_id: 1,
               test_date: test_date,
-              test_category: Random.rand(0 .. 17),
+              test_category: Random.rand(0 .. 10),
               ige_value: Random.rand(10 .. 3000),
               ige_unit: 0)
 end
@@ -50,7 +50,7 @@ end
     test_date = Faker::Time.between(10.years.ago, Date.today, :day)
     Ige.create!(user_id: n+1,
                 test_date: test_date,
-                test_category: Random.rand(0 .. 17),
+                test_category: Random.rand(0 .. 10),
                 ige_value: Random.rand(10 .. 3000),
                 ige_unit: 0)
   end

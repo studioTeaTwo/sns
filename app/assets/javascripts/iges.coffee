@@ -233,11 +233,6 @@ presentAllergen = (selector, currentTarget, element) ->
     show(allergens[test_category])
   else $(selector).show()
 
-syncValue = ->
-  selectedValue = $('#ige_ige_unit').val()
-  for name in allergens.all
-    $("select[id=ige_allergen_#{name}_unit]").val(selectedValue)
-
 $ ->
   do ->
     # showページ
@@ -248,7 +243,3 @@ $ ->
     $('#ige_test_category').on
       'load': presentAllergen('.card', '#ige_test_category', 'select')
       'change': (e) -> presentAllergen('.card', '#ige_test_category', 'select')
-    # アレルゲン項目のイベント
-    $('#ige_ige_unit').on
-      'load': syncValue()
-      'change': (e) -> syncValue()

@@ -46,7 +46,7 @@ class IgesController < ApplicationController
   end
 
   def index
-    @iges = current_user.iges.paginate(:page => params[:page])
+    @iges = current_user.iges.order("test_date DESC").paginate(:page => params[:page])
     @chart_data = current_user.iges.select(:test_date, :ige_value).group(:test_date).sum(:ige_value)
   end
 

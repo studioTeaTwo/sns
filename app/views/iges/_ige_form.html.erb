@@ -62,25 +62,18 @@
 
       <!-- 検査結果 -->
       <div class="row">
-        <div class="col-md-4">
-          <%= f.label "allergen_#{name["en"]}_value".intern, '検査値' %>
-          <%= f.text_field "allergen_#{name["en"]}_value".intern, class: 'form-control allergen_value', placeholder: "(ex.100)" %>
-        </div>
-        <div class="col-md-1">
-          <%= f.label "allergen_#{name["en"]}_unit".intern, '単位' %>
-          <%= f.select "allergen_#{name["en"]}_unit".intern, [[IgesHelper::TEST_UNIT[0], "0"], 
-                                                              [IgesHelper::TEST_UNIT[1], "1"], 
-                                                              [IgesHelper::TEST_UNIT[2], "2"], 
-                                                              [IgesHelper::TEST_UNIT[3], "3"]],
-                                                          class: 'form-control input-sm test_unit' %>
-        </div>
-      </div>
-
-      <!-- クラス -->
-      <div class="row">
         <div class="col-md-2">
-          <%= f.label "allergen_#{name["en"]}_class".intern, 'クラス' %>
-          <%= f.text_field "allergen_#{name["en"]}_class".intern, class: 'form-control input-sm' %>
+          <%= f.label "allergen_#{name["en"]}_class".intern, '検査結果（クラス）' %>
+          <%= f.select "allergen_#{name["en"]}_class".intern, [
+                                                               ["0", "0"], 
+                                                               ["1", "1"], 
+                                                               ["2", "2"], 
+                                                               ["3", "3"], 
+                                                               ["4", "4"], 
+                                                               ["5", "5"], 
+                                                               ["6", "6"]
+                                                              ],
+                                                class: 'form-control input-sm' %>
         </div>
       </div>
 
