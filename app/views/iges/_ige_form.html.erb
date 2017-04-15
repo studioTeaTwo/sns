@@ -19,7 +19,8 @@
     <!-- 検査項目名 -->
     <div class="col-md-4">
   	  <%= f.label :test_category, '検査項目名' %>
-  	  <%= f.select :test_category, [[IgesHelper::TEST_CATEGORY[0], "0"],
+  	  <%= f.select :test_category, [
+                                    [IgesHelper::TEST_CATEGORY[0], "0"],
   	                                [IgesHelper::TEST_CATEGORY[1], "1"],
   	                                [IgesHelper::TEST_CATEGORY[2], "2"],
   	                                [IgesHelper::TEST_CATEGORY[3], "3"],
@@ -29,14 +30,8 @@
   	                                [IgesHelper::TEST_CATEGORY[7], "7"],
   	                                [IgesHelper::TEST_CATEGORY[8], "8"],
   	                                [IgesHelper::TEST_CATEGORY[9], "9"],
-  	                                [IgesHelper::TEST_CATEGORY[10], "10"],
-  	                                [IgesHelper::TEST_CATEGORY[11], "11"],
-  	                                [IgesHelper::TEST_CATEGORY[12], "12"],
-  	                                [IgesHelper::TEST_CATEGORY[13], "13"],
-  	                                [IgesHelper::TEST_CATEGORY[14], "14"], 
-  	                                [IgesHelper::TEST_CATEGORY[15], "15"],
-  	                                [IgesHelper::TEST_CATEGORY[16], "16"],
-  	                                [IgesHelper::TEST_CATEGORY[17], "17"]], 
+  	                                [IgesHelper::TEST_CATEGORY[10], "10"]
+                                   ],
   	                            class: 'form-control' %>
     </div>
 
@@ -59,6 +54,8 @@
   <% IgesHelper::ALLERGEN_SORT.each do |name| %>
   <div class="row">
     <div class="card <%= name["en"] %>">
+
+      <p><%= name["category"] %> - <%= name["sort"] %></p>
 
       <!-- アレルゲン名 -->
       <h4><%= name["ja"] %></h4>
