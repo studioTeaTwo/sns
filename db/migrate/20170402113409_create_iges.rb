@@ -6,6 +6,30 @@ class CreateIges < ActiveRecord::Migration[5.0]
       t.integer :test_category
       t.decimal :ige_value, precision: 24, scale: 20
       t.integer :ige_unit
+      t.boolean :allergen_sort_inekakafun,  default: false
+      t.boolean :allergen_sort_zassoukafun, default: false
+      t.boolean :allergen_sort_jyukikafun,  default: false
+      t.boolean :allergen_sort_chiri,       default: false
+      t.boolean :allergen_sort_dani,        default: false
+      t.boolean :allergen_sort_shinkin,     default: false
+      t.boolean :allergen_sort_saikin,      default: false
+      t.boolean :allergen_sort_doubutsu,    default: false
+      t.boolean :allergen_sort_syokugyou,   default: false
+      t.boolean :allergen_sort_tamago,      default: false
+      t.boolean :allergen_sort_nyuuseihin,  default: false
+      t.boolean :allergen_sort_gyorui,      default: false
+      t.boolean :allergen_sort_koukakurui,  default: false
+      t.boolean :allergen_sort_ikatako,     default: false
+      t.boolean :allergen_sort_komugi,      default: false
+      t.boolean :allergen_sort_komugiigai,  default: false
+      t.boolean :allergen_sort_nikurui,     default: false
+      t.boolean :allergen_sort_mamerui,     default: false
+      t.boolean :allergen_sort_kudamonorui, default: false
+      t.boolean :allergen_sort_sonota,      default: false
+      t.boolean :allergen_sort_kiseityuu,   default: false
+      t.boolean :allergen_sort_yakubutsu,   default: false
+      t.boolean :allergen_sort_kontyuu,     default: false
+      t.boolean :allergen_sort_maruti,      default: false
       t.integer :allergen_harugaya_class
       t.integer :allergen_gyougishiba_class
       t.integer :allergen_kamogaya_class

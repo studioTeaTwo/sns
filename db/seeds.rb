@@ -7,25 +7,29 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'as-duration'
 
-User.create!( name:  "allergy.blue",
+User.create!( 
+              name:  "allergy.blue",
               email: "allergy.blue@gmail.com",
               password:              "allergy",
               password_confirmation: "allergy",
               rank: 1,
               title_of_honor: 11,
-              latest_ige_value: 400,
-              allergen_sort_chiri: true,
-              allergen_sort_dani: true,
-              allergen_sort_saikin: true,
-              allergen_sort_komugi: true,
-              admin: true)
+              latest_ige_id: 1,
+              admin: true
+              )
 10.times do |n|
   test_date = Faker::Time.between(10.years.ago, Date.today, :day)
-  Ige.create!(user_id: 1,
+  Ige.create!(
+              user_id: 1,
               test_date: test_date,
               test_category: Random.rand(0 .. 10),
               ige_value: Random.rand(10 .. 3000),
-              ige_unit: 0)
+              ige_unit: 0,
+              allergen_sort_chiri: true,
+              allergen_sort_dani: true,
+              allergen_sort_saikin: true,
+              allergen_sort_komugi: true
+              )
 end
 
 #User.create!(name:  "Example User",

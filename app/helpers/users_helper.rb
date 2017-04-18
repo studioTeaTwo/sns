@@ -8,7 +8,7 @@ module UsersHelper
     image_tag(gravatar_url, alt: user.name, class: "gravatar")
   end
 
-  def getRankName(rank)
+  def get_rank_name(rank)
     case rank
     when 0 then 'Dランク'
     when 1 then 'Cランク'
@@ -18,7 +18,7 @@ module UsersHelper
     end
   end
 
-  def getTitleOfHonor(rank)
+  def get_title_of_honor(rank)
     case rank
     when 10 then 'ふつーの人'
     when 11 then 'アレルギーサラリーマン'
