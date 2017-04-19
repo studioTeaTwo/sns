@@ -36,8 +36,10 @@
   <% end %>
 </section>
 
-<%= button_to '修正する', edit_ige_path, method: :get, class: "btn btn-primary" %>
-<%= button_to '引用登録する', quote_ige_path, method: :get, class: "btn btn-primary" %>
-<%= button_to '削除する', @ige, method: :delete, class: "btn btn-danger", data: { confirm: "削除してよいですか?" } %>
+<% if @ige.user_id == current_user.id %>
+  <%= button_to '修正する', edit_ige_path, method: :get, class: "btn btn-primary" %>
+  <%= button_to '引用登録する', quote_ige_path, method: :get, class: "btn btn-primary" %>
+  <%= button_to '削除する', @ige, method: :delete, class: "btn btn-danger", data: { confirm: "削除してよいですか?" } %>
+<% end %>
 
 <%= button_to 'ホームへ戻る', root_path, method: :get, class: "btn" %>

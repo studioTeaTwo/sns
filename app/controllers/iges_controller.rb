@@ -7,10 +7,8 @@ class IgesController < ApplicationController
 
   def create
     @ige = current_user.iges.build(ige_params)
-    reset_allergen_sort(@ige)
-    allergen_possession(ige_params.to_h).each do |allergen_sort|
-      @ige[allergen_sort] = true
-    end
+    addition_params = calc_allergen_possession(ige_params.to_h)
+    @ige.update(addition_params)
     ActiveRecord::Base.transaction do
       if @ige.save
         # 最新IgE検査の更新(プロフィールやユーザー検索のため)
@@ -29,7 +27,7 @@ class IgesController < ApplicationController
   end
 
   def show
-    @ige = current_user.iges.find(params[:id]);
+    @ige = Ige.find(params[:id]);
   end
 
   def edit
@@ -46,12 +44,8 @@ class IgesController < ApplicationController
 
   def update
     @ige = Ige.find(params[:id])
-    possession_params = initial_allergen_sort
-    allergen_possession(ige_params.to_h).each do |allergen_sort|
-      possession_params[allergen_sort] = true
-    end
-    ige_params.to_h.update(possession_params)
-    if @ige.update_attributes(ige_params)
+    addition_params = calc_allergen_possession(ige_params.to_h)
+    if @ige.update_attributes(addition_params)
       flash[:success] = "記録が修正されました"
       redirect_to root_path
     else
@@ -270,18 +264,16 @@ class IgesController < ApplicationController
                                   )
     end
 
-    def reset_allergen_sort(ige_data)
-      ige_data.attributes.each do |item|
-        if item[0].match(/(allergen_sort.+)/) then ige_data[item[0]] = false end
-      end
-      ige_data
-    end
-
-    def initial_allergen_sort
+    def calc_allergen_possession(test_data)
       hash = {}
+      # リセットする
       ALLERGEN_SORT.keys.each do |k|
         hash[k] = false
       end
-      hash
+      # 保有アレルゲンを判定する
+      allergen_possessions(test_data).each do |allergen_sort|
+        hash[allergen_sort] = true
+      end
+      test_data.update(hash)
     end
 end

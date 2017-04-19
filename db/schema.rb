@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20170402113409) do
     t.boolean  "allergen_sort_nikurui",                                       default: false
     t.boolean  "allergen_sort_mamerui",                                       default: false
     t.boolean  "allergen_sort_kudamonorui",                                   default: false
+    t.boolean  "allergen_sort_yasai",                                         default: false
     t.boolean  "allergen_sort_sonota",                                        default: false
     t.boolean  "allergen_sort_kiseityuu",                                     default: false
     t.boolean  "allergen_sort_yakubutsu",                                     default: false

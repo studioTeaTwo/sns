@@ -25,6 +25,7 @@ class CreateIges < ActiveRecord::Migration[5.0]
       t.boolean :allergen_sort_nikurui,     default: false
       t.boolean :allergen_sort_mamerui,     default: false
       t.boolean :allergen_sort_kudamonorui, default: false
+      t.boolean :allergen_sort_yasai,       default: false
       t.boolean :allergen_sort_sonota,      default: false
       t.boolean :allergen_sort_kiseityuu,   default: false
       t.boolean :allergen_sort_yakubutsu,   default: false
