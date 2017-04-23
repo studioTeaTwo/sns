@@ -3,6 +3,7 @@ class CreateIges < ActiveRecord::Migration[5.0]
     create_table :iges do |t|
       t.references :user, foreign_key: true
       t.date :test_date
+      t.boolean :latest_test_result, default: false
       t.integer :test_category
       t.decimal :ige_value, precision: 24, scale: 20
       t.integer :ige_unit

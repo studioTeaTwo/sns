@@ -10,14 +10,20 @@ class IgesController < ApplicationController
     addition_params = calc_allergen_possession(ige_params.to_h)
     @ige.update(addition_params)
     ActiveRecord::Base.transaction do
-      if @ige.save
-        # 最新IgE検査の更新(プロフィールやユーザー検索のため)
-        @latest_ige = current_user.iges.order("test_date DESC").limit(1)
-        if ige_params[:test_date] >= @latest_ige[0][:test_date].to_s
-          params = {}
-          params['latest_ige_id'] = @latest_ige[0][:id]
-          current_user.update_attributes(params)
+      # 最新IgE検査の更新(プロフィールやユーザー検索のため)
+      @current_iges = current_user.iges.order("test_date DESC").limit(1)
+      if ige_params[:test_date] >= @current_iges[0][:test_date].to_s
+        @ige[:latest_test_result] = true
+        @current_iges do |ige|
+          ige.update_attributes({:latest_test_result => false})
         end
+      else
+        # 今回のIgE検査は最新では無い
+        @ige[:latest_test_result] = false
+      end
+
+      # 今回のIge検査を登録
+      if @ige.save
         flash[:success] = "あなたの歴史に刻まれました"
         redirect_to root_path
       else

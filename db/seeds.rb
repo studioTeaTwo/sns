@@ -14,13 +14,28 @@ User.create!(
               password_confirmation: "allergy",
               rank: 1,
               title_of_honor: 11,
-              latest_ige_id: 1,
               admin: true
               )
+# 最新IgE検査の登録
+latest_test_date = Faker::Time.between(1.months.ago, Date.today, :day)
+Ige.create!(
+            user_id: 1,
+            latest_test_result: true,
+            test_date: latest_test_date,
+            test_category: Random.rand(0 .. 10),
+            ige_value: Random.rand(10 .. 3000),
+            ige_unit: 0,
+            allergen_sort_chiri: true,
+            allergen_sort_dani: true,
+            allergen_sort_saikin: true,
+            allergen_sort_komugi: true
+            )
+# その他のIgE検査結果
 10.times do |n|
-  test_date = Faker::Time.between(10.years.ago, Date.today, :day)
+  test_date = Faker::Time.between(10.years.ago, 1.months.ago, :day)
   Ige.create!(
               user_id: 1,
+              latest_test_result: false,
               test_date: test_date,
               test_category: Random.rand(0 .. 10),
               ige_value: Random.rand(10 .. 3000),
@@ -49,10 +64,26 @@ end
                password_confirmation: password,
                rank: Random.rand(0 .. 4),
                title_of_honor: Random.rand(10 .. 14))
+  # 最新IgE検査の登録
+  latest_test_date = Faker::Time.between(1.months.ago, Date.today, :day)
+  Ige.create!(
+              user_id: n+2,
+              latest_test_result: true,
+              test_date: latest_test_date,
+              test_category: Random.rand(0 .. 10),
+              ige_value: Random.rand(10 .. 3000),
+              ige_unit: 0,
+              allergen_sort_chiri: true,
+              allergen_sort_dani: true,
+              allergen_sort_gyorui: true,
+              allergen_sort_inekakafun: true
+              )
+  # その他のIgE検査結果
   ige_count = Random.rand(1 .. 10)
   ige_count.times do |n2|
-    test_date = Faker::Time.between(10.years.ago, Date.today, :day)
-    Ige.create!(user_id: n+1,
+    test_date = Faker::Time.between(10.years.ago, 1.months.ago, :day)
+    Ige.create!(user_id: n+2,
+                latest_test_result: false,
                 test_date: test_date,
                 test_category: Random.rand(0 .. 10),
                 ige_value: Random.rand(10 .. 3000),

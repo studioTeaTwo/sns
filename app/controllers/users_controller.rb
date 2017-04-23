@@ -4,15 +4,17 @@ class UsersController < ApplicationController
   before_action :admin_user,     only: :destroy
   
   def index
-     @users = User.paginate(:page => params[:page])
+     # オススメの検索条件のユーザーを示す
+     # とりあえず　1.同じアレルゲン持ち、2.IgEが同ランク程度のユーザー、3.ランダムの順に20件作成する
+     # @users = User.paginate(:page => params[:page])
+     #@users = User.joins(:iges).where(latest_ige_id: :id).select("users.*").paginate(:page => params[:page])
+     @users = User.joins("LEFT OUTER JOIN iges ON users.latest_ige_id = iges.id")
   end
   
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(:page => params[:page])
-    if @user.latest_ige_id
-      @latest_ige = Ige.find(@user.latest_ige_id)
-    end
+    @latest_ige = @user.iges.where(:latest_test_result => true)
     @iges = @user.iges.order('test_date DESC').limit(5)
     if @user.iges.count > 5
       @more = true

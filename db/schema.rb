@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20170402113409) do
   create_table "iges", force: :cascade do |t|
     t.integer  "user_id"
     t.date     "test_date"
+    t.boolean  "latest_test_result",                                          default: false
     t.integer  "test_category"
     t.decimal  "ige_value",                         precision: 24, scale: 20
     t.integer  "ige_unit"
@@ -268,7 +269,6 @@ ActiveRecord::Schema.define(version: 20170402113409) do
     t.text     "self_introduction"
     t.integer  "rank"
     t.integer  "title_of_honor"
-    t.integer  "latest_ige_id"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

@@ -23,16 +23,16 @@
           </div>
           <div class="row">
             <p>総IgE:
-              <% if @latest_ige %>
-                <%= @latest_ige.ige_value.to_s %>
+              <% if @latest_ige.exists? %>
+                <%= @latest_ige[0].ige_value.to_s %>
               <% else %>
                 --
               <% end %>
             </p>
           </div>
           <div class="row">
-            <% if @latest_ige %>
-              <% @latest_ige.attributes.each do |allergen_sort| %>
+            <% if @latest_ige.exists? %>
+              <% @latest_ige[0].attributes.each do |allergen_sort| %>
                 <% allergen_sort_name = allergen_sort[0].match(/(allergen_sort_.+)/) %>
                 <% if allergen_sort_name && allergen_sort[1] %>
                   <% if Rails.application.assets.find_asset("#{allergen_sort[0]}") %>
