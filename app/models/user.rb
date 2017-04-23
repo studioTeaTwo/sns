@@ -55,4 +55,8 @@ class User < ApplicationRecord
   def followed_by?(other_user)
     followers.include?(other_user)
   end
+
+  def self.search_by_allergen(allegen_sort_name)
+    @users = User.joins(:iges).merge(Ige.where(:latest_test_result => true, allegen_sort_name => true))
+  end
 end

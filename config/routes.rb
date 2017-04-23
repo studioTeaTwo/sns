@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
+  get '/search_by_allergen', to: 'users#search_by_allergen'
   resources :users do
     member do
       get :following, :followers
@@ -17,6 +18,7 @@ Rails.application.routes.draw do
   resources :relationships,       only: [:create, :destroy]
   resources :iges do
     member do
+      #引用登録
       get 'quote'
     end
   end

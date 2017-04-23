@@ -36,9 +36,9 @@
                 <% allergen_sort_name = allergen_sort[0].match(/(allergen_sort_.+)/) %>
                 <% if allergen_sort_name && allergen_sort[1] %>
                   <% if Rails.application.assets.find_asset("#{allergen_sort[0]}") %>
-                    <%= image_tag("#{allergen_sort[0]}.png", alt: "#{allergen_sort[0]}", :size => "32x32") %>
+                    <%= link_to image_tag("#{allergen_sort[0]}.png", alt: "#{allergen_sort[0]}", :size => "32x32"), search_by_allergen_path(:search_key => allergen_sort[0]) %>
                   <% else %>
-                    <p><%= IgesHelper::ALLERGEN_SORT[allergen_sort_name.to_s] %>の絵に差し替える</p>
+                    <p><%= link_to "#{IgesHelper::ALLERGEN_SORT[allergen_sort_name.to_s]}の絵に差し替える", search_by_allergen_path(:search_key => allergen_sort[0]) %></p>
                   <% end %>
                 <% end %>
               <% end %>

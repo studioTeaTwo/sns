@@ -5,10 +5,14 @@ class UsersController < ApplicationController
   
   def index
      # オススメの検索条件のユーザーを示す
-     # とりあえず　1.同じアレルゲン持ち、2.IgEが同ランク程度のユーザー、3.ランダムの順に20件作成する
-     # @users = User.paginate(:page => params[:page])
-     #@users = User.joins(:iges).where(latest_ige_id: :id).select("users.*").paginate(:page => params[:page])
-     @users = User.joins("LEFT OUTER JOIN iges ON users.latest_ige_id = iges.id")
+     # とりあえず　1.同じアレルゲン持ち、2.IgEが同ランク程度のユーザー、3.IgE検査がある人からランダムの順に20件作成する
+     @users = User.search_by_allergen('allergen_sort_inekakafun')
+  end
+
+  def search_by_allergen
+    puts params
+    @users = User.search_by_allergen(params[:search_key])
+    render 'index'
   end
   
   def show
@@ -74,8 +78,14 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, 
-                                   :self_introduction)
+      puts params
+      params.require(:user).permit(
+                                   :name,
+                                   :email,
+                                   :password,
+                                   :password_confirmation, 
+                                   :self_introduction
+                                   )
     end
     
     # beforeアクション
