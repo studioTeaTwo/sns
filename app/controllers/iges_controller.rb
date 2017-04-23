@@ -14,7 +14,7 @@ class IgesController < ApplicationController
       @current_iges = current_user.iges.order("test_date DESC").limit(1)
       if ige_params[:test_date] >= @current_iges[0][:test_date].to_s
         @ige[:latest_test_result] = true
-        @current_iges do |ige|
+        @current_iges.each do |ige|
           ige.update_attributes({:latest_test_result => false})
         end
       else
