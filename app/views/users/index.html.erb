@@ -1,10 +1,6 @@
 <% provide(:title, 'ユーザー一覧') %>
 <h1>ユーザー一覧</h1>
 
-<%= will_paginate(:previous_label => '<<', :next_label => '>>') %>
-
 <ul class="users">
   <%= render @users %>
 </ul>
-
-<%= will_paginate(:previous_label => '<<', :next_label => '>>') %>
