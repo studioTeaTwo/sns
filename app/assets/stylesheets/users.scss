@@ -1,3 +1,16 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+ul.search-allergen {
+	display:table;
+    width:auto;
+	li {
+		display: table-cell;
+		vertical-align: middle;
+		text-align: center;
+		a {
+		    display:block;
+		}
+	}
+}

@@ -4,17 +4,18 @@ class UsersController < ApplicationController
   before_action :admin_user,     only: :destroy
   
   def index
-     # オススメの検索条件のユーザーを示す
-     # とりあえず　1.同じアレルゲン持ち、2.IgEが同ランク程度のユーザー、3.IgE検査がある人からランダムの順に20件作成する
-     @users = User.search_by_allergen('allergen_sort_inekakafun')
+    # オススメの検索条件のユーザーを示す
+    # とりあえず　1.同じアレルゲン持ち、2.IgEが同ランク程度のユーザー、3.IgE検査がある人からランダムの順に20件作成する
+    @users = User.paginate(page: params[:page])
   end
 
   def search_by_allergen
-    puts params
-    @users = User.search_by_allergen(params[:search_key])
-    render 'index'
   end
-  
+
+  def search_result_by_allergen
+    @users = User.search_by_allergen(params[:search_key])
+  end
+
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(:page => params[:page])

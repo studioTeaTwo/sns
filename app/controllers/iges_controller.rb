@@ -11,7 +11,7 @@ class IgesController < ApplicationController
     @ige.update(addition_params)
     ActiveRecord::Base.transaction do
       # 最新IgE検査の更新(プロフィールやユーザー検索のため)
-      @current_iges = current_user.iges.order("test_date DESC").limit(1)
+      @current_iges = current_user.iges.order("test_date DESC")
       if ige_params[:test_date] >= @current_iges[0][:test_date].to_s
         @ige[:latest_test_result] = true
         @current_iges.each do |ige|
@@ -51,11 +51,26 @@ class IgesController < ApplicationController
   def update
     @ige = Ige.find(params[:id])
     addition_params = calc_allergen_possession(ige_params.to_h)
-    if @ige.update_attributes(addition_params)
-      flash[:success] = "記録が修正されました"
-      redirect_to root_path
-    else
-      render 'edit'
+    ActiveRecord::Base.transaction do
+      # 最新IgE検査の更新(プロフィールやユーザー検索のため)
+      @current_iges = current_user.iges.order("test_date DESC")
+      if (@ige[:id] == @current_iges[0][:id] && @ige[:test_date] >= @current_iges[1][:test_date]) || @ige[:test_date] >= @current_iges[0][:test_date]
+        addition_params[:latest_test_result] = true
+        @current_iges.each do |ige|
+          ige.update_attributes({:latest_test_result => false})
+        end
+      else
+        # 今回のIgE検査は最新では無い
+        addition_params[:latest_test_result] = false
+      end
+
+      # 今回のIge検査を登録
+      if @ige.update_attributes(addition_params)
+        flash[:success] = "記録が修正されました"
+        redirect_to root_path
+      else
+        render 'edit'
+      end
     end
   end
 

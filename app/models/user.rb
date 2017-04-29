@@ -57,6 +57,6 @@ class User < ApplicationRecord
   end
 
   def self.search_by_allergen(allegen_sort_name)
-    @users = User.joins(:iges).merge(Ige.where(:latest_test_result => true, allegen_sort_name => true))
+    @users = User.eager_load(:iges).where(:iges => {:latest_test_result => true, allegen_sort_name => true})
   end
 end

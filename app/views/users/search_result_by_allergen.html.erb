@@ -1,0 +1,12 @@
+<% provide(:title, 'ユーザー一覧') %>
+<h1>ユーザー一覧</h1>
+
+<table class="users table table-list">
+  <tbody>
+  <% if @users.any? %>
+    <%= render @users%>
+  <% else %>
+    <tr><td>該当ユーザーはいませんでした</td></tr>
+  <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,14 @@
+<% provide(:title, 'アレルゲン検索') %>
+<h1>アレルゲンから探す</h1>
+
+<ul class="search-allergen">
+  <% IgesHelper::ALLERGEN_SORT.collect do |k, v| %>
+  <li>
+    <% if Rails.application.assets.find_asset("#{k}") %>
+      <%= link_to image_tag("#{k}.png", alt: "#{k}", :size => "32x32"), search_result_by_allergen_path(:search_key => k) %>
+    <% else %>
+      <p><%= link_to "#{v}の絵に差し替える", search_result_by_allergen_path(:search_key => k) %></p>
+    <% end %>
+  </li>
+  <% end %>
+</ul>

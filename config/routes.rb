@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
-  get '/search_by_allergen', to: 'users#search_by_allergen'
   resources :users do
     member do
       get :following, :followers
@@ -22,4 +21,8 @@ Rails.application.routes.draw do
       get 'quote'
     end
   end
+  get '/search_by_ige', to: 'users#search_by_ige'
+  get '/search_result_by_ige', to: 'users#search_result_by_ige'
+  get '/search_by_allergen', to: 'users#search_by_allergen'
+  get '/search_result_by_allergen', to: 'users#search_result_by_allergen'
 end
