@@ -9,6 +9,10 @@
   </td>
 
   <td>
+    <%= user.iges[0].ige_value %>
+  </td>
+
+  <td>
     <% user.iges.each do |record| %>
       <%= render :partial => '/shared/possession_allergen', :locals => {:possession_allergen => record} %>
     <% end %>

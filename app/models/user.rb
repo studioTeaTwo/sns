@@ -56,7 +56,15 @@ class User < ApplicationRecord
     followers.include?(other_user)
   end
 
+  def self.search_by_newest
+    @users = User.eager_load(:iges).where(:iges => {:latest_test_result => true}).order('test_date DESC').limit(10)
+  end
+
+  def self.search_by_ige(from_ige, to_ige)
+    @users = User.eager_load(:iges).where(:iges => {:ige_value => (from_ige)..(to_ige), :latest_test_result => true})
+  end
+
   def self.search_by_allergen(allegen_sort_name)
-    @users = User.eager_load(:iges).where(:iges => {:latest_test_result => true, allegen_sort_name => true})
+    @users = User.eager_load(:iges).where(:iges => {allegen_sort_name => true, :latest_test_result => true})
   end
 end

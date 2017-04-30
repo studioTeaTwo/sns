@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     end
   end
   get '/search_by_ige', to: 'users#search_by_ige'
-  get '/search_result_by_ige', to: 'users#search_result_by_ige'
+  post '/search_result_by_ige', to: 'users#search_result_by_ige'
   get '/search_by_allergen', to: 'users#search_by_allergen'
   get '/search_result_by_allergen', to: 'users#search_result_by_allergen'
 end

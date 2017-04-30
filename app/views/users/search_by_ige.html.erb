@@ -1,0 +1,27 @@
+<% provide(:title, 'IgE検索') %>
+<h1>IgEが近い人を探す</h1>
+
+<%= form_for(@form, url: search_result_by_ige_path, html: { method: :post, class: 'form-inline search-ige', role: 'form' }) do |f| %>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="input-group">
+    	  <%= f.text_field :from_ige, class: 'form-control', placeholder: '探したいIgEの下限を入力してください' %>
+        <div class="input-group-addon">から</div>
+      </div>
+      <div class="input-group">
+    	  <%= f.text_field :to_ige, class: 'form-control', placeholder: '探したいIgEの上限を入力してください' %>
+        <div class="input-group-addon">まで</div>
+      </div>
+    </div>
+    <!-- ボタン -->
+    <div class="col-md-2">
+    <%= f.submit '探す', class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
+
+<table class="users">
+  <tbody>
+　　　<%= render @users %>
+  </tbody>
+</table>
