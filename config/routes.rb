@@ -25,4 +25,6 @@ Rails.application.routes.draw do
   post '/search_result_by_ige', to: 'users#search_result_by_ige'
   get '/search_by_allergen', to: 'users#search_by_allergen'
   get '/search_result_by_allergen', to: 'users#search_result_by_allergen'
+  get '/search_by_name', to: 'users#search_by_name'
+  post '/search_result_by_name', to: 'users#search_result_by_name'
 end

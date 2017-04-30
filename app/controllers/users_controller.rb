@@ -53,6 +53,22 @@ class UsersController < ApplicationController
     render 'search_result'
   end
 
+  def search_by_name
+    @user = User.new
+  end
+
+  def search_result_by_name
+    @user = User.find_by_name(user_params[:name])
+    @microposts = @user.microposts.paginate(:page => params[:page])
+    @latest_ige = @user.iges.where(:latest_test_result => true)
+    @iges = @user.iges.order('test_date DESC').limit(5)
+    if @user.iges.count > 5
+      @more = true
+    end
+    @chart_data_history = @user.iges.select(:test_date, :ige_value).group(:test_date).sum(:ige_value)
+    render 'show'
+  end
+
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(:page => params[:page])
