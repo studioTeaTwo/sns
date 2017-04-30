@@ -56,6 +56,8 @@ class User < ApplicationRecord
     followers.include?(other_user)
   end
 
+  # ユーザー検索
+
   def self.search_by_newest
     @users = User.eager_load(:iges).where(:iges => {:latest_test_result => true}).order('test_date DESC').limit(10)
   end
@@ -66,5 +68,9 @@ class User < ApplicationRecord
 
   def self.search_by_allergen(allegen_sort_name)
     @users = User.eager_load(:iges).where(:iges => {allegen_sort_name => true, :latest_test_result => true})
+  end
+
+  def self.search_by_name(user_name)
+    @user = User.find(:name => name)
   end
 end
