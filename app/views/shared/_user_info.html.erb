@@ -1,6 +1,0 @@
-<%= link_to gravatar_for(current_user, size: 50), current_user %>
-<h1><%= current_user.name %></h1>
-<p><%= get_rank_name(current_user.rank) %></p>
-<p><%= get_title_of_honor(current_user.title_of_honor) %></p>
-<span><%= link_to "プロフィールを見る", current_user %></span>
-<span><%= pluralize(current_user.microposts.count, "投稿") %></span>

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
+  get    '/home_logined',   to: 'users#home_logined'
   resources :users do
     member do
       get :following, :followers

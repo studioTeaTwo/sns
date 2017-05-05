@@ -1,5 +1,10 @@
-<% if logged_in? %>
-  <%= render 'login_home' %>
-<% else %>
-  <%= render 'general_home' %>
-<% end %>
+<div class="center jumbotron">
+  <h1>Welcome to <%= Constants::SITE_TITLE %></h1>
+
+  <h2>
+    This is the Allergy SNS for All Persons Concerned with Allergy.
+  </h2>
+
+  <%= image_tag("inquiry-300x300.png", alt: "inquiry") %>
+  <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+</div>

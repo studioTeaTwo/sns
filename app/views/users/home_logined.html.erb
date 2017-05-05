@@ -1,10 +1,10 @@
 <div class="row">
   <aside class="col-md-4">
     <section class="user_info">
-      <%= render 'shared/user_info' %>
+      <%= render 'users/user_info' %>
     </section>
     <section class="stats">
-      <%= render 'shared/stats' %>
+      <%= render 'relationships/stats' %>
     </section>
     <section class="iges">
       <%= line_chart @chart_data_history %>
@@ -15,11 +15,11 @@
       <%= button_to 'IgE検査結果を記録する', new_ige_path, method: :get, class: "btn btn-primary" %>
     </section>
     <section class="micropost_form">
-      <%= render 'shared/micropost_form' %>
+      <%= render 'microposts/micropost_form' %>
     </section>
   </aside>
   <div class="col-md-8">
     <h3>タイムライン</h3>
-    <%= render 'shared/feed' %>
+    <%= render 'microposts/feed' %>
   </div>
 </div>

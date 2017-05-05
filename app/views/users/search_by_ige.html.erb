@@ -5,11 +5,11 @@
   <div class="row">
     <div class="col-md-6">
       <div class="input-group">
-    	  <%= f.text_field :from_ige, class: 'form-control', placeholder: '探したいIgEの下限を入力してください' %>
+    	  <%= f.number_field :from_ige, class: 'form-control', placeholder: '探したいIgEの下限を入力してください' %>
         <div class="input-group-addon">から</div>
       </div>
       <div class="input-group">
-    	  <%= f.text_field :to_ige, class: 'form-control', placeholder: '探したいIgEの上限を入力してください' %>
+    	  <%= f.number_field :to_ige, class: 'form-control', placeholder: '探したいIgEの上限を入力してください' %>
         <div class="input-group-addon">まで</div>
       </div>
     </div>

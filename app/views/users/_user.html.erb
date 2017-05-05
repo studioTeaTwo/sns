@@ -14,7 +14,7 @@
 
   <td>
     <% user.iges.each do |record| %>
-      <%= render :partial => '/shared/possession_allergen', :locals => {:possession_allergen => record} %>
+      <%= render :partial => '/iges/possession_allergen', :locals => {:possession_allergen => record} %>
     <% end %>
   </td>
 </tr>

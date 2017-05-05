@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :following, :followers]
+  before_action :logged_in_user, only: [:home_logined, :index, :edit, :update, :destroy, :following, :followers]
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only: :destroy
   
@@ -59,25 +59,22 @@ class UsersController < ApplicationController
 
   def search_result_by_name
     @user = User.find_by_name(user_params[:name])
+    get_user_info @user
     @microposts = @user.microposts.paginate(:page => params[:page])
-    @latest_ige = @user.iges.where(:latest_test_result => true)
-    @iges = @user.iges.order('test_date DESC').limit(5)
-    if @user.iges.count > 5
-      @more = true
-    end
-    @chart_data_history = @user.iges.select(:test_date, :ige_value).group(:test_date).sum(:ige_value)
     render 'show'
+  end
+
+  def home_logined
+    @user = current_user
+    get_user_info @user
+    @micropost  = @user.microposts.build
+    @feed_items = @user.feed.paginate(page: params[:page])
   end
 
   def show
     @user = User.find(params[:id])
+    get_user_info @user
     @microposts = @user.microposts.paginate(:page => params[:page])
-    @latest_ige = @user.iges.where(:latest_test_result => true)
-    @iges = @user.iges.order('test_date DESC').limit(5)
-    if @user.iges.count > 5
-      @more = true
-    end
-    @chart_data_history = @user.iges.select(:test_date, :ige_value).group(:test_date).sum(:ige_value)
   end
 
   def new
@@ -159,5 +156,16 @@ class UsersController < ApplicationController
     # 管理者かどうか確認
     def admin_user
       redirect_to(root_url) unless current_user.admin?
+    end
+
+    # 共通メソッド
+
+    def get_user_info(user)
+      @latest_ige = user.iges.where(:latest_test_result => true)
+      @iges = user.iges.order('test_date DESC').limit(5)
+      if user.iges.count > 5
+        @more = true
+      end
+      @chart_data_history = user.iges.select(:test_date, :ige_value).group(:test_date).sum(:ige_value)
     end
 end
