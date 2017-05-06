@@ -11,7 +11,7 @@
     </div>
     <!-- ボタン -->
     <div class="col-md-2">
-    <%= f.submit '探す', class: "btn btn-primary" %>
+    <%= f.submit '探す', data: { disable_with: '探し中...' }, class: "btn btn-primary" %>
     </div>
   </div>
 <% end %>

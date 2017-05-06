@@ -3,7 +3,7 @@
   <div class="field">
     <%= f.text_area :content, placeholder: "文章を入力してください" %>
   </div>
-  <%= f.submit "投稿する", class: "btn btn-primary" %>
+  <%= f.submit "投稿する", data: { disable_with: '投稿中...' }, class: "btn btn-primary" %>
   <span class="picture">
     <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
   </span>

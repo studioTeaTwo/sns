@@ -2,5 +2,5 @@
 <h1>Contact</h1>
 <p>
   お問い合わせはこちらへお願いします。<br/>
-  <email>allergy.blue@gmail.com</email>
+  <%= mail_to 'allergy.blue@gmail.com', nil, subject: 'お問い合わせ' %>
 </p>

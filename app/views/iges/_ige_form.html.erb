@@ -29,7 +29,7 @@
 　　<!-- 総IgE値 -->
     <div class="col-md-2">
   	  <%= f.label :ige_value, '測定値（総IgE値）' %>
-  	  <%= f.text_field :ige_value, class: 'form-control' %>
+  	  <%= f.number_field :ige_value, class: 'form-control' %>
     </div>
     <div class="col-md-1">
   	  <%= f.label :ige_unit, '単位' %>
@@ -56,6 +56,7 @@
           <%= f.label "allergen_#{name["en"]}_class".intern, '検査結果（クラス）' %>
           <%= f.select "allergen_#{name["en"]}_class".intern,
                        7.times.map { |i| [i, i] },
+                       :prompt => "選択してください", 
                        class: 'form-control input-sm'
           %>
         </div>
@@ -67,7 +68,7 @@
 
 　<!-- ボタン -->
   <div class="col-md-2">
-    <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+    <%= f.submit yield(:button_text), data: { disable_with: '記録中...' }, class: "btn btn-primary" %>
   </div>
 
 <% end %>
