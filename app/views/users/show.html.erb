@@ -32,12 +32,12 @@
           </div>
           <div class="row">
             <% if @latest_ige.exists? %>
-              <%= render :partial => '/iges/possession_allergen', :locals => {:possession_allergen => @latest_ige[0]} %>
+              <%= render 'iges/possession_allergen', possession_allergen: @latest_ige[0] %>
             <% end %>
           </div>
           <div class="row">
             <div class="col-md-4">
-              <%= render 'relationships/stats' %>
+              <%= render 'relationships/stats', user: @user %>
             </div>
             <div class="col-md-2">
               <%= render 'follow_form' if logged_in? %>

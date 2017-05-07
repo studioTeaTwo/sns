@@ -3,7 +3,7 @@
 <% provide(:button_text, '記録する') %>
 <h1>IgE検査結果の入力</h1>
 
-<%= render 'ige_form' %>
+<%= render 'ige_form', ige: @ige %>
 
 <%= button_to 'ホームへ戻る', root_path, method: :get, class: "btn" %>
 

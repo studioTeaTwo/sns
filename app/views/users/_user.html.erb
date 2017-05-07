@@ -13,8 +13,6 @@
   </td>
 
   <td>
-    <% user.iges.each do |record| %>
-      <%= render :partial => '/iges/possession_allergen', :locals => {:possession_allergen => record} %>
-    <% end %>
+    <%= render 'iges/possession_allergen', possession_allergen: user.iges[0] %>
   </td>
 </tr>

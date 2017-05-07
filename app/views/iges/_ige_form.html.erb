@@ -1,5 +1,5 @@
 <div class="container">
-<%= form_for(@ige, url: yield(:url), method: yield(:method)) do |f| %>
+<%= form_for(ige, url: yield(:url), method: yield(:method)) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
   <!-- 検査概要 -->
