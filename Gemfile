@@ -21,7 +21,8 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 gem "font-awesome-rails"
 gem 'webpacker', github: 'rails/webpacker'
 gem 'rb-readline'
-gem "chartkick"
+gem 'chartkick'
+gem 'material_design_lite-sass'
 
 group :development, :test do
   gem 'sqlite3', '1.3.11'
