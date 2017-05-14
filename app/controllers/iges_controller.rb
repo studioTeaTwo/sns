@@ -13,23 +13,21 @@ class IgesController < ApplicationController
       # 最新IgE検査の更新(プロフィールやユーザー検索のため)
       @current_iges = current_user.iges.order("test_date DESC")
       if ige_params[:test_date] >= @current_iges[0][:test_date].to_s
+        # 今回の検査データが最新検査データである
+        @current_iges.where(:latest_test_result => true).update_all(:latest_test_result => false)
         @ige[:latest_test_result] = true
-        @current_iges.each do |ige|
-          ige.update_attributes({:latest_test_result => false})
-        end
       else
-        # 今回のIgE検査は最新では無い
+        # 今回の検査データは最新では無い
         @ige[:latest_test_result] = false
       end
 
       # 今回のIge検査を登録
-      if @ige.save
-        flash[:success] = "あなたの歴史に刻まれました"
-        redirect_to root_path
-      else
-        render 'new'
-      end
+      @ige.save!
     end
+    flash[:success] = "あなたの歴史に刻まれました"
+    redirect_to root_path
+    rescue => e
+      render 'new'
   end
 
   def show
@@ -54,24 +52,27 @@ class IgesController < ApplicationController
     ActiveRecord::Base.transaction do
       # 最新IgE検査の更新(プロフィールやユーザー検索のため)
       @current_iges = current_user.iges.order("test_date DESC")
-      if (@ige[:id] == @current_iges[0][:id] && @ige[:test_date] >= @current_iges[1][:test_date]) || @ige[:test_date] >= @current_iges[0][:test_date]
+      if (
+           # 今回の検査データは最新検査の更新であり、かつ今回入力された検査日付が1個前の検査より新しい
+           (@ige[:id] == @current_iges[0][:id] && @ige[:test_date] >= @current_iges[1][:test_date]) || 
+           # 今回の検査データは最新検査の更新では無いが、今回入力された検査日付は一番新しい
+           @ige[:test_date] >= @current_iges[0][:test_date]
+         )
+        # 今回の検査データが最新検査データである
+        @current_iges.where(:latest_test_result => true).update_all(:latest_test_result => false)
         addition_params[:latest_test_result] = true
-        @current_iges.each do |ige|
-          ige.update_attributes({:latest_test_result => false})
-        end
       else
-        # 今回のIgE検査は最新では無い
+        # 今回の検査データは最新では無い
         addition_params[:latest_test_result] = false
       end
 
-      # 今回のIge検査を登録
-      if @ige.update_attributes(addition_params)
-        flash[:success] = "記録が修正されました"
-        redirect_to root_path
-      else
-        render 'edit'
-      end
+      # 今回のIge検査を更新
+      @ige.update_attributes(addition_params)
     end
+    flash[:success] = "記録が修正されました"
+    redirect_to root_path
+    rescue => e
+      render 'edit'
   end
 
   def destroy
