@@ -1,6 +1,3 @@
-<% provide(:title, 'アレルゲン検索') %>
-<h1>アレルゲンから探す</h1>
-
 <ul class="search-allergen">
   <% IgesHelper::ALLERGEN_SORT.collect do |k, v| %>
   <li>
@@ -15,6 +12,6 @@
 
 <table class="users">
   <tbody>
-　　　<%= render @users %>
+　　　<%= render users %>
   </tbody>
 </table>

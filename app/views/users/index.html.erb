@@ -1,8 +1,30 @@
-<% provide(:title, 'ユーザー一覧') %>
-<h1>ユーザー一覧</h1>
+<% provide(:title, '他の人を探す') %>
+<h1>他の人を探す</h1>
 
-<table class="users">
-  <tbody>
-    <%= render @users %>
-  </tbody>
-</table>
+<!-- 
+  タブはmaterialdesignに似せたもの 
+  http://qiita.com/bump_of_kiharu/items/2c066e5e5401de5521f6 
+-->
+<div class="tabs">
+  <div class="tab-bar">
+    <%= content_tag :li, :class => (@tabs == 'search_by_ige' ? 'tab active' : 'tab') do %>
+      <%= link_to_unless_current "IgE値から", search_by_ige_path %></li>
+    <% end %>
+    <%= content_tag :li, :class => (@tabs == 'search_by_allergen' ? 'tab active' : 'tab') do %>
+      <%= link_to_unless_current "アレルゲンから", search_by_allergen_path %>
+    <% end %>
+    <%= content_tag :li, :class => (@tabs == 'search_by_name' ? 'tab active' : 'tab') do %>
+      <%= link_to_unless_current "名前から", search_by_name_path %>
+    <% end %>
+  </div>
+</div>
+
+<div>
+  <% if @tabs == 'search_by_ige' then %>
+    <%= render 'search_by_ige', form: @form, users: @users %>
+  <% elsif @tabs == 'search_by_allergen' then %>
+    <%= render 'search_by_allergen', users: @users %>
+  <% else %>
+    <%= render 'search_by_name', user: @user %>
+  <% end %>
+</div>

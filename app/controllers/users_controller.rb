@@ -5,11 +5,13 @@ class UsersController < ApplicationController
   
   def index
     # オススメの検索条件のユーザーを示す
-    # とりあえず　1.同じアレルゲン持ち、2.IgEが同ランク程度のユーザー、3.IgE検査がある人からランダムの順に20件作成する
-    @users = User.paginate(page: params[:page])
+    # 1.同じアレルゲン持ち、2.IgEが同ランク程度のユーザー、3.IgE検査がある人からランダムの順に20件作成する
+    # TODO: 
+    search_by_ige
   end
 
   def search_by_ige
+    @tabs = 'search_by_ige'
     @form = UserSearchForm.new
     # デフォルトで表示しておく人たちを作成する
     # ログインユーザーのIgE値に近い人を、10人になるまで再帰検索する
@@ -27,6 +29,7 @@ class UsersController < ApplicationController
       # 適当に10人(検査日付が新しい人から)
       @users = User.search_by_newest
     end
+    render 'index'
   end
 
   def search_result_by_ige
@@ -36,6 +39,7 @@ class UsersController < ApplicationController
   end
 
   def search_by_allergen
+    @tabs = 'search_by_allergen'
     # デフォルトで表示しておく人たちを作成する
     # ログインユーザーが持っているアレルゲンを、10人になるまで再帰検索する
     @latest_ige = current_user.iges.where(:latest_test_result => true)
@@ -46,6 +50,7 @@ class UsersController < ApplicationController
       # 適当に10人(検査日付が新しい人から)
       @users = User.search_by_newest
     end
+    render 'index'
   end
 
   def search_result_by_allergen
@@ -54,7 +59,9 @@ class UsersController < ApplicationController
   end
 
   def search_by_name
+    @tabs = 'search_by_name'
     @user = User.new
+    render 'index'
   end
 
   def search_result_by_name

@@ -1,0 +1,18 @@
+<%= form_for(form, url: search_result_by_ige_path, html: { method: :post, class: 'form-inline search-ige', role: 'form' }) do |f| %>
+    <div class="input-group">
+  	  <%= f.number_field :from_ige, class: 'form-control', placeholder: '探したいIgEの下限を入力してください' %>
+      <div class="input-group-addon">から</div>
+    </div>
+    <div class="input-group">
+  	  <%= f.number_field :to_ige, class: 'form-control', placeholder: '探したいIgEの上限を入力してください' %>
+      <div class="input-group-addon">まで</div>
+    </div>
+    <!-- ボタン -->
+    <%= f.submit '探す', data: { disable_with: '探し中...' }, class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" %>
+<% end %>
+
+<table class="users">
+  <tbody>
+　　　<%= render users %>
+  </tbody>
+</table>
