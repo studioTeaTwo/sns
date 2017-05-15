@@ -16,7 +16,6 @@ $gray-medium-light: #eaeaea;
 /* universal */
 
 body {
-  padding-top: 60px;
 }
 
 section {
@@ -31,12 +30,6 @@ textarea {
   text-align: center;
   h1 {
     margin-bottom: 10px;
-  }
-}
-
-ul.dropdown-menu {
-  li {
-    text-align: center;
   }
 }
 
@@ -71,7 +64,6 @@ p {
 /* header */
 
 #logo {
-  float: left;
   margin-right: 10px;
   font-size: 1.7em;
   color: white;

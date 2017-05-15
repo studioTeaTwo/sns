@@ -1,38 +1,22 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
-  <div class="container">
-    <%= link_to Constants::SITE_TITLE, root_path, id: "logo" %>
-    <nav>
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Home", root_path %></li>
-        <li><%= link_to_unless_current "help", help_path %></li>
-        <% if logged_in? %>
-          <li class="dropdown">
-            <%= link_to users_path, :class => 'dropdown-toggle', :data => {:toggle => 'dropdown'} do %>
-              他の人を探す <b class="caret"></b>
-            <% end %>
-            <ul class="dropdown-menu">
-              <li><%= link_to_unless_current "IgE値から探す", search_by_ige_path %></li>
-              <li><%= link_to_unless_current "アレルゲンから探す", search_by_allergen_path %></li>
-              <li><%= link_to_unless_current "名前で探す", search_by_name_path %></li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              プロフィール <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-              <li><%= link_to_unless_current "公開ページを見る", current_user %></li>
-              <li><%= link_to_unless_current "設定変更する", edit_user_path(current_user) %></li>
-              <li class="divider"></li>
-              <li>
-                <%= link_to "ログアウトする", logout_path, method: "delete" %>
-              </li>
-            </ul>
-          </li>
-        <% else %>
-          <li><%= link_to "Log in", login_path %></li>
-        <% end %>
-      </ul>
-    </nav>
+<header class="mdl-layout__header">
+  <div class="mdl-layout__header-row">
+    <span class="mdl-layout-title"><%= link_to Constants::SITE_TITLE, root_path, id: "logo" %></span>
+    <!-- Add spacer, to align navigation to the right -->
+    <div class="mdl-layout-spacer"></div>
+    <button id="demo-menu-lower-right"
+            class="mdl-button mdl-js-button mdl-button--icon">
+      <i class="material-icons">more_vert</i>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+        for="demo-menu-lower-right">
+      <% if logged_in? %>
+        <li class="mdl-menu__item"><%= link_to_unless_current "他の人を探す", users_path %></li>
+        <li class="mdl-menu__item"><%= link_to_unless_current "公開ページを見る", current_user %></li>
+        <li class="mdl-menu__item"><%= link_to "ログアウトする", logout_path, method: "delete" %></li>
+      <% else %>
+        <li class="mdl-menu__item"><%= link_to "ログインする", login_path %></li>
+        <li class="mdl-menu__item"><%= link_to "会員登録する", signup_path %></li>
+      <% end %>
+    </ul>
   </div>
 </header>
