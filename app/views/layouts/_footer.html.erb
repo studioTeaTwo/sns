@@ -1,13 +1,17 @@
-<footer class="footer">
-  <small>
-    <a href=<%= Constants::ALLERGYBLUE_URL %>>AllergyBlue</a>
-    <a href=<%= Constants::DIAGNOSISCHECK_URL %>>アレルギー診断チェック</a>
-  </small>
-  <nav>
-    <ul>
+<footer class="mdl-mini-footer">
+  <div class="mdl-mini-footer__left-section">
+    <small>
+      <ul class="mdl-mini-footer__link-list">
+        <li><%= link_to "AllergyBlue", Constants::ALLERGYBLUE_URL %></li>
+        <li><%= link_to "アレルギー診断チェック", Constants::DIAGNOSISCHECK_URL %></li>
+      </ul>
+    </small>
+  </div>
+  <div class="mdl-mini-footer__right-section">
+    <ul class="mdl-mini-footer__link-list">
       <li><%= link_to_unless_current "About",   about_path %></li>
       <li><%= link_to_unless_current "help", help_path %></li>
       <li><%= link_to_unless_current "Contact", contact_path %></li>
     </ul>
-  </nav>
+  </div>
 </footer>
