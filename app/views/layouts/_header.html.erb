@@ -10,6 +10,7 @@
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
         for="demo-menu-lower-right">
       <% if logged_in? %>
+        <li class="mdl-menu__item"><%= link_to_unless_current "IgE検査を記録する", new_ige_path %></li>
         <li class="mdl-menu__item"><%= link_to_unless_current "他の人を探す", users_path %></li>
         <li class="mdl-menu__item"><%= link_to_unless_current "公開ページを見る", current_user %></li>
         <li class="mdl-menu__item"><%= link_to "ログアウトする", logout_path, method: "delete" %></li>
