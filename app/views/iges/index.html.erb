@@ -1,15 +1,27 @@
 <% provide(:title, 'IgE一覧') %>
 <h1>歴史</h1>
 
-<ul class="iges">
-  <% if @iges.any? %>
-    <%= line_chart @chart_data %>
-    <%= render @iges %>
-  <% else %>
-    まだ記録がありません
-  <% end %>
-</ul>
+<%= button_to 'IgE検査結果を記録する', new_ige_path, method: :get, class: "mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" %>
+
+<% if @iges.any? %>
+  <%= line_chart @chart_data %>
+  <table class="iges mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+    <thead>
+      <tr>
+        <th>検査日付</th>
+        <th>検査種類</th>
+        <th>総IgE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @iges %>
+    </tbody>
+  </table>
+<% else %>
+  まだ記録がありません
+<% end %>
 
 <%= will_paginate(:previous_label => '<<', :next_label => '>>') %>
 
-<%= button_to 'ホームへ戻る', root_path, method: :get, class: "btn" %>
+<%= button_to 'IgE検査結果を記録する', new_ige_path, method: :get, class: "mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" %>
+<%= button_to 'ホームへ戻る', root_path, method: :get, class: "mdl-button mdl-js-button" %>

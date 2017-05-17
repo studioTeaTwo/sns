@@ -66,9 +66,11 @@
     <div class="tab-pane active" id="tab_treatment_history" role="tabpanel">
       <% if @iges.any? %>
         <%= line_chart @chart_data_history %>
-        <ol class="iges">
-          <%= render @iges %>
-        </ol>
+        <table class="iges">
+          <tbody>
+            <%= render @iges %>
+          </tbody>
+        </table>
         <% unless @more.nil? %>
           <%= link_to 'もっと見る', iges_path %>
         <% end %>

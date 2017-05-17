@@ -2,44 +2,56 @@
 <h1><%= @ige.test_date %></h1>
 
 <!-- 検査概要 -->
-<section id="test_summary">
-  <h4>検査概要</h4>
+<h2>検査概要</h2>
+<div class="ige-show-card mdl-card mdl-shadow--2dp">
   <div id="test_category" hidden><%= @ige.test_category %></div>
-  <p>検査種類: <%= get_category_name(@ige.test_category) %></p>
-  <p>総IgE値: <%= @ige.ige_value %> <%= get_unit_name(@ige.ige_unit) %></p>
-</section>
+  <div class="ige-show-cardtitle mdl-card__title">
+    <h4 class="mdl-card__title-text">検査種類</h4>
+  </div>
+  <div class="ige-show-cardtext mdl-card__supporting-text mdl-card--border"><%= get_category_name(@ige.test_category) %></div>
+  <div class="ige-show-cardtext mdl-card__supporting-text">総IgE <%= @ige.ige_value %> <%= get_unit_name(@ige.ige_unit) %></div>
+</div>
 
 <!-- アレルゲン詳細 -->
-<section id="allergen_detail">
-　<h4>アレルゲン詳細</h4>
+<h2>アレルゲン詳細</h2>
+<ul class="mdl-list">
   <% IgesHelper::ALLERGEN_DETAIL.each do |name| %>
     <% unless @ige["allergen_#{name["en"]}_class"].blank? %>
-      <p class="allergen <%= name["en"] %>"><%= name["ja"] %>: クラス<%= @ige["allergen_#{name["en"]}_class"] %></p>
+      <li class="allergen <%= name["en"] %> mdl-list__item">
+        <span class="mdl-list__item-primary-content">
+          <%= name["ja"] %>
+          <i class="material-icons mdl-list__item-icon">flag</i>
+          クラス<%= @ige["allergen_#{name["en"]}_class"] %>
+        </span>
+      </li>
     <% else %>
-      <p class="allergen <%= name["en"] %>"><%= name["ja"] %>: -- </p>
+      <li class="allergen <%= name["en"] %> mdl-list__item">
+        <span class="mdl-list__item-primary-content">
+          <%= name["ja"] %>
+          <i class="material-icons mdl-list__item-icon">remove</i>
+        </span>
+      </li>
     <% end %>
   <% end %>
-</section>
+</ul>
 
 <!-- 保有アレルゲン -->
-<section id="allergen_sort">
-  <h4>保有アレルゲン</h4>
-  <% @ige.attributes.each do |allergen_sort| %>
-    <% allergen_sort_name = allergen_sort[0].match(/(allergen_sort_.+)/) %>
-    <% if allergen_sort_name && allergen_sort[1] %>
-      <% if Rails.application.assets.find_asset("#{allergen_sort[0]}") %>
-        <%= image_tag("#{allergen_sort[0]}.png", :alt => "#{allergen_sort[0]}", :size => "64x64") %>
-      <% else %>
-        <p><%= IgesHelper::ALLERGEN_SORT[allergen_sort_name.to_s] %>の絵に差し替える</p>
-      <% end %>
+<h2>保有アレルゲン</h2>
+<% @ige.attributes.each do |allergen_sort| %>
+  <% allergen_sort_name = allergen_sort[0].match(/(allergen_sort_.+)/) %>
+  <% if allergen_sort_name && allergen_sort[1] %>
+    <% if Rails.application.assets.find_asset("#{allergen_sort[0]}") %>
+      <%= image_tag("#{allergen_sort[0]}.png", :alt => "#{allergen_sort[0]}", :size => "64x64") %>
+    <% else %>
+      <p><%= IgesHelper::ALLERGEN_SORT[allergen_sort_name.to_s] %>の絵に差し替える</p>
     <% end %>
   <% end %>
-</section>
-
-<% if @ige.user_id == current_user.id %>
-  <%= button_to '修正する', edit_ige_path, method: :get, class: "btn btn-primary" %>
-  <%= button_to '引用登録する', quote_ige_path, method: :get, class: "btn btn-primary" %>
-  <%= button_to '削除する', @ige, method: :delete, class: "btn btn-danger", data: { confirm: "削除してよいですか?" } %>
 <% end %>
 
-<%= button_to 'ホームへ戻る', root_path, method: :get, class: "btn" %>
+<% if @ige.user_id == current_user.id %>
+  <%= button_to '修正する', edit_ige_path, method: :get, class: "mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" %>
+  <%= button_to '引用登録する', quote_ige_path, method: :get, class: "mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" %>
+  <%= button_to '削除する', @ige, method: :delete, class: "mdl-button mdl-js-button mdl-js-ripple-effect", data: { confirm: "削除してよいですか?" } %>
+<% end %>
+
+<%= button_to 'ホームへ戻る', root_path, method: :get, class: "mdl-button mdl-js-button" %>
