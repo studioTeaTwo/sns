@@ -1,8 +1,6 @@
 <% provide(:title, 'IgE一覧') %>
 <h1>歴史</h1>
 
-<%= button_to 'IgE検査結果を記録する', new_ige_path, method: :get, class: "mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" %>
-
 <% if @iges.any? %>
   <%= line_chart @chart_data %>
   <table class="iges mdl-data-table mdl-js-data-table mdl-shadow--2dp">

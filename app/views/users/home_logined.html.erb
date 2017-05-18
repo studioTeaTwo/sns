@@ -2,17 +2,8 @@
   <aside class="col-md-4">
     <section class="user_info">
       <%= render 'users/user_info', user: @user %>
-    </section>
-    <section class="stats">
-      <%= render 'relationships/stats', user: @user %>
-    </section>
-    <section class="iges">
-      <%= line_chart @chart_data_history %>
-      <%= render @iges %>
-      <% unless @more.nil? %>
-        <%= link_to 'もっと見る', iges_path %>
-      <% end %>
-      <%= button_to 'IgE検査結果を記録する', new_ige_path, method: :get, class: "btn btn-primary" %>
+      <span><%= link_to "プロフィールを見る", @user %></span>
+      <span><%= pluralize(@user.microposts.count, "投稿") %></span>
     </section>
     <section class="micropost_form">
       <%= render 'microposts/micropost_form', micropost: @micropost %>

@@ -2,6 +2,90 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+/* Users index */
+
+.users {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-bottom: 1px solid gray-lighter;
+  }
+}
+
+/* profile */
+
+aside {
+  .user_info {
+  	max-width: auto;
+	&:first-child {
+		border: 0;
+		padding-top: 0;
+	}
+	.gravatar {
+	    margin-right: 10px;
+	}
+	.gravatar_edit {
+	    margin-top: 15px;
+	}
+	h1.user-name {
+		width: 50%;
+		font-size: 2em;
+		text-align: center;
+		letter-spacing: -1px;
+		margin: 3px;
+	}
+	.user-honor {
+		display: flex;
+	}
+	.user-igevalue {
+		text-align: center;
+		font-weight: bold;
+	}
+  }
+}
+
+.stats {
+  overflow: auto;
+  margin-top: 0;
+  padding: 0;
+  a {
+    float: left;
+    padding: 0 10px;
+    border-left: 1px solid gray;
+    color: gray;
+    &:first-child {
+      padding-left: 0;
+      border: 0;
+    }
+    &:hover {
+      text-decoration: none;
+      color: blue;
+    }
+  }
+  strong {
+    display: block;
+  }
+}
+
+.user_avatars {
+  overflow: auto;
+  margin-top: 10px;
+  .gravatar {
+    margin: 1px 1px;
+  }
+  a {
+    padding: 0;
+  }
+}
+
+.users.follow {
+  padding: 0;
+}
+
+/* allergen */
+
 ul.search-allergen {
 	display:table;
     width:auto;
@@ -14,7 +98,6 @@ ul.search-allergen {
 		}
 	}
 }
-
 
 /* tabs */
 /* http://qiita.com/bump_of_kiharu/items/2c066e5e5401de5521f6 */

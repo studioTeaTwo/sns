@@ -14,6 +14,7 @@ User.create!(
               password_confirmation: "allergy",
               rank: 1,
               title_of_honor: 11,
+              self_introduction: "自己紹介が入ります。自己紹介が入ります。自己紹介が入ります。",
               admin: true
               )
 # 最新IgE検査の登録

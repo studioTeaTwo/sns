@@ -1,6 +1,12 @@
-<%= link_to gravatar_for(user, size: 50), user %>
-<h1><%= user.name %></h1>
-<p><%= get_rank_name(user.rank) %></p>
-<p><%= get_title_of_honor(user.title_of_honor) %></p>
-<span><%= link_to "プロフィールを見る", user %></span>
-<span><%= pluralize(@user.microposts.count, "投稿") %></span>
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--1-col"><%= gravatar_for user %></div>
+  <div class="mdl-cell mdl-cell--3-col">
+    <h1 class="user-name">
+      <%= @user.name %>
+    </h1>
+    <div class="user-honor">
+      <span class="mdl-chip"><span class="mdl-chip__text"><%= get_rank_name(user.rank) %></span></span>
+      <span class="mdl-chip"><span class="mdl-chip__text"><%= get_title_of_honor(user.title_of_honor) %></span></span>
+    </div>
+  </div>
+</div>
