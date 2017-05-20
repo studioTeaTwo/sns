@@ -2,6 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.form-summary {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.form-datepicker {
+	margin-left: -10px;
+}
+
+.form-label-test-category {
+	color: #3F51B5 !important;
+}
+
 .card {
     /* Add shadows to create the "card" effect */
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);

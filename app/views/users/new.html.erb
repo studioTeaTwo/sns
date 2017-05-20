@@ -3,8 +3,4 @@
 <% provide(:button_text, '会員登録する') %>
 <h1><%= Constants::SITE_TITLE %>へようこそ！</h1>
 
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= render 'profile_form', user: @user %>
-  </div>
-</div>
+<%= render 'profile_form', user: @user %>

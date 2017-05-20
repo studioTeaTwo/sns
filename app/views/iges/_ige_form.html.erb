@@ -1,48 +1,53 @@
-<div class="container">
 <%= form_for(ige, url: yield(:url), method: yield(:method)) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
   <!-- 検査概要 -->
-  <div class="row">
+  <div class="mdl-grid">
 
   　<!-- 検査日付 -->
-  	<div class="col-md-2">
-      <%= f.label :test_date, '検査日付' %>
-      <div class="input-group date datepicker">
-        <%= f.text_field :test_date, class: 'form-control' %>
-        <span class="input-group-addon">
-          <span class="fa fa-calendar"></span>
-        </span>
+  	<div class="form-summary mdl-cell mdl-cell--2-col">
+      <div class="form-datepicker mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <%= f.label :test_date, '検査日付', class: 'mdl-textfield__label' %>
+        <div class="input-group date datepicker">
+          <%= f.text_field :test_date, class: 'mdl-textfield__input' %>
+          <span class="input-group-addon">
+            <span class="fa fa-calendar"></span>
+          </span>
+        </div>
       </div>
     </div>
 
     <!-- 検査項目名 -->
-    <div class="col-md-4">
-  	  <%= f.label :test_category, '検査項目名' %>
-  	  <%= f.select :test_category, 
-                   IgesHelper::TEST_CATEGORY.each_index.map { |idx| [IgesHelper::TEST_CATEGORY[idx], idx] },
-                   :prompt => "選択してください", 
-                   class: 'form-control'
-      %>
+    <div class="form-summary mdl-cell mdl-cell--2-col">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    	  <%= f.label :test_category, '検査項目名', class: 'form-label-test-category' %>
+    	  <%= f.select :test_category, 
+                     IgesHelper::TEST_CATEGORY.each_index.map { |idx| [IgesHelper::TEST_CATEGORY[idx], idx] },
+                     :prompt => "選択してください", 
+                     class: 'mdl-textfield__input'
+        %>
+      </div>
     </div>
 
 　　<!-- 総IgE値 -->
-    <div class="col-md-2">
-  	  <%= f.label :ige_value, '測定値（総IgE値）' %>
-  	  <%= f.number_field :ige_value, class: 'form-control' %>
+    <div class="form-summary mdl-cell mdl-cell--2-col">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    	  <%= f.label :ige_value, '測定値（総IgE値）', class: 'mdl-textfield__label' %>
+    	  <%= f.number_field :ige_value, class: 'mdl-textfield__input' %>
+      </div>
     </div>
-    <div class="col-md-1">
-  	  <%= f.label :ige_unit, '単位' %>
-  	  <%= f.select :ige_unit, 
-                   IgesHelper::TEST_UNIT.each_index.map { |idx| [IgesHelper::TEST_UNIT[idx], idx] },
-  	               class: 'form-control input-sm'
-      %>
+    <div class="form-summary mdl-cell mdl-cell--1-col">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    	  <%= f.select :ige_unit, 
+                     IgesHelper::TEST_UNIT.each_index.map { |idx| [IgesHelper::TEST_UNIT[idx], idx] },
+    	               class: 'mdl-textfield__input'
+        %>
+      </div>
   	</div>
   </div>
 
 　<!-- アレルゲン詳細 -->
   <% IgesHelper::ALLERGEN_DETAIL.each do |name| %>
-  <div class="row">
     <div class="card <%= name["en"] %>">
 
       <p><%= name["category"] %> - <%= name["sort"] %></p>
@@ -63,13 +68,9 @@
       </div>
 
     </div>
-  </div>
   <% end %>
 
 　<!-- ボタン -->
-  <div class="col-md-2">
-    <%= f.submit yield(:button_text), data: { disable_with: '記録中...' }, class: "mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" %>
-  </div>
+  <%= f.submit yield(:button_text), data: { disable_with: '記録中...' }, class: "mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" %>
 
 <% end %>
-</div>

@@ -25,10 +25,6 @@ section {
   overflow: auto;
 }
 
-textarea {
-  resize: vertical;
-}
-
 .home {
   text-align: center;
   h1 {
@@ -45,12 +41,12 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   font-size: 3em;
   letter-spacing: -2px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   text-align: center;
 }
 
 h2 {
-  font-size: 1.2em;
+  font-size: 2em;
   letter-spacing: -1px;
   margin-bottom: 30px;
   text-align: center;
@@ -66,26 +62,24 @@ h3 {
 
 /* header */
 
-.mdl-layout__header-row {
-  padding-left: 10px;
-  #logo {
-    margin-right: 10px;
-    font-size: 1.7em;
+#logo {
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+  &:hover {
     color: white;
-    text-transform: uppercase;
-    letter-spacing: -1px;
-    padding-top: 9px;
-    font-weight: bold;
-    &:hover {
-      color: white;
-      text-decoration: none;
-    }
+    text-decoration: none;
   }
 }
 
 /* footer */
 
 footer {
+  background-color: #CDDC39 !important;
   border-top: 1px solid $gray-medium-light;
   color: gray-light;
   a {
@@ -108,15 +102,13 @@ footer {
 
 /* forms */
 
-input, textarea, select, .uneditable-input {
-  border: 1px solid #bbb;
-  width: 100%;
-  margin-bottom: 15px;
-  @include box_sizing;
+button {
+  text-align: center;
 }
 
-input {
-  height: auto !important;
+textarea {
+  width: 100%;
+  resize: vertical;
 }
 
 #error_explanation {
@@ -128,18 +120,9 @@ input {
 }
 
 .field_with_errors {
-  // @extend .has-error;
+  //@extend .has-error;
   .form-control {
     color: #F44336;
-  }
-}
-
-.checkbox {
-  margin-top: -10px;
-  margin-bottom: 10px;
-  span {
-    margin-left: 20px;
-    font-weight: normal;
   }
 }
 

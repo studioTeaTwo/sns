@@ -231,7 +231,7 @@ presentAllergen = (selector, currentTarget, element) ->
     test_category = $(currentTarget).html()
   if test_category
     show(allergens[test_category])
-  else $(selector).show()
+  else $(selector).hide()
 
 $ ->
   do ->
