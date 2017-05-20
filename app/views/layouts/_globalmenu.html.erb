@@ -1,0 +1,18 @@
+<div id="global-menu">
+  <%= link_to root_path, class: "global-menu-item" do %>
+    <i id="global-menu-home" class="material-icons">home</i>
+    <div data-mdl-for="global-menu-home">ホーム</div>
+  <% end %>
+  <%= link_to iges_path(current_user), class: "global-menu-item" do %>
+    <i id="global-menu-history" class="material-icons">watch_later</i>
+    <div data-mdl-for="global-menu-history">歴史</div>
+  <% end %>
+  <%= link_to new_micropost_path, class: "global-menu-item" do %>
+    <i id="global-menu-contribution" class="material-icons">chat</i>
+    <div data-mdl-for="global-menu-contribution">投稿</div>
+  <% end %>
+  <%= link_to users_path, class: "global-menu-item" do %>
+    <i id="global-menu-people" class="material-icons">group</i>
+    <div data-mdl-for="global-menu-people">他の人を探す</div>
+  <% end %>
+</div>
