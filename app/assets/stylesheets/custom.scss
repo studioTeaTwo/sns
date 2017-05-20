@@ -77,6 +77,9 @@ h3 {
       text-decoration: none;
     }
   }
+  .header-menu {
+    text-decoration: none;
+  }
 }
 
 /* golobalmenu */
@@ -90,7 +93,6 @@ h3 {
   z-index: 9999;
   display: table-cell;
   vertical-align: middle;
-  padding-top: 10px;
   text-align: center;
   display: table;
   table-layout: fixed;

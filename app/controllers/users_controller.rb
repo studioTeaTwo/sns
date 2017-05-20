@@ -74,7 +74,6 @@ class UsersController < ApplicationController
   def home_logined
     @user = current_user
     get_user_info @user
-    @micropost  = @user.microposts.build
     @feed_items = @user.feed.paginate(page: params[:page])
   end
 

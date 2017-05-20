@@ -1,5 +1,5 @@
 class MicropostsController < ApplicationController
-  before_action :logged_in_user, only: [:create, :destroy]
+  before_action :logged_in_user, only: [:create, :destroy, :new]
   before_action :correct_user,   only: :destroy
   
   def create
@@ -11,6 +11,10 @@ class MicropostsController < ApplicationController
       @feed_items = []
       redirect_to root_url
     end
+  end
+
+  def new
+    @micropost  = Micropost.new
   end
 
   def destroy

@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
-  resources :microposts,          only: [:create, :destroy]
+  resources :microposts,          only: [:create, :destroy, :new]
   resources :relationships,       only: [:create, :destroy]
   resources :iges do
     member do

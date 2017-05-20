@@ -1,5 +1,11 @@
 class IgesController < ApplicationController
   include IgesHelper
+  before_action :logged_in_user, only: [:index, :new, :create, :edit, :quote, :update, :destroy]
+
+  def index
+    @iges = current_user.iges.order("test_date DESC").paginate(:page => params[:page])
+    @chart_data = current_user.iges.select(:test_date, :ige_value).group(:test_date).sum(:ige_value)
+  end
 
   def new
     @ige = Ige.new
@@ -79,11 +85,6 @@ class IgesController < ApplicationController
     Ige.find(params[:id]).destroy
     flash[:success] = "記録を削除しました"
     redirect_to root_path
-  end
-
-  def index
-    @iges = current_user.iges.order("test_date DESC").paginate(:page => params[:page])
-    @chart_data = current_user.iges.select(:test_date, :ige_value).group(:test_date).sum(:ige_value)
   end
 
   private
