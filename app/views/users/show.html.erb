@@ -15,7 +15,7 @@
     </p>
 
     <div class="mdl-grid">
-      <div class="mdl-cell mdl-cell--4-col">
+      <div class="possession-allergen mdl-cell mdl-cell--4-col">
       <% if @latest_ige.exists? %>
         <%= render 'iges/possession_allergen', possession_allergen: @latest_ige[0] %>
       <% end %>
