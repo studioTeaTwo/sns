@@ -40,8 +40,13 @@ aside {
 		display: flex;
 	}
 	.user-igevalue {
+		background-color: #03A9F4;
+		color: #fff;
 		text-align: center;
-		font-weight: bold;
+		span {
+			font-size: large;
+			font-weight: bold;
+		}
 	}
   }
 }

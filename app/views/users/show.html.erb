@@ -4,12 +4,14 @@
 
     <%= render 'user_info', user: @user %>
 
-    <p class="user-igevalue">総IgE:
-        <% if @latest_ige.exists? %>
-          <%= @latest_ige[0].ige_value.to_s %>
-        <% else %>
-          --
-        <% end %>
+    <p class="user-igevalue">総IgE
+      <span>
+      <% if @latest_ige.exists? %>
+        <%= @latest_ige[0].ige_value.to_s %>
+      <% else %>
+        --
+      <% end %>
+      </span>
     </p>
 
     <div class="mdl-grid">
