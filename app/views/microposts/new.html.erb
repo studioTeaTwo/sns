@@ -1,10 +1,12 @@
 <%= form_for(@micropost, html: { multipart: true }) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+  <div class="micropost-textarea mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
     <%= f.label :content, '文章を入力してください', class: 'mdl-textfield__label' %>
     <%= f.text_area :content, class: 'mdl-textfield__input' %>
   </div>
-  <%= f.submit "投稿する", data: { disable_with: '投稿中...' }, class: "mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" %>
+  <div class="micropost-button">
+    <%= f.submit "投稿する", data: { disable_with: '投稿中...' }, class: "micropost-button-item mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" %>
+  </div>
   <span class="picture">
     <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
   </span>

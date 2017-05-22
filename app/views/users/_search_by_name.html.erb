@@ -1,5 +1,5 @@
 <%= form_for(user, url: search_result_by_name_path, html: { method: :post, class: 'form-inline search-name', role: 'form' }) do |f| %>
-  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+  <div class="search-name mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
     <%= f.search_field :name, id: 'search-name', class: 'mdl-textfield__input' %>
     <label class="mdl-textfield__label" for="search-name">ユーザーネームを入力してください</label>
   </div>

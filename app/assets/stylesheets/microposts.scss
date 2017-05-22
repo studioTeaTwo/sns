@@ -35,9 +35,21 @@
   }
 }
 
-textarea {
-  height: 100px;
-  margin-bottom: 5px;
+.micropost-textarea {
+  width: 100%;
+  text-align: center;
+  textarea {
+    height: 100px;
+  }
+}
+
+.micropost-button {
+  width: 100%;
+  text-align: center;
+  .micropost-button-item {
+    width: 200px;
+    margin-bottom: 15px;
+  }
 }
 
 span.picture {

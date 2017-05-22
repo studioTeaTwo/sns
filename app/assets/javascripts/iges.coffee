@@ -241,5 +241,5 @@ $ ->
     # editページ
     # 検査項目のイベント
     $('#ige_test_category').on
-      'load': presentAllergen('.card', '#ige_test_category', 'select')
+      'load': presentAllergen('.ige-form-card', '#ige_test_category', 'select')
       'change': (e) -> presentAllergen('.card', '#ige_test_category', 'select')

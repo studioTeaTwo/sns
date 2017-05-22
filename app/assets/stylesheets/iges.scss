@@ -2,27 +2,54 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.form-summary {
-	margin-top: 0;
-	margin-bottom: 0;
+.show-test-summary {
+    min-height: 150px !important;
+    width: 90%;
+    margin: auto;
+    h4 {
+        font-size: 1.2em !important;
+    }
+    .show-cardtext {
+
+    }
 }
 
-.form-datepicker {
-	margin-left: -10px;
+.ige-button {
+  width: 100%;
+  text-align: center;
+  .ige-button-item {
+    width: 200px;
+    margin-bottom: 15px;
+  }
 }
 
-.form-label-test-category {
-	color: #3F51B5 !important;
+.ige-form-summary {
+    border: medium solid #607D8B;
+    .form-summary-block {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
 }
 
-.card {
+.ige-form-datepicker {
+    margin-left: -10px;
+}
+
+.ige-form-label-test-category {
+    color: #3F51B5 !important;
+}
+
+.ige-form-card {
     /* Add shadows to create the "card" effect */
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     border-radius: 5px;
-    padding: 2px 20px;
+    padding: 20px 20px;
     margin: 20px;
     &:hover {
-	    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-	}
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+    .form-card-category {
+        border-bottom: thin solid #607D8B,
+    }
 }

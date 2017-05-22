@@ -1,17 +1,11 @@
 <%= form_for(form, url: search_result_by_ige_path, html: { method: :post, class: 'form-inline search-ige', role: 'form' }) do |f| %>
-    <div class="mdl-grid">
-      <div class="mdl-cell mdl-cell--2-col">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <%= f.label :from_ige, 'IgEの下限を入力', class: 'mdl-textfield__label' %>
-      	  <%= f.number_field :from_ige, class: 'mdl-textfield__input' %>
-        </div>
-      </div>
-      <div class="mdl-cell mdl-cell--2-col">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <%= f.label :to_ige, 'IgEの上限を入力', class: 'mdl-textfield__label' %>
-      	  <%= f.number_field :to_ige, class: 'mdl-textfield__input' %>
-        </div>
-      </div>
+    <div class="search-ige-from mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <%= f.label :from_ige, 'IgEの下限を入力', class: 'mdl-textfield__label' %>
+  	  <%= f.number_field :from_ige, class: 'mdl-textfield__input' %>
+    </div>
+    <div class="search-ige-to mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <%= f.label :to_ige, 'IgEの上限を入力', class: 'mdl-textfield__label' %>
+  	  <%= f.number_field :to_ige, class: 'mdl-textfield__input' %>
     </div>
     <!-- ボタン -->
     <%= f.submit '探す', data: { disable_with: '探し中...' }, class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" %>
