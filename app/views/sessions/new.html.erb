@@ -1,19 +1,32 @@
 <% provide(:title, "ログイン") %>
 <h1>ようこそ！</h1>
 
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for(:session, url: login_path) do |f| %>
+<%= form_for(:session, url: login_path) do |f| %>
+  <div class="login-form">
 
-      <%= f.label :email, 'メールアドレス' %>
-      <%= f.email_field :email, class: 'form-control' %>
+    <div class="login-item mdl-cell mdl-cell--2-col">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <%= f.label :email, 'メールアドレス', class: 'mdl-textfield__label' %>
+        <%= f.email_field :email, class: 'mdl-textfield__input' %>
+      </div>
+    </div>
 
-      <%= f.label :password, 'パスワード' %>
-      <%= f.password_field :password, class: 'form-control' %>
+    <div class="login-item mdl-cell mdl-cell--2-col">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <%= f.label :password, 'パスワード', class: 'mdl-textfield__label' %>
+        <%= f.password_field :password, class: 'mdl-textfield__input' %>
+      </div>
+    </div>
 
-      <%= f.submit "ログインする", class: "mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" %>
+    <div class="login-item mdl-cell mdl-cell--2-col">
+    <%= f.label :remember_me, class: "mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" do %>
+      <%= f.check_box :remember_me, class: "mdl-checkbox__input" %>
+      <span class="mdl-checkbox__label">保存する</span>
     <% end %>
+    </div>
+
+    <%= f.submit "ログインする", class: "mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" %>
 
     <p>まだ会員ではないですか? <%= link_to "Join now!", signup_path %></p>
   </div>
-</div>
+<% end %>

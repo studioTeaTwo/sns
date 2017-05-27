@@ -18,3 +18,9 @@ $(function(){
     }
   });
 });
+
+// https://github.com/google/material-design-lite/issues/1287
+var nodeList = document.querySelectorAll('.mdl-textfield');
+Array.prototype.forEach.call(nodeList, function (elem) {
+    elem.MaterialTextfield.checkDirty();
+});
