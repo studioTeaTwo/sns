@@ -66,7 +66,9 @@ $ rbenv exec bundle exec rake unicorn:stop && rbenv exec bundle exec rake unicor
 
 * production(heroku)
 ```bash
+$ heroku maintenance:on
 $ git push heroku master
 $ heroku run rails db:migrate
 $ heroku run rails test
+$ heroku maintenance:off
 ```

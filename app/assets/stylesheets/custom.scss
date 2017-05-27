@@ -27,9 +27,14 @@ section {
 
 .home {
   text-align: center;
+  margin-bottom: 0px;
   h1 {
     margin-bottom: 10px;
   }
+}
+
+main {
+  padding-bottom: 50px; // =global-menu.height
 }
 
 /* typography */
