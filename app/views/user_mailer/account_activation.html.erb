@@ -1,0 +1,10 @@
+<h1><%= @user.name %>様</h1>
+
+<p><%= Constants::SITE_TITLE %>をご登録くださりありがとうございます！</p>
+
+<p>
+下記リンクからアカウントの有効化を行ってください。
+</p>
+
+<%= link_to "Activate", edit_account_activation_url(@user.activation_token,
+                                                    email: @user.email) %>
