@@ -27,6 +27,7 @@
 
     <%= f.submit "ログインする", class: "mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" %>
 
+    <p><%= link_to "パスワードを忘れましたか？", new_password_reset_path %></p>
     <p>まだ会員ではないですか? <%= link_to "Join now!", signup_path %></p>
   </div>
 <% end %>
