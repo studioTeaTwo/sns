@@ -1,12 +1,12 @@
 <div class="home jumbotron">
   <h1>Welcome to <%= Constants::SITE_TITLE %></h1>
 
-  <h2>
-    This is the Allergy SNS for All Persons Concerned with Allergy.
-  </h2>
+  <h3>
+    毎日アレルギーの症状を記録して他の仲間を見つけよう
+  </h3>
 
-  <%= image_tag("inquiry-300x300.png", alt: "inquiry") %>
-  <%= link_to "Sign up now!", signup_path, class: "mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" %>
+  <%= image_tag("top.png", class: "home-top", alt: "top") %>
+  <%= link_to "ここから参加！", signup_path, class: "mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" %>
 </div>
 
 <%= render 'layouts/footer' %>
