@@ -1,9 +1,9 @@
 <% provide(:title, "プロフィール編集") %>
 <% provide(:url, user_path) %>
 <% provide(:button_text, '変更する') %>
-<h1>プロフィールの編集</h1>
+<h1>プロフィールを変更する</h1>
 
-<%= render 'profile_form', user: @user %>
+<%= render 'account_form', user: @user %>
 <div class="gravatar_edit">
   <%= gravatar_for @user %>
   <a href="http://gravatar.com/emails" target="_blank" rel="noopener">change</a>
