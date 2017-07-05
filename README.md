@@ -3,7 +3,7 @@
 ## 事前に必要なもの
 
 * Ruby version
-2.3.0
+2.3.3
 * rbenv
 * bundler
 * postgreSQL
