@@ -8,13 +8,13 @@
 <div class="tabs">
   <div class="tab-bar">
     <%= content_tag :li, :class => (@tabs == 'search_by_ige' ? 'tab active' : 'tab') do %>
-      <%= link_to_unless_current "IgE値から", search_by_ige_path %></li>
+      <%= link_to_unless_current "IgE値から", search_by_ige_users_path %></li>
     <% end %>
     <%= content_tag :li, :class => (@tabs == 'search_by_allergen' ? 'tab active' : 'tab') do %>
-      <%= link_to_unless_current "アレルゲンから", search_by_allergen_path %>
+      <%= link_to_unless_current "アレルゲンから", search_by_allergen_users_path %>
     <% end %>
     <%= content_tag :li, :class => (@tabs == 'search_by_name' ? 'tab active' : 'tab') do %>
-      <%= link_to_unless_current "名前から", search_by_name_path %>
+      <%= link_to_unless_current "名前から", search_by_name_users_path %>
     <% end %>
   </div>
 </div>
