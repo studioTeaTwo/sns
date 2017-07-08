@@ -289,24 +289,31 @@ module IgesHelper
 
   # アレルゲンを持っているか判定する
   def collect_allergen_in_user(test_data)
-    allergen_possession_data = Array.new
-    test_data.to_a.each do |allergen|
-      allergen_name = allergen[0].match(/(allergen_.+)/)
-      if allergen_name && (allergen[1].to_i > 1)
-        ALLERGEN_DETAIL.find do |item|
-          if allergen[0] == "allergen_#{item['en']}_class"
-            ALLERGEN_SORT.select do |k, v|
-              if v == item['sort']
-                if !allergen_possession_data.include? k
-                  allergen_possession_data.push << k
-                end
-              end
-            end
-          end
-        end
-      end
+    positive_reaction_list = test_data.to_a.select do |item|
+      positive_reaction? item
     end
-    allergen_possession_data
+    
+    allergenGroup_list = positive_reaction_list.map { |item| to_allergenGroup(item[0]) }
+    allergenGroup_list.uniq!
+    # マルチアレルゲンは含めない
+    allergenGroup_list.delete_if {|item| item == 'allergen_sort_maruti' }
+  end
+
+  private
+
+  # 陽性反応か調べる
+  def positive_reaction?(inspection_data)
+    allergen_class_name = inspection_data[0].match(/(allergen_.+)/)
+    allergen_class_name && (inspection_data[1].to_i > 1)
+  end
+
+  # アレルゲンクラス名からアレルゲン群に変換する
+  def to_allergenGroup(allergen_class_name)
+    allergen_info = ALLERGEN_DETAIL.find do |item|
+      allergen_class_name == "allergen_#{item['en']}_class"
+    end
+    allergenGroup = ALLERGEN_SORT.find { |k, v| v == allergen_info['sort'] }
+    allergenGroup[0]
   end
   
 end

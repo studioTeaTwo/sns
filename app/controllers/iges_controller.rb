@@ -289,15 +289,14 @@ class IgesController < ApplicationController
     end
 
     def calc_allergen_possession(test_data)
-      hash = {}
       # リセットする
-      ALLERGEN_SORT.keys.each do |k|
-        hash[k] = false
-      end
-      # 保有アレルゲンを判定する
+      allergenGroup_list = ALLERGEN_SORT.keys.map {|allergenGroup_name| [allergenGroup_name, false]}.to_h
+
+      # 保有アレルゲンを記録する
       collect_allergen_in_user(test_data).each do |allergen_sort|
-        hash[allergen_sort] = true
+        allergenGroup_list[allergen_sort] = true
       end
-      test_data.update(hash)
+
+      test_data.update(allergenGroup_list)
     end
 end
