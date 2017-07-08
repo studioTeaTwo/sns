@@ -288,7 +288,7 @@ module IgesHelper
   end
 
   # アレルゲンを持っているか判定する
-  def allergen_possessions(test_data)
+  def collect_allergen_in_user(test_data)
     allergen_possession_data = Array.new
     test_data.to_a.each do |allergen|
       allergen_name = allergen[0].match(/(allergen_.+)/)

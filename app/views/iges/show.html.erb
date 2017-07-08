@@ -12,17 +12,13 @@
 
 <!-- 保有アレルゲン -->
 <h2>保有アレルゲン</h2>
-<% @ige.attributes.each do |allergen_sort| %>
-  <% allergen_sort_name = allergen_sort[0].match(/(allergen_sort_.+)/) %>
-  <% if allergen_sort_name && allergen_sort[1] %>
-    <% if Rails.application.assets.find_asset("#{allergen_sort[0]}") %>
-      <%= image_tag("#{allergen_sort[0]}.png", alt: "#{allergen_sort[0]}", size: "64x64", id: "#{allergen_sort[0]}") %>
-      <div class="mdl-tooltip mdl-tooltip--top" data-mdl-for="<%= allergen_sort[0] %>" >
-        <%= IgesHelper::ALLERGEN_SORT[allergen_sort_name.to_s] %>
-      </div>
-    <% else %>
-      <p><%= IgesHelper::ALLERGEN_SORT[allergen_sort_name.to_s] %>の絵に差し替える</p>
-    <% end %>
+<% @ige.attributes.collect do |column_name, hasAllergen| %>
+  <% allergen_sort_name = column_name.match(/(allergen_sort_.+)/) %>
+  <% if allergen_sort_name && hasAllergen %>
+    <%= image_tag("#{allergen_sort_name}.png", alt: "#{allergen_sort_name}", size: "64x64", id: "#{allergen_sort_name}") %>
+    <div class="mdl-tooltip mdl-tooltip--top" data-mdl-for="<%= allergen_sort_name %>" >
+      <%= IgesHelper::ALLERGEN_SORT[allergen_sort_name.to_s] %>
+    </div>
   <% end %>
 <% end %>
 

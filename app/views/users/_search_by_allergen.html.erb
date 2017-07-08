@@ -1,12 +1,8 @@
-<% IgesHelper::ALLERGEN_SORT.collect do |k, v| %>
+<% IgesHelper::ALLERGEN_SORT.collect do |allergen_sort_name_en, allergen_sort_name_jp| %>
   <span class="search-allergen mdl-chip mdl-chip--contact mdl-chip--deletable">
-    <% if Rails.application.assets.find_asset("#{k}") %>
-      <%= link_to search_result_by_allergen_users_path(:search_key => k) do %>
-        <%= image_tag("#{k}.png", alt: "#{k}", size: "32x32", class: "mdl-chip__contact") %>
-        <span class="mdl-chip__text"><%= v %></span>
-      <% end %>
-    <% else %>
-      <%= link_to "#{v}の絵に差し替える", search_result_by_allergen_users_path(:search_key => k) %>
+    <%= link_to search_result_by_allergen_users_path(:search_key => allergen_sort_name_en) do %>
+      <%= image_tag("#{allergen_sort_name_en}.png", alt: "#{allergen_sort_name_en}", size: "32x32", class: "mdl-chip__contact") %>
+      <span class="mdl-chip__text"><%= allergen_sort_name_jp %></span>
     <% end %>
   </span>
 <% end %>

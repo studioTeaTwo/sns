@@ -33,6 +33,7 @@ class IgesController < ApplicationController
     flash[:success] = "あなたの歴史に刻まれました"
     redirect_to root_path
     rescue => e
+      puts e
       render 'new'
   end
 
@@ -294,7 +295,7 @@ class IgesController < ApplicationController
         hash[k] = false
       end
       # 保有アレルゲンを判定する
-      allergen_possessions(test_data).each do |allergen_sort|
+      collect_allergen_in_user(test_data).each do |allergen_sort|
         hash[allergen_sort] = true
       end
       test_data.update(hash)

@@ -71,16 +71,16 @@ class UsersController < ApplicationController
     render 'show'
   end
 
-  def home_logined
-    @user = current_user
-    get_user_info @user
-    @feed_items = @user.feed.paginate(page: params[:page])
-  end
-
   def show
     @user = User.find(params[:id])
     get_user_info @user
     @microposts = @user.microposts.paginate(:page => params[:page])
+  end
+
+  def home_logined
+    @user = current_user
+    get_user_info @user
+    @feed_items = @user.feed.paginate(page: params[:page])
   end
 
   def new
