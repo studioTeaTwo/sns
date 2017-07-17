@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails',        '5.1.2'
+gem 'rb-readline'
 gem 'bootstrap-sass', '~> 3.3'
 gem 'puma',         '~> 3.4'
 gem 'sass-rails',   '~> 5.0'
