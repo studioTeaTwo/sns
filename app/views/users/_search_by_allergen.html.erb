@@ -1,9 +1,9 @@
-<% IgesHelper::ALLERGEN_SORT.collect do |allergen_sort_name_en, allergen_sort_name_jp| %>
-  <% if allergen_sort_name_en != 'allergen_sort_maruti' %>
+<% IgesHelper::allergen_group.collect do |allergen_group_name_en, allergen_group_name_jp| %>
+  <% if allergen_group_name_en != 'allergen_group_maruti' %>
     <span class="search-allergen mdl-chip mdl-chip--contact mdl-chip--deletable">
-      <%= link_to search_result_by_allergen_users_path(:search_key => allergen_sort_name_en) do %>
-        <%= image_tag("#{allergen_sort_name_en}.png", alt: "#{allergen_sort_name_en}", size: "32x32", class: "mdl-chip__contact") %>
-        <span class="mdl-chip__text"><%= allergen_sort_name_jp %></span>
+      <%= link_to search_result_by_allergen_users_path(:search_key => allergen_group_name_en) do %>
+        <%= image_tag("#{allergen_group_name_en}.png", alt: "#{allergen_group_name_en}", size: "32x32", class: "mdl-chip__contact") %>
+        <span class="mdl-chip__text"><%= allergen_group_name_jp %></span>
       <% end %>
     </span>
   <% end %>

@@ -18,31 +18,31 @@ module IgesHelper
   # アレルゲン種類
   ALLERGEN_SORT =
     {
-      'allergen_sort_inekakafun'  => 'イネ科植物花粉',
-      'allergen_sort_zassoukafun' => '雑草花粉',
-      'allergen_sort_jyukikafun'  => '樹木花粉',
-      'allergen_sort_chiri'       => '室内塵',     
-      'allergen_sort_dani'        => 'ダニ',      
-      'allergen_sort_shinkin'     => '真菌',   
-      'allergen_sort_saikin'      => '細菌',    
-      'allergen_sort_doubutsu'    => '動物',  
-      'allergen_sort_syokugyou'   => '職業性アレルゲン', 
-      'allergen_sort_tamago'      => '卵',    
-      'allergen_sort_nyuuseihin'  => '乳製品',
-      'allergen_sort_gyorui'      => '魚類',    
-      'allergen_sort_koukakurui'  => '甲殻類',
-      'allergen_sort_ikatako'     => 'イカ・タコ',   
-      'allergen_sort_komugi'      => '穀穀類（小麦）',    
-      'allergen_sort_komugiigai'  => '穀類（小麦以外）',
-      'allergen_sort_nikurui'     => '肉類',   
-      'allergen_sort_mamerui'     => '豆類',   
-      'allergen_sort_kudamonorui' => '果物類',
-      'allergen_sort_yasai'       => '野菜',
-      'allergen_sort_sonota'      => 'その他',    
-      'allergen_sort_kiseityuu'   => '寄生虫', 
-      'allergen_sort_yakubutsu'   => '薬物', 
-      'allergen_sort_kontyuu'     => '昆虫',   
-      'allergen_sort_maruti'      => 'マルチアレルゲン'
+      'allergen_group_inekakafun'  => 'イネ科植物花粉',
+      'allergen_group_zassoukafun' => '雑草花粉',
+      'allergen_group_jyukikafun'  => '樹木花粉',
+      'allergen_group_chiri'       => '室内塵',     
+      'allergen_group_dani'        => 'ダニ',      
+      'allergen_group_shinkin'     => '真菌',   
+      'allergen_group_saikin'      => '細菌',    
+      'allergen_group_doubutsu'    => '動物',  
+      'allergen_group_syokugyou'   => '職業性アレルゲン', 
+      'allergen_group_tamago'      => '卵',    
+      'allergen_group_nyuuseihin'  => '乳製品',
+      'allergen_group_gyorui'      => '魚類',    
+      'allergen_group_koukakurui'  => '甲殻類',
+      'allergen_group_ikatako'     => 'イカ・タコ',   
+      'allergen_group_komugi'      => '穀穀類（小麦）',    
+      'allergen_group_komugiigai'  => '穀類（小麦以外）',
+      'allergen_group_nikurui'     => '肉類',   
+      'allergen_group_mamerui'     => '豆類',   
+      'allergen_group_kudamonorui' => '果物類',
+      'allergen_group_yasai'       => '野菜',
+      'allergen_group_sonota'      => 'その他',    
+      'allergen_group_kiseityuu'   => '寄生虫', 
+      'allergen_group_yakubutsu'   => '薬物', 
+      'allergen_group_kontyuu'     => '昆虫',   
+      'allergen_group_maruti'      => 'マルチアレルゲン'
     }
 
   # アレルゲン詳細 
@@ -285,35 +285,6 @@ module IgesHelper
     when 3 then TEST_UNIT[3]
     else
     end
-  end
-
-  # アレルゲンを持っているか判定する
-  def collect_allergen_in_user(test_data)
-    positive_reaction_list = test_data.to_a.select do |item|
-      positive_reaction? item
-    end
-    
-    allergenGroup_list = positive_reaction_list.map { |item| to_allergenGroup(item[0]) }
-    allergenGroup_list.uniq!
-    # マルチアレルゲンは含めない
-    allergenGroup_list.delete_if {|item| item == 'allergen_sort_maruti' }
-  end
-
-  private
-
-  # 陽性反応か調べる
-  def positive_reaction?(inspection_data)
-    allergen_class_name = inspection_data[0].match(/(allergen_.+)/)
-    allergen_class_name && (inspection_data[1].to_i > 1)
-  end
-
-  # アレルゲンクラス名からアレルゲン群に変換する
-  def to_allergenGroup(allergen_class_name)
-    allergen_info = ALLERGEN_DETAIL.find do |item|
-      allergen_class_name == "allergen_#{item['en']}_class"
-    end
-    allergenGroup = ALLERGEN_SORT.find { |k, v| v == allergen_info['sort'] }
-    allergenGroup[0]
   end
   
 end

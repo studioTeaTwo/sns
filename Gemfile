@@ -1,20 +1,29 @@
 source 'https://rubygems.org'
 
 gem 'rails',        '5.1.2'
-gem 'rb-readline'
-gem 'bootstrap-sass', '~> 3.3'
 gem 'puma',         '~> 3.4'
+gem 'rb-readline'
+gem 'active_hash'
+gem 'jbuilder',     '~> 2.4'
+
+# パスワード暗号化
+gem 'bcrypt',       '~> 3.1'
+
+# 画像
+gem 'carrierwave',             '~> 0.11'
+gem 'mini_magick',             '~> 4.5'
+gem 'fog',                     '~> 1.38'
+
+# ダミーデータ作成
+gem 'faker',        '~> 1.6'
+gem 'as-duration'
+
+# view関連（→APIモードにしたら削除）
+gem 'bootstrap-sass', '~> 3.3'
 gem 'sass-rails',   '~> 5.0'
 gem 'uglifier',     '~> 3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails', '~> 4.1'
-gem 'jbuilder',     '~> 2.4'
-gem 'bcrypt',       '~> 3.1'
-gem 'faker',        '~> 1.6'
-gem 'as-duration'
-gem 'carrierwave',             '~> 0.11'
-gem 'mini_magick',             '~> 4.5'
-gem 'fog',                     '~> 1.38'
 gem 'will_paginate',           '~> 3.1'
 gem 'bootstrap-will_paginate', '~> 0.0'
 gem 'momentjs-rails',          '~> 2.9'

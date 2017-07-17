@@ -91,212 +91,53 @@ class IgesController < ApplicationController
   private
 
     def ige_params
-      params.require(:ige).permit(:test_date, 
-                                  :test_category,
-                                  :ige_value,
-                                  :ige_unit,
-                                  :allergen_harugaya_class,
-                                  :allergen_gyougishiba_class,
-                                  :allergen_kamogaya_class,
-                                  :allergen_hirohaushinokegusa_class,
-                                  :allergen_hosomugi_class,
-                                  :allergen_ooawagaeri_class, 
-                                  :allergen_ashi_class,
-                                  :allergen_nagahagusa_class, 
-                                  :allergen_konukagusaZoku_class,
-                                  :allergen_seibanmorokoshi_class,   
-                                  :allergen_komugiZoku_class,  
-                                  :allergen_oosuzumenoteppou_class,  
-                                  :allergen_suzumenohieZoku_class,
-                                  :allergen_butakusakongoubu1_class, 
-                                  :allergen_butakusa_class,
-                                  :allergen_butakusamodoki_class,    
-                                  :allergen_oobutakusa_class,
-                                  :allergen_nigayomogi_class,
-                                  :allergen_yomogi_class,
-                                  :allergen_huransugiku_class,
-                                  :allergen_tanpopoZoku_class,
-                                  :allergen_heraobako_class,
-                                  :allergen_shiroza_class,
-                                  :allergen_akinokirinsou_class,  
-                                  :allergen_himesuiba_class,
-                                  :allergen_irakusaZoku_class, 
-                                  :allergen_kanamugura_class,
-                                  :allergen_kaedeZoku_class, 
-                                  :allergen_hannokiZoku_class,
-                                  :allergen_shirakanbaZoku_class,
-                                  :allergen_bunaZoku_class,
-                                  :allergen_byakushinZoku_class,
-                                  :allergen_konaraZoku_class,
-                                  :allergen_nireZoku_class, 
-                                  :allergen_olive_class,
-                                  :allergen_kurumiZoku_class, 
-                                  :allergen_yanagiZoku_class, 
-                                  :allergen_matsuZoku_class, 
-                                  :allergen_sugi_class,
-                                  :allergen_acaciaZoku_class,  
-                                  :allergen_hinoki_class,
-                                  :allergen_kuwaZoku_class,  
-                                  :allergen_housedust1_class,
-                                  :allergen_housedust2_class,
-                                  :allergen_yakehyouhidani_class,   
-                                  :allergen_konahyouhidani_class,   
-                                  :allergen_ashibutokonadani_class,
-                                  :allergen_sayaashinidani_class, 
-                                  :allergen_kenagakonadani_class,  
-                                  :allergen_penicillium_class,
-                                  :allergen_cladosporium_class,      
-                                  :allergen_aspergillosis_class,     
-                                  :allergen_mucor_class,
-                                  :allergen_candida_class,
-                                  :allergen_alternaria_class,
-                                  :allergen_helminthosporium_class,
-                                  :allergen_pityrosporium_class, 
-                                  :allergen_trichophyton_class,    
-                                  :allergen_malassezia_class,
-                                  :allergen_kiirobudoukyukinA_class,
-                                  :allergen_kiirobudoukyukinB_class,
-                                  :allergen_nekoHisetsu_class,
-                                  :allergen_umaHisetsu_class,
-                                  :allergen_ushiHisetsu_class,
-                                  :allergen_inuHisetsu_class,
-                                  :allergen_marmotJyouhi_class,    
-                                  :allergen_hatoFun_class,
-                                  :allergen_gatyouUmou_class,
-                                  :allergen_sekiseiinkoFun_class,  
-                                  :allergen_sekiseiinkoUmou_class,   
-                                  :allergen_yagiJyouhi_class,
-                                  :allergen_hitsujiJyouhi_class,  
-                                  :allergen_katoJyouhi_class,
-                                  :allergen_butaJyouhi_class,
-                                  :allergen_hamsterJyouhi_class,   
-                                  :allergen_niwatoriUmou_class,    
-                                  :allergen_ahiruUmou_class,
-                                  :allergen_ratt_class,
-                                  :allergen_mouse_class,   
-                                  :allergen_oobakosyushi_class,   
-                                  :allergen_kinu_class,
-                                  :allergen_isocyanateTDI_class,
-                                  :allergen_isocyanateMDI_class,
-                                  :allergen_isocyanateHDI_class,
-                                  :allergen_ethyleneoxide_class,
-                                  :allergen_musuihutalsan_class,
-                                  :allergen_formalin_class,
-                                  :allergen_latex_class,
-                                  :allergen_men_class,  
-                                  :allergen_ranpaku_class,
-                                  :allergen_ranou_class,
-                                  :allergen_ovomucoid_class,
-                                  :allergen_milk_class,
-                                  :allergen_alpha_actalbumin_class,
-                                  :allergen_beta_lactoglobulin_class,
-                                  :allergen_casein_class,
-                                  :allergen_cheese_class, 
-                                  :allergen_moldcheese_class,
-                                  :allergen_tara_class,
-                                  :allergen_maguro_class,
-                                  :allergen_sake_class,
-                                  :allergen_saba_class,
-                                  :allergen_aji_class,
-                                  :allergen_iwashi_class,
-                                  :allergen_karei_class,
-                                  :allergen_ikura_class,
-                                  :allergen_tarako_class,
-                                  :allergen_kani_class,
-                                  :allergen_ebi_class,
-                                  :allergen_murasakigai_class,
-                                  :allergen_lobster_class,
-                                  :allergen_asari_class,
-                                  :allergen_kaki_class,  
-                                  :allergen_hotate_class,
-                                  :allergen_ika_class, 
-                                  :allergen_tako_class,
-                                  :allergen_komugi_class,
-                                  :allergen_gluten_class,
-                                  :allergen_oh_5gliadin_class,
-                                  :allergen_raimugi_class,
-                                  :allergen_oomugi_class,
-                                  :allergen_ootomugi_class,
-                                  :allergen_toumorokoshi_class,    
-                                  :allergen_kome_class,
-                                  :allergen_soba_class,   
-                                  :allergen_beerkoubo_class,
-                                  :allergen_kibi_class,
-                                  :allergen_awa_class,   
-                                  :allergen_hie_class,    
-                                  :allergen_bakuga_class,
-                                  :allergen_butaniku_class,
-                                  :allergen_gyuniku_class,
-                                  :allergen_toriniku_class,
-                                  :allergen_youniku_class,
-                                  :allergen_endou_class,
-                                  :allergen_peanuts_class,
-                                  :allergen_daizu_class,
-                                  :allergen_ingen_class,  
-                                  :allergen_hashibami_class, 
-                                  :allergen_brazilnuts_class,
-                                  :allergen_almond_class,
-                                  :allergen_coconut_class, 
-                                  :allergen_cacao_class,
-                                  :allergen_cashewnuts_class,
-                                  :allergen_kurumi_class,
-                                  :allergen_arah2_class, 
-                                  :allergen_orange_class,  
-                                  :allergen_ichigo_class, 
-                                  :allergen_ringo_class, 
-                                  :allergen_kiwi_class,  
-                                  :allergen_melon_class,   
-                                  :allergen_mango_class,  
-                                  :allergen_banana_class,  
-                                  :allergen_younashi_class,
-                                  :allergen_momo_class,
-                                  :allergen_avocado_class,
-                                  :allergen_grapefruit_class,
-                                  :allergen_suika_class,
-                                  :allergen_tomato_class,  
-                                  :allergen_ninjin_class, 
-                                  :allergen_jyagaimo_class,
-                                  :allergen_ninniku_class,
-                                  :allergen_tamanegi_class,
-                                  :allergen_takenoko_class,
-                                  :allergen_satsumaimo_class, 
-                                  :allergen_celery_class,
-                                  :allergen_parsley_class, 
-                                  :allergen_yamaimo_class,
-                                  :allergen_hourensou_class,
-                                  :allergen_kabocha_class,
-                                  :allergen_hitoinsulin_food_class, 
-                                  :allergen_gelatin_class,
-                                  :allergen_goma_class,
-                                  :allergen_mustard_class,
-                                  :allergen_kaichu_class,
-                                  :allergen_anisakis_class,
-                                  :allergen_hitoinsulin_etc_class,   
-                                  :allergen_mitsubachi_class,
-                                  :allergen_suzumebachi_class,
-                                  :allergen_ashinagabachi_class,     
-                                  :allergen_gokiburi_class,
-                                  :allergen_yusurika_class,
-                                  :allergen_ga_class,
-                                  :allergen_yabuka_class,  
-                                  :allergen_doubutsuJyouhi_class,    
-                                  :allergen_syokumotsu_class,
-                                  :allergen_kokumotsu_class,
-                                  :allergen_ineka_class,
-                                  :allergen_kabi_class,  
-                                  :allergen_zassou_class
-                                  )
+      params.require(:ige).permit(*Ige.column_names)
     end
 
     def calc_allergen_possession(test_data)
       # リセットする
-      allergenGroup_list = ALLERGEN_SORT.keys.map {|allergenGroup_name| [allergenGroup_name, false]}.to_h
+      allergen_group_list = Masterdata::AllergenGroup.all.map {|allergen_group| [allergen_group.en, false]}.to_h
 
       # 保有アレルゲンを記録する
-      collect_allergen_in_user(test_data).each do |allergen_sort|
-        allergenGroup_list[allergen_sort] = true
+      collect_allergen_in_user(test_data).each do |allergen_group|
+        allergen_group_list[allergen_group] = true
       end
 
-      test_data.update(allergenGroup_list)
+      test_data.update(allergen_group_list)
+    end
+
+    # アレルゲンを持っているか判定する
+    def collect_allergen_in_user(test_data)
+      positive_reaction_list = test_data.to_a.select do |item|
+        positive_reaction? item
+      end
+      
+      allergenGroup_list = positive_reaction_list.map { |item| to_allergen_group(item[0]) }
+      allergenGroup_list.uniq!
+      # マルチアレルゲンは含めない
+      allergenGroup_list.delete_if {|item| item == 'allergen_group_maruti' }
+    end
+
+    private
+
+    # 陽性反応か調べる
+    def positive_reaction?(inspection_data)
+      allergen_class_name = inspection_data[0].match(/(allergen_.+)/)
+      allergen_class_name && (inspection_data[1].to_i > 1)
+    end
+
+    # アレルゲンクラス名からアレルゲン群に変換する
+    def to_allergen_group(allergen_class_name)
+      allergen_info = Masterdata::Allergen.all.select do |item|
+        allergen_class_name == "allergen_#{item.en}_class"
+      end
+
+      # TODO: 結果が１つ以外だったらアラート上げる
+      # if allergen_info.count != 1
+
+      allergenGroup = Masterdata::AllergenGroup.all.select do |item| 
+        item.ja == allergen_info[0].allergenGroup
+      end
+      allergenGroup[0].en
     end
 end

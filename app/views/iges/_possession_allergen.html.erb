@@ -1,6 +1,6 @@
 <% possession_allergen.attributes.each do |allergen| %>
-  <% allergen_sort_name = allergen[0].match(/(allergen_sort_.+)/) %>
-  <% if allergen_sort_name && allergen[1] %>
+  <% allergen_group_name = allergen[0].match(/(allergen_group_.+)/) %>
+  <% if allergen_group_name && allergen[1] %>
     <%= link_to image_tag("#{allergen[0]}.png", alt: "#{allergen[0]}", size: "32x32"), search_result_by_allergen_users_path(:search_key => allergen[0]) %>
   <% end %>
 <% end %>

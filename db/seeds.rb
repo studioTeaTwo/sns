@@ -29,10 +29,10 @@ Ige.create!(
             test_category: Random.rand(0 .. 10),
             ige_value: Random.rand(10 .. 3000),
             ige_unit: 0,
-            allergen_sort_chiri: true,
-            allergen_sort_dani: true,
-            allergen_sort_saikin: true,
-            allergen_sort_komugi: true
+            allergen_group_chiri: true,
+            allergen_group_dani: true,
+            allergen_group_saikin: true,
+            allergen_group_komugi: true
            )
 # 管理者ユーザーのその他のIgE検査結果
 10.times do |n|
@@ -44,10 +44,10 @@ Ige.create!(
               test_category: Random.rand(0 .. 10),
               ige_value: Random.rand(10 .. 3000),
               ige_unit: 0,
-              allergen_sort_chiri: true,
-              allergen_sort_dani: true,
-              allergen_sort_saikin: true,
-              allergen_sort_komugi: true
+              allergen_group_chiri: true,
+              allergen_group_dani: true,
+              allergen_group_saikin: true,
+              allergen_group_komugi: true
               )
 end
 
@@ -81,10 +81,10 @@ end
               test_category: Random.rand(0 .. 10),
               ige_value: Random.rand(10 .. 3000),
               ige_unit: 0,
-              allergen_sort_chiri: true,
-              allergen_sort_dani: true,
-              allergen_sort_gyorui: true,
-              allergen_sort_inekakafun: true
+              allergen_group_chiri: true,
+              allergen_group_dani: true,
+              allergen_group_gyorui: true,
+              allergen_group_inekakafun: true
              )
   # その他のIgE検査結果
   ige_count = Random.rand(1 .. 10)
