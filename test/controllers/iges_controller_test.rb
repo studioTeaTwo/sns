@@ -1,29 +1,41 @@
 require 'test_helper'
 
 class IgesControllerTest < ActionDispatch::IntegrationTest
+  def setup
+    @user = users(:michael)
+    log_in_as(@user)
+    @ige = iges(:one)
+  end
+
+  test "should get index" do
+    get iges_url
+    assert_response :success
+  end
+
   test "should get new" do
-    get iges_new_url
+    get new_ige_url
     assert_response :success
   end
 
   test "should get show" do
-    get iges_show_url
+    get ige_url(@ige)
     assert_response :success
   end
 
   test "should get edit" do
-    get iges_edit_url
+    get edit_ige_url(@ige)
     assert_response :success
   end
 
-  test "should get destroy" do
-    get iges_destroy_url
+  test "should get quote" do
+    get quote_ige_url(@ige)
     assert_response :success
   end
 
-  test "should get index" do
-    get iges_index_url
-    assert_response :success
+  test "should destroy" do
+    assert_difference('Ige.count', -1) do
+      delete ige_url(@ige)
+    end
   end
 
 end
