@@ -42,6 +42,7 @@ group :development do
   gem 'listen',                '~> 3.0'
   gem 'spring',                '~> 1.7'
   gem 'spring-watcher-listen', '~> 2.0'
+  gem 'rails-erd', require: false
 end
 
 group :test do
