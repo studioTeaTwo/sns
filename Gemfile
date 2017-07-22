@@ -34,6 +34,8 @@ gem 'material_design_lite-sass'
 
 group :development, :test do
   gem 'sqlite3', '~> 1.3'
+  gem 'rspec-rails', '~> 3.5'
+  gem 'fuubar' 
   gem 'byebug',  '~> 9.0', platform: :mri
 end
 
@@ -46,9 +48,7 @@ group :development do
 end
 
 group :test do
-  gem 'minitest-reporters',       '~> 1.1'
   gem 'guard',                    '~> 2.13'
-  gem 'guard-minitest',           '~> 2.4'
 end
 
 group :production do
