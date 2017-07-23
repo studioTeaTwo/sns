@@ -55,7 +55,8 @@ group :development do
 end
 
 group :test do
-  gem 'guard',                    '~> 2.13'
+  gem 'guard',               '~> 2.13'
+  gem 'pg', '~> 0.18'
 end
 
 group :production do
