@@ -16,7 +16,9 @@ FactoryGirl.define do
   end
 
   factory :another_user, class: User do
-    name "Nash"
-    email "nash@example.com"
+    id 2
+    name "t2"
+    email "t2@example.com"
+    password_digest User.digest('test')
   end
 end
