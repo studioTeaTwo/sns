@@ -67,10 +67,30 @@ RSpec.describe "Iges", type: :request do
   end
 
   describe "PUT /iges/:id" do
-    it "changes" do
-      put ige_path(existing_ige), params: { ige: attributes_for(:existing_ige, ige_value: 300) }
+    before do
+      put ige_path(existing_ige), params: { ige: attributes_for(
+        :existing_ige, 
+        ige_value: 300,
+        allergen_milk_class: 1,
+        allergen_konahyouhidani_class: 2
+      )}
       existing_ige.reload
+    end
+
+    it "changes" do
       expect(existing_ige.ige_value).to eq 300
+    end
+
+    it "judge allergen as positive reaction" do
+      expect(existing_ige.allergen_group_dani).to eq true
+    end
+
+    it "judge allergen as negative reaction" do
+      expect(existing_ige.allergen_group_nyuuseihin).to eq false
+    end
+
+    it "has one :latest_test_result in the database" do
+      expect(Ige.where(:latest_test_result => true).count).to eq 1
     end
   end
 

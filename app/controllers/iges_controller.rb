@@ -54,8 +54,8 @@ class IgesController < ApplicationController
     addition_params = calc_allergen_possession(ige_params.to_h)
     ActiveRecord::Base.transaction do
       # 最新IgE検査の更新(プロフィールやユーザー検索のため)
-      if latest_test?(@ige, 'new')
-        current_user.iges.where(:latest_test_result => true).update_all(:latest_test_result => false)
+      if latest_test?(@ige, 'edit')
+        current_user.iges.where.not(:id => @ige.id).where(:latest_test_result => true).update_all(:latest_test_result => false)
         addition_params[:latest_test_result] = true
       else
         addition_params[:latest_test_result] = false
@@ -82,16 +82,19 @@ class IgesController < ApplicationController
     end
 
     def latest_test?(ige_data, method)
-      @current_iges = current_user.iges.order("test_date DESC")
+      current_iges = current_user.iges.order("test_date DESC")
       if method == 'new'
-        @current_iges.count == 0 || ige_data[:test_date] >= @current_iges[0][:test_date]
+        # ige検査がこれしかない
+        current_iges.count == 0 ||
+        # 今回入力された検査日付は一番新しい
+        ige_data[:test_date] >= current_iges[0][:test_date]
       else
         # ige検査がこれしかない
-        @current_iges.count == 1  ||
+        current_iges.count == 1  ||
         # 今回の検査データは最新検査の更新であり、かつ今回入力された検査日付が1個前の検査より新しい
-        (@ige[:id] == @current_iges[0][:id] && @ige[:test_date] >= @current_iges[1][:test_date]) || 
+        (ige_data[:id] == current_iges[0][:id] && ige_data[:test_date] >= current_iges[1][:test_date]) || 
         # 今回の検査データは最新検査の更新では無いが、今回入力された検査日付は一番新しい
-        @ige[:test_date] >= @current_iges[0][:test_date]
+        ige_data[:test_date] >= current_iges[0][:test_date]
       end
     end
 
