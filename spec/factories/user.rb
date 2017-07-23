@@ -6,6 +6,7 @@ FactoryGirl.define do
     name Faker::Name.name
     email 'sample@sample.com'
     password_digest User.digest('test')
+    activated true
 
     factory :activate_user do
       activated false

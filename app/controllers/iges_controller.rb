@@ -17,24 +17,20 @@ class IgesController < ApplicationController
     @ige.update(addition_params)
     ActiveRecord::Base.transaction do
       # 最新IgE検査の更新(プロフィールやユーザー検索のため)
-      @current_iges = current_user.iges.order("test_date DESC")
-      if ige_params[:test_date] >= @current_iges[0][:test_date].to_s
-        # 今回の検査データが最新検査データである
-        @current_iges.where(:latest_test_result => true).update_all(:latest_test_result => false)
+      if latest_test?(@ige, 'new')
+        current_user.iges.where(:latest_test_result => true).update_all(:latest_test_result => false)
         @ige[:latest_test_result] = true
       else
-        # 今回の検査データは最新では無い
         @ige[:latest_test_result] = false
       end
-
       # 今回のIge検査を登録
       @ige.save!
     end
     flash[:success] = "あなたの歴史に刻まれました"
     redirect_to root_path
-    rescue => e
-      puts e
-      render 'new'
+  rescue => e
+    puts e
+    render 'new'
   end
 
   def show
@@ -58,28 +54,19 @@ class IgesController < ApplicationController
     addition_params = calc_allergen_possession(ige_params.to_h)
     ActiveRecord::Base.transaction do
       # 最新IgE検査の更新(プロフィールやユーザー検索のため)
-      @current_iges = current_user.iges.order("test_date DESC")
-      if (
-           # 今回の検査データは最新検査の更新であり、かつ今回入力された検査日付が1個前の検査より新しい
-           (@ige[:id] == @current_iges[0][:id] && @ige[:test_date] >= @current_iges[1][:test_date]) || 
-           # 今回の検査データは最新検査の更新では無いが、今回入力された検査日付は一番新しい
-           @ige[:test_date] >= @current_iges[0][:test_date]
-         )
-        # 今回の検査データが最新検査データである
-        @current_iges.where(:latest_test_result => true).update_all(:latest_test_result => false)
+      if latest_test?(@ige, 'new')
+        current_user.iges.where(:latest_test_result => true).update_all(:latest_test_result => false)
         addition_params[:latest_test_result] = true
       else
-        # 今回の検査データは最新では無い
         addition_params[:latest_test_result] = false
       end
-
       # 今回のIge検査を更新
       @ige.update_attributes(addition_params)
     end
     flash[:success] = "記録が修正されました"
     redirect_to root_path
-    rescue => e
-      render 'edit'
+  rescue => e
+    render 'edit'
   end
 
   def destroy
@@ -92,6 +79,20 @@ class IgesController < ApplicationController
 
     def ige_params
       params.require(:ige).permit(*Ige.column_names)
+    end
+
+    def latest_test?(ige_data, method)
+      @current_iges = current_user.iges.order("test_date DESC")
+      if method == 'new'
+        @current_iges.count == 0 || ige_data[:test_date] >= @current_iges[0][:test_date]
+      else
+        # ige検査がこれしかない
+        @current_iges.count == 1  ||
+        # 今回の検査データは最新検査の更新であり、かつ今回入力された検査日付が1個前の検査より新しい
+        (@ige[:id] == @current_iges[0][:id] && @ige[:test_date] >= @current_iges[1][:test_date]) || 
+        # 今回の検査データは最新検査の更新では無いが、今回入力された検査日付は一番新しい
+        @ige[:test_date] >= @current_iges[0][:test_date]
+      end
     end
 
     def calc_allergen_possession(test_data)
