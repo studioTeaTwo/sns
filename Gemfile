@@ -35,7 +35,8 @@ gem 'material_design_lite-sass'
 group :development, :test do
   gem 'sqlite3', '~> 1.3'
   gem 'rspec-rails', '~> 3.5'
-  gem 'fuubar' 
+  gem 'fuubar'
+  gem 'factory_girl_rails'
   gem 'byebug',  '~> 9.0', platform: :mri
 end
 
@@ -44,6 +45,12 @@ group :development do
   gem 'listen',                '~> 3.0'
   gem 'spring',                '~> 1.7'
   gem 'spring-watcher-listen', '~> 2.0'
+
+  # リアルタイムテスト
+  gem 'guard-rspec', require: false # guardでrspecを動かす
+  gem 'terminal-notifier'
+  gem 'terminal-notifier-guard'  # デスクトップ通知を行う
+
   gem 'rails-erd', require: false
 end
 

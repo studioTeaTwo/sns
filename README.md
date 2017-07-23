@@ -25,6 +25,10 @@
   $ sudo apt-get install imagemagick --fix-missing
   ```
 * その他
+  * for rails-erd
+  ``` bash
+  $ brew install graphviz
+  ```
   * ubuntu
   `bundle install`でjsonがインストールできない場合
   ``` bash
