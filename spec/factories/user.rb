@@ -13,6 +13,11 @@ FactoryGirl.define do
       activation_token activaton_token
       activation_digest User.digest(activaton_token)
     end
+
+    factory :reset_user do
+      reset_digest User.digest('resettoken')
+      reset_sent_at Time.zone.now
+    end
   end
 
   factory :another_user, class: User do
