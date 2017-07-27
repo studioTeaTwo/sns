@@ -24,5 +24,14 @@ FactoryGirl.define do
     name "t2"
     email "t2@example.com"
     password_digest User.digest('test')
+    activated true
+  end
+
+  factory :admin_user, class: User do
+    name "admin"
+    email "admin@example.com"
+    password_digest User.digest('test')
+    activated true
+    admin true
   end
 end
