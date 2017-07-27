@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Iges", type: :request do
   let(:current_user) { create(:user) }
+  # count系テストのために!をつける
   let!(:existing_ige) { create(:existing_ige, { user_id: current_user.id}) }
 
   before :each do
@@ -9,14 +10,14 @@ RSpec.describe "Iges", type: :request do
   end
 
   describe "GET /iges" do
-    it "works! (now write some real specs)" do
+    it "works!" do
       get iges_path
       expect(response).to have_http_status(200)
     end
   end
 
   describe "GET /iges/new" do
-    it "works! (now write some real specs)" do
+    it "works!" do
       get new_ige_path
       expect(response).to have_http_status(200)
     end
@@ -46,21 +47,21 @@ RSpec.describe "Iges", type: :request do
   end
 
   describe "GET /iges/:id/show" do
-    it "works! (now write some real specs)" do
+    it "works!" do
       get ige_path(existing_ige)
       expect(response).to have_http_status(200)
     end
   end
 
   describe "GET /iges/:id/edit" do
-    it "works! (now write some real specs)" do
+    it "works!" do
       get edit_ige_path(existing_ige)
       expect(response).to have_http_status(200)
     end
   end
 
   describe "GET /iges/:id/quote" do
-    it "works! (now write some real specs)" do
+    it "works!" do
       get edit_ige_path(existing_ige)
       expect(response).to have_http_status(200)
     end

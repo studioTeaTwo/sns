@@ -9,7 +9,7 @@ RSpec.describe "Microposts", type: :request do
   end
 
   describe "GET /microposts/new" do
-    it "works! (now write some real specs)" do
+    it "works!" do
       get new_micropost_path
       expect(response).to have_http_status(200)
     end
