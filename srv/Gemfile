@@ -43,6 +43,7 @@ group :development, :test do
   # rspec
   gem 'rspec-rails', '~> 3.5'
   gem 'fuubar'
+  gem 'factory_girl_rails'
 
 end
 

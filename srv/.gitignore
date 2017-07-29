@@ -6,6 +6,7 @@
 
 # Ignore bundler config.
 /.bundle
+/vendor/bundle/
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
@@ -18,3 +19,16 @@
 !/tmp/.keep
 
 .byebug_history
+
+# Ignore Spring files.
+/spring/*.pid
+
+# アップロードされたテスト画像を無視する
+/public/uploads
+
+# Ignore Production build
+.ruby-version
+/public/assets
+
+# OS/editor
+.DS_Store
