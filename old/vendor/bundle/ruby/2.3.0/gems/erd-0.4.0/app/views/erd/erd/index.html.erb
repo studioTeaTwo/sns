@@ -1,0 +1,86 @@
+<div id="erd_box">
+  <div id="erd_container">
+    <%=raw @erd %>
+  </div>
+  <div id="open_migration"><%= image_tag("/assets/erd/angle-left.png") %></div>
+  <div id="migration">
+    <div id="close_migration"><%= image_tag("/assets/erd/angle-right.png") %></div>
+    <%- if flash[:executed_migrations].present? -%>
+      <div id="executed">
+        <h2>Successfully executed following <%= flash[:executed_migrations].values.flatten.count %> migrations!</h2>
+        <%- [:up, :down].each do |direction| -%>
+          <%- if flash[:executed_migrations][direction].present? -%>
+            <h3><%= direction %></h3>
+            <ul>
+            <%- flash[:executed_migrations][direction].each do |m| -%>
+              <li><%= File.basename m.to_s %></li>
+            <%- end -%>
+            </ul>
+          <%- end -%>
+        <%- end -%>
+      </div>
+    <%- end -%>
+    <%- if flash[:failed_migrations].present? -%>
+      <div id="failed">
+        <h2>failed migrations</h2>
+        <ul>
+        <%- flash[:failed_migrations].each do |m| -%>
+          <li><%= m %></li>
+        <%- end -%>
+        </ul>
+      </div>
+    <%- end -%>
+    <table id="changes">
+      <caption>schema changes</caption>
+      <thead><tr><th>action</th><th>model</th><th>column</th><th>from</th><th>to</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <%= form_tag '/erd', :method => :put, :id => 'changes_form' do %>
+      <%= hidden_field_tag 'changes' %>
+      <%= submit_tag 'save changes' %>
+    <% end %>
+    <%= form_tag '/erd/migrate', :method => :put, :id => 'migrate_form' do %>
+      <ul id="open_buttons">
+        <li><button id="open_up" type="button">up</button></li>
+        <li><button id="open_down" type="button">down</button></li>
+        <li><button id="close_all" type="button">close</button></li>
+      </ul>
+      <table id="migration_status">
+        <caption>migration status</caption>
+        <thead>
+          <tr><th class="status">status</th><th class="version">version</th><th class="name">name</th></tr>
+          <tr><td colspan="3" class="migrations">
+            <button>UNFOLD ALL</button>
+            <%= @migrations.count %> migrations in total (up: <%= @migrations.count {|m| m[:status] == 'up'} %>, down: <%= @migrations.count {|m| m[:status] == 'down'} %>)
+          </td></tr>
+        </thead>
+        <tbody>
+          <%- @migrations.each do |m| -%>
+            <tr class="<%= m[:status] %>">
+              <td><label><%= check_box_tag (m[:status] == 'up' ? 'down[]' : 'up[]'), m[:filename] %><%= m[:status] %></label></td>
+              <td><%= m[:version] %></td>
+              <td class="migration_file_name"><%= m[:name] %></td>
+            </tr>
+          <%- end -%>
+        </tbody>
+      </table>
+      <%= submit_tag 'run migrations' %>
+    <% end %>
+  </div>
+  <a href="#" id='open_create_model_dialog'%>Create Model</a>
+  <div id="create_model_form">
+    <form>
+      Model Name: <input id="new_model_name" name="new_model_name" type="text" /><br>
+      <table id="create_model_table">
+        <tbody>
+          <tr>
+            <td><input name="new_model_column_name_1" type="text" /></td>
+            <td class="separator">:</td>
+            <td><input name="new_model_column_type_1" type="text" value="string" /></td>
+          </tr>
+        </tbody>
+      </table>
+      <div><a href="#" id="new_model_add_column" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"><span class="ui-button-text">Add More Column</span></a></div>
+    </form>
+  </div>
+</div>
