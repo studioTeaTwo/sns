@@ -1,4 +1,9 @@
 class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
   has_many :microposts, dependent: :destroy
   has_many :active_relationships, class_name:  "Relationship",
                                   foreign_key: "follower_id",
@@ -13,16 +18,17 @@ class User < ApplicationRecord
   attr_accessor :remember_token, :activation_token, :reset_token
 
   before_save   :downcase_email
-  before_create :create_activation_digest
+  #before_create :create_activation_digest
+  after_create :update_access_token
 
-  validates :name,  presence: true, length: { maximum: 50 }
+  #validates :name,  presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
       format: { with: VALID_EMAIL_REGEX },
       uniqueness: { case_sensitive: false }
-  has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
-  validates :self_introduction, length: { maximum: 140 }
+  #has_secure_password
+  #validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  #validates :self_introduction, length: { maximum: 140 }
   
   # ユーザーのステータスフィードを返す
   def feed
@@ -71,6 +77,11 @@ class User < ApplicationRecord
   end
 
   # アカウント関連
+
+  def update_access_token
+    self.access_token = "#{self.id}:#{Devise.friendly_token}"
+    save
+  end
 
   # 渡された文字列のハッシュ値を返す
   def User.digest(string)
