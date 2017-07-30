@@ -1,5 +1,5 @@
 class Api::SessionsController < ApplicationController
-  skip_before_action :authenticate_user_from_token
+  skip_before_action :logged_in_user
 
   def create
     @user = User.find_for_database_authentication(email: params[:email])
@@ -15,13 +15,14 @@ class Api::SessionsController < ApplicationController
 
   private
 
-  def invalid_email
-    warden.custom_failure!
-    render json: { error: 'invalid_email' }
-  end
+    def invalid_email
+      warden.custom_failure!
 
-  def invalid_password
-    warden.custom_failure!
-    render json: { error: 'invalid_password' }
-  end
+      render json: { error: 'invalid_email' }
+    end
+
+    def invalid_password
+      warden.custom_failure!
+      render json: { error: 'invalid_password' }
+    end
 end

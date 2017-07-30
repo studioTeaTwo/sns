@@ -3,6 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+         #, :confirmable  TODO: メール認証
 
   has_many :microposts, dependent: :destroy
   has_many :active_relationships, class_name:  "Relationship",
