@@ -1,4 +1,4 @@
-class Api::SessionSerializer < ActiveModel::Serializer
+class Rest::SessionSerializer < ActiveModel::Serializer
 
 	attributes :email, :token_type, :user_id, :access_token
 

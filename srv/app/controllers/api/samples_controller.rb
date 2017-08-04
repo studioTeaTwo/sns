@@ -4,7 +4,7 @@ class Api::SamplesController < ApplicationController
   # GET /api/samples
   # GET /api/samples.json
   def index
-    @api_samples = Api::Sample.all
+    @api_samples = Rest::Sample.all
   end
 
   # GET /api/samples/1
@@ -15,7 +15,7 @@ class Api::SamplesController < ApplicationController
   # POST /api/samples
   # POST /api/samples.json
   def create
-    @api_sample = Api::Sample.new(api_sample_params)
+    @api_sample = Rest::Sample.new(api_sample_params)
 
     if @api_sample.save
       render :show, status: :created, location: @api_sample
@@ -43,7 +43,7 @@ class Api::SamplesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_api_sample
-      @api_sample = Api::Sample.find(params[:id])
+      @api_sample = Rest::Sample.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
