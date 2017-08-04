@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   namespace :api do
     resources :samples
   end
+  
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
@@ -16,7 +17,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     resource :login, only: [:create], controller: :sessions
-    resources :users do
+    resources :users, module: 'users' do
       collection do
         get 'search_by_ige'
         post 'search_result_by_ige'
@@ -26,6 +27,7 @@ Rails.application.routes.draw do
         post 'search_result_by_name'
       end
     end
+
   end
 
   resources :account_activations, only: [:edit]

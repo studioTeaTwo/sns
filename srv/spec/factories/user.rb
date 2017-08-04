@@ -6,6 +6,8 @@ FactoryGirl.define do
     name Faker::Name.name
     email 'sample@sample.com'
     password 'testtest'
+    encrypted_password User.digest('test')
+    access_token 'hTDRTjL5m2Zpz6ieMVGs'
     #activated true
 
     factory :activate_user do

@@ -1,8 +1,5 @@
 module AuthenticationHelper
-  def login
-    let(:user) { build(:user) }
-    before do
-      sign_in user
-    end 
+  def login(user)
+    sign_in user
   end
 end

@@ -6,7 +6,7 @@ RSpec.describe "Api::Sessions", type: :request do
   describe "POST /api/login" do
     it "return success status" do
       post api_login_path, params: { email: user.email, password: user.password }
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:success)
     end
   end
 end
