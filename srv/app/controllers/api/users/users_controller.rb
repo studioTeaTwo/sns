@@ -3,13 +3,13 @@ class Api::Users::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    render json: @user, serializer: Rest::UserSerializer, root: nil
+    render json: @user, serializer: Rest::UserSerializer
   end
 
   def create
     @user = User.new user_params
     if @user.save
-      render json: @user, serializer: Rest::SessionSerializer, root: nil
+      render json: @user, serializer: Rest::SessionSerializer
     else
       render json: { error: @user.errors }, status: :unprocessable_entity
     end
@@ -18,7 +18,7 @@ class Api::Users::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      render json: @user, serializer: Rest::UserSerializer, root: nil
+      render json: @user, serializer: Rest::UserSerializer
     else
       render json: { error: @user.errors }, status: :unprocessable_entity
     end

@@ -26,6 +26,11 @@ Rails.application.routes.draw do
         get 'search_by_name'
         post 'search_result_by_name'
       end
+      member do
+        resources :relationships, only: [:create, :destroy]
+        resources :followings, only: [:index]
+        resources :followers, only: [:index]
+      end
     end
 
   end

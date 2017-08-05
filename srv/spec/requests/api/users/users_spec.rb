@@ -5,7 +5,7 @@ RSpec.describe "Api::Users", type: :request do
 
   describe "GET /user/:id" do
     it "works!" do
-      get api_user_path(current_user), headers: { 'Authorization' => '1:hTDRTjL5m2Zpz6ieMVGs' }
+      get api_user_path(current_user), headers: { 'Authorization' => "#{current_user.access_token}" }
       expect(response).to have_http_status(:success)
       expect(json['email']).to eq('sample@sample.com')
     end
@@ -25,7 +25,7 @@ RSpec.describe "Api::Users", type: :request do
         :user,
         email: 'update@sample.com'
       )},
-      headers: { 'Authorization' => '1:hTDRTjL5m2Zpz6ieMVGs' }
+      headers: { 'Authorization' => "#{current_user.access_token}" }
     end
 
     it "changes" do

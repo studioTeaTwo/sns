@@ -25,7 +25,9 @@ FactoryGirl.define do
   factory :another_user, class: User do
     name "t2"
     email "t2@example.com"
+    password 'testtest'
     encrypted_password User.digest('test')
+    access_token 'aTDRTjL5m2Zpz6ieMVGs'
     #activated true
   end
 
