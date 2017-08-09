@@ -39,7 +39,6 @@ gem 'fog',                     '~> 1.38'
 
 # ダミーデータ作成
 gem 'faker',        '~> 1.6'
-gem 'as-duration'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record

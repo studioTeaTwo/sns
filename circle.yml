@@ -1,0 +1,17 @@
+machine:
+  timezone:
+    Asia/Tokyo
+  ruby:
+    version:
+      2.3.3
+dependencies:
+  override:
+    - cd ./srv && bundle install:
+        timeout: 180
+database:
+  override:
+    - cd ./srv && bundle exec rails db:create db:schema:load RAILS_ENV=test
+    - cd ./srv && bundle exec rails db:migrate RAILS_ENV=test
+test:
+  override:
+    - cd ./srv && bundle exec rspec spec/requests/api
