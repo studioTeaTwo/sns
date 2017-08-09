@@ -1,18 +1,18 @@
-class IgesController < ApplicationController
-  include IgesHelper
-  before_action :logged_in_user, only: [:index, :new, :create, :edit, :quote, :update, :destroy]
+class Api::IgesController < ApplicationController
 
   def index
-    @iges = current_user.iges.order("test_date DESC").paginate(:page => params[:page])
-    @chart_data = current_user.iges.select(:test_date, :ige_value).group(:test_date).sum(:ige_value)
+    @iges = current_user.iges.order("test_date DESC")
+    render json: @iges, each_serializer: Rest::IgeSerializer
   end
 
-  def new
-    @ige = Ige.new
+  def show
+    @ige = Ige.find(params[:id]);
+    render json: @ige, serializer: Rest::IgeSerializer
   end
 
   def create
     @ige = current_user.iges.build(ige_params)
+    # アレルゲン判定を追加する
     addition_params = calc_allergen_possession(ige_params.to_h)
     @ige.update(addition_params)
     ActiveRecord::Base.transaction do
@@ -26,31 +26,14 @@ class IgesController < ApplicationController
       # 今回のIge検査を登録
       @ige.save!
     end
-    flash[:success] = "あなたの歴史に刻まれました"
-    redirect_to root_path
+    render json: @ige, status: :created, serializer: Rest::IgeSerializer
   rescue => e
-    puts e
-    render 'new'
-  end
-
-  def show
-    @ige = Ige.find(params[:id]);
-  end
-
-  def edit
-    @ige = current_user.iges.find(params[:id]);
-  end
-
-  def quote
-    @ige = current_user.iges.find(params[:id]);
-    # 引用登録で必ず再記入させたい項目をnilにする
-    @ige.id = nil
-    @ige.test_date = nil
-    @ige.ige_value = nil
+    render json: @ige.errors, status: :unprocessable_entity
   end
 
   def update
     @ige = Ige.find(params[:id])
+    # アレルゲン判定を追加する
     addition_params = calc_allergen_possession(ige_params.to_h)
     ActiveRecord::Base.transaction do
       # 最新IgE検査の更新(プロフィールやユーザー検索のため)
@@ -63,14 +46,15 @@ class IgesController < ApplicationController
       # 今回のIge検査を更新
       @ige.update_attributes(addition_params)
     end
-    flash[:success] = "記録が修正されました"
-    redirect_to root_path
+    render json: @ige, serializer: Rest::IgeSerializer
   rescue => e
-    render 'edit'
+    render json: @ige.errors, status: :unprocessable_entity
   end
 
   def destroy
+    puts Ige.count
     Ige.find(params[:id]).destroy
+    puts Ige.count
   end
 
   private
