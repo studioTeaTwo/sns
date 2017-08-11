@@ -1,4 +1,5 @@
 class Api::IgesController < ApplicationController
+  before_action :correct_user, only: [:update, :destroy]
 
   def index
     @iges = current_user.iges.order("test_date DESC")
@@ -56,7 +57,7 @@ class Api::IgesController < ApplicationController
     if !@ige.nil?
       @ige.destroy
     else
-      render json: @ige.errors, status: :unprocessable_entity
+      render json: { error: 'not_found' }, status: :not_found
     end
   end
 
@@ -128,5 +129,10 @@ class Api::IgesController < ApplicationController
         item.ja == allergen_info[0].allergenGroup
       end
       allergenGroup[0].en
+    end
+
+    def correct_user
+      @ige = current_user.iges.find_by(:id => params[:id])
+      render json: { error: 'forbidden' }, status: :forbidden if @ige.nil?
     end
 end

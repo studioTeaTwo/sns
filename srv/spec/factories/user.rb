@@ -34,6 +34,7 @@ FactoryGirl.define do
   factory :admin_user, class: User do
     name "admin"
     email "admin@example.com"
+    password 'adminadmin'
     encrypted_password User.digest('test')
     #activated true
     admin true

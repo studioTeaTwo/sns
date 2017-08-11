@@ -1,4 +1,5 @@
 class Api::MicropostsController < ApplicationController
+  before_action :correct_user, only: :destroy
 
   def create
     @micropost = current_user.microposts.build(micropost_params)
@@ -10,18 +11,18 @@ class Api::MicropostsController < ApplicationController
   end
 
   def destroy
-    @micropost = current_user.microposts.find_by(:id => params[:id])
-    if !@micropost.nil?
-      @micropost.destroy
-    else
-      render json: @micropost.errors, status: :unprocessable_entity
-    end
+    @micropost.destroy
   end
 
   private
 
     def micropost_params
       params.require(:micropost).permit(:content, :picture)
+    end
+
+    def correct_user
+      @micropost = current_user.microposts.find_by(:id => params[:id])
+      render json: { error: 'forbidden' }, status: :forbidden if @micropost.nil?
     end
     
 end
