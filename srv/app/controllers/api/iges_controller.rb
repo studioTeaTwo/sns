@@ -29,7 +29,7 @@ class Api::IgesController < ApplicationController
     end
     render json: @ige, status: :created, serializer: Rest::IgeSerializer
   rescue => e
-    render json: @ige.errors, status: :unprocessable_entity
+    render json: @ige.errors.full_messages, status: :unprocessable_entity
   end
 
   def update
@@ -49,7 +49,7 @@ class Api::IgesController < ApplicationController
     end
     render json: @ige, serializer: Rest::IgeSerializer
   rescue => e
-    render json: @ige.errors, status: :unprocessable_entity
+    render json: @ige.errors.full_messages, status: :unprocessable_entity
   end
 
   def destroy
@@ -64,7 +64,7 @@ class Api::IgesController < ApplicationController
   private
 
     def ige_params
-      params.require(:ige).permit(*Ige.column_names)
+      params.fetch(:ige, {}).permit(*Ige.column_names)
     end
 
     def latest_test?(ige_data, method)

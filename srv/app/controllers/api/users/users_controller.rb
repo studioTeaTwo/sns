@@ -13,7 +13,7 @@ class Api::Users::UsersController < ApplicationController
     if @user.save
       render json: @user, serializer: Rest::SessionSerializer
     else
-      render json: { error: @user.errors }, status: :unprocessable_entity
+      render json: { error: @user.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -22,7 +22,7 @@ class Api::Users::UsersController < ApplicationController
     if @user.update_attributes(user_params)
       render json: @user, serializer: Rest::UserSerializer
     else
-      render json: { error: @user.errors }, status: :unprocessable_entity
+      render json: { error: @user.errors.full_messages }, status: :unprocessable_entity
     end
   end
 

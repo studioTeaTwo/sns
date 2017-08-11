@@ -13,11 +13,11 @@ class Rest::ProfileSerializer < Rest::UserSerializer
   end
 
   def latest_ige
-    latest_test_result.exists? ? latest_test_result[0].ige_value : ''
+    latest_test_result.present? ? latest_test_result[0].ige_value : ''
   end
 
   def positive_allergen_group
-    return [] unless latest_test_result.exists?
+    return [] unless latest_test_result.present?
     result = latest_test_result[0].attributes.collect {|k, v| k if k.match(/(allergen_group_.+)/) && v }
     result.compact
   end

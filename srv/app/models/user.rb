@@ -22,7 +22,7 @@ class User < ApplicationRecord
   #before_create :create_activation_digest
   after_create :update_access_token
 
-  #validates :name,  presence: true, length: { maximum: 50 }
+  validates :name,  presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
       format: { with: VALID_EMAIL_REGEX },
@@ -60,7 +60,7 @@ class User < ApplicationRecord
   end
 
   # ユーザー検索
-
+  # TODO: 本人は除く
   def self.search_by_newest
     @users = User.eager_load(:iges).where(:iges => {:latest_test_result => true}).order('test_date DESC').limit(10)
   end
@@ -69,12 +69,8 @@ class User < ApplicationRecord
     @users = User.eager_load(:iges).where(:iges => {:ige_value => (from_ige)..(to_ige), :latest_test_result => true})
   end
 
-  def self.search_by_allergen(allegen_sort_name)
-    @users = User.eager_load(:iges).where(:iges => {allegen_sort_name => true, :latest_test_result => true})
-  end
-
-  def self.search_by_name(user_name)
-    @user = User.find(:name => name)
+  def self.search_by_allergen(allegen_group_name)
+    @users = User.eager_load(:iges).where(:iges => {allegen_group_name => true, :latest_test_result => true})
   end
 
   # アカウント関連

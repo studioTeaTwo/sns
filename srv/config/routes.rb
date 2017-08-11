@@ -21,14 +21,6 @@ Rails.application.routes.draw do
 
     scope module: :users do
       resources :users do
-        collection do
-          get 'search_by_ige'
-          post 'search_result_by_ige'
-          get 'search_by_allergen'
-          get 'search_result_by_allergen'
-          get 'search_by_name'
-          post 'search_result_by_name'
-        end
         member do
           resources :relationships, only: [:create, :destroy]
           resources :followings, only: [:index]
@@ -36,6 +28,12 @@ Rails.application.routes.draw do
         end
       end
       resources :profiles, only: [:show]
+    end
+
+    namespace :search do
+      resources :usernames, only: [:index]
+      resources :allergens, only: [:index]
+      resources :ige_ranks, only: [:index]
     end
     
     resources :iges

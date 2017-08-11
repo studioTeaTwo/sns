@@ -6,7 +6,7 @@ FactoryGirl.define do
     name Faker::Name.name
     email 'sample@sample.com'
     password 'testtest'
-    encrypted_password User.digest('test')
+    encrypted_password User.digest('testtest')
     access_token 'hTDRTjL5m2Zpz6ieMVGs'
     #activated true
 
@@ -23,17 +23,17 @@ FactoryGirl.define do
   end
 
   factory :another_user, class: User do
-    name "t2"
-    email "t2@example.com"
-    password 'testtest'
-    encrypted_password User.digest('test')
+    name 't2'
+    email 't2@example.com'
+    password 'testtest2'
+    encrypted_password User.digest('testtest2')
     access_token 'aTDRTjL5m2Zpz6ieMVGs'
     #activated true
   end
 
   factory :admin_user, class: User do
-    name "admin"
-    email "admin@example.com"
+    name 'admin'
+    email 'admin@example.com'
     password 'adminadmin'
     encrypted_password User.digest('test')
     #activated true

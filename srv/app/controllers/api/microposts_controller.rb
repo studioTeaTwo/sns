@@ -6,7 +6,7 @@ class Api::MicropostsController < ApplicationController
     if @micropost.save
       render json: @micropost, status: :created, serializer: Rest::MicropostSerializer
     else
-      render json: @micropost.errors, status: :unprocessable_entity
+      render json: @micropost.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -17,7 +17,7 @@ class Api::MicropostsController < ApplicationController
   private
 
     def micropost_params
-      params.require(:micropost).permit(:content, :picture)
+      params.fetch(:micropost, {}).permit(:content, :picture)
     end
 
     def correct_user

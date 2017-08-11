@@ -16,13 +16,10 @@ class Api::SessionsController < ApplicationController
   private
 
     def invalid_email
-      warden.custom_failure!
-
-      render json: { error: 'invalid_email' }
+      render json: { error: 'invalid_email' }, status: :unauthorized
     end
 
     def invalid_password
-      warden.custom_failure!
-      render json: { error: 'invalid_password' }
+      render json: { error: 'invalid_password' }, status: :unauthorized
     end
 end
