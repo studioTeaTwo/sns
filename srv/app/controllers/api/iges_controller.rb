@@ -52,9 +52,12 @@ class Api::IgesController < ApplicationController
   end
 
   def destroy
-    puts Ige.count
-    Ige.find(params[:id]).destroy
-    puts Ige.count
+    @ige = current_user.iges.find_by(:id => params[:id])
+    if !@ige.nil?
+      @ige.destroy
+    else
+      render json: @ige.errors, status: :unprocessable_entity
+    end
   end
 
   private
