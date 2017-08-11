@@ -18,20 +18,24 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
 
     resource :login, only: [:create], controller: :sessions
-    resources :users, module: 'users' do
-      collection do
-        get 'search_by_ige'
-        post 'search_result_by_ige'
-        get 'search_by_allergen'
-        get 'search_result_by_allergen'
-        get 'search_by_name'
-        post 'search_result_by_name'
+
+    scope module: :users do
+      resources :users do
+        collection do
+          get 'search_by_ige'
+          post 'search_result_by_ige'
+          get 'search_by_allergen'
+          get 'search_result_by_allergen'
+          get 'search_by_name'
+          post 'search_result_by_name'
+        end
+        member do
+          resources :relationships, only: [:create, :destroy]
+          resources :followings, only: [:index]
+          resources :followers, only: [:index]
+        end
       end
-      member do
-        resources :relationships, only: [:create, :destroy]
-        resources :followings, only: [:index]
-        resources :followers, only: [:index]
-      end
+      resources :profiles, only: [:show]
     end
     
     resources :iges
