@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
 
   namespace :api, defaults: { format: :json } do
-    
+
     resource :login, only: [:create], controller: :sessions
     resources :users, module: 'users' do
       collection do
@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     end
     
     resources :iges
+    resources :microposts, only: [:create, :destroy]
   end
 
   resources :account_activations, only: [:edit]
