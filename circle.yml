@@ -14,4 +14,4 @@ database:
     - cd ./srv && bundle exec rails db:migrate RAILS_ENV=test
 test:
   override:
-    - cd ./srv && bundle exec rspec spec/requests/api
+    - cd ./srv && RAILS_ENV=test bundle exec rspec spec/requests/api
