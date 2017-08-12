@@ -1,4 +1,4 @@
-class CreateIges < ActiveRecord::Migration[5.0]
+class CreateIges < ActiveRecord::Migration[5.1]
   def change
     create_table :iges do |t|
       t.references :user, foreign_key: true
