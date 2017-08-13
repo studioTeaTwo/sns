@@ -19,6 +19,7 @@ export class AccountService {
       .map(response => {
         this.userId = response.user_id;
         localStorage.setItem('allergylog', response.access_token);
+        return response;
       });
   }
 

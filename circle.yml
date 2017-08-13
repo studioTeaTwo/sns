@@ -4,10 +4,14 @@ machine:
   ruby:
     version:
       2.3.3
+  node:
+    version: 8.2.0
+  post:
+    - npm install -g npm
 dependencies:
   override:
-    - cd ./srv && bundle install:
-        timeout: 180
+    - cd ./srv && bundle install
+    - cd ./cli && npm install && npm run build
 database:
   override:
     - cd ./srv && bundle exec rails db:create db:schema:load RAILS_ENV=test
@@ -15,3 +19,4 @@ database:
 test:
   override:
     - cd ./srv && RAILS_ENV=test bundle exec rspec spec/
+    - cd ./cli && npm run test

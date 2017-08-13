@@ -3,14 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { AccountService } from 'app/shared/services/api';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-top',
+  templateUrl: './top.component.html',
+  styleUrls: ['./top.component.scss']
 })
-export class HomeComponent implements OnInit {
-  token: string;
-  name: string;
-  email: string;
+export class TopComponent implements OnInit {
+  sessionResponse: any;
+  userResponse: any;
 
   constructor(
     private accountService: AccountService,
@@ -21,16 +20,15 @@ export class HomeComponent implements OnInit {
 
   login() {
     this.accountService.login('allelog@gmail.com', 'allergy')
-    .subscribe(() => {
-      this.token = localStorage.getItem('allergylog');
+    .subscribe(response => {
+      this.sessionResponse = JSON.stringify(response);
       this.getMe();
     });
   }
 
   private getMe() {
     this.accountService.get().subscribe(response => {
-      this.name = response.name;
-      this.email = response.email;
+      this.userResponse = JSON.stringify(response);
     });
   }
 
