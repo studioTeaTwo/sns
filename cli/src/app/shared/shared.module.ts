@@ -13,6 +13,14 @@ import {
     HttpClientModule,
   ],
   declarations: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ApiInterceptor,
+      // 必須：HTTP_INTERCEPTORSが配列であることを示す
+      multi: true
+    }
+  ]
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {

@@ -9,6 +9,8 @@ import { AccountService } from 'app/shared/services/api';
 })
 export class HomeComponent implements OnInit {
   token: string;
+  name: string;
+  email: string;
 
   constructor(
     private accountService: AccountService,
@@ -18,8 +20,18 @@ export class HomeComponent implements OnInit {
   }
 
   login() {
-    this.accountService.login('allelog@gmail.com', 'allergy');
-    this.token = localStorage.getItem('allergylog');
+    this.accountService.login('allelog@gmail.com', 'allergy')
+    .subscribe(() => {
+      this.token = localStorage.getItem('allergylog');
+      this.getMe();
+    });
+  }
+
+  private getMe() {
+    this.accountService.get().subscribe(response => {
+      this.name = response.name;
+      this.email = response.email;
+    });
   }
 
 }
