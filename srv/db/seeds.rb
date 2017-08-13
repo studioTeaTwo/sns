@@ -5,20 +5,16 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-require 'as-duration'
 
 # 管理者ユーザー
 User.create!( 
-              name:  "allergy.blue",
-              email: "allergy.blue@gmail.com",
+              name:  "allelog",
+              email: "allelog@gmail.com",
               password:              "allergy",
-              password_confirmation: "allergy",
               rank: 1,
               title_of_honor: 11,
               self_introduction: "自己紹介が入ります。自己紹介が入ります。自己紹介が入ります。",
-              admin: true,
-              activated: true,
-              activated_at: Time.zone.now
+              admin: true
             )
 # 管理者ユーザーの最新IgE検査の登録
 latest_test_date = Faker::Time.between(1.months.ago, Date.today, :day)
@@ -66,11 +62,8 @@ end
                name:  name,
                email: email,
                password:              password,
-               password_confirmation: password,
                rank: Random.rand(0 .. 4),
-               title_of_honor: Random.rand(10 .. 14),
-               activated: true,
-               activated_at: Time.zone.now
+               title_of_honor: Random.rand(10 .. 14)
               )
   # 最新IgE検査の登録
   latest_test_date = Faker::Time.between(1.months.ago, Date.today, :day)
