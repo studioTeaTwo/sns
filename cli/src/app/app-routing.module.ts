@@ -9,13 +9,17 @@ const routes: Routes = [
     component: TopComponent,
   },
   // {
+  //   path: 'chat',
+  //   loadChildren: './components/chat/chat.module#ChatModule'
+  // },
+  // {
   //   path: 'log',
   //   loadChildren: './components/log/log.module#LogModule'
   // },
-  // {
-  //   path: 'profile',
-  //   loadChildren: './components/user/profile.module#ProfileModule'
-  // },
+  {
+    path: 'user',
+    loadChildren: './components/user/user.module#UserModule'
+  },
   // {
   //   path: 'search',
   //   loadChildren: './components/search/search.module#SearchModule'

@@ -5,6 +5,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import {
   ApiInterceptor,
   AccountService,
+  UserService,
 } from './services/api/index';
 
 @NgModule({
@@ -27,6 +28,7 @@ export class SharedModule {
       ngModule: SharedModule,
       providers: [
         AccountService,
+        UserService,
       ]
     };
   }

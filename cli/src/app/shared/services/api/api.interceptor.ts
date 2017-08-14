@@ -14,7 +14,7 @@ export class ApiInterceptor implements HttpInterceptor {
     if (!token && !request.url.match(/login/)) {
       // TODO: 認証画面を提示
     }
-    
+
     const req = request.clone({
       url: this.domain + request.url,
       setHeaders: { Authorization: token },
