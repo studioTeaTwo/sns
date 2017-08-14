@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from "rxjs/Observable";
+import { Observable } from 'rxjs/Observable';
 
 import { Store } from 'app/shared/store/store';
 import { AccountService } from 'app/shared/services/api';

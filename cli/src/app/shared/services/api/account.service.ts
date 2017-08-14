@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from "rxjs/Observable";
+import { Observable } from 'rxjs/Observable';
 
 import { Store } from 'app/shared/store/store';
 
@@ -39,7 +39,7 @@ export class AccountService {
   private onSuccessAccount(data) {
     const currentState = this.store.getState();
     this.store.setState({
-      ...currentState, 
+      ...currentState,
       account: data,
       loading: false,
       error: false,

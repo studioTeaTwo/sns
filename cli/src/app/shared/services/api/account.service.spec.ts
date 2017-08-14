@@ -1,8 +1,9 @@
 import { TestBed, inject } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { AccountService } from './account.service';
 
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { Store } from 'app/shared/store/store';
 
 describe('AccountService', () => {
   beforeEach(() => {
@@ -11,6 +12,7 @@ describe('AccountService', () => {
         HttpClientTestingModule
       ],
       providers: [
+        Store,
         AccountService
       ]
     });

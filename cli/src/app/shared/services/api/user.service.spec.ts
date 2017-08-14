@@ -3,13 +3,18 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { UserService } from './user.service';
 
+import { Store } from 'app/shared/store/store';
+
 describe('UserService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule
       ],
-      providers: [UserService]
+      providers: [
+        Store,
+        UserService
+      ]
     });
   });
 

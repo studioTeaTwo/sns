@@ -33,7 +33,7 @@ export class UserService {
   private onSuccessProfile(data) {
     const currentState = this.store.getState();
     this.store.setState({
-      ...currentState, 
+      ...currentState,
       profile: data,
       loading: false,
       error: false,
@@ -43,7 +43,7 @@ export class UserService {
   private onSuccessSearchUsers(data) {
     const currentState = this.store.getState();
     this.store.setState({
-      ...currentState, 
+      ...currentState,
       searchUsers: data,
       loading: false,
       error: false,

@@ -5,6 +5,7 @@ import 'app/shared/rxjs-operators';
 
 import { ProfileComponent } from './profile.component';
 
+import { Store } from 'app/shared/store/store';
 import { UserService } from 'app/shared/services/api';
 
 describe('ProfileComponent', () => {
@@ -19,6 +20,7 @@ describe('ProfileComponent', () => {
       ],
       declarations: [ ProfileComponent ],
       providers: [
+        Store,
         UserService,
       ]
     })

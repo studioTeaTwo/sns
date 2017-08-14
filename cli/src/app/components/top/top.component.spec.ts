@@ -1,8 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { TopComponent } from './top.component';
 
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { Store } from 'app/shared/store/store';
 import { AccountService } from 'app/shared/services/api';
 
 describe('TopComponent', () => {
@@ -16,6 +17,7 @@ describe('TopComponent', () => {
       ],
       declarations: [ TopComponent ],
       providers: [
+        Store,
         AccountService,
       ]
     })
