@@ -15,7 +15,7 @@ export class AccountService {
       email: email,
       password: password
     };
-    return this.http.post<any>(`http://localhost:3000/api/login`, body)
+    return this.http.post<any>(`/api/login`, body)
       .map(response => {
         this.userId = response.user_id;
         localStorage.setItem('allergylog', response.access_token);
@@ -24,7 +24,7 @@ export class AccountService {
   }
 
   get() {
-    return this.http.get<any>(`http://localhost:3000/api/users/${this.userId}`);
+    return this.http.get<any>(`/api/users/${this.userId}`);
   }
 
 }
