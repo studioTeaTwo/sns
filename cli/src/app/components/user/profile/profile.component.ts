@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
+import { Store } from 'app/shared/store/store';
 import {
   UserService
 } from 'app/shared/services/api';
@@ -15,15 +16,15 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private store: Store,
     private userService: UserService,
   ) { }
 
   ngOnInit() {
-    this.route.params.concatMap((params: Params) =>
-        this.userService.getProfile(params['userId']))
-      .subscribe(response => {
-        this.profileResponse = JSON.stringify(response);
-      });
+    this.profileResponse = this.store.changes.pluck('profile');
+    this.route.params.subscribe((params: Params) =>
+        this.userService.getProfile(params['userId'])
+      );
   }
 
 

@@ -8,4 +8,4 @@
 <button (click)="login()">ログイン</button>
 
 <label>{{sessionResponse}}</label>
-<label>{{userResponse}}</label>
+<label>{{JSON.stringify(accountResponse$ | async)}}</label>
