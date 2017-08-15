@@ -1,10 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import 'app/shared/rxjs-operators';
 
 import { ProfileComponent } from './profile.component';
 
+import { SharedModule } from 'app/shared/shared.module'
 import { Store } from 'app/shared/store/store';
 import { UserService } from 'app/shared/services/api';
 
@@ -17,6 +17,7 @@ describe('ProfileComponent', () => {
       imports: [
         HttpClientTestingModule,
         RouterTestingModule,
+        SharedModule,
       ],
       declarations: [ ProfileComponent ],
       providers: [

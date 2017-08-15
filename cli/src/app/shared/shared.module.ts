@@ -1,8 +1,10 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import 'app/shared/rxjs-operators';
 
 import { Store } from 'app/shared/store/store';
+import { MaterialModule } from 'app/shared/material/material.module';
 import {
   ApiInterceptor,
   AccountService,
@@ -12,8 +14,12 @@ import {
 @NgModule({
   imports: [
     CommonModule,
+    MaterialModule,
   ],
   declarations: [],
+  exports: [
+    MaterialModule,
+  ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
