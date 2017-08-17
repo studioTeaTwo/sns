@@ -9,16 +9,26 @@ import {
   ApiInterceptor,
   AccountService,
   UserService,
-} from './services/api/index';
+} from './services/api';
+import {
+  FormatToJapaneseDatePipe,
+  RoundOffDatePipe
+} from './pipes';
 
 @NgModule({
   imports: [
     CommonModule,
     MaterialModule,
   ],
-  declarations: [],
+  declarations: [
+    FormatToJapaneseDatePipe,
+    RoundOffDatePipe,
+  ],
   exports: [
     MaterialModule,
+
+    FormatToJapaneseDatePipe,
+    RoundOffDatePipe,
   ],
   providers: [
     {
