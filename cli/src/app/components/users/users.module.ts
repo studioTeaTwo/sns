@@ -13,4 +13,4 @@ import { ProfileComponent } from './profile/profile.component';
   ],
   declarations: [ProfileComponent]
 })
-export class UserModule { }
+export class UsersModule { }

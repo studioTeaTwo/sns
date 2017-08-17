@@ -1,0 +1,196 @@
+#container-chats {
+    width: 100%;
+    height: 100%;
+    background-color: #f0f0f0;
+
+    #header-chats {
+        position: fixed;
+        z-index: 999;
+        box-sizing: border-box;
+        width: 100%;
+        padding: 8px;
+        input {
+            border: none;
+            outline: none;
+            padding-left: 30px;
+            height: 30px;
+            width: 100%;
+            background-image: url("/assets/images/icon_search_24dp_1x.png");
+            background-repeat: no-repeat;
+            background-position: 2px center;
+            background-color: #fff; // たまに画面遷移した時にプレースホルダーや色が消えることがあるので一応入れておく
+        }
+    }
+    
+    #contents-chats {
+        padding: 5px;
+        padding-top: 46px; // =chat.header.height
+        padding-bottom: 50px; // =chat.footer.height
+        // height: auto; →directiveで端末サイズから計算する
+    }
+    
+    #footer-chats {
+        position: fixed;
+        z-index: 9999;
+        background-color: #fff;
+        bottom: 0;
+        width: 100%;
+        height: 50px;
+        padding-bottom: 5px;
+        text-align: center;
+        .footer-chats-item {
+            top: 20%;
+            position: relative;
+        }
+        .footer-chats-replyText {
+            height: 30px;
+            width: 70%;
+            font-size: 1em;
+            border: 1px solid #eaeaea;
+            padding: 0 6px;
+        }
+        .footer-chats-replyButton {
+            width: 60px;
+            min-width: 60px;
+            margin-left: 5px;
+            background-color: #005d93;
+        }
+    }
+}
+
+.history-scrollbox {
+    overflow: scroll;
+
+    .history-chat {
+        width: 100%;
+        border-spacing: 0 40px;
+        &-divider {
+            line-height: 1em;
+            position: relative;
+            outline: 0;
+            border: 0;
+            color: #d0d0d0;
+            text-align: center;
+            height: 1.5em;
+            &:before {
+                content: '';
+                background: #e0e0e0;
+                position: absolute;
+                left: 0;
+                top: 50%;
+                width: 100%;
+                height: 1px;
+            }
+        }
+        &-divider-date:after {
+            content: attr(data-content);
+            position: relative;
+            display: inline-block;
+            color: #000;
+            padding: 0.5em;
+            line-height: 1.5em;
+            font-size: small;
+            background-color: #f0f0f0;
+        }
+        &-divider-offer:after {
+            content: attr(data-content);
+            position: relative;
+            display: inline-block;
+            color: #000;
+            padding: 0 0.5em;
+            line-height: 1.5em;
+            font-size: small;
+            background-color: #fff;
+        }
+
+        // チャットアバター列
+        .history-chat-column-avatar {
+            width: 15%;
+            .history-chat-avatar {
+                font-size: 0;
+                width: 45px;
+                height: 45px;
+                border: 1px solid #eaeaea;
+                border-radius: 50%;
+            }
+        }
+
+
+        // チャット時間列
+        .history-chat-column-time {
+            width: 10%;
+            .history-chat-created, .history-chat-read {
+                color: rgba(0, 0, 0, 0.54);
+                font-size: small;
+            }
+        }
+
+        // チャット本文列     
+        .applicant {
+            .history-chat-body {
+                background-color: white;
+                width: 80%;
+                min-height: 50px;
+                height: auto;
+                margin: auto;
+                border-radius: 10px;
+                position:relative;
+                box-sizing: border-box;
+                padding: 8px;
+                &:after {
+                    border:10px solid transparent;
+                    border-left-color:#fff;
+                    border-right-width:0;
+                    right:-10px;
+                    content:"";
+                    display:block;
+                    top:15px;
+                    position:absolute;
+                    width:0;
+                }
+            }
+        }
+        .agent {
+            .history-chat-body {
+                background-color: white;
+                width: 80%;
+                min-height: 50px;
+                height: auto;
+                margin: auto;
+                border-radius: 10px;
+                position:relative;
+                box-sizing: border-box;
+                padding: 8px;
+                &:after {
+                    border:10px solid transparent;
+                    border-right-color:#fff;
+                    border-left-width:0;
+                    left:-10px;
+                    content:"";
+                    display:block;
+                    top:15px;
+                    position:absolute;
+                    width:0;
+                }
+            }
+        }
+    }
+    .history-unread {
+        font-size: small;
+        color: #fff;
+        background-color: rgba(255,0,0,0.2); 
+        border-radius: 20px;
+        width: 50%;
+        margin: auto;
+        padding-bottom: 5px;
+        text-align: center;
+        md-icon {
+            vertical-align: middle;
+        }
+    }
+    .history-loading {
+        margin: auto;
+        height: 50px;
+        width: 50px;
+    }
+}

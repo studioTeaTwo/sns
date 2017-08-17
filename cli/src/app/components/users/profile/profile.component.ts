@@ -12,7 +12,8 @@ import {
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  profileResponse: any;
+  JSON = JSON;
+  profileResponse$: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -21,7 +22,7 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.profileResponse = this.store.changes.pluck('profile');
+    this.profileResponse$ = this.store.changes.pluck('profile');
     this.route.params.subscribe((params: Params) =>
         this.userService.getProfile(params['userId'])
       );
