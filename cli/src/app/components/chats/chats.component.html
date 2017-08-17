@@ -1,16 +1,16 @@
 <div id="container-chats">
   
   <div id="header-chats">
-    <input type="search" placeholder="メッセージ、ワード検索" (change)="handleClickSearch()" />
+    <input type="search" placeholder="メッセージ、ワード検索" (change)="handleClickSearch($event.value)" />
   </div>
 
-  <div id="contents-chats" [style.height.px]="">
+  <div id="contents-chats" [style.height.px]="height">
     <div #scrollMove class="history-scrollbox" [style.height.px]="height">
       <div ><md-spinner class="history-loading" *ngIf="loadingChatBack$ | async"></md-spinner></div>
     
       <table class="history-chat">
     
-        <tbody *ngFor="let chat of (chatList$ | async).chats; let idx = index;">
+        <tbody *ngFor="let chat of (chatList$ | async); let idx = index;">
           
           <!-- 年月日 -->
           <tr *ngIf="isDisplayDate(idx)"><td colspan="3"><hr class="history-chat-divider history-chat-divider-date" [attr.data-content]="chat.created | formatToJapaneseDate"></td></tr>
