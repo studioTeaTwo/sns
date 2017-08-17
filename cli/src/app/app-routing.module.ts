@@ -8,17 +8,17 @@ const routes: Routes = [
     path: '',
     component: TopComponent,
   },
-  // {
-  //   path: 'chat',
-  //   loadChildren: './components/chat/chat.module#ChatModule'
-  // },
+  {
+    path: 'chat',
+    loadChildren: './components/chats/chats.module#ChatsModule'
+  },
   // {
   //   path: 'log',
-  //   loadChildren: './components/log/log.module#LogModule'
+  //   loadChildren: './components/lifelogs/lifelogs.module#LifelogsModule'
   // },
   {
     path: 'user',
-    loadChildren: './components/user/user.module#UserModule'
+    loadChildren: './components/users/users.module#UsersModule'
   },
   // {
   //   path: 'search',
