@@ -10,7 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170402113409) do
+ActiveRecord::Schema.define(version: 20170819141125) do
+
+  create_table "chat_statuses", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "chat_thread_id"
+    t.integer "read_until", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_thread_id"], name: "index_chat_statuses_on_chat_thread_id"
+    t.index ["user_id"], name: "index_chat_statuses_on_user_id"
+  end
+
+  create_table "chat_threads", force: :cascade do |t|
+    t.text "participants"
+    t.integer "newest_chat_id", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "chats", force: :cascade do |t|
+    t.integer "chat_thread_id"
+    t.integer "sender_id"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_thread_id"], name: "index_chats_on_chat_thread_id"
+    t.index ["sender_id"], name: "index_chats_on_sender_id"
+  end
 
   create_table "iges", force: :cascade do |t|
     t.integer "user_id"
@@ -236,6 +263,33 @@ ActiveRecord::Schema.define(version: 20170402113409) do
     t.integer "allergen_zassou_class"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["allergen_group_chiri"], name: "index_iges_on_allergen_group_chiri"
+    t.index ["allergen_group_dani"], name: "index_iges_on_allergen_group_dani"
+    t.index ["allergen_group_doubutsu"], name: "index_iges_on_allergen_group_doubutsu"
+    t.index ["allergen_group_gyorui"], name: "index_iges_on_allergen_group_gyorui"
+    t.index ["allergen_group_ikatako"], name: "index_iges_on_allergen_group_ikatako"
+    t.index ["allergen_group_inekakafun"], name: "index_iges_on_allergen_group_inekakafun"
+    t.index ["allergen_group_jyukikafun"], name: "index_iges_on_allergen_group_jyukikafun"
+    t.index ["allergen_group_kiseityuu"], name: "index_iges_on_allergen_group_kiseityuu"
+    t.index ["allergen_group_komugi"], name: "index_iges_on_allergen_group_komugi"
+    t.index ["allergen_group_komugiigai"], name: "index_iges_on_allergen_group_komugiigai"
+    t.index ["allergen_group_kontyuu"], name: "index_iges_on_allergen_group_kontyuu"
+    t.index ["allergen_group_koukakurui"], name: "index_iges_on_allergen_group_koukakurui"
+    t.index ["allergen_group_kudamonorui"], name: "index_iges_on_allergen_group_kudamonorui"
+    t.index ["allergen_group_mamerui"], name: "index_iges_on_allergen_group_mamerui"
+    t.index ["allergen_group_maruti"], name: "index_iges_on_allergen_group_maruti"
+    t.index ["allergen_group_nikurui"], name: "index_iges_on_allergen_group_nikurui"
+    t.index ["allergen_group_nyuuseihin"], name: "index_iges_on_allergen_group_nyuuseihin"
+    t.index ["allergen_group_saikin"], name: "index_iges_on_allergen_group_saikin"
+    t.index ["allergen_group_shinkin"], name: "index_iges_on_allergen_group_shinkin"
+    t.index ["allergen_group_sonota"], name: "index_iges_on_allergen_group_sonota"
+    t.index ["allergen_group_syokugyou"], name: "index_iges_on_allergen_group_syokugyou"
+    t.index ["allergen_group_tamago"], name: "index_iges_on_allergen_group_tamago"
+    t.index ["allergen_group_yakubutsu"], name: "index_iges_on_allergen_group_yakubutsu"
+    t.index ["allergen_group_yasai"], name: "index_iges_on_allergen_group_yasai"
+    t.index ["allergen_group_zassoukafun"], name: "index_iges_on_allergen_group_zassoukafun"
+    t.index ["latest_test_result"], name: "index_iges_on_latest_test_result"
+    t.index ["test_date"], name: "index_iges_on_test_date"
     t.index ["user_id"], name: "index_iges_on_user_id"
   end
 
@@ -276,7 +330,7 @@ ActiveRecord::Schema.define(version: 20170402113409) do
     t.string "unconfirmed_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "name"
+    t.string "name"
     t.boolean "admin", default: false
     t.text "self_introduction"
     t.integer "rank"

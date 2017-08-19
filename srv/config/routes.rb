@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
@@ -30,8 +30,13 @@ Rails.application.routes.draw do
       resources :ige_ranks, only: [:index]
     end
     
-    resources :iges
+    resources :chats, only: [:index, :create, :show, :destroy] do
+      member do
+        post '/say', to: 'chats#say'
+      end
+    end
     resources :microposts, only: [:create, :destroy]
+    resources :iges
   end
 
   # TODO: API化の残タスク
