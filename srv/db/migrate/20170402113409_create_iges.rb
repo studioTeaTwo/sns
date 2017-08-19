@@ -224,5 +224,32 @@ class CreateIges < ActiveRecord::Migration[5.1]
       t.integer :allergen_zassou_class
       t.timestamps
     end
+    add_index :iges, :test_date
+    add_index :iges, :latest_test_result
+    add_index :iges, :allergen_group_inekakafun
+    add_index :iges, :allergen_group_zassoukafun
+    add_index :iges, :allergen_group_jyukikafun
+    add_index :iges, :allergen_group_chiri
+    add_index :iges, :allergen_group_dani
+    add_index :iges, :allergen_group_shinkin
+    add_index :iges, :allergen_group_saikin
+    add_index :iges, :allergen_group_doubutsu
+    add_index :iges, :allergen_group_syokugyou
+    add_index :iges, :allergen_group_tamago
+    add_index :iges, :allergen_group_nyuuseihin
+    add_index :iges, :allergen_group_gyorui
+    add_index :iges, :allergen_group_koukakurui
+    add_index :iges, :allergen_group_ikatako
+    add_index :iges, :allergen_group_komugi
+    add_index :iges, :allergen_group_komugiigai
+    add_index :iges, :allergen_group_nikurui
+    add_index :iges, :allergen_group_mamerui
+    add_index :iges, :allergen_group_kudamonorui
+    add_index :iges, :allergen_group_yasai
+    add_index :iges, :allergen_group_sonota
+    add_index :iges, :allergen_group_kiseityuu
+    add_index :iges, :allergen_group_yakubutsu
+    add_index :iges, :allergen_group_kontyuu
+    add_index :iges, :allergen_group_maruti  
   end
 end
