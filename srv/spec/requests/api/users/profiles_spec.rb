@@ -15,12 +15,12 @@ RSpec.describe "Api::Users::Profiles", type: :request do
       expect(response).to have_http_status(:success)
       
       expect(json['email']).to eq(view_user.email)
-      expect(json['avatar_url']).to eq('https://secure.gravatar.com/avatar/66be054e58f234aa64b5af7f0159a74d?s=50')
-      expect(json['latest_ige']).to eq(existing_ige.ige_value)
-      expect(json['positive_allergen_group']).to include('allergen_group_yasai')
+      expect(json['avatarUrl']).to eq('https://secure.gravatar.com/avatar/66be054e58f234aa64b5af7f0159a74d?s=50')
+      expect(json['latestIge']).to eq(existing_ige.ige_value)
+      expect(json['positiveAllergenGroup']).to include('allergen_group_yasai')
 
       expect(json['iges'].length).to eq(2)
-      expect(json['iges'][0]).to have_key('allergen_ratt_class')
+      expect(json['iges'][0]).to have_key('allergenRattClass')
       expect(json['iges'].to_s).to match(/#{new_ige.test_date.to_s}/)
 
       expect(json['microposts'].length).to eq(2)

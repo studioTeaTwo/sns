@@ -34,5 +34,7 @@ module Srv
         controller_specs: false
     end
 
+    ActiveModelSerializers.config.key_transform = :camel_lower
+
   end
 end

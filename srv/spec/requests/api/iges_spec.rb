@@ -11,7 +11,7 @@ RSpec.describe "Api::Iges", type: :request do
     it "works!" do
       get api_iges_path, headers: { 'Authorization' => "#{current_user.access_token}" }
       expect(response).to have_http_status(:success)
-      expect(json[0]['ige_value']).to eq(existing_ige.ige_value)
+      expect(json[0]['igeValue']).to eq(existing_ige.ige_value)
     end
   end
 
@@ -19,7 +19,7 @@ RSpec.describe "Api::Iges", type: :request do
     it "works!" do
       get api_ige_path(existing_ige), headers: { 'Authorization' => "#{current_user.access_token}" }
       expect(response).to have_http_status(:success)
-      expect(json['ige_value']).to eq(existing_ige.ige_value)
+      expect(json['igeValue']).to eq(existing_ige.ige_value)
     end
   end
 
@@ -31,7 +31,7 @@ RSpec.describe "Api::Iges", type: :request do
 
     it "works!" do
       expect(response).to have_http_status(:created)
-      expect(json['ige_value']).to eq(new_ige.ige_value)
+      expect(json['igeValue']).to eq(new_ige.ige_value)
     end
 
     it "saves the new record in the database" do
@@ -68,7 +68,7 @@ RSpec.describe "Api::Iges", type: :request do
 
       it "works!" do
         expect(response).to have_http_status(:success)
-        expect(json['ige_value']).to eq(existing_ige.ige_value)
+        expect(json['igeValue']).to eq(existing_ige.ige_value)
       end
 
       it "changes" do
@@ -100,7 +100,7 @@ RSpec.describe "Api::Iges", type: :request do
         headers: { 'Authorization' => "#{another_user.access_token}" }
         existing_ige.reload
         expect(response).to have_http_status(:forbidden)
-        expect(json['ige_value']).not_to eq(existing_ige.ige_value)
+        expect(json['igeValue']).not_to eq(existing_ige.ige_value)
       end
     end
   end
