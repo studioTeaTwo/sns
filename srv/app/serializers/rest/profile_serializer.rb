@@ -24,7 +24,7 @@ class Rest::ProfileSerializer < Rest::UserSerializer
 
   # Searchならmicropotやigeは返さない
   def search?
-    instance_options[:type] == :search
+    instance_options[:sort] == :search
   end
 
 end

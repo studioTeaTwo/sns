@@ -12,7 +12,7 @@ class Api::Search::IgeRanksController < ApplicationController
     end
 
     if @users.present?
-      render json: @users, each_serializer: Rest::ProfileSerializer, type: :search
+      render json: @users, each_serializer: Rest::ProfileSerializer, sort: :search
     else
       render json: { error: 'not_found' }, status: :not_found
     end

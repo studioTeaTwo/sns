@@ -6,7 +6,7 @@ class Api::Search::UsernamesController < ApplicationController
     @users = User.where('name LIKE(?)', "%#{params[:search_key]}%")
 
     if @users.present?
-      render json: @users, each_serializer: Rest::ProfileSerializer, type: :search
+      render json: @users, each_serializer: Rest::ProfileSerializer, sort: :search
     else
       render json: { error: 'not_found' }, status: :not_found
     end
