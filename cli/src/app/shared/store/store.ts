@@ -7,6 +7,8 @@ const initialState = {
     // APIデータ
     account: {},
     profile: {},
+    chatList: [],
+    chats: [],
     searchUsers: {},
 
     // 画面状態

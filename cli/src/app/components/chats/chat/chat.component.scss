@@ -1,35 +1,24 @@
-#container-chats {
+#container-chat {
     width: 100%;
     height: 100%;
     background-color: #f0f0f0;
 
-    #header-chats {
+    #header-chat {
         position: fixed;
         z-index: 999;
         box-sizing: border-box;
         width: 100%;
         padding: 8px;
-        input {
-            border: none;
-            outline: none;
-            padding-left: 30px;
-            height: 30px;
-            width: 100%;
-            background-image: url("/assets/images/icon_search_24dp_1x.png");
-            background-repeat: no-repeat;
-            background-position: 2px center;
-            background-color: #fff; // たまに画面遷移した時にプレースホルダーや色が消えることがあるので一応入れておく
-        }
     }
     
-    #contents-chats {
+    #contents-chat {
         padding: 5px;
         padding-top: 46px; // =chat.header.height
         padding-bottom: 50px; // =chat.footer.height
         // height: auto; →directiveで端末サイズから計算する
     }
     
-    #footer-chats {
+    #footer-chat {
         position: fixed;
         z-index: 9999;
         background-color: #fff;
@@ -38,18 +27,18 @@
         height: 50px;
         padding-bottom: 5px;
         text-align: center;
-        .footer-chats-item {
+        .footer-chat-item {
             top: 20%;
             position: relative;
         }
-        .footer-chats-replyText {
+        .footer-chat-replyText {
             height: 30px;
             width: 70%;
             font-size: 1em;
             border: 1px solid #eaeaea;
             padding: 0 6px;
         }
-        .footer-chats-replyButton {
+        .footer-chat-replyButton {
             width: 60px;
             min-width: 60px;
             margin-left: 5px;
@@ -61,7 +50,7 @@
 .history-scrollbox {
     overflow: scroll;
 
-    .history-chat {
+    .chats {
         width: 100%;
         border-spacing: 0 40px;
         &-divider {
@@ -104,9 +93,9 @@
         }
 
         // チャットアバター列
-        .history-chat-column-avatar {
+        .chat-column-avatar {
             width: 15%;
-            .history-chat-avatar {
+            .chat-avatar {
                 font-size: 0;
                 width: 45px;
                 height: 45px;
@@ -117,17 +106,17 @@
 
 
         // チャット時間列
-        .history-chat-column-time {
+        .chat-column-time {
             width: 10%;
-            .history-chat-created, .history-chat-read {
+            .chat-created, .chat-read {
                 color: rgba(0, 0, 0, 0.54);
                 font-size: small;
             }
         }
 
         // チャット本文列     
-        .applicant {
-            .history-chat-body {
+        .myself {
+            .chat-body {
                 background-color: white;
                 width: 80%;
                 min-height: 50px;
@@ -150,8 +139,8 @@
                 }
             }
         }
-        .agent {
-            .history-chat-body {
+        .opponent {
+            .chat-body {
                 background-color: white;
                 width: 80%;
                 min-height: 50px;

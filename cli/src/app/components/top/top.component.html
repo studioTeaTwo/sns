@@ -5,7 +5,11 @@
   <img width="300" src="assets/images/top.png">
 </div>
 
+<button (click)="sighup()">登録</button>
 <button (click)="login()">ログイン</button>
+<a routerLink="/chat/list" routerLinkActive="active"><span>チャット</span></a>
+<a routerLink="/user/1" routerLinkActive="active"><span>プロフィール</span></a>
 
 <label>{{sessionResponse}}</label>
 <label>{{JSON.stringify(accountResponse$ | async)}}</label>
+

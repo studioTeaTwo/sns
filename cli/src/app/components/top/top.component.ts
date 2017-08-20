@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 import { Store } from 'app/shared/store/store';
-import { AccountService } from 'app/shared/services/api';
+import {
+  AccountService,
+  ChatService,
+} from 'app/shared/services/api';
+import { NAVI_CHARA } from 'app/constants/constants';
 
 @Component({
   selector: 'app-top',
@@ -15,16 +20,27 @@ export class TopComponent implements OnInit {
   accountResponse$: Observable<any>;
 
   constructor(
+    private router: Router,
     private store: Store,
     private accountService: AccountService,
+    private chatService: ChatService,
   ) { }
 
   ngOnInit() {
     this.accountResponse$ = this.store.changes.pluck('account');
   }
 
+  sighup() {
+    this.chatService.post(NAVI_CHARA)
+      .subscribe(
+        response => {
+          this.router.navigate([`chat/${response.id}`]);
+        }
+      );
+  }
+
   login() {
-    this.accountService.login('allelog@gmail.com', 'allergy')
+    this.accountService.login('t2.tide@gmail.com', 'allergy')
       .subscribe(() => {
         this.sessionResponse = localStorage.getItem('allergylog');
         this.getMe();

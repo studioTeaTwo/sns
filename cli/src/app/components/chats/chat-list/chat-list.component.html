@@ -1,0 +1,7 @@
+<p>
+  chat-list works!
+</p>
+
+<div *ngFor="let chatThread of (chatList$ | async)">
+  <a (click)="onClick(chatThread)">{{JSON.stringify(chatThread)}}</a>
+</div>

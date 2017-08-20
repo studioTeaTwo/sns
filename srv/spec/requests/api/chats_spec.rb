@@ -8,7 +8,7 @@ RSpec.describe "Api::Chats", type: :request do
   let(:chat) { create(:chat, {sender_id: current_user.id, chat_thread_id: 1}) }
 
   before do
-    post api_chats_path, params: { chat_thread: { participants: [current_user.id, another_user.id] }}, headers: { 'Authorization' => "#{current_user.access_token}" }
+    post api_chats_path, params: { chat_thread: { participants: [another_user.id] }}, headers: { 'Authorization' => "#{current_user.access_token}" }
     @chat_thread_id = json['id']
   end
 
@@ -38,16 +38,12 @@ RSpec.describe "Api::Chats", type: :request do
       it "works!" do
         expect(response).to have_http_status(:success)
 
-        expect(json).to have_key('participants')
-        expect(json).to have_key('hasUnread')
-        expect(json).to have_key('readUntil')
-        expect(json).to have_key('newestChat')
-        expect(json['participants'].to_s).to match(/#{current_user.name}/)
-        expect(json['newestChat']['body']).to eq chat.body
+        expect(json[0]['senderId']).to eq another_user.id
+        expect(json[0]['body']).to eq chat.body
       end
 
       it "updates read_until in ChatStatus" do
-        expect(ChatStatus.where(chat_thread_id: @chat_thread_id, user_id: current_user.id).first.read_until).to eq json['newestChat']['id']
+        expect(ChatStatus.where(chat_thread_id: @chat_thread_id, user_id: current_user.id).first.read_until).to eq json[0]['id']
       end
     end
 
@@ -62,7 +58,7 @@ RSpec.describe "Api::Chats", type: :request do
   describe "POST /api/chats" do
     context "when valid input data" do
       before do
-        post api_chats_path, params: { chat_thread: { participants: [current_user.id, other_user.id] }}, headers: { 'Authorization' => "#{current_user.access_token}" }
+        post api_chats_path, params: { chat_thread: { participants: [other_user.id] }}, headers: { 'Authorization' => "#{current_user.access_token}" }
       end
 
       it "works!" do
@@ -71,7 +67,7 @@ RSpec.describe "Api::Chats", type: :request do
 
       it "saves the new record in the database" do
         expect(ChatThread.count).to eq 2
-        expect(ChatThread.find(json['id']).participants).to eq [current_user.id.to_s, other_user.id.to_s]
+        expect(ChatThread.find(json['id']).participants).to eq [current_user.id, other_user.id]
         expect(ChatStatus.count).to eq 4
         expect(ChatStatus.where(chat_thread_id: json['id'], user_id: current_user.id).count).to eq 1
         expect(ChatStatus.where(chat_thread_id: json['id'], user_id: other_user.id).count).to eq 1
@@ -80,7 +76,7 @@ RSpec.describe "Api::Chats", type: :request do
 
     context "when existing participants" do
       it "should be error" do
-        post api_chats_path, params: { chat_thread: { participants: [current_user.id, another_user.id] }}, headers: { 'Authorization' => "#{current_user.access_token}" }
+        post api_chats_path, params: { chat_thread: { participants: [another_user.id] }}, headers: { 'Authorization' => "#{current_user.access_token}" }
         expect(response).to have_http_status(:unprocessable_entity)
         expect(ChatThread.count).to eq 1
         expect(ChatStatus.count).to eq 2

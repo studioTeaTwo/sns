@@ -2,28 +2,25 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-import { TopComponent } from './top.component';
-
+import { SharedModule } from 'app/shared/shared.module';
 import { Store } from 'app/shared/store/store';
-import {
-  AccountService,
-  ChatService,
- } from 'app/shared/services/api';
+import { ChatService } from 'app/shared/services/api';
+import { ChatListComponent } from './chat-list.component';
 
-describe('TopComponent', () => {
-  let component: TopComponent;
-  let fixture: ComponentFixture<TopComponent>;
+describe('ChatListComponent', () => {
+  let component: ChatListComponent;
+  let fixture: ComponentFixture<ChatListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
         HttpClientTestingModule,
+        SharedModule,
       ],
-      declarations: [ TopComponent ],
+      declarations: [ ChatListComponent ],
       providers: [
         Store,
-        AccountService,
         ChatService,
       ]
     })
@@ -31,7 +28,7 @@ describe('TopComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TopComponent);
+    fixture = TestBed.createComponent(ChatListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -21,8 +21,8 @@ export class AccountService {
     return this.http.post<any>(`/api/login`, body)
       .map(
         response => {
-          this.userId = response.user_id;
-          localStorage.setItem('allergylog', response.access_token);
+          this.userId = response.userId;
+          localStorage.setItem('allergylog', response.accessToken);
         }
       );
   }

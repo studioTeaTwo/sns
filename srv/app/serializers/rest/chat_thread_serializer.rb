@@ -1,6 +1,6 @@
 class Rest::ChatThreadSerializer < ActiveModel::Serializer
   
-  attributes :id, :has_unread, :read_until
+  attributes :id, :has_unread, :read_until, :updated_at
   
   has_many :users, key: :participants, serializer: Rest::UserSerializer do
     object.users

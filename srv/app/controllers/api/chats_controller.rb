@@ -7,11 +7,11 @@ class Api::ChatsController < ApplicationController
   end
 
   def create
-    chat_thread_params[:participants].sort!
-    @chat_thread = current_user.chat_threads.build(chat_thread_params)
+    participants = make_participants
+    @chat_thread = current_user.chat_threads.build({participants: participants})
     ActiveRecord::Base.transaction do
       @chat_thread.save!
-      chat_thread_params[:participants].each do |participant|
+      participants.each do |participant|
         ChatStatus.create(chat_thread_id: @chat_thread.id, user_id: participant)
       end
     end
@@ -24,7 +24,7 @@ class Api::ChatsController < ApplicationController
     @chat_thread = ChatThread.find(params[:id])
     # 既読チェック
     readChat(@chat_thread.id, @chat_thread.chats.last.id) if @chat_thread.chats.count > 0
-    render json: @chat_thread, serializer: Rest::ChatThreadSerializer
+    render json: @chat_thread.chats, each_serializer: Rest::ChatSerializer
   end
 
   def say
@@ -67,5 +67,12 @@ class Api::ChatsController < ApplicationController
       def correct_user
         chat_thread = ChatThread.find(params[:id])
         render json: { error: 'forbidden' }, status: :forbidden if chat_thread.chat_statuses.where(user_id: current_user.id).empty?
+      end
+
+      def make_participants
+        participants = chat_thread_params[:participants]
+        participants.push(current_user.id)
+        # modelのvalidates :participantsのためにsortする
+        participants.map(&:to_i).sort!        
       end
 end

@@ -6,30 +6,41 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# ナビキャラ
+User.create!( 
+  name: "ハロ",
+  email: "studioTeaTwo@gmail.com",
+  password: "allergy",
+  rank: 1,
+  title_of_honor: 11,
+  self_introduction: "よろしくにゃ！",
+  admin: true
+)
+
 # 管理者ユーザー
 User.create!( 
-              name:  "allelog",
-              email: "allelog@gmail.com",
-              password:              "allergy",
-              rank: 1,
-              title_of_honor: 11,
-              self_introduction: "自己紹介が入ります。自己紹介が入ります。自己紹介が入ります。",
-              admin: true
-            )
+  name: "allelog",
+  email: "t2.tide@gmail.com",
+  password: "allergy",
+  rank: 1,
+  title_of_honor: 11,
+  self_introduction: "自己紹介が入ります。自己紹介が入ります。自己紹介が入ります。",
+  admin: true
+)
 # 管理者ユーザーの最新IgE検査の登録
 latest_test_date = Faker::Time.between(1.months.ago, Date.today, :day)
 Ige.create!(
-            user_id: 1,
-            latest_test_result: true,
-            test_date: latest_test_date,
-            test_category: Random.rand(0 .. 10),
-            ige_value: Random.rand(10 .. 3000),
-            ige_unit: 0,
-            allergen_group_chiri: true,
-            allergen_group_dani: true,
-            allergen_group_saikin: true,
-            allergen_group_komugi: true
-           )
+  user_id: 1,
+  latest_test_result: true,
+  test_date: latest_test_date,
+  test_category: Random.rand(0 .. 10),
+  ige_value: Random.rand(10 .. 3000),
+  ige_unit: 0,
+  allergen_group_chiri: true,
+  allergen_group_dani: true,
+  allergen_group_saikin: true,
+  allergen_group_komugi: true
+)
 # 管理者ユーザーのその他のIgE検査結果
 10.times do |n|
   test_date = Faker::Time.between(10.years.ago, 1.months.ago, :day)

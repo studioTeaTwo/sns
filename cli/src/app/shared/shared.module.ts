@@ -9,6 +9,7 @@ import {
   ApiInterceptor,
   AccountService,
   UserService,
+  ChatService,
 } from './services/api';
 import {
   FormatToJapaneseDatePipe,
@@ -45,8 +46,10 @@ export class SharedModule {
       ngModule: SharedModule,
       providers: [
         Store,
+
         AccountService,
         UserService,
+        ChatService
       ]
     };
   }

@@ -3,11 +3,13 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { SharedModule } from 'app/shared/shared.module';
-import { ChatsComponent } from './chats.component';
+import { Store } from 'app/shared/store/store';
+import { ChatService } from 'app/shared/services/api';
+import { ChatComponent } from './chat.component';
 
-describe('ChatsComponent', () => {
-  let component: ChatsComponent;
-  let fixture: ComponentFixture<ChatsComponent>;
+describe('ChatComponent', () => {
+  let component: ChatComponent;
+  let fixture: ComponentFixture<ChatComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -16,15 +18,17 @@ describe('ChatsComponent', () => {
         RouterTestingModule,
         SharedModule,
       ],
-      declarations: [
-        ChatsComponent,
+      declarations: [ ChatComponent ],
+      providers: [
+        Store,
+        ChatService,
       ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChatsComponent);
+    fixture = TestBed.createComponent(ChatComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
