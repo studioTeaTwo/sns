@@ -9,10 +9,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TopComponent } from './components/top/top.component';
 
+import { Tutorial1Component } from "app/tutorials/tutorial1/tutorial1.component";
+
 @NgModule({
   declarations: [
     AppComponent,
-    TopComponent
+    TopComponent,
+    Tutorial1Component,
   ],
   imports: [
     BrowserModule,

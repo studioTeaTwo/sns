@@ -47,7 +47,7 @@
   </div>
 
   <div id="footer-chat" *ngIf="true">
-    <input #replyText placeholder="メッセージを入力してください" class="footer-chat-item footer-chat-replyText" />
+    <input id="replyText" #replyText placeholder="メッセージを入力してください" class="footer-chat-item footer-chat-replyText" />
     <button md-raised-button color="primary" class="footer-chat-item footer-chat-replyButton" (click)="handleClickReply(replyText.value); replyText.value=''">送信</button>
   </div>
 

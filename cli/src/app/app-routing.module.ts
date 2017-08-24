@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { TopComponent } from './components/top/top.component';
+import { Tutorial1Component } from "app/tutorials/tutorial1/tutorial1.component";
 
 const routes: Routes = [
   {
@@ -32,6 +33,10 @@ const routes: Routes = [
   //   path: 'account',
   //   loadChildren: './components/account/account.module#AccountModule'
   // },
+  {
+    path: 'tutorial',
+    component: Tutorial1Component
+  },
 ];
 
 @NgModule({

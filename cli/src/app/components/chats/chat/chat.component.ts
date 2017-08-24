@@ -27,10 +27,10 @@ export class ChatComponent implements OnInit {
   loadingChatForward$: Observable<boolean>;
 
   constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private store: Store,
-    private chatService: ChatService,
+    public router: Router,
+    public route: ActivatedRoute,
+    public store: Store,
+    public chatService: ChatService,
   ) {
     this.height = window.innerHeight - (56 + 46 + 50); // header.height + chat.header.height + chat.footer.height
   }

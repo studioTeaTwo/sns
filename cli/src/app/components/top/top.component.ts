@@ -31,7 +31,7 @@ export class TopComponent implements OnInit {
   }
 
   sighup() {
-    this.chatService.post(NAVI_CHARA)
+    this.chatService.post(NAVI_CHARA.id)
       .subscribe(
         response => {
           this.router.navigate([`chat/${response.id}`]);
