@@ -28,7 +28,6 @@
 
 # Ignore Production build
 .ruby-version
-/public/assets
 
 # OS/editor
 .DS_Store

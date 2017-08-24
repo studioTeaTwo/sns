@@ -17,7 +17,7 @@ export class ApiInterceptor implements HttpInterceptor {
 
     const req = request.clone({
       url: this.domain + request.url,
-      setHeaders: { Authorization: token },
+      setHeaders: { Authorization: token ? token : '' },
     });
     console.log('インターセプト！', req);
     return next.handle(req);

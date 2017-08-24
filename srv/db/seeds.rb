@@ -11,6 +11,7 @@ User.create!(
   name: "ハロ",
   email: "studioTeaTwo@gmail.com",
   password: "allergy",
+  encrypted_password: User.digest('allergy'),
   rank: 1,
   title_of_honor: 11,
   self_introduction: "よろしくにゃ！",
@@ -22,6 +23,7 @@ User.create!(
   name: "allelog",
   email: "t2.tide@gmail.com",
   password: "allergy",
+  encrypted_password: User.digest('allergy'),
   rank: 1,
   title_of_honor: 11,
   self_introduction: "自己紹介が入ります。自己紹介が入ります。自己紹介が入ります。",
@@ -70,9 +72,10 @@ end
   email = "example-#{n+1}@railstutorial.org"
   password = "password"
   User.create!(
-               name:  name,
+               name: name,
                email: email,
-               password:              password,
+               password: password,
+               encrypted_password: User.digest(password),
                rank: Random.rand(0 .. 4),
                title_of_honor: Random.rand(10 .. 14)
               )

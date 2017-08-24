@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
@@ -23,12 +23,15 @@ export class ChatComponent implements OnInit {
   chatThread: ChatThread;
   myself: User;
   opponents: User[];
+
+  isActive: boolean;
   loadingChatBack$: Observable<boolean>;
   loadingChatForward$: Observable<boolean>;
 
   constructor(
     public router: Router,
     public route: ActivatedRoute,
+    private renderer: Renderer2,
     public store: Store,
     public chatService: ChatService,
   ) {
@@ -63,7 +66,13 @@ export class ChatComponent implements OnInit {
 
   getUnreadChat() {}
 
-  handleClickReply(replyText) {
+  handleClickReply(replyText: string, event: Event) {
     this.chatService.say(this.chatThread['id'], replyText);
+  }
+
+  private setFocus(event: Event) {
+    event.preventDefault();
+    const element = this.renderer.selectRootElement('#replyText') as HTMLInputElement;
+    element.focus();
   }
 }

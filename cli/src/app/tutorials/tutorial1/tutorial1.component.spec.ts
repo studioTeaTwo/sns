@@ -1,5 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
+import { SharedModule } from 'app/shared/shared.module';
+import { Store } from 'app/shared/store/store';
+import {
+  AccountService,
+  ChatService,
+ } from 'app/shared/services/api';
 import { Tutorial1Component } from './tutorial1.component';
 
 describe('Tutorial1Component', () => {
@@ -8,7 +16,17 @@ describe('Tutorial1Component', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ Tutorial1Component ]
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        SharedModule,
+      ],
+      declarations: [ Tutorial1Component ],
+      providers: [
+        Store,
+        AccountService,
+        ChatService,
+      ]
     })
     .compileComponents();
   }));

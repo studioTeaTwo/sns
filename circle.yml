@@ -11,7 +11,7 @@ machine:
 dependencies:
   override:
     - cd ./srv && bundle install
-    - cd ./cli && npm install && npm run build
+    - cd ./cli && npm install
 database:
   override:
     - cd ./srv && bundle exec rails db:create db:schema:load RAILS_ENV=test
@@ -19,4 +19,14 @@ database:
 test:
   override:
     - cd ./srv && RAILS_ENV=test bundle exec rspec spec/
-    - cd ./cli && npm run test
+    - cd ./cli && ./node_modules/.bin/ng build --env=prod && npm run test
+
+deployment:
+  staging:
+    branch: master
+    heroku:
+      appname: allelog
+    commands:
+      - cp -rf ./cli/dist/ ./srv/public/
+      - git push heroku `git subtree split --prefix srv master`:master --force
+      - heroku run rails db:migrate db:seed

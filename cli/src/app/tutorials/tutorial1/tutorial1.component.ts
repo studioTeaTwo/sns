@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer } from '@angular/core';
+import { Component, OnInit, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from "rxjs/Subject";
@@ -20,18 +20,20 @@ import { ChatComponent } from "app/components/chats/chat/chat.component";
   styleUrls: ['../../components/chats/chat/chat.component.scss']
 })
 export class Tutorial1Component extends ChatComponent implements OnInit {
+  @ViewChild('replyText') input:ElementRef;
   chatSource: Subject<Chat[]>;
 
   constructor(
-    private renderer: Renderer,
     router: Router,
     route: ActivatedRoute,
+    renderer: Renderer2,
     store: Store,
     chatService: ChatService,
   ) {
     super(
       router,
       route,
+      renderer,
       store,
       chatService,
     );
@@ -48,12 +50,18 @@ export class Tutorial1Component extends ChatComponent implements OnInit {
     setTimeout(() => this.chatSource.next(tutorial_script1), 0);
     setTimeout(() => {
       this.chatSource.next(tutorial_script1.concat(tutorial_script2));
-      const element = this.renderer.selectRootElement('#replyText');
-      setTimeout(() => element.focus(), 0);
-    }, 3000);
+      this.input.nativeElement.click();
+      if (navigator.userAgent.indexOf('iPhone') > -1 || navigator.userAgent.indexOf('iPad') > -1) {
+        this.isActive = true;
+      }
+    }, 2000);
   }
 
   handleClickReply(text) {
+    if (navigator.userAgent.indexOf('iPhone') > -1 || navigator.userAgent.indexOf('iPad') > -1) {
+      this.isActive = false;
+    }
+
     const reply: Chat[] = [{
       id: 3,
       senderId: this.myself.id,
@@ -64,9 +72,8 @@ export class Tutorial1Component extends ChatComponent implements OnInit {
 
     let body = `すごい！${text}って言うんだ！`;
     tutorial_script3[0].body = body;
-    setTimeout(() => this.chatSource.next(tutorial_script1.concat(tutorial_script2, reply, tutorial_script3)), 3000);
+    setTimeout(() => this.chatSource.next(tutorial_script1.concat(tutorial_script2, reply, tutorial_script3)), 1000);
   }
-
 }
 
 const tutorial_script1: Chat[] = [{

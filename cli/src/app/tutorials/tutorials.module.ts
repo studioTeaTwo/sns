@@ -11,6 +11,6 @@ import { Tutorial1Component } from './tutorial1/tutorial1.component';
     SharedModule,
     ChatsModule,
   ],
-  declarations: [Tutorial1Component]
+  declarations: []
 })
 export class TutorialsModule { }
