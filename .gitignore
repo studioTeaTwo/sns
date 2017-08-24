@@ -7,3 +7,7 @@
 # OS/editor
 .DS_Store
 .vscode/
+
+# circleCI
+.config/
+vendor/

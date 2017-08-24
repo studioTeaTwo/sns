@@ -17,16 +17,27 @@ database:
     - cd ./srv && bundle exec rails db:create db:schema:load RAILS_ENV=test
     - cd ./srv && bundle exec rails db:migrate RAILS_ENV=test
 test:
+  pre:
+    - bash ./build.sh
   override:
     - cd ./srv && RAILS_ENV=test bundle exec rspec spec/
-    - cd ./cli && ./node_modules/.bin/ng build --env=prod && npm run test
+    - cd ./cli && npm run lint && npm run test
 
 deployment:
   staging:
     branch: master
-    heroku:
-      appname: allelog
     commands:
-      - cp -rf ./cli/dist/ ./srv/public/
-      - git push heroku `git subtree split --prefix srv master`:master --force
-      - heroku run rails db:migrate db:seed
+      - |
+        cat >~/.netrc <<EOF
+        machine api.heroku.com
+          login $HEROKU_EMAIL
+          password $HEROKU_TOKEN
+        machine git.heroku.com
+          login $HEROKU_EMAIL
+          password $HEROKU_TOKEN
+        EOF
+      - chmod 600 ~/.netrc # Heroku cli complains about permissions without this
+      - git status
+      - git add srv/public && git commit --amend --no-edit
+      - git push git@heroku.com:allelog.git `git subtree split --prefix srv HEAD`:master --force
+      - heroku run rails db:migrate --app allelog
