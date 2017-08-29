@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170819141125) do
+ActiveRecord::Schema.define(version: 20170821201416) do
 
   create_table "chat_statuses", force: :cascade do |t|
     t.integer "user_id"
@@ -301,6 +301,20 @@ ActiveRecord::Schema.define(version: 20170819141125) do
     t.datetime "updated_at", null: false
     t.index ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_microposts_on_user_id"
+  end
+
+  create_table "personal_assistants", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "tutorial_tatus"
+    t.boolean "diary_atopic"
+    t.boolean "diary_asthma"
+    t.boolean "diary_rhinitis"
+    t.boolean "diary_pollen"
+    t.boolean "diary_gastroenteritis"
+    t.boolean "diary_conjunctivitis"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_personal_assistants_on_user_id"
   end
 
   create_table "relationships", force: :cascade do |t|
