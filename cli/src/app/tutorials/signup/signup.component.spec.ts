@@ -8,11 +8,13 @@ import {
   AccountService,
   ChatService,
  } from 'app/shared/services/api';
-import { Tutorial1Component } from './tutorial1.component';
+import { SignupComponent } from './signup.component';
+import { Step1Component } from './step/step1.component';
+import { Step2Component } from './step/step2.component';
 
-describe('Tutorial1Component', () => {
-  let component: Tutorial1Component;
-  let fixture: ComponentFixture<Tutorial1Component>;
+describe('SignupComponent', () => {
+  let component: SignupComponent;
+  let fixture: ComponentFixture<SignupComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -21,7 +23,11 @@ describe('Tutorial1Component', () => {
         RouterTestingModule,
         SharedModule,
       ],
-      declarations: [ Tutorial1Component ],
+      declarations: [
+        SignupComponent,
+        Step1Component,
+        Step2Component,
+      ],
       providers: [
         Store,
         AccountService,
@@ -32,7 +38,7 @@ describe('Tutorial1Component', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(Tutorial1Component);
+    fixture = TestBed.createComponent(SignupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

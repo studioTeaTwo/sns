@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { SharedModule } from 'app/shared/shared.module';
 import { ChatsModule } from 'app/components/chats/chats.module';
-import { Tutorial1Component } from './tutorial1/tutorial1.component';
+import { SignupComponent } from './signup/signup.component';
+import { Step1Component } from './signup/step/step1.component';
+import { Step2Component } from './signup/step/step2.component';
 
 @NgModule({
   imports: [
@@ -11,6 +13,10 @@ import { Tutorial1Component } from './tutorial1/tutorial1.component';
     SharedModule,
     ChatsModule,
   ],
-  declarations: []
+  declarations: [
+    SignupComponent,
+    Step1Component,
+    Step2Component,
+  ]
 })
 export class TutorialsModule { }

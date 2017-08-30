@@ -7,6 +7,13 @@ import { Store } from 'app/shared/store/store';
 @Injectable()
 export class AccountService {
   private userId: string;
+  private signupData = {
+    name: '',
+    email: '',
+    password: '',
+    symptom: {},
+    userType: 0,
+  };
 
   constructor(
     private http: HttpClient,
@@ -34,6 +41,21 @@ export class AccountService {
           this.onSuccessAccount(response);
         }
       );
+  }
+
+  saveSignupdataName(name: string) {
+    this.signupData.name = name;
+  }
+
+  saveSignupdataSymptom(item: any): any {
+    this.signupData.symptom[item.name] = !this.signupData.symptom[item.name];
+    console.log(this.signupData);
+    return this.signupData.symptom;
+  }
+
+  saveSignupdataUserType(item: any): any {
+    this.signupData.userType = item.name;
+    return this.signupData.userType;
   }
 
   private onSuccessAccount(data) {

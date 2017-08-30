@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { TopComponent } from './components/top/top.component';
-import { Tutorial1Component } from "app/tutorials/tutorial1/tutorial1.component";
+import { SignupComponent } from 'app/tutorials/signup/signup.component';
 
 const routes: Routes = [
   {
@@ -34,8 +34,8 @@ const routes: Routes = [
   //   loadChildren: './components/account/account.module#AccountModule'
   // },
   {
-    path: 'tutorial',
-    component: Tutorial1Component
+    path: 'signup',
+    component: SignupComponent
   },
 ];
 

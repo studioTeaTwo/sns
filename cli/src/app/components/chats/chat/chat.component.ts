@@ -1,12 +1,14 @@
-import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
+import { MaterialModule } from 'app/shared/material/material.module';
 import { Store } from 'app/shared/store/store';
 import {
   ChatThread,
   Chats,
   Chat,
+  CONTENT_TYPE,
   User,
 } from 'app/interfaces/api-models';
 import { ChatService } from 'app/shared/services/api';
@@ -17,6 +19,7 @@ import { ChatService } from 'app/shared/services/api';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
+  @ViewChild('scrollMove') scrollContainer: ElementRef;
   height: number;
 
   chats$: Observable<Chats>;
@@ -25,6 +28,7 @@ export class ChatComponent implements OnInit {
   opponents: User[];
 
   isActive: boolean;
+  showReplyText: boolean;
   loadingChatBack$: Observable<boolean>;
   loadingChatForward$: Observable<boolean>;
 
@@ -35,7 +39,7 @@ export class ChatComponent implements OnInit {
     public store: Store,
     public chatService: ChatService,
   ) {
-    this.height = window.innerHeight - (56 + 46 + 50); // header.height + chat.header.height + chat.footer.height
+    this.height = window.innerHeight - (56 + 50); // header.height + chat.header.height + chat.footer.height
   }
 
   ngOnInit() {
@@ -56,18 +60,58 @@ export class ChatComponent implements OnInit {
 
   isDisplayDate() {}
 
-  isOpponents(chat: Chat): boolean {
-    return this.opponents.some(value => value.id === chat.senderId)
+  isMyself(chat: Chat): boolean {
+    if (!chat.body) { return false; }
+    return (chat.contentType === CONTENT_TYPE.REPLY) && (chat.senderId === this.myself.id);
   }
 
-  isDispalyReply() {}
+  isOpponents(chat: Chat): boolean {
+    if (!chat.body) { return false; }
+    return (chat.contentType === CONTENT_TYPE.REPLY) && (this.opponents.some(value => value.id === chat.senderId));
+  }
+
+  isYesNo(chat: Chat): boolean {
+    return (chat.contentType === CONTENT_TYPE.YESNO);
+  }
+
+  isCheckbox(chat: Chat): boolean {
+    return (chat.contentType === CONTENT_TYPE.CHECKBOX) && chat.itemList ? true : false;
+  }
+
+  isRadiobutton(chat: Chat): boolean {
+    return (chat.contentType === CONTENT_TYPE.RADIOBUTTON) && chat.itemList ? true : false;
+  }
+
+  getImgSrc(chat: Chat): string {
+    if (chat.senderId === this.myself.id) {
+      return this.myself.avatarUrl;
+    } else {
+      const speaker = this.opponents.find(value => value.id === chat.senderId);
+      return speaker.avatarUrl;
+    }
+  }
 
   isUnread() {}
 
   getUnreadChat() {}
 
-  handleClickReply(replyText: string, event: Event) {
+  onClickYes() {}
+
+  onClickNo() {}
+
+  onChangeChecked(item) {
+  }
+
+  onChangeRadio(item) {
+  }
+
+  onClickReply(replyText: string, event: Event) {
     this.chatService.say(this.chatThread['id'], replyText);
+  }
+
+  // 継承先で使うためprivateにしていない
+  protected scrollToBottom() {
+    this.scrollContainer.nativeElement.scrollTop = this.scrollContainer.nativeElement.scrollHeight;
   }
 
   private setFocus(event: Event) {

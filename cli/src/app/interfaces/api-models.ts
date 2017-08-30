@@ -1,3 +1,5 @@
+import { SafeHtml } from '@angular/platform-browser';
+
 export interface User {
   id: number;
   email: string;
@@ -28,6 +30,15 @@ export type Chats = Chat[];
 export interface Chat {
   id: number;
   senderId: number;
-  body: string;
-  createdAt: Date;
+  contentType: CONTENT_TYPE;
+  body?: string | SafeHtml;
+  itemList?: any;
+  expired?: boolean;
+  createdAt?: Date;
+}
+export enum CONTENT_TYPE {
+  REPLY,
+  YESNO,
+  CHECKBOX,
+  RADIOBUTTON,
 }
