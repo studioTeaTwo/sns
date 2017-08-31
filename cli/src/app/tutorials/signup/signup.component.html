@@ -1,4 +1,5 @@
 <div [ngSwitch]="displayState">
   <app-step1 *ngSwitchCase="DisplayState.NAME" (completed)="onCompleted($event)"></app-step1>
   <app-step2 *ngSwitchCase="DisplayState.SYMPTOM" (completed)="onCompleted($event)"></app-step2>
+  <app-step3 *ngSwitchCase="DisplayState.EMAIL" (completed)="onCompleted($event)"></app-step3>
 </div>

@@ -11,7 +11,7 @@ export class AccountService {
     name: '',
     email: '',
     password: '',
-    symptom: {},
+    symptoms: {},
     userType: 0,
   };
 
@@ -43,19 +43,34 @@ export class AccountService {
       );
   }
 
+  create() {
+    this.http.post<any>(`/api/users`, {user: this.signupData})
+      .subscribe(
+        response => {
+          this.onSuccessAccount(response);
+        }
+      );
+  }
+
   saveSignupdataName(name: string) {
     this.signupData.name = name;
   }
 
   saveSignupdataSymptom(item: any): any {
-    this.signupData.symptom[item.name] = !this.signupData.symptom[item.name];
-    console.log(this.signupData);
-    return this.signupData.symptom;
+    this.signupData.symptoms[item.name] = !this.signupData.symptoms[item.name];
+    return this.signupData.symptoms;
   }
 
-  saveSignupdataUserType(item: any): any {
+  saveSignupdataUserType(item: any) {
     this.signupData.userType = item.name;
-    return this.signupData.userType;
+  }
+
+  saveSignupdataEmail(email: string) {
+    this.signupData.email = email;
+  }
+
+  saveSignupdataPassword(password: string) {
+    this.signupData.password = password;
   }
 
   private onSuccessAccount(data) {

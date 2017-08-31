@@ -33,6 +33,7 @@ export interface Chat {
   contentType: CONTENT_TYPE;
   body?: string | SafeHtml;
   itemList?: any;
+  result?: string,
   expired?: boolean;
   createdAt?: Date;
 }
