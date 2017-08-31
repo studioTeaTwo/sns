@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Renderer2, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ElementRef, Renderer2, ViewChild, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -24,7 +24,7 @@ import { ChatComponent } from 'app/components/chats/chat/chat.component';
   templateUrl: '../../../components/chats/chat/chat.component.html',
   styleUrls: ['../../../components/chats/chat/chat.component.scss']
 })
-export class Step2Component extends ChatComponent implements OnInit {
+export class Step2Component extends ChatComponent implements OnInit, AfterViewInit {
   @ViewChild('replyText') input: ElementRef;
   chatSource: Subject<Chat[]>;
   chatHistory: Chat[] = [];
@@ -47,7 +47,7 @@ export class Step2Component extends ChatComponent implements OnInit {
       store,
       chatService,
     );
-    this.height = window.innerHeight - (56 + 50);
+    this.height = window.innerHeight;
 
     this.chatSource = new Subject<Chat[]>();
     this.chats$ = this.chatSource.asObservable();
@@ -66,6 +66,11 @@ export class Step2Component extends ChatComponent implements OnInit {
     }, 2000);
   }
 
+  ngAfterViewInit() {
+    this.scrollToTop();
+  }
+
+
   onChangeChecked(item) {
     const mySymptom = this.accountService.saveSignupdataSymptom(item);
     this.createReply(mySymptom);
@@ -75,6 +80,7 @@ export class Step2Component extends ChatComponent implements OnInit {
     // 症状データはリセット
     tutorial_script2[0].itemList.forEach(value => value.checked = false);
     tutorial_script2[0].expired = true;
+    this.accountService.saveSignupdataSymptom({});
 
     tutorial_script2[1].result = item.name;
     this.accountService.saveSignupdataUserType(item);
@@ -89,6 +95,8 @@ export class Step2Component extends ChatComponent implements OnInit {
   }
 
   onClickNo() {
+    this.scrollToTop();
+
     this.reset();
     this.chatSource.next(this.chatHistory);
   }
@@ -116,6 +124,8 @@ export class Step2Component extends ChatComponent implements OnInit {
     tutorial_script2[0].itemList.forEach(value => value.checked = false);
     tutorial_script2[0].expired = false;
     tutorial_script2[1].result = '';
+    this.accountService.saveSignupdataSymptom(null);
+    this.accountService.saveSignupdataUserType(null);
 
     this.chatHistory = [];
     this.chatHistory.push(...tutorial_script1, ...tutorial_script2);

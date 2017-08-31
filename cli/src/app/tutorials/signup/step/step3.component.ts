@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Renderer2, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ElementRef, Renderer2, ViewChild, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -24,7 +24,7 @@ import { ChatComponent } from 'app/components/chats/chat/chat.component';
   templateUrl: '../../../components/chats/chat/chat.component.html',
   styleUrls: ['../../../components/chats/chat/chat.component.scss']
 })
-export class Step3Component extends ChatComponent implements OnInit {
+export class Step3Component extends ChatComponent implements OnInit, AfterViewInit {
   @ViewChild('replyText') input: ElementRef;
   chatSource: Subject<Chat[]>;
   chatHistory: Chat[] = [];
@@ -47,7 +47,7 @@ export class Step3Component extends ChatComponent implements OnInit {
       store,
       chatService,
     );
-    this.height = window.innerHeight - (56 + 50);
+    this.height = window.innerHeight;
 
     this.chatSource = new Subject<Chat[]>();
     this.chats$ = this.chatSource.asObservable();
@@ -68,6 +68,10 @@ export class Step3Component extends ChatComponent implements OnInit {
     }, 2000);
   }
 
+  ngAfterViewInit() {
+    this.scrollToTop();
+  }
+
   onClickReply(text) {
     this.toggleReplyText(false);
 
@@ -75,11 +79,14 @@ export class Step3Component extends ChatComponent implements OnInit {
   }
 
   onClickYes() {
-    this.completed.emit();
+    this.router.navigate(['']);
+    // this.completed.emit();
     // this.accountService.create();
   }
 
   onClickNo() {
+    this.scrollToTop();
+
     this.chatHistory = [];
     this.chatHistory.push(...tutorial_script1, ...tutorial_script2);
     this.chatSource.next(this.chatHistory);

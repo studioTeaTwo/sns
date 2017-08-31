@@ -45,7 +45,7 @@ export class Step1Component extends ChatComponent implements OnInit {
       store,
       chatService,
     );
-    this.height = window.innerHeight - (56 + 50);
+    this.height = window.innerHeight;
 
     this.showReplyText = false;
     this.chatSource = new Subject<Chat[]>();

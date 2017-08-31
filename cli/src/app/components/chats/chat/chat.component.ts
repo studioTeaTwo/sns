@@ -39,7 +39,7 @@ export class ChatComponent implements OnInit {
     public store: Store,
     public chatService: ChatService,
   ) {
-    this.height = window.innerHeight - (56 + 50); // header.height + chat.header.height + chat.footer.height
+    this.height = window.innerHeight - 50; // chat.footer.height
   }
 
   ngOnInit() {
@@ -107,6 +107,11 @@ export class ChatComponent implements OnInit {
 
   onClickReply(replyText: string, event: Event) {
     this.chatService.say(this.chatThread['id'], replyText);
+  }
+
+  // 継承先で使うためprivateにしていない
+  protected scrollToTop() {
+    this.scrollContainer.nativeElement.scrollTop = 0;
   }
 
   // 継承先で使うためprivateにしていない
