@@ -32,7 +32,11 @@ ActiveRecord::Schema.define(version: 20170821201416) do
   create_table "chats", force: :cascade do |t|
     t.integer "chat_thread_id"
     t.integer "sender_id"
+    t.integer "content_type"
     t.text "body"
+    t.text "itemList"
+    t.string "result"
+    t.boolean "expired", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["chat_thread_id"], name: "index_chats_on_chat_thread_id"
@@ -305,7 +309,7 @@ ActiveRecord::Schema.define(version: 20170821201416) do
 
   create_table "personal_assistants", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "tutorial_tatus"
+    t.integer "tutorial_status"
     t.boolean "diary_atopic"
     t.boolean "diary_asthma"
     t.boolean "diary_rhinitis"
@@ -349,10 +353,25 @@ ActiveRecord::Schema.define(version: 20170821201416) do
     t.text "self_introduction"
     t.integer "rank"
     t.integer "title_of_honor"
+    t.integer "classification", default: 0
+    t.boolean "atopic", default: false
+    t.boolean "asthma", default: false
+    t.boolean "rhinitis", default: false
+    t.boolean "pollen", default: false
+    t.boolean "gastroenteritis", default: false
+    t.boolean "conjunctivitis", default: false
     t.string "access_token"
+    t.index ["admin"], name: "index_users_on_admin"
+    t.index ["asthma"], name: "index_users_on_asthma"
+    t.index ["atopic"], name: "index_users_on_atopic"
+    t.index ["classification"], name: "index_users_on_classification"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.index ["conjunctivitis"], name: "index_users_on_conjunctivitis"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["gastroenteritis"], name: "index_users_on_gastroenteritis"
+    t.index ["pollen"], name: "index_users_on_pollen"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["rhinitis"], name: "index_users_on_rhinitis"
   end
 
 end

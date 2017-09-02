@@ -1,6 +1,7 @@
 class Rest::UserSerializer < ActiveModel::Serializer
 
   attributes :id, :email, :name, :self_introduction, :rank, :title_of_honor,
+             :classification, :atopic, :asthma, :rhinitis, :pollen, :gastroenteritis, :conjunctivitis,
              :avatar_url
 
   def avatar_url

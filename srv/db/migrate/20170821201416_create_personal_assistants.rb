@@ -2,7 +2,7 @@ class CreatePersonalAssistants < ActiveRecord::Migration[5.1]
   def change
     create_table :personal_assistants do |t|
       t.references :user, foreign_key: true
-      t.integer :tutorial_tatus
+      t.integer :tutorial_status
       t.boolean :diary_atopic # アトピー
       t.boolean :diary_asthma # 喘息
       t.boolean :diary_rhinitis # 鼻炎

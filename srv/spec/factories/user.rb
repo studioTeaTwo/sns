@@ -10,6 +10,8 @@ FactoryGirl.define do
     access_token 'hTDRTjL5m2Zpz6ieMVGs'
     #activated true
 
+    classification 1
+
     factory :activate_user do
       #activated false
       #activation_token activaton_token
@@ -29,6 +31,8 @@ FactoryGirl.define do
     encrypted_password User.digest('testtest2')
     access_token 'aTDRTjL5m2Zpz6ieMVGs'
     #activated true
+
+    classification 1
   end
 
   factory :admin_user, class: User do
@@ -38,5 +42,7 @@ FactoryGirl.define do
     encrypted_password User.digest('test')
     #activated true
     admin true
+
+    classification 1
   end
 end

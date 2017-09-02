@@ -49,14 +49,14 @@ class Api::ChatsController < ApplicationController
       def chat_thread_params
         params.fetch(:chat_thread, {}).permit(
           :chat_thread_id,
-          :participants => [],
+          :participants => []
         )
       end
 
       def chat_params
         params.fetch(:chat, {}).permit(
           :chat_thread_id,
-          :body,
+          :body
         )
       end
 

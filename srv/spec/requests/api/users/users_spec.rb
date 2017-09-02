@@ -14,10 +14,28 @@ RSpec.describe "Api::Users", type: :request do
   end
 
   describe "POST /api/users" do
-    it 'return success status' do
-      post api_users_path, params: { user: { email: 'sample@sample.com', name: 'テスト太郎', password: 'testtest' } }
+    before do
+      post api_users_path, params: { user: {
+        email: 'sample@sample.com',
+        name: 'テスト太郎',
+        password: 'ああああああ',
+        classification: 1,
+        symptoms: ['atopic']
+      } }
+    end
+
+    it 'works!' do
       expect(response).to have_http_status(:success)
-      expect(json['email']).to eq('sample@sample.com') 
+      expect(json['email']).to eq('sample@sample.com')
+      expect(json['accessToken'].length).to be > 0
+    end
+
+    it 'saves the new record in the database' do
+      expect(User.count).to eq 1
+      expect(User.first.name).to eq 'テスト太郎'
+      expect(User.first.atopic).to be true
+      expect(PersonalAssistant.count).to eq 1
+      expect(PersonalAssistant.first.user_id).to eq User.first.id
     end
   end
 

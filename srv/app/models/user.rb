@@ -5,10 +5,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
          #, :confirmable  TODO: メール認証
 
+  has_one :personal_assistant
   has_many :chat_statuses, dependent: :destroy
   has_many :chat_threads, through: :chat_statuses
   has_many :chats, foreign_key: "sender_id"
-  has_many :microposts, dependent: :destroy
+  has_many :microposts
   has_many :active_relationships, class_name:  "Relationship",
                                   foreign_key: "follower_id",
                                   dependent: :destroy
@@ -17,7 +18,7 @@ class User < ApplicationRecord
                                    dependent: :destroy
   has_many :followings, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
-  has_many :iges, dependent: :destroy
+  has_many :iges
   
   attr_accessor :remember_token, :activation_token, :reset_token
 
