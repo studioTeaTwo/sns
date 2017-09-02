@@ -8,11 +8,11 @@ import {
   AccountService,
   ChatService,
  } from 'app/shared/services/api';
-import { Step1Component } from './step1.component';
+import { StepSymptomComponent } from './step_symptom.component';
 
-describe('Step1Component', () => {
-  let component: Step1Component;
-  let fixture: ComponentFixture<Step1Component>;
+describe('StepSymptomComponent', () => {
+  let component: StepSymptomComponent;
+  let fixture: ComponentFixture<StepSymptomComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -21,7 +21,7 @@ describe('Step1Component', () => {
         RouterTestingModule,
         SharedModule,
       ],
-      declarations: [ Step1Component ],
+      declarations: [ StepSymptomComponent ],
       providers: [
         Store,
         AccountService,
@@ -32,7 +32,7 @@ describe('Step1Component', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(Step1Component);
+    fixture = TestBed.createComponent(StepSymptomComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

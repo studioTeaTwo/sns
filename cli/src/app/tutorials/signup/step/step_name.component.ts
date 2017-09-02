@@ -19,11 +19,11 @@ import {
 import { ChatComponent } from 'app/components/chats/chat/chat.component';
 
 @Component({
-  selector: 'app-step1',
+  selector: 'app-step-name',
   templateUrl: '../../../components/chats/chat/chat.component.html',
   styleUrls: ['../../../components/chats/chat/chat.component.scss']
 })
-export class Step1Component extends ChatComponent implements OnInit {
+export class StepNameComponent extends ChatComponent implements OnInit {
   @ViewChild('replyText') input: ElementRef;
   chatSource: Subject<Chat[]>;
   chatHistory: Chat[] = [];

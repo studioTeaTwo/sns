@@ -8,11 +8,11 @@ import {
   AccountService,
   ChatService,
  } from 'app/shared/services/api';
-import { Step3Component } from './step3.component';
+import { StepEmailComponent } from './step_email.component';
 
-describe('Step3Component', () => {
-  let component: Step3Component;
-  let fixture: ComponentFixture<Step3Component>;
+describe('StepEmailComponent', () => {
+  let component: StepEmailComponent;
+  let fixture: ComponentFixture<StepEmailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -21,7 +21,7 @@ describe('Step3Component', () => {
         RouterTestingModule,
         SharedModule,
       ],
-      declarations: [ Step3Component ],
+      declarations: [ StepEmailComponent ],
       providers: [
         Store,
         AccountService,
@@ -32,7 +32,7 @@ describe('Step3Component', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(Step3Component);
+    fixture = TestBed.createComponent(StepEmailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

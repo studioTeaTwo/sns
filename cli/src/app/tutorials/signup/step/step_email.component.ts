@@ -20,11 +20,11 @@ import {
 import { ChatComponent } from 'app/components/chats/chat/chat.component';
 
 @Component({
-  selector: 'app-step3',
+  selector: 'app-step-email',
   templateUrl: '../../../components/chats/chat/chat.component.html',
   styleUrls: ['../../../components/chats/chat/chat.component.scss']
 })
-export class Step3Component extends ChatComponent implements OnInit, AfterViewInit {
+export class StepEmailComponent extends ChatComponent implements OnInit, AfterViewInit {
   @ViewChild('replyText') input: ElementRef;
   chatSource: Subject<Chat[]>;
   chatHistory: Chat[] = [];
@@ -69,19 +69,37 @@ export class Step3Component extends ChatComponent implements OnInit, AfterViewIn
   }
 
   ngAfterViewInit() {
-    this.scrollToTop();
+    document.body.scrollTop = 0;
   }
 
-  onClickReply(text) {
-    this.toggleReplyText(false);
-
-    !this.chatHistory.includes(tutorial_script3[0]) ? this.createEmail(text) : this.createPassword(text);
+  onClickReply(text: string) {
+    // eメール
+    if (!this.chatHistory.includes(tutorial_script3[0])) {
+      // FIXME: 正規表現バリデーション
+      // https://blog.ohgaki.net/redos-must-review-mail-address-validation
+      if (!this.emailValidator(text)) {
+        this.chatSource.next(this.chatHistory.concat(tutorial_script_error));
+        setTimeout(() => this.input.nativeElement.click(), 0);
+        return;
+      }
+      this.toggleReplyText(false);
+      this.createEmail(text);
+    // パスワード
+    } else {
+      if (!this.passwordValidator(text)) {
+        this.chatSource.next(this.chatHistory.concat(tutorial_script_error));
+        setTimeout(() => this.input.nativeElement.click(), 0);
+        return;
+      }
+      // FIXME: パスワードバリデーション
+      this.toggleReplyText(false);
+      this.createPassword(text);
+    }
   }
 
   onClickYes() {
+    this.accountService.create();
     this.router.navigate(['']);
-    // this.completed.emit();
-    // this.accountService.create();
   }
 
   onClickNo() {
@@ -108,8 +126,6 @@ export class Step3Component extends ChatComponent implements OnInit, AfterViewIn
     this.chatHistory.push(...reply);
     this.chatSource.next(this.chatHistory);
 
-    const body = `パスワードはどうする？君の好きな暗号を設定するんだ`;
-    tutorial_script3[0].body = body;
     setTimeout(() => {
       this.chatHistory.push(...tutorial_script3);
       this.chatSource.next(this.chatHistory);
@@ -139,6 +155,31 @@ export class Step3Component extends ChatComponent implements OnInit, AfterViewIn
       this.isActive = checked;
     }
   }
+
+  private emailValidator(email: string): boolean {
+    const mail_regex1 = new RegExp(
+      `(?:[-!#-\'*+/-9=?A-Z^-~]+\.?(?:\.[-!#-\'*+/-9=?A-Z^-~]+)*|"(?:[!#-\[\]-~]|\\\\[\x09 -~])*")
+      @[-!#-\'*+/-9=?A-Z^-~]+(?:\.[-!#-\'*+/-9=?A-Z^-~]+)*`
+    );
+    const mail_regex2 = new RegExp('^[^\@]+\@[^\@]+$');
+    if (email.match(mail_regex1) && email.match(mail_regex2)) {
+        // 全角チェック
+        if ( email.match( /[^a-zA-Z0-9\!\"\#\$\%\&\'\(\)\=\~\|\-\^\\\@\[\;\:\]\,\.\/\\\<\>\?\_\`\{\+\*\} ]/ ) ) { return false; }
+        // 末尾TLDチェック（〜.co,jpなどの末尾ミスチェック用）
+        if ( !email.match( /\.[a-z]+$/ ) ) { return false; }
+        return true;
+    } else {
+        return false;
+    }
+  }
+
+  private passwordValidator(password: string): boolean {
+    if (password.length && password.length >= 6) {
+        return true;
+    } else {
+        return false;
+    }
+  }
 }
 
 const tutorial_script1: Chat[] = [
@@ -163,13 +204,20 @@ const tutorial_script3: Chat[] = [{
   id: 4,
   senderId: NAVI_CHARA.id,
   contentType: CONTENT_TYPE.REPLY,
-  body: '',
+  body: 'パスワードはどうする？君の好きな暗号を6文字以上で設定するんだ',
   createdAt: new Date()
 }];
 const tutorial_script4: Chat[] = [{
-  id: 4,
+  id: 5,
   senderId: NAVI_CHARA.id,
   contentType: CONTENT_TYPE.YESNO,
   body: 'これでOKかい？',
+  createdAt: new Date()
+}];
+const tutorial_script_error: Chat[] = [{
+  id: 6,
+  senderId: NAVI_CHARA.id,
+  contentType: CONTENT_TYPE.REPLY,
+  body: '入力が正しく無いよ。もう一回入力してみて！',
   createdAt: new Date()
 }];

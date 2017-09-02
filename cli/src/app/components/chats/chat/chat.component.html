@@ -37,7 +37,7 @@
           <tr [ngClass]="chat.senderId === myself.id ? 'myself' : 'opponent'" *ngIf="chat && isYesNo(chat)">
             <td class="chat-column-avatar"><img class="chat-avatar" [src]="getImgSrc(chat)" /></td>
             <td class="chat-column-body">
-              <div *ngIf="chat.body" class="chat-body" [innerHtml]="chat.body"></div>
+              <div *ngIf="chat.body" class="chat-body mb15" [innerHtml]="chat.body"></div>
               <button md-raised-button color="primary" (click)="onClickYes()">はい</button>
               <button md-raised-button (click)="onClickNo()">ちょっと待って</button>
             </td>
@@ -51,7 +51,7 @@
           <tr [ngClass]="chat.senderId === myself.id ? 'myself' : 'opponent'" *ngIf="chat && isCheckbox(chat)">
             <td class="chat-column-avatar"><img class="chat-avatar" [src]="getImgSrc(chat)" /></td>
             <td class="chat-column-body">
-              <div *ngIf="chat.body" class="chat-body" [innerHtml]="chat.body"></div>
+              <div *ngIf="chat.body" class="chat-body mb15" [innerHtml]="chat.body"></div>
               <md-checkbox *ngFor="let item of chat.itemList" [(ngModel)]="item.checked" (change)="onChangeChecked(item)" [disabled]="chat.expired">{{item.name}}</md-checkbox>
             </td>
             <td class="chat-column-time">
@@ -64,9 +64,9 @@
           <tr [ngClass]="chat.senderId === myself.id ? 'myself' : 'opponent'" *ngIf="chat && isRadiobutton(chat)">
             <td class="chat-column-avatar"><img class="chat-avatar" [src]="getImgSrc(chat)" /></td>
             <td class="chat-column-body">
-              <div *ngIf="chat.body" class="chat-body" [innerHtml]="chat.body"></div>
+              <div *ngIf="chat.body" class="chat-body mb15" [innerHtml]="chat.body"></div>
               <md-radio-group class="example-radio-group" [(ngModel)]="chat.result">
-                <md-radio-button *ngFor="let item of chat.itemList" [value]="item.name" (change)="onChangeRadio(item)" [disabled]="chat.expired">{{item.name}}</md-radio-button>
+                <md-radio-button *ngFor="let item of chat.itemList" [value]="item.id" (change)="onChangeRadio(item)" [disabled]="chat.expired">{{item.name}}</md-radio-button>
               </md-radio-group>
             </td>
             <td class="chat-column-time">

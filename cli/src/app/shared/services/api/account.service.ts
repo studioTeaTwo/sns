@@ -11,8 +11,8 @@ export class AccountService {
     name: '',
     email: '',
     password: '',
-    symptoms: {},
-    userType: 0,
+    symptoms: [],
+    classification: 0,
   };
 
   constructor(
@@ -58,25 +58,19 @@ export class AccountService {
 
   saveSignupdataSymptom(item?: any): any {
     if (!item) {
-      this.signupData.symptoms = {};
+      this.signupData.symptoms = [];
       return;
     }
 
-    this.signupData.symptoms[item.name] = !this.signupData.symptoms[item.name];
+    this.signupData.symptoms.push(item.id);
     return this.signupData.symptoms;
   }
 
-  saveSignupdataUserType(item?: any) {
+  saveSignupdataClassification(item?: any) {
     if (!item) {
-      this.signupData.userType = 0;
       return;
     }
-
-    if (item.name === '患者の家族') {
-      this.signupData.userType = 1;
-    } else if (item.name === '医療関係者') {
-      this.signupData.userType = 2;
-    }
+    this.signupData.classification = item.id;
   }
 
   saveSignupdataEmail(email: string) {

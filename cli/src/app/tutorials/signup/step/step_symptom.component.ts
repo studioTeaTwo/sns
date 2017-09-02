@@ -20,11 +20,11 @@ import {
 import { ChatComponent } from 'app/components/chats/chat/chat.component';
 
 @Component({
-  selector: 'app-step2',
+  selector: 'app-step-symptom',
   templateUrl: '../../../components/chats/chat/chat.component.html',
   styleUrls: ['../../../components/chats/chat/chat.component.scss']
 })
-export class Step2Component extends ChatComponent implements OnInit, AfterViewInit {
+export class StepSymptomComponent extends ChatComponent implements OnInit, AfterViewInit {
   @ViewChild('replyText') input: ElementRef;
   chatSource: Subject<Chat[]>;
   chatHistory: Chat[] = [];
@@ -59,39 +59,21 @@ export class Step2Component extends ChatComponent implements OnInit, AfterViewIn
     this.chatThread = SIGNUP_THREAD;
     this.chatHistory.push(...tutorial_script1);
 
-    setTimeout(() => this.chatSource.next(this.chatHistory), 0)
-    setTimeout(() => {
-      this.chatHistory.push(...tutorial_script2);
-      this.chatSource.next(this.chatHistory);
-    }, 2000);
+    setTimeout(() => this.chatSource.next(this.chatHistory), 0);
   }
 
   ngAfterViewInit() {
-    this.scrollToTop();
+    document.body.scrollTop = 0;
   }
-
 
   onChangeChecked(item) {
     const mySymptom = this.accountService.saveSignupdataSymptom(item);
     this.createReply(mySymptom);
   }
 
-  onChangeRadio(item) {
-    // 症状データはリセット
-    tutorial_script2[0].itemList.forEach(value => value.checked = false);
-    tutorial_script2[0].expired = true;
-    this.accountService.saveSignupdataSymptom({});
-
-    tutorial_script2[1].result = item.name;
-    this.accountService.saveSignupdataUserType(item);
-
-    const reply = {};
-    reply[item.name] = 'dummy';
-    this.createReply(reply);
-  }
-
   onClickYes() {
-    this.completed.emit(2);
+    // 次のステップへ
+    this.completed.emit(3);
   }
 
   onClickNo() {
@@ -116,30 +98,21 @@ export class Step2Component extends ChatComponent implements OnInit, AfterViewIn
       body: this.sanitizer.bypassSecurityTrustHtml(body),
       createdAt: new Date()
     }];
-    this.chatSource.next(this.chatHistory.concat(reply, tutorial_script3));
+    this.chatSource.next(this.chatHistory.concat(reply, tutorial_script2));
     setTimeout(() => this.scrollToBottom(), 0);
   }
 
   private reset() {
-    tutorial_script2[0].itemList.forEach(value => value.checked = false);
-    tutorial_script2[0].expired = false;
-    tutorial_script2[1].result = '';
+    tutorial_script1[0].itemList.forEach(value => value.checked = false);
+    tutorial_script1[0].expired = false;
     this.accountService.saveSignupdataSymptom(null);
-    this.accountService.saveSignupdataUserType(null);
 
     this.chatHistory = [];
-    this.chatHistory.push(...tutorial_script1, ...tutorial_script2);
+    this.chatHistory.push(...tutorial_script1);
   }
 }
 
-const tutorial_script1: Chat[] = [{
-  id: 1,
-  senderId: NAVI_CHARA.id,
-  contentType: CONTENT_TYPE.REPLY,
-  body: 'ここはアレルギー王国',
-  createdAt: new Date()
-}];
-const tutorial_script2: Chat[] = [
+const tutorial_script1: Chat[] = [
   {
     id: 2,
     senderId: NAVI_CHARA.id,
@@ -147,50 +120,40 @@ const tutorial_script2: Chat[] = [
     body: '君はどんな症状を持っているんだい？',
     itemList: [
       {
+        id: 'atopic',
         name: 'アトピー',
         checked: false,
       },
       {
+        id: '',
         name: '喘息',
         checked: false,
       },
       {
+        id: '',
         name: '花粉症',
         checked: false,
       },
       {
+        id: '',
         name: '鼻炎',
         checked: false,
       },
       {
+        id: '',
         name: '胃腸炎',
         checked: false,
       },
       {
+        id: '',
         name: '結膜炎',
         checked: false,
       },
     ],
     createdAt: new Date()
   },
-  {
-    id: 3,
-    senderId: NAVI_CHARA.id,
-    contentType: CONTENT_TYPE.RADIOBUTTON,
-    body: 'それとも患者以外かい？（こちらをチェックすると治療データを入力できません）',
-    itemList: [
-      {
-        name: '患者の家族',
-      },
-      {
-        name: '医療関係者',
-      },
-    ],
-    result: '',
-    createdAt: new Date()
-  },
 ];
-const tutorial_script3: Chat[] = [
+const tutorial_script2: Chat[] = [
   {
     id: 5,
     senderId: NAVI_CHARA.id,

@@ -4,9 +4,10 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from 'app/shared/shared.module';
 import { ChatsModule } from 'app/components/chats/chats.module';
 import { SignupComponent } from './signup/signup.component';
-import { Step1Component } from './signup/step/step1.component';
-import { Step2Component } from './signup/step/step2.component';
-import { Step3Component } from './signup/step/step3.component';
+import { StepNameComponent } from './signup/step/step_name.component';
+import { StepTypeComponent } from './signup/step/step_type.component';
+import { StepSymptomComponent } from './signup/step/step_symptom.component';
+import { StepEmailComponent } from './signup/step/step_email.component';
 
 @NgModule({
   imports: [
@@ -16,9 +17,10 @@ import { Step3Component } from './signup/step/step3.component';
   ],
   declarations: [
     SignupComponent,
-    Step1Component,
-    Step2Component,
-    Step3Component,
+    StepNameComponent,
+    StepTypeComponent,
+    StepSymptomComponent,
+    StepEmailComponent,
   ]
 })
 export class TutorialsModule { }

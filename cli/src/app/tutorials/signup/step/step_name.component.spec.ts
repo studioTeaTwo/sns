@@ -8,15 +8,11 @@ import {
   AccountService,
   ChatService,
  } from 'app/shared/services/api';
-import { SignupComponent } from './signup.component';
-import { StepNameComponent } from './step/step_name.component';
-import { StepTypeComponent } from './step/step_type.component';
-import { StepSymptomComponent } from './step/step_symptom.component';
-import { StepEmailComponent } from './step/step_email.component';
+import { StepNameComponent } from './step_name.component';
 
-describe('SignupComponent', () => {
-  let component: SignupComponent;
-  let fixture: ComponentFixture<SignupComponent>;
+describe('StepNameComponent', () => {
+  let component: StepNameComponent;
+  let fixture: ComponentFixture<StepNameComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -25,13 +21,7 @@ describe('SignupComponent', () => {
         RouterTestingModule,
         SharedModule,
       ],
-      declarations: [
-        SignupComponent,
-        StepNameComponent,
-        StepTypeComponent,
-        StepSymptomComponent,
-        StepEmailComponent,
-      ],
+      declarations: [ StepNameComponent ],
       providers: [
         Store,
         AccountService,
@@ -42,7 +32,7 @@ describe('SignupComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SignupComponent);
+    fixture = TestBed.createComponent(StepNameComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 enum DisplayState {
   NAME,
+  TYPE,
   SYMPTOM,
   EMAIL,
 }

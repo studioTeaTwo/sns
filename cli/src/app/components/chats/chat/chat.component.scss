@@ -131,18 +131,20 @@
         // チャット本文列     
         .myself {
             .chat-body {
-                background-color: white;
+                color: #fff;
+                background-color: #2196F3;
                 width: 80%;
                 min-height: 50px;
                 height: auto;
-                margin: auto;
+                margin-left: auto;
+                margin-right: auto;
+                padding: 8px;
                 border-radius: 10px;
                 position:relative;
                 box-sizing: border-box;
-                padding: 8px;
                 &:after {
                     border:10px solid transparent;
-                    border-left-color:#fff;
+                    border-left-color: #2196F3;
                     border-right-width:0;
                     right:-10px;
                     content:"";
@@ -159,11 +161,12 @@
                 width: 80%;
                 min-height: 50px;
                 height: auto;
-                margin: auto;
+                margin-left: auto;
+                margin-right: auto;
+                padding: 8px;
                 border-radius: 10px;
                 position:relative;
                 box-sizing: border-box;
-                padding: 8px;
                 &:after {
                     border:10px solid transparent;
                     border-right-color:#fff;

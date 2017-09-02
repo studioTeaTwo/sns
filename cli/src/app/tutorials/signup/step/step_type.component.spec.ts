@@ -8,11 +8,11 @@ import {
   AccountService,
   ChatService,
  } from 'app/shared/services/api';
-import { Step2Component } from './step2.component';
+import { StepTypeComponent } from './step_type.component';
 
-describe('Step2Component', () => {
-  let component: Step2Component;
-  let fixture: ComponentFixture<Step2Component>;
+describe('StepTypeComponent', () => {
+  let component: StepTypeComponent;
+  let fixture: ComponentFixture<StepTypeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -21,7 +21,7 @@ describe('Step2Component', () => {
         RouterTestingModule,
         SharedModule,
       ],
-      declarations: [ Step2Component ],
+      declarations: [ StepTypeComponent ],
       providers: [
         Store,
         AccountService,
@@ -32,7 +32,7 @@ describe('Step2Component', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(Step2Component);
+    fixture = TestBed.createComponent(StepTypeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
