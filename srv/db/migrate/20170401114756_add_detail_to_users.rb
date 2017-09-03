@@ -15,13 +15,14 @@ class AddDetailToUsers < ActiveRecord::Migration[5.1]
     add_column :users, :conjunctivitis, :boolean, default: false # 結膜炎
 
     add_column :users, :access_token, :string
+
+    add_index :users, :admin
+    add_index :users, :classification
+    add_index :users, :atopic
+    add_index :users, :asthma
+    add_index :users, :rhinitis
+    add_index :users, :pollen
+    add_index :users, :gastroenteritis
+    add_index :users, :conjunctivitis
   end
-  add_index :users, :admin
-  add_index :users, :classification
-  add_index :users, :atopic
-  add_index :users, :asthma
-  add_index :users, :rhinitis
-  add_index :users, :pollen
-  add_index :users, :gastroenteritis
-  add_index :users, :conjunctivitis
 end

@@ -10,12 +10,13 @@ class Api::Users::UsersController < ApplicationController
 
   def create
     @user = User.new
-    createUser
+    updateUser
     @personal_assistant = @user.build_personal_assistant
     createSymptoms
     ActiveRecord::Base.transaction do
       @user.save!
       @personal_assistant.save!
+      createChatThread(@user)
     end
     render json: @user, serializer: Rest::SessionSerializer
   rescue
@@ -28,6 +29,14 @@ class Api::Users::UsersController < ApplicationController
       render json: @user, serializer: Rest::UserSerializer
     else
       render json: { error: @user.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
+  def verify_email
+    if (User.where("email = ?" ,user_params[:email]).count == 0)
+      head :ok
+    else
+      head :bad_request
     end
   end
 
@@ -60,7 +69,7 @@ class Api::Users::UsersController < ApplicationController
       render json: { error: 'forbidden' }, status: :forbidden unless current_user.admin?
     end
 
-    def createUser
+    def updateUser
       @user.name = user_params[:name]
       @user.email = user_params[:email]
       @user.password = user_params[:password]
@@ -91,6 +100,15 @@ class Api::Users::UsersController < ApplicationController
             @personal_assistant.diary_conjunctivitis = true
           end
         end
+      end
+    end
+
+    def createChatThread(user)
+      @chat_thread = user.chat_threads.build({participants: [user.id, Constants::PERSONAL_ASSISTANT]})
+      ActiveRecord::Base.transaction do
+        @chat_thread.save!
+        ChatStatus.create(chat_thread_id: @chat_thread.id, user_id: user.id)
+        ChatStatus.create(chat_thread_id: @chat_thread.id, user_id: Constants::PERSONAL_ASSISTANT)
       end
     end
 end

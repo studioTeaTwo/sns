@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
 import { Store } from 'app/shared/store/store';
-import { NAVI_CHARA, SIGNUP_THREAD } from 'app/constants/constants';
+import { NAVI_CHARA, SIGNUP_USER, SIGNUP_THREAD } from 'app/constants/constants';
 import {
   ChatThread,
   Chats,
@@ -59,7 +59,7 @@ export class StepTypeComponent extends ChatComponent implements OnInit, AfterVie
   }
 
   ngOnInit() {
-    this.myself = this.store.getState().account;
+    this.myself = SIGNUP_USER;
     this.opponents = [{...NAVI_CHARA}];
     this.chatThread = SIGNUP_THREAD;
 

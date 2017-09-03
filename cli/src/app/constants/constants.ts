@@ -8,6 +8,16 @@ export const NAVI_CHARA = {
   titleOfHonor: '',
 };
 
+export const SIGNUP_USER = {
+  id: 0,
+  avatarUrl: 'assets/images/new_user_avatar.png',
+  email: '',
+  name: '',
+  selfIntroduction: '',
+  rank: '',
+  titleOfHonor: '',
+};
+
 export const SIGNUP_THREAD = {
   id: 0,
   hasUnread: false,

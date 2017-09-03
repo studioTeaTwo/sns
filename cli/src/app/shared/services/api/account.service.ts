@@ -75,6 +75,14 @@ export class AccountService {
     this.signupData.classification = item.id;
   }
 
+  verifyEmail(email: string) {
+    return this.http.post<any>(
+      `/api/users/emailverification`,
+      {user: { email: email }},
+      {observe: 'response'}
+    );
+  }
+
   saveSignupdataEmail(email: string) {
     this.signupData.email = email;
   }

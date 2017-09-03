@@ -15,6 +15,9 @@ Rails.application.routes.draw do
 
     scope module: :users do
       resources :users do
+        collection do
+          post '/emailverification', to: 'users#verify_email'
+        end
         member do
           resources :relationships, only: [:create, :destroy]
           resources :followings, only: [:index]

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
 import { Store } from 'app/shared/store/store';
-import { NAVI_CHARA, SIGNUP_THREAD } from 'app/constants/constants';
+import { NAVI_CHARA, SIGNUP_USER, SIGNUP_THREAD } from 'app/constants/constants';
 import {
   ChatThread,
   Chats,
@@ -57,7 +57,7 @@ export class StepEmailComponent extends ChatComponent implements OnInit, AfterVi
   }
 
   ngOnInit() {
-    this.myself = this.store.getState().account;
+    this.myself = SIGNUP_USER;
     this.opponents = [{...NAVI_CHARA}];
     this.chatThread = SIGNUP_THREAD;
 
@@ -92,8 +92,21 @@ export class StepEmailComponent extends ChatComponent implements OnInit, AfterVi
         return;
       }
 
-      this.toggleReplyText(false);
-      this.createEmail(text);
+      this.accountService.verifyEmail(text)
+        .subscribe(
+          response => {
+            this.toggleReplyText(false);
+            this.createEmail(text);
+          },
+          error => {
+            addChatAndFocus({
+              body: tutorial_script_error_email,
+              waitTime: 0,
+              tmp: true
+            }, this.chatHistory, this.chatSource, () => this.toggleReplyText(true), this.emitClick);
+          }
+        );
+
     // パスワード
     } else {
       // TODO: パスワードバリデーション。日本語オーケーでいいか？
@@ -218,5 +231,12 @@ const tutorial_script_error: Chat[] = [{
   senderId: NAVI_CHARA.id,
   contentType: CONTENT_TYPE.REPLY,
   body: '入力が正しく無いよ。もう一回入力してみて！',
+  createdAt: new Date()
+}];
+const tutorial_script_error_email: Chat[] = [{
+  id: 7,
+  senderId: NAVI_CHARA.id,
+  contentType: CONTENT_TYPE.REPLY,
+  body: 'もうこのアドレスは登録されてるってさ！',
   createdAt: new Date()
 }];
