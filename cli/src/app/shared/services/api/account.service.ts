@@ -47,7 +47,8 @@ export class AccountService {
     this.http.post<any>(`/api/users`, {user: this.signupData})
       .subscribe(
         response => {
-          this.onSuccessAccount(response);
+          this.userId = response.userId;
+          localStorage.setItem('allergylog', response.accessToken);
         }
       );
   }
@@ -56,14 +57,15 @@ export class AccountService {
     this.signupData.name = name;
   }
 
-  saveSignupdataSymptom(item?: any): any {
+  saveSignupdataSymptom(item?: any): any[] {
     if (!item) {
       this.signupData.symptoms = [];
       return;
     }
 
-    this.signupData.symptoms.push(item.id);
-    return this.signupData.symptoms;
+    this.signupData.symptoms = item.checked ?
+      this.signupData.symptoms.concat(item.id) :
+      this.signupData.symptoms.filter(value => item.id !== value);
   }
 
   saveSignupdataClassification(item?: any) {

@@ -18,6 +18,7 @@ import {
   ChatService,
 } from 'app/shared/services/api';
 import { ChatComponent } from 'app/components/chats/chat/chat.component';
+import { addChat, addChatAndFocus } from '../../shared/chat-operation.function';
 
 @Component({
   selector: 'app-step-symptom',
@@ -28,6 +29,8 @@ export class StepSymptomComponent extends ChatComponent implements OnInit, After
   @ViewChild('replyText') input: ElementRef;
   chatSource: Subject<Chat[]>;
   chatHistory: Chat[] = [];
+
+  private selectedSymptoms = '';
 
   @Output() completed = new EventEmitter();
 
@@ -51,15 +54,21 @@ export class StepSymptomComponent extends ChatComponent implements OnInit, After
 
     this.chatSource = new Subject<Chat[]>();
     this.chats$ = this.chatSource.asObservable();
+
+    this.resetData();
   }
 
   ngOnInit() {
     this.myself = this.store.getState().account;
     this.opponents = [{...NAVI_CHARA}];
     this.chatThread = SIGNUP_THREAD;
-    this.chatHistory.push(...tutorial_script1);
 
-    setTimeout(() => this.chatSource.next(this.chatHistory), 0);
+    this.toggleReplyText(false);
+
+    addChat({
+      body: tutorial_script1,
+      waitTime: 0
+    }, this.chatHistory, this.chatSource);
   }
 
   ngAfterViewInit() {
@@ -67,8 +76,8 @@ export class StepSymptomComponent extends ChatComponent implements OnInit, After
   }
 
   onChangeChecked(item) {
-    const mySymptom = this.accountService.saveSignupdataSymptom(item);
-    this.createReply(mySymptom);
+    this.accountService.saveSignupdataSymptom(item);
+    this.createReply(item);
   }
 
   onClickYes() {
@@ -84,12 +93,10 @@ export class StepSymptomComponent extends ChatComponent implements OnInit, After
   }
 
   private createReply(result) {
-    let body = '';
-    Object.keys(result).forEach(value => {
-      if (!result[value]) { return; }
-      body += value + 'です。<br/>';
-    });
-    if (body.length === 0) { body = '特に無い。'; }
+    this.selectedSymptoms = result.checked ?
+      this.selectedSymptoms.concat(result.name + 'です。<br/>') :
+      this.selectedSymptoms.replace(result.name + 'です。<br/>', '');
+    const body = this.selectedSymptoms.length !== 0 ? this.selectedSymptoms : '特に無い。';
 
     const reply: Chat[] = [{
       id: 4,
@@ -98,17 +105,27 @@ export class StepSymptomComponent extends ChatComponent implements OnInit, After
       body: this.sanitizer.bypassSecurityTrustHtml(body),
       createdAt: new Date()
     }];
-    this.chatSource.next(this.chatHistory.concat(reply, tutorial_script2));
+    addChat({
+      body: reply.concat(tutorial_script2),
+      waitTime: 0,
+      tmp: true
+    }, this.chatHistory, this.chatSource);
     setTimeout(() => this.scrollToBottom(), 0);
   }
 
   private reset() {
-    tutorial_script1[0].itemList.forEach(value => value.checked = false);
-    tutorial_script1[0].expired = false;
-    this.accountService.saveSignupdataSymptom(null);
+    this.resetData();
 
     this.chatHistory = [];
     this.chatHistory.push(...tutorial_script1);
+  }
+
+  private resetData() {
+    tutorial_script1[0].itemList.forEach(value => value.checked = false);
+    tutorial_script1[0].expired = false;
+
+    this.selectedSymptoms = '';
+    this.accountService.saveSignupdataSymptom(null);
   }
 }
 
@@ -125,27 +142,27 @@ const tutorial_script1: Chat[] = [
         checked: false,
       },
       {
-        id: '',
+        id: 'asthma',
         name: '喘息',
         checked: false,
       },
       {
-        id: '',
+        id: 'pollen',
         name: '花粉症',
         checked: false,
       },
       {
-        id: '',
+        id: 'rhinitis',
         name: '鼻炎',
         checked: false,
       },
       {
-        id: '',
+        id: 'gastroenteritis',
         name: '胃腸炎',
         checked: false,
       },
       {
-        id: '',
+        id: 'conjunctivitis',
         name: '結膜炎',
         checked: false,
       },

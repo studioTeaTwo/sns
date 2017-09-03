@@ -17,6 +17,7 @@ import {
   ChatService,
 } from 'app/shared/services/api';
 import { ChatComponent } from 'app/components/chats/chat/chat.component';
+import { addChat, addChatAndFocus } from '../../shared/chat-operation.function';
 
 @Component({
   selector: 'app-step-name',
@@ -24,11 +25,13 @@ import { ChatComponent } from 'app/components/chats/chat/chat.component';
   styleUrls: ['../../../components/chats/chat/chat.component.scss']
 })
 export class StepNameComponent extends ChatComponent implements OnInit {
-  @ViewChild('replyText') input: ElementRef;
+  @ViewChild('replyText') inputElm: ElementRef;
   chatSource: Subject<Chat[]>;
   chatHistory: Chat[] = [];
 
   @Output() completed = new EventEmitter();
+
+  private emitClick = () => setTimeout(() => this.inputElm.nativeElement.click(), 0);
 
   constructor(
     router: Router,
@@ -56,15 +59,15 @@ export class StepNameComponent extends ChatComponent implements OnInit {
     this.myself = this.store.getState().account;
     this.opponents = [{...NAVI_CHARA}];
     this.chatThread = SIGNUP_THREAD;
-    this.chatHistory.push(...tutorial_script1);
 
-    setTimeout(() => this.chatSource.next(this.chatHistory), 0);
-    setTimeout(() => {
-      this.chatHistory.push(...tutorial_script2);
-      this.chatSource.next(this.chatHistory);
-      this.toggleReplyText(true);
-      setTimeout(() => this.input.nativeElement.click(), 0);
-    }, 2000);
+    addChat({
+      body: tutorial_script1,
+      waitTime: 0
+    }, this.chatHistory, this.chatSource);
+    addChatAndFocus({
+      body: tutorial_script2,
+      waitTime: 2000
+    }, this.chatHistory, this.chatSource, () => this.toggleReplyText(true), this.emitClick);
   }
 
   onClickReply(text) {
@@ -78,25 +81,19 @@ export class StepNameComponent extends ChatComponent implements OnInit {
       body: text,
       createdAt: new Date()
     }];
-    this.chatHistory.push(...reply);
-    this.chatSource.next(this.chatHistory);
+    addChat({
+      body: reply,
+      waitTime: 0
+    }, this.chatHistory, this.chatSource);
 
-    const body = `すごい！${text}って言うんだ！`;
-    tutorial_script3[0].body = body;
-    setTimeout(() => {
-      this.chatHistory.push(...tutorial_script3);
-      this.chatSource.next(this.chatHistory);
-
+    tutorial_script3[0].body = `すごい！${text}って言うんだ！`;
+    addChat({
+      body: tutorial_script3,
+      waitTime: 1000
+    }, this.chatHistory, this.chatSource,
       // 次のステップへ
-      setTimeout(() => this.completed.emit(1), 2000);
-    }, 1000);
-  }
-
-  private toggleReplyText(checked: boolean) {
-    this.showReplyText = checked;
-    if (navigator.userAgent.indexOf('iPhone') > -1 || navigator.userAgent.indexOf('iPad') > -1) {
-      this.isActive = checked;
-    }
+      () => setTimeout(() => this.completed.emit(1), 2000)
+    );
   }
 }
 

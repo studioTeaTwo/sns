@@ -27,8 +27,8 @@ export class ChatComponent implements OnInit {
   myself: User;
   opponents: User[];
 
-  isActive: boolean;
-  showReplyText: boolean;
+  isActive = false;
+  showReplyText = true;
   loadingChatBack$: Observable<boolean>;
   loadingChatForward$: Observable<boolean>;
 
@@ -105,7 +105,7 @@ export class ChatComponent implements OnInit {
   onChangeRadio(item) {
   }
 
-  onClickReply(replyText: string, event: Event) {
+  onClickReply(replyText: string) {
     this.chatService.say(this.chatThread['id'], replyText);
   }
 
@@ -117,6 +117,14 @@ export class ChatComponent implements OnInit {
   // 継承先で使うためprivateにしていない
   protected scrollToBottom() {
     this.scrollContainer.nativeElement.scrollTop = this.scrollContainer.nativeElement.scrollHeight;
+  }
+
+  // 継承先で使うためprivateにしていない
+  protected toggleReplyText(checked: boolean) {
+    this.showReplyText = checked;
+    if (navigator.userAgent.indexOf('iPhone') > -1 || navigator.userAgent.indexOf('iPad') > -1) {
+      this.isActive = checked;
+    }
   }
 
   private setFocus(event: Event) {

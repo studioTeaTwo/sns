@@ -18,6 +18,7 @@ import {
   ChatService,
 } from 'app/shared/services/api';
 import { ChatComponent } from 'app/components/chats/chat/chat.component';
+import { addChat, addChatAndFocus } from '../../shared/chat-operation.function';
 
 @Component({
   selector: 'app-step-email',
@@ -25,11 +26,13 @@ import { ChatComponent } from 'app/components/chats/chat/chat.component';
   styleUrls: ['../../../components/chats/chat/chat.component.scss']
 })
 export class StepEmailComponent extends ChatComponent implements OnInit, AfterViewInit {
-  @ViewChild('replyText') input: ElementRef;
+  @ViewChild('replyText') inputElm: ElementRef;
   chatSource: Subject<Chat[]>;
   chatHistory: Chat[] = [];
 
   @Output() completed = new EventEmitter();
+
+  private emitClick = () => setTimeout(() => this.inputElm.nativeElement.click(), 0);
 
   constructor(
     router: Router,
@@ -57,16 +60,19 @@ export class StepEmailComponent extends ChatComponent implements OnInit, AfterVi
     this.myself = this.store.getState().account;
     this.opponents = [{...NAVI_CHARA}];
     this.chatThread = SIGNUP_THREAD;
-    this.chatHistory.push(...tutorial_script1);
 
-    setTimeout(() => this.chatSource.next(this.chatHistory), 0);
-    setTimeout(() => {
-      this.chatHistory.push(...tutorial_script2);
-      this.chatSource.next(this.chatHistory);
-      this.toggleReplyText(true);
-      setTimeout(() => this.input.nativeElement.click(), 0);
-    }, 2000);
+    this.toggleReplyText(false);
+
+    addChat({
+      body: tutorial_script1,
+      waitTime: 0
+    }, this.chatHistory, this.chatSource);
+    addChatAndFocus({
+      body: tutorial_script2,
+      waitTime: 1000
+    }, this.chatHistory, this.chatSource, () => this.toggleReplyText(true), this.emitClick);
   }
+
 
   ngAfterViewInit() {
     document.body.scrollTop = 0;
@@ -78,20 +84,28 @@ export class StepEmailComponent extends ChatComponent implements OnInit, AfterVi
       // FIXME: 正規表現バリデーション
       // https://blog.ohgaki.net/redos-must-review-mail-address-validation
       if (!this.emailValidator(text)) {
-        this.chatSource.next(this.chatHistory.concat(tutorial_script_error));
-        setTimeout(() => this.input.nativeElement.click(), 0);
+        addChatAndFocus({
+          body: tutorial_script_error,
+          waitTime: 0,
+          tmp: true
+        }, this.chatHistory, this.chatSource, () => this.toggleReplyText(true), this.emitClick);
         return;
       }
+
       this.toggleReplyText(false);
       this.createEmail(text);
     // パスワード
     } else {
+      // TODO: パスワードバリデーション。日本語オーケーでいいか？
       if (!this.passwordValidator(text)) {
-        this.chatSource.next(this.chatHistory.concat(tutorial_script_error));
-        setTimeout(() => this.input.nativeElement.click(), 0);
+        addChatAndFocus({
+          body: tutorial_script_error,
+          waitTime: 0,
+          tmp: true
+        }, this.chatHistory, this.chatSource, () => this.toggleReplyText(true), this.emitClick);
         return;
       }
-      // FIXME: パスワードバリデーション
+
       this.toggleReplyText(false);
       this.createPassword(text);
     }
@@ -106,11 +120,10 @@ export class StepEmailComponent extends ChatComponent implements OnInit, AfterVi
     this.scrollToTop();
 
     this.chatHistory = [];
-    this.chatHistory.push(...tutorial_script1, ...tutorial_script2);
-    this.chatSource.next(this.chatHistory);
-
-    this.toggleReplyText(true);
-    setTimeout(() => this.input.nativeElement.click(), 0);
+    addChatAndFocus({
+      body: tutorial_script1.concat(tutorial_script2),
+      waitTime: 0
+    }, this.chatHistory, this.chatSource, () => this.toggleReplyText(true), this.emitClick);
   }
 
   private createEmail(text: string) {
@@ -123,15 +136,11 @@ export class StepEmailComponent extends ChatComponent implements OnInit, AfterVi
       body: text,
       createdAt: new Date()
     }];
-    this.chatHistory.push(...reply);
-    this.chatSource.next(this.chatHistory);
 
-    setTimeout(() => {
-      this.chatHistory.push(...tutorial_script3);
-      this.chatSource.next(this.chatHistory);
-      this.toggleReplyText(true);
-      setTimeout(() => this.input.nativeElement.click(), 0);
-    }, 1000);
+    addChatAndFocus({
+      body: reply.concat(tutorial_script3),
+      waitTime: 1000,
+    }, this.chatHistory, this.chatSource, () => this.toggleReplyText(true), this.emitClick);
   }
 
   private createPassword(text: string) {
@@ -144,40 +153,30 @@ export class StepEmailComponent extends ChatComponent implements OnInit, AfterVi
       body: text,
       createdAt: new Date()
     }];
-    this.chatHistory.push(...reply, ...tutorial_script4);
-    this.chatSource.next(this.chatHistory);
+
+    addChat({
+      body: reply.concat(tutorial_script4),
+      waitTime: 0,
+    }, this.chatHistory, this.chatSource);
     setTimeout(() => this.scrollToBottom(), 0);
   }
 
-  private toggleReplyText(checked: boolean) {
-    this.showReplyText = checked;
-    if (navigator.userAgent.indexOf('iPhone') > -1 || navigator.userAgent.indexOf('iPad') > -1) {
-      this.isActive = checked;
-    }
-  }
-
   private emailValidator(email: string): boolean {
-    const mail_regex1 = new RegExp(
-      `(?:[-!#-\'*+/-9=?A-Z^-~]+\.?(?:\.[-!#-\'*+/-9=?A-Z^-~]+)*|"(?:[!#-\[\]-~]|\\\\[\x09 -~])*")
-      @[-!#-\'*+/-9=?A-Z^-~]+(?:\.[-!#-\'*+/-9=?A-Z^-~]+)*`
+    const mail_regex = new RegExp(
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
     );
-    const mail_regex2 = new RegExp('^[^\@]+\@[^\@]+$');
-    if (email.match(mail_regex1) && email.match(mail_regex2)) {
-        // 全角チェック
-        if ( email.match( /[^a-zA-Z0-9\!\"\#\$\%\&\'\(\)\=\~\|\-\^\\\@\[\;\:\]\,\.\/\\\<\>\?\_\`\{\+\*\} ]/ ) ) { return false; }
-        // 末尾TLDチェック（〜.co,jpなどの末尾ミスチェック用）
-        if ( !email.match( /\.[a-z]+$/ ) ) { return false; }
-        return true;
+    if (email.match(mail_regex)) {
+      return true;
     } else {
-        return false;
+      return false;
     }
   }
 
   private passwordValidator(password: string): boolean {
     if (password.length && password.length >= 6) {
-        return true;
+      return true;
     } else {
-        return false;
+      return false;
     }
   }
 }

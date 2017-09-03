@@ -18,6 +18,7 @@ import {
   ChatService,
 } from 'app/shared/services/api';
 import { ChatComponent } from 'app/components/chats/chat/chat.component';
+import { addChat, addChatAndFocus } from '../../shared/chat-operation.function';
 
 @Component({
   selector: 'app-step-type',
@@ -53,19 +54,25 @@ export class StepTypeComponent extends ChatComponent implements OnInit, AfterVie
 
     this.chatSource = new Subject<Chat[]>();
     this.chats$ = this.chatSource.asObservable();
+
+    this.resetData();
   }
 
   ngOnInit() {
     this.myself = this.store.getState().account;
     this.opponents = [{...NAVI_CHARA}];
     this.chatThread = SIGNUP_THREAD;
-    this.chatHistory.push(...tutorial_script1);
 
-    setTimeout(() => this.chatSource.next(this.chatHistory), 0)
-    setTimeout(() => {
-      this.chatHistory.push(...tutorial_script2);
-      this.chatSource.next(this.chatHistory);
-    }, 2000);
+    this.toggleReplyText(false);
+
+    addChat({
+      body: tutorial_script1,
+      waitTime: 0
+    }, this.chatHistory, this.chatSource);
+    addChat({
+      body: tutorial_script2,
+      waitTime: 2000
+    }, this.chatHistory, this.chatSource);
   }
 
   ngAfterViewInit() {
@@ -77,9 +84,7 @@ export class StepTypeComponent extends ChatComponent implements OnInit, AfterVie
     tutorial_script2[0].result = item.name;
     this.accountService.saveSignupdataClassification(item);
 
-    const reply = {};
-    reply[item.name] = 'dummy';
-    this.createReply(reply);
+    this.createReply(item);
   }
 
   onClickYes() {
@@ -99,12 +104,7 @@ export class StepTypeComponent extends ChatComponent implements OnInit, AfterVie
   }
 
   private createReply(result) {
-    let body = '';
-    Object.keys(result).forEach(value => {
-      if (!result[value]) { return; }
-      body += value + 'です。<br/>';
-    });
-
+    const body = result.name + 'です。<br/>';
     const reply: Chat[] = [{
       id: 4,
       senderId: this.myself.id,
@@ -112,16 +112,25 @@ export class StepTypeComponent extends ChatComponent implements OnInit, AfterVie
       body: this.sanitizer.bypassSecurityTrustHtml(body),
       createdAt: new Date()
     }];
-    this.chatSource.next(this.chatHistory.concat(reply, tutorial_script3));
+
+    addChat({
+      body: reply.concat(tutorial_script3),
+      waitTime: 0,
+      tmp: true
+    }, this.chatHistory, this.chatSource);
     setTimeout(() => this.scrollToBottom(), 0);
   }
 
   private reset() {
-    tutorial_script2[0].result = '';
-    this.accountService.saveSignupdataClassification(null);
+    this.resetData();
 
     this.chatHistory = [];
     this.chatHistory.push(...tutorial_script1, ...tutorial_script2);
+  }
+
+  private resetData() {
+    tutorial_script2[0].result = '';
+    this.accountService.saveSignupdataClassification(null);
   }
 }
 
