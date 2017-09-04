@@ -15,7 +15,7 @@ module.exports = function (config) {
     files: [
       {pattern: './config/karma-test-shim.js', watched: false},
       // Include a Material theme in the test suite.
-      {pattern: './node_modules/@angular/material/prebuilt-themes/indigo-pink.css', included: true, watched: true},
+      {pattern: './node_modules/@angular/material/prebuilt-themes/indigo-pink.css', included: true, watched: false},
     ],
     client:{
       clearContext: false // leave Jasmine Spec Runner output visible in browser
@@ -32,7 +32,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
+    browsers: ['ChromeHeadless'],
     singleRun: false
   });
 };
