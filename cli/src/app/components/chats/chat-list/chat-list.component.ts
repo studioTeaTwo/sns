@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { Store } from 'app/shared/store/store';
 import { ChatService } from 'app/shared/services/api';
+import { ChatThread, User } from 'app/interfaces/api-models';
 
 @Component({
   selector: 'app-chat-list',
@@ -12,7 +13,8 @@ import { ChatService } from 'app/shared/services/api';
 })
 export class ChatListComponent implements OnInit {
   JSON = JSON;
-  chatList$: Observable<any>;
+  chatList$: Observable<ChatThread[]>;
+  myself: User;
 
   constructor(
     private router: Router,
@@ -22,10 +24,18 @@ export class ChatListComponent implements OnInit {
 
   ngOnInit() {
     this.chatList$ = this.store.changes.pluck('chatList');
+    this.myself = this.store.getState().account;
+
     this.chatService.list();
   }
 
-  onClick(chatTread) {
+  getImgSrc(chatThread: ChatThread) {
+    // TODO: 3人以上の時
+    const user = chatThread.participants.find(value => value.id !== this.myself.id);
+    return user.avatarUrl;
+  }
+
+  onClick(chatTread: ChatThread) {
     this.router.navigate([`/chat/${chatTread.id}`]);
   }
 

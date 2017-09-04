@@ -16,6 +16,7 @@ import {
   FormatToJapaneseDatePipe,
   RoundOffDatePipe
 } from './pipes';
+import { ShortenTextPipe } from './pipes/shorten-text.pipe';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import {
   declarations: [
     FormatToJapaneseDatePipe,
     RoundOffDatePipe,
+    ShortenTextPipe,
   ],
   exports: [
     FormsModule,
@@ -33,6 +35,7 @@ import {
 
     FormatToJapaneseDatePipe,
     RoundOffDatePipe,
+    ShortenTextPipe,
   ],
   providers: [
     {
