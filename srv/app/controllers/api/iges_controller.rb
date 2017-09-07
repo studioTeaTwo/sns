@@ -1,16 +1,30 @@
 class Api::IgesController < ApplicationController
   before_action :correct_user, only: [:update, :destroy]
 
+  # Returns the list of iges
+  #
+  # @response_status 200
+  # @response_class Array<Rest::IgeSerializer>
   def index
     @iges = current_user.iges.order("test_date DESC")
     render json: @iges, each_serializer: Rest::IgeSerializer
   end
 
+  # Returns the list of iges
+  #
+  # @response_status 200
+  # @response_class Array<Rest::IgeSerializer>
   def show
     @ige = Ige.find(params[:id]);
     render json: @ige, serializer: Rest::IgeSerializer
   end
 
+  # Creates a ige record
+  #
+  # @body_parameter [Params::Ige] ige
+  # @response_status 200
+  # @response_root ige
+  # @response_class Rest::IgeSerializer
   def create
     @ige = current_user.iges.build(ige_params)
     # アレルゲン判定を追加する
