@@ -6,19 +6,19 @@ RSpec.describe "Api::Users::Relationships", type: :request do
 
   describe "POST /api/users/:id/relationships" do
     it 'return success status' do
-      post api_relationships_path(current_user), params: { followed_id: another_user.id }, headers: { 'Authorization' => "#{current_user.access_token}" }
+      post api_relationships_path(current_user), params: { relationship: {followed_id: another_user.id} }, headers: { 'Authorization' => "#{current_user.access_token}" }
       expect(response).to have_http_status(:success)
     end
 
     it "saves the new record in the database" do
       expect{
-        post api_relationships_path(current_user), params: { followed_id: another_user.id }, headers: { 'Authorization' => "#{current_user.access_token}" }
+        post api_relationships_path(current_user), params: { relationship: {followed_id: another_user.id} }, headers: { 'Authorization' => "#{current_user.access_token}" }
       }.to change(Relationship, :count).by(1)
     end
   end
 
   describe "DELETE /api/users/:id/relationship/:id" do
-    before(:each) { post api_relationships_path(current_user), params: { followed_id: another_user.id }, headers: { 'Authorization' => "#{current_user.access_token}" } }
+    before(:each) { post api_relationships_path(current_user), params: { relationship: {followed_id: another_user.id} }, headers: { 'Authorization' => "#{current_user.access_token}" } }
     
     it "deletes" do
       expect{

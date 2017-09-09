@@ -1,6 +1,13 @@
+# @tag Microposts
 class Api::MicropostsController < ApplicationController
   before_action :correct_user, only: :destroy
 
+  # Creates a micropost
+  #
+  # @name MicropostRequestBody
+  # @body_parameter [Params::Micropost] micropost
+  # @response_status 200
+  # @response_class Rest::MicropostSerializer
   def create
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
@@ -10,6 +17,9 @@ class Api::MicropostsController < ApplicationController
     end
   end
 
+  # Deletes a micropost
+  #
+  # @response_status 200
   def destroy
     @micropost.destroy
   end

@@ -6,7 +6,7 @@ RSpec.describe "Api::Users::Followings", type: :request do
 
   describe "GET /api/users/:id/followings" do
     before do
-      post api_relationships_path(current_user), params: { followed_id: another_user.id }, headers: { 'Authorization' => "#{current_user.access_token}" }
+      post api_relationships_path(current_user), params: { relationship: {followed_id: another_user.id} }, headers: { 'Authorization' => "#{current_user.access_token}" }
     end
 
     it "works!" do

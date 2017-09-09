@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20170821201416) do
     t.integer "sender_id"
     t.integer "content_type"
     t.text "body"
-    t.text "itemList"
+    t.text "item_list"
     t.string "result"
     t.boolean "expired", default: false
     t.datetime "created_at", null: false

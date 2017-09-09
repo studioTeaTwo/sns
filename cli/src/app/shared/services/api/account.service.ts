@@ -20,16 +20,19 @@ export class AccountService {
     private store: Store,
   ) { }
 
-  login(email: string, password: string): Observable<void> {
+  login(email: string, password: string) {
     const body = {
-      email: email,
-      password: password
+      session: {
+        email: email,
+        password: password
+      }
     };
-    return this.http.post<any>(`/api/login`, body)
-      .map(
+    this.http.post<any>(`/api/login`, body)
+      .subscribe(
         response => {
-          this.userId = response.userId;
+          this.userId = response.id;
           localStorage.setItem('allergylog', response.accessToken);
+          this.onSuccessAccount(response);
         }
       );
   }

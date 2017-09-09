@@ -8,7 +8,7 @@ import { NAVI_CHARA, SIGNUP_USER, SIGNUP_THREAD } from 'app/constants/constants'
 import {
   ChatThread,
   Chats,
-  Chat,
+  ChatViewModel,
   CONTENT_TYPE,
   User,
 } from 'app/interfaces/api-models';
@@ -26,8 +26,8 @@ import { addChat, addChatAndFocus } from '../../shared/chat-operation.function';
 })
 export class StepNameComponent extends ChatComponent implements OnInit {
   @ViewChild('replyText') inputElm: ElementRef;
-  chatSource: Subject<Chat[]>;
-  chatHistory: Chat[] = [];
+  chatSource: Subject<ChatViewModel[]>;
+  chatHistory: ChatViewModel[] = [];
 
   @Output() completed = new EventEmitter();
 
@@ -51,7 +51,7 @@ export class StepNameComponent extends ChatComponent implements OnInit {
     this.height = window.innerHeight;
 
     this.showReplyText = false;
-    this.chatSource = new Subject<Chat[]>();
+    this.chatSource = new Subject<ChatViewModel[]>();
     this.chats$ = this.chatSource.asObservable();
   }
 
@@ -74,7 +74,7 @@ export class StepNameComponent extends ChatComponent implements OnInit {
     this.toggleReplyText(false);
     this.accountService.saveSignupdataName(text);
 
-    const reply: Chat[] = [{
+    const reply: ChatViewModel[] = [{
       id: 3,
       senderId: this.myself.id,
       contentType: CONTENT_TYPE.REPLY,
@@ -97,21 +97,21 @@ export class StepNameComponent extends ChatComponent implements OnInit {
   }
 }
 
-const tutorial_script1: Chat[] = [{
+const tutorial_script1: ChatViewModel[] = [{
   id: 1,
   senderId: NAVI_CHARA.id,
   contentType: CONTENT_TYPE.REPLY,
   body: 'ようこそ！',
   createdAt: new Date()
 }];
-const tutorial_script2: Chat[] = [{
+const tutorial_script2: ChatViewModel[] = [{
   id: 2,
   senderId: NAVI_CHARA.id,
   contentType: CONTENT_TYPE.REPLY,
   body: '君の名前を教えて！',
   createdAt: new Date()
 }];
-const tutorial_script3: Chat[] = [{
+const tutorial_script3: ChatViewModel[] = [{
   id: 4,
   senderId: NAVI_CHARA.id,
   contentType: CONTENT_TYPE.REPLY,

@@ -5,7 +5,7 @@ export interface StoreState {
     account: any;
     profile: any;
     chatList: API.ChatList;
-    chats: API.Chats;
+    chats: API.Chat[];
     searchUsers: any;
 
     // 外部サービス

@@ -35,11 +35,7 @@ export class TopComponent implements OnInit {
   }
 
   login() {
-    this.accountService.login('t2.tide@gmail.com', 'allergy')
-      .subscribe(() => {
-        this.sessionResponse = localStorage.getItem('allergylog');
-        this.getMe();
-      });
+    this.accountService.login('t2.tide@gmail.com', 'allergy');
   }
 
   private getMe() {

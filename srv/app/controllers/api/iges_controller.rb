@@ -1,3 +1,4 @@
+# @tag Iges
 class Api::IgesController < ApplicationController
   before_action :correct_user, only: [:update, :destroy]
 
@@ -10,20 +11,20 @@ class Api::IgesController < ApplicationController
     render json: @iges, each_serializer: Rest::IgeSerializer
   end
 
-  # Returns the list of iges
+  # Returns a ige
   #
   # @response_status 200
-  # @response_class Array<Rest::IgeSerializer>
+  # @response_class Rest::IgeSerializer
   def show
     @ige = Ige.find(params[:id]);
     render json: @ige, serializer: Rest::IgeSerializer
   end
 
-  # Creates a ige record
+  # Creates a ige
   #
+  # @name IgeRequestBody
   # @body_parameter [Params::Ige] ige
   # @response_status 200
-  # @response_root ige
   # @response_class Rest::IgeSerializer
   def create
     @ige = current_user.iges.build(ige_params)
@@ -46,6 +47,12 @@ class Api::IgesController < ApplicationController
     render json: @ige.errors.full_messages, status: :unprocessable_entity
   end
 
+  # Updates a ige
+  #
+  # @name IgeRequestBody
+  # @body_parameter [Params::Ige] ige
+  # @response_status 200
+  # @response_class Rest::IgeSerializer
   def update
     @ige = Ige.find(params[:id])
     # アレルゲン判定を追加する
@@ -66,10 +73,14 @@ class Api::IgesController < ApplicationController
     render json: @ige.errors.full_messages, status: :unprocessable_entity
   end
 
+  # Destroys a ige
+  #
+  # @response_status 200
   def destroy
     @ige = current_user.iges.find_by(:id => params[:id])
     if !@ige.nil?
       @ige.destroy
+      head :ok
     else
       render json: { error: 'not_found' }, status: :not_found
     end

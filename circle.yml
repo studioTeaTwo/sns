@@ -17,9 +17,8 @@ database:
     - cd ./srv && bundle exec rails db:create db:schema:load RAILS_ENV=test
     - cd ./srv && bundle exec rails db:migrate RAILS_ENV=test
 test:
-  pre:
-    - bash ./build.sh
   override:
+    - bash ./build.sh
     - cd ./srv && RAILS_ENV=test bundle exec rspec spec/
     - cd ./cli && npm run lint && npm run test
 

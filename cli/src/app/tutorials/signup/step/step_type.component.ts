@@ -9,7 +9,7 @@ import { NAVI_CHARA, SIGNUP_USER, SIGNUP_THREAD } from 'app/constants/constants'
 import {
   ChatThread,
   Chats,
-  Chat,
+  ChatViewModel,
   CONTENT_TYPE,
   User,
 } from 'app/interfaces/api-models';
@@ -27,8 +27,8 @@ import { addChat, addChatAndFocus } from '../../shared/chat-operation.function';
 })
 export class StepTypeComponent extends ChatComponent implements OnInit, AfterViewInit {
   @ViewChild('replyText') input: ElementRef;
-  chatSource: Subject<Chat[]>;
-  chatHistory: Chat[] = [];
+  chatSource: Subject<ChatViewModel[]>;
+  chatHistory: ChatViewModel[] = [];
 
   private selectedResult: number;
 
@@ -52,7 +52,7 @@ export class StepTypeComponent extends ChatComponent implements OnInit, AfterVie
     );
     this.height = window.innerHeight;
 
-    this.chatSource = new Subject<Chat[]>();
+    this.chatSource = new Subject<ChatViewModel[]>();
     this.chats$ = this.chatSource.asObservable();
 
     this.resetData();
@@ -105,7 +105,7 @@ export class StepTypeComponent extends ChatComponent implements OnInit, AfterVie
 
   private createReply(result) {
     const body = result.name + 'です。<br/>';
-    const reply: Chat[] = [{
+    const reply: ChatViewModel[] = [{
       id: 4,
       senderId: this.myself.id,
       contentType: CONTENT_TYPE.REPLY,
@@ -134,14 +134,14 @@ export class StepTypeComponent extends ChatComponent implements OnInit, AfterVie
   }
 }
 
-const tutorial_script1: Chat[] = [{
+const tutorial_script1: ChatViewModel[] = [{
   id: 1,
   senderId: NAVI_CHARA.id,
   contentType: CONTENT_TYPE.REPLY,
   body: 'ここはアレルギー王国',
   createdAt: new Date()
 }];
-const tutorial_script2: Chat[] = [
+const tutorial_script2: ChatViewModel[] = [
   {
     id: 2,
     senderId: NAVI_CHARA.id,
@@ -169,7 +169,7 @@ const tutorial_script2: Chat[] = [
     createdAt: new Date()
   },
 ];
-const tutorial_script3: Chat[] = [
+const tutorial_script3: ChatViewModel[] = [
   {
     id: 5,
     senderId: NAVI_CHARA.id,

@@ -1,5 +1,26 @@
 import { SafeHtml } from '@angular/platform-browser';
 
+import { Chat } from './swagger-models';
+
+export * from './swagger-models';
+
+export interface ChatViewModel extends Chat {
+  id: number;
+  senderId: number;
+  contentType: CONTENT_TYPE;
+  body?: any;
+  itemList?: any;
+  result?: string,
+  expired?: boolean;
+  createdAt?: any;
+}
+export enum CONTENT_TYPE {
+  REPLY,
+  YESNO,
+  CHECKBOX,
+  RADIOBUTTON,
+}
+
 export interface User {
   id: number;
   email: string;
@@ -17,7 +38,7 @@ export interface ChatThread {
   updatedAt: Date;
   readUntil: ChatStatus[];
   participants: User[];
-  newestChat: Chat;
+  newestChat: ChatViewModel;
 }
 
 export interface ChatStatus {
@@ -26,20 +47,4 @@ export interface ChatStatus {
   readUntil: number;
 }
 
-export type Chats = Chat[];
-export interface Chat {
-  id: number;
-  senderId: number;
-  contentType: CONTENT_TYPE;
-  body?: string | SafeHtml;
-  itemList?: any;
-  result?: string,
-  expired?: boolean;
-  createdAt?: Date;
-}
-export enum CONTENT_TYPE {
-  REPLY,
-  YESNO,
-  CHECKBOX,
-  RADIOBUTTON,
-}
+export type Chats = ChatViewModel[];

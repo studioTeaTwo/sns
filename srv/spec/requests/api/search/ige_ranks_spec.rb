@@ -11,7 +11,7 @@ RSpec.describe "Api::Search::IgeRanks", type: :request do
 
     context "when initial" do
       it "works!" do
-        get api_search_ige_ranks_path, params: { search_key: :initial } , headers: { 'Authorization' => "#{current_user.access_token}" }
+        get api_search_ige_ranks_path, params: { keyword: :initial } , headers: { 'Authorization' => "#{current_user.access_token}" }
         expect(response).to have_http_status(:success)
         expect(json.length).to eq(1)
         expect(json.to_s).to match(/#{view_user.name}/)
@@ -23,7 +23,7 @@ RSpec.describe "Api::Search::IgeRanks", type: :request do
 
     context "when user input search_key" do
       it "works!" do
-        get api_search_ige_ranks_path, params: { search_key: { from_ige: 101, to_ige: 200} } , headers: { 'Authorization' => "#{current_user.access_token}" }
+        get api_search_ige_ranks_path, params: { keyword: { from_ige: 101, to_ige: 200} } , headers: { 'Authorization' => "#{current_user.access_token}" }
         expect(response).to have_http_status(:success)
         expect(json.length).to eq(1)
 
@@ -39,7 +39,7 @@ RSpec.describe "Api::Search::IgeRanks", type: :request do
 
     context "without search_key" do
       it "can't work" do
-        get api_search_ige_ranks_path, params: { search_key: {} } , headers: { 'Authorization' => "#{current_user.access_token}" }
+        get api_search_ige_ranks_path, params: { keyword: {} } , headers: { 'Authorization' => "#{current_user.access_token}" }
         expect(response).to have_http_status(:bad_request)
       end
     end

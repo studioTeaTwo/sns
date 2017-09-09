@@ -1,11 +1,22 @@
+# @tag Chats
 class Api::ChatsController < ApplicationController
   before_action :correct_user, only: [:show, :say, :destroy]
 
+  # Returns the list of chat threads
+  #
+  # @response_status 200
+  # @response_class Array<Rest::ChatThreadSerializer>
   def index
     @chat_threads = current_user.chat_threads.order("updated_at DESC")
     render json: @chat_threads, each_serializer: Rest::ChatThreadSerializer
   end
 
+  # Creates a chat thread
+  #
+  # @name ChatThreadRequestBody
+  # @body_parameter [Params::ChaThread] chatThread
+  # @response_status 200
+  # @response_class Rest::ChatThreadSerializer
   def create
     participants = make_participants
     @chat_thread = current_user.chat_threads.build({participants: participants})
@@ -20,6 +31,10 @@ class Api::ChatsController < ApplicationController
     render json: @chat_thread.errors.full_messages, status: :unprocessable_entity
   end
 
+  # Returns the chats of the chat thread
+  #
+  # @response_status 200
+  # @response_class Array<Rest::ChatSerializer>
   def show
     @chat_thread = ChatThread.find(params[:id])
     # 既読チェック
@@ -27,6 +42,12 @@ class Api::ChatsController < ApplicationController
     render json: @chat_thread.chats, each_serializer: Rest::ChatSerializer
   end
 
+  # Creates a chat
+  #
+  # @name ChatRequestBody
+  # @body_parameter [Params::Chat] chat
+  # @response_status 200
+  # @response_class Rest::ChatSerializer
   def say
     @chat = current_user.chats.build(chat_params)
     @chat.sender_id = current_user.id
@@ -41,6 +62,9 @@ class Api::ChatsController < ApplicationController
     render json: @chat.errors.full_messages, status: :unprocessable_entity
   end
 
+  # Deletes a chat thread
+  #
+  # @response_status 200
   def destroy
   end
 

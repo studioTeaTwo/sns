@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
 
     resource :login, only: [:create], controller: :sessions
+    resource :logout, only: [:destroy], controller: :sessions
 
     scope module: :users do
       resources :users do
@@ -21,12 +22,12 @@ Rails.application.routes.draw do
           post '/emailverification', to: 'users#verify_email'
         end
         member do
+          resources :profiles, only: [:show]
           resources :relationships, only: [:create, :destroy]
           resources :followings, only: [:index]
           resources :followers, only: [:index]
         end
       end
-      resources :profiles, only: [:show]
     end
 
     namespace :search do

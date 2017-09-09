@@ -79,7 +79,7 @@ export class ChatService {
     });
   }
 
-  private onSuccessChats(data: Chats) {
+  private onSuccessChats(data: Chat[]) {
     const currentState = this.store.getState();
     data = this.unique(data.concat(...currentState.chats));
     data.sort(this.compareCreated);

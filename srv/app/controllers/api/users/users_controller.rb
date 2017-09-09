@@ -1,13 +1,24 @@
+# @tag Users
 class Api::Users::UsersController < ApplicationController 
   skip_before_action :logged_in_user, only: [:create]
   before_action :correct_user, only: :update
   before_action :admin_user, only: :destroy
 
+  # Returns a user
+  #
+  # @response_status 200
+  # @response_class Rest::UserSerializer
   def show
     @user = User.find(params[:id])
     render json: @user, serializer: Rest::UserSerializer
   end
 
+  # Creates a user
+  #
+  # @name UserRequestBody
+  # @body_parameter [Params::User] user
+  # @response_status 200
+  # @response_class Rest::UserSerializer
   def create
     @user = User.new
     updateUser
@@ -18,12 +29,18 @@ class Api::Users::UsersController < ApplicationController
       @personal_assistant.save!
       createChatThread(@user)
     end
-    render json: @user, serializer: Rest::SessionSerializer
+    render json: @user, serializer: Rest::UserSerializer, sort: :session
   rescue
     puts @user.errors.full_messages
     render json: { error: @user.errors.full_messages }, status: :unprocessable_entity
   end
 
+  # Updates a user
+  #
+  # @name UserRequestBody
+  # @body_parameter [Params::User] user
+  # @response_status 200
+  # @response_class Rest::UserSerializer
   def update
     if @user.update_attributes(user_params)
       render json: @user, serializer: Rest::UserSerializer
@@ -32,6 +49,11 @@ class Api::Users::UsersController < ApplicationController
     end
   end
 
+  # Verifies a email
+  #
+  # @name EmailVerifyRequestBody
+  # @body_parameter [string] email
+  # @response_status 200
   def verify_email
     if (User.where("email = ?" ,user_params[:email]).count == 0)
       head :ok
@@ -40,6 +62,9 @@ class Api::Users::UsersController < ApplicationController
     end
   end
 
+  # Destroys a user
+  #
+  # @response_status 200
   def destroy
     User.find(params[:id]).destroy
   end

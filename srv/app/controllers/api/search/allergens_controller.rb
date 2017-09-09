@@ -1,12 +1,18 @@
+# @tag Search
 class Api::Search::AllergensController < ApplicationController
 
+  # Returns the list of allergens
+  #
+  # @query_parameter [string] keyword
+  # @response_status 200
+  # @response_class Array<Rest::ProfileSerializer>
   def index
     return render json: { error: 'bad_request' }, status: :bad_request unless params_present?
 
-    if params[:search_key] == 'initial'
+    if params[:keyword] == 'initial'
       @users = initial_display
     else
-      @users = User.search_by_allergen(params[:search_key])
+      @users = User.search_by_allergen(params[:keyword])
     end
     
     if @users.present?
@@ -32,7 +38,7 @@ class Api::Search::AllergensController < ApplicationController
     end
 
     def params_present?
-      params[:search_key].present? && ( params[:search_key] == 'initial' || params[:search_key].match(/(allergen_group_.+)/) )
+      params[:keyword].present? && ( params[:keyword] == 'initial' || params[:keyword].match(/(allergen_group_.+)/) )
     end
 
 end

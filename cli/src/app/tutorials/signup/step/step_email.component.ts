@@ -9,7 +9,7 @@ import { NAVI_CHARA, SIGNUP_USER, SIGNUP_THREAD } from 'app/constants/constants'
 import {
   ChatThread,
   Chats,
-  Chat,
+  ChatViewModel,
   CONTENT_TYPE,
   User,
 } from 'app/interfaces/api-models';
@@ -27,8 +27,8 @@ import { addChat, addChatAndFocus } from '../../shared/chat-operation.function';
 })
 export class StepEmailComponent extends ChatComponent implements OnInit, AfterViewInit {
   @ViewChild('replyText') inputElm: ElementRef;
-  chatSource: Subject<Chat[]>;
-  chatHistory: Chat[] = [];
+  chatSource: Subject<ChatViewModel[]>;
+  chatHistory: ChatViewModel[] = [];
 
   @Output() completed = new EventEmitter();
 
@@ -52,7 +52,7 @@ export class StepEmailComponent extends ChatComponent implements OnInit, AfterVi
     );
     this.height = window.innerHeight;
 
-    this.chatSource = new Subject<Chat[]>();
+    this.chatSource = new Subject<ChatViewModel[]>();
     this.chats$ = this.chatSource.asObservable();
   }
 
@@ -142,7 +142,7 @@ export class StepEmailComponent extends ChatComponent implements OnInit, AfterVi
   private createEmail(text: string) {
     this.accountService.saveSignupdataEmail(text);
 
-    const reply: Chat[] = [{
+    const reply: ChatViewModel[] = [{
       id: 3,
       senderId: this.myself.id,
       contentType: CONTENT_TYPE.REPLY,
@@ -159,7 +159,7 @@ export class StepEmailComponent extends ChatComponent implements OnInit, AfterVi
   private createPassword(text: string) {
     this.accountService.saveSignupdataPassword(text);
 
-    const reply: Chat[] = [{
+    const reply: ChatViewModel[] = [{
       id: 3,
       senderId: this.myself.id,
       contentType: CONTENT_TYPE.REPLY,
@@ -194,7 +194,7 @@ export class StepEmailComponent extends ChatComponent implements OnInit, AfterVi
   }
 }
 
-const tutorial_script1: Chat[] = [
+const tutorial_script1: ChatViewModel[] = [
   {
     id: 1,
     senderId: NAVI_CHARA.id,
@@ -203,7 +203,7 @@ const tutorial_script1: Chat[] = [
     createdAt: new Date()
   },
 ];
-const tutorial_script2: Chat[] = [
+const tutorial_script2: ChatViewModel[] = [
   {
     id: 2,
     senderId: NAVI_CHARA.id,
@@ -212,28 +212,28 @@ const tutorial_script2: Chat[] = [
     createdAt: new Date()
   },
 ];
-const tutorial_script3: Chat[] = [{
+const tutorial_script3: ChatViewModel[] = [{
   id: 4,
   senderId: NAVI_CHARA.id,
   contentType: CONTENT_TYPE.REPLY,
   body: 'パスワードはどうする？君の好きな暗号を6文字以上で設定するんだ',
   createdAt: new Date()
 }];
-const tutorial_script4: Chat[] = [{
+const tutorial_script4: ChatViewModel[] = [{
   id: 5,
   senderId: NAVI_CHARA.id,
   contentType: CONTENT_TYPE.YESNO,
   body: 'これでOKかい？',
   createdAt: new Date()
 }];
-const tutorial_script_error: Chat[] = [{
+const tutorial_script_error: ChatViewModel[] = [{
   id: 6,
   senderId: NAVI_CHARA.id,
   contentType: CONTENT_TYPE.REPLY,
   body: '入力が正しく無いよ。もう一回入力してみて！',
   createdAt: new Date()
 }];
-const tutorial_script_error_email: Chat[] = [{
+const tutorial_script_error_email: ChatViewModel[] = [{
   id: 7,
   senderId: NAVI_CHARA.id,
   contentType: CONTENT_TYPE.REPLY,

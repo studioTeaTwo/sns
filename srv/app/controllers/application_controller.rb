@@ -4,8 +4,6 @@ class ApplicationController < ActionController::API
 
   respond_to :json
 
-
-
   protected
 
     # ユーザーのログインを確認する

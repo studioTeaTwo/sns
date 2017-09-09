@@ -1,8 +1,26 @@
+# @name User
+#
+# @attr [integer] id
+# @attr [string] email
+# @attr [string] name
+# @attr [string] selfIntroduction
+# @attr [integer] rank
+# @attr [integer] titleOfHonor
+# @attr [integer] classification
+# @attr [boolean] atopic
+# @attr [boolean] asthma
+# @attr [boolean] rhinitis
+# @attr [boolean] pollen
+# @attr [boolean] gastroenteritis
+# @attr [boolean] conjunctivitis
+# @attr [string] avatarUrl
+# @attr [string] accessToken
 class Rest::UserSerializer < ActiveModel::Serializer
 
   attributes :id, :email, :name, :self_introduction, :rank, :title_of_honor,
              :classification, :atopic, :asthma, :rhinitis, :pollen, :gastroenteritis, :conjunctivitis,
              :avatar_url
+  attribute :access_token if :session?
 
   def avatar_url
     gravatar_for(object, size: 50)
@@ -26,6 +44,11 @@ class Rest::UserSerializer < ActiveModel::Serializer
     when 13 then 'アレルギーキング'
     when 14 then 'アレルギーゴッド'
     end
+  end
+
+  # Searchならmicropotやigeは返さない
+  def session?
+    instance_options[:sort] == :session
   end
 
   private

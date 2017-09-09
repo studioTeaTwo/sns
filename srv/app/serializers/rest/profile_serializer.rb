@@ -1,6 +1,26 @@
 ##
 # UserSerializerの継承
 #
+# @name Profile
+#
+# @attr [integer] latestIge
+# @attr [Array<string>] positiveAllergenGroup
+# @attr [integer] id
+# @attr [string] email
+# @attr [string] name
+# @attr [string] selfIntroduction
+# @attr [integer] rank
+# @attr [integer] titleOfHonor
+# @attr [integer] classification
+# @attr [boolean] atopic
+# @attr [boolean] asthma
+# @attr [boolean] rhinitis
+# @attr [boolean] pollen
+# @attr [boolean] gastroenteritis
+# @attr [boolean] conjunctivitis
+# @attr [string] avatarUrl
+# @attr [Array<Rest::IgeSerializer>] iges
+# @attr [Array<Rest::MicropostSerializer>] microposts
 class Rest::ProfileSerializer < Rest::UserSerializer
   
   attributes :latest_ige, :positive_allergen_group
@@ -13,7 +33,7 @@ class Rest::ProfileSerializer < Rest::UserSerializer
   end
 
   def latest_ige
-    latest_test_result.present? ? latest_test_result[0].ige_value : ''
+    latest_test_result.present? ? latest_test_result.first.ige_value : ''
   end
 
   def positive_allergen_group

@@ -51,7 +51,7 @@ group :development, :test do
   gem 'fuubar'
   gem 'factory_girl_rails'
 
-  gem 'swaggard'
+  gem 'swaggard', github: 'studioTeaTwo/swaggard'
 end
 
 group :development do

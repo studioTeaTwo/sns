@@ -1,9 +1,15 @@
+# @tag Search
 class Api::Search::IgeRanksController < ApplicationController
 
+  # Returns the list of igeranks
+  #
+  # @query_parameter [string] keyword
+  # @response_status 200
+  # @response_class Array<Rest::ProfileSerializer>
   def index
     return render json: { error: 'bad_request' }, status: :bad_request unless params_present?
 
-    if params[:search_key] == 'initial'
+    if params[:keyword] == 'initial'
       @users = initial_dispaly
     else
       from_key = search_params[:from_ige].present? ? search_params[:from_ige] : 0
@@ -21,7 +27,7 @@ class Api::Search::IgeRanksController < ApplicationController
   private
 
     def search_params
-      params.fetch(:search_key, {}).permit(
+      params.fetch(:keyword, {}).permit(
           :from_ige,
           :to_ige
         )
@@ -48,6 +54,6 @@ class Api::Search::IgeRanksController < ApplicationController
     end
 
     def params_present?
-      params[:search_key] == 'initial' || search_params[:from_ige].present? || search_params[:to_ige].present?
+      params[:keyword] == 'initial' || search_params[:from_ige].present? || search_params[:to_ige].present?
     end
 end

@@ -5,7 +5,7 @@ class CreateChats < ActiveRecord::Migration[5.1]
       t.references :sender, foreign_key: { to_table: :users }
       t.integer :content_type # 1 発言 2 YesNo 3 checkbox 4 radio
       t.text :body
-      t.text :itemList
+      t.text :item_list
       t.string :result
       t.boolean :expired, default: false
 
