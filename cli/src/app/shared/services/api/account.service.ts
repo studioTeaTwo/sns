@@ -31,7 +31,8 @@ export class AccountService {
       .subscribe(
         response => {
           this.userId = response.id;
-          localStorage.setItem('allergylog', response.accessToken);
+          localStorage.setItem('token', response.accessToken);
+          localStorage.setItem('account', JSON.stringify(response));
           this.onSuccessAccount(response);
         }
       );
@@ -51,7 +52,7 @@ export class AccountService {
       .subscribe(
         response => {
           this.userId = response.userId;
-          localStorage.setItem('allergylog', response.accessToken);
+          localStorage.setItem('token', response.accessToken);
         }
       );
   }

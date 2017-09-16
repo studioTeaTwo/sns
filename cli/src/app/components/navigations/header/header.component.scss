@@ -1,0 +1,28 @@
+header {
+  background-color: rgb(128,128,128);
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  height: 42px;
+  width: 100%;
+  box-sizing: border-box;
+  padding-right: 16px;
+  .title-logo {
+    margin: 0 10px 0 10px;
+    font-size: 1.7em;
+    color: white;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: -1px;
+    padding-top: 9px;
+    font-weight: bold;
+  }
+  .header-menu-button {
+      float: right;
+      .material-icons {
+        color: #fff;
+        font-size: 2em; 
+      }
+  }
+}

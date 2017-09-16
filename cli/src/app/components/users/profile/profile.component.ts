@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 
 import { Store } from 'app/shared/store/store';
 import {
-  UserService
+  UserService,
 } from 'app/shared/services/api';
+import {
+  Profile,
+} from 'app/interfaces/api-models';
 
 @Component({
   selector: 'app-profile',
@@ -13,7 +17,7 @@ import {
 })
 export class ProfileComponent implements OnInit {
   JSON = JSON;
-  profileResponse$: any;
+  profile$: Observable<Profile>;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,12 +26,10 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.profileResponse$ = this.store.changes.pluck('profile');
+    this.profile$ = this.store.changes.pluck('profile') as Observable<Profile>;
     this.route.params.subscribe((params: Params) =>
         this.userService.getProfile(params['userId'])
       );
   }
-
-
 
 }

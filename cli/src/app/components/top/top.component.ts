@@ -31,7 +31,7 @@ export class TopComponent implements OnInit {
   }
 
   sighup() {
-    this.router.navigate(['signup']);
+    this.router.navigate(['auth/signup']);
   }
 
   login() {

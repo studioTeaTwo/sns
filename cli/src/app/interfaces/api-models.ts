@@ -1,6 +1,6 @@
 import { SafeHtml } from '@angular/platform-browser';
 
-import { Chat } from './swagger-models';
+import { Chat, User } from './swagger-models';
 
 export * from './swagger-models';
 
@@ -19,16 +19,6 @@ export enum CONTENT_TYPE {
   YESNO,
   CHECKBOX,
   RADIOBUTTON,
-}
-
-export interface User {
-  id: number;
-  email: string;
-  name: string;
-  selfIntroduction: string;
-  rank: string;
-  titleOfHonor: string;
-  avatarUrl: string;
 }
 
 export type ChatList = ChatThread[];

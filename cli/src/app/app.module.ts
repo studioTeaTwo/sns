@@ -5,14 +5,17 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
-import { TutorialsModule } from 'app/tutorials/tutorials.module';
 import { AppComponent } from './app.component';
 import { TopComponent } from './components/top/top.component';
+import { HeaderComponent } from './components/navigations/header/header.component';
+import { GlobalMenuComponent } from './components/navigations/global-menu/global-menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopComponent,
+    HeaderComponent,
+    GlobalMenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -20,7 +23,6 @@ import { TopComponent } from './components/top/top.component';
     HttpClientModule,
     SharedModule.forRoot(),
     AppRoutingModule,
-    TutorialsModule,
   ],
   providers: [
   ],

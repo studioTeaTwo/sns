@@ -12,7 +12,7 @@ export class UserService {
   ) { }
 
   getProfile(userId: string) {
-    this.httpClient.get<any>(`/api/profiles/${userId}`)
+    this.httpClient.get<any>(`/api/users/${userId}/profiles`)
       .subscribe(
         response => {
           this.onSuccessProfile(response);

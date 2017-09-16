@@ -9,10 +9,10 @@ import {
   ChatService,
  } from 'app/shared/services/api';
 import { SignupComponent } from './signup.component';
-import { StepNameComponent } from './step/step_name.component';
-import { StepTypeComponent } from './step/step_type.component';
-import { StepSymptomComponent } from './step/step_symptom.component';
-import { StepEmailComponent } from './step/step_email.component';
+import { StepNameComponent } from 'app/tutorials/signup-steps/step_name.component';
+import { StepTypeComponent } from 'app/tutorials/signup-steps/step_type.component';
+import { StepSymptomComponent } from 'app/tutorials/signup-steps/step_symptom.component';
+import { StepEmailComponent } from 'app/tutorials/signup-steps/step_email.component';
 
 describe('SignupComponent', () => {
   let component: SignupComponent;

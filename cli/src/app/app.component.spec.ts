@@ -4,19 +4,20 @@ import { SpyLocation } from '@angular/common/testing';
 
 import { SharedModule } from 'app/shared/shared.module';
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './components/navigations/header/header.component';
+import { GlobalMenuComponent } from './components/navigations/global-menu/global-menu.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        SharedModule,
+        SharedModule.forRoot(),
       ],
       declarations: [
-        AppComponent
-      ],
-      providers: [
-        SpyLocation,
+        AppComponent,
+        HeaderComponent,
+        GlobalMenuComponent,
       ]
     }).compileComponents();
   }));

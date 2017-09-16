@@ -519,7 +519,9 @@ export interface MicropostStrongParameter {
 }
 export interface Profile {
     latestIge?: number; // int32
-    positiveAllergenGroup?: string[];
+    positiveAllergenGroups?: string[];
+    followers?: number; // int32
+    followings?: number; // int32
     id?: number; // int32
     email?: string;
     name?: string;

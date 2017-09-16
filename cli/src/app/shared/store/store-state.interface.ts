@@ -2,8 +2,8 @@ import * as API from 'app/interfaces/api-models';
 
 export interface StoreState {
     // APIデータ
-    account: any;
-    profile: any;
+    account: API.User;
+    profile: API.Profile;
     chatList: API.ChatList;
     chats: API.Chat[];
     searchUsers: any;

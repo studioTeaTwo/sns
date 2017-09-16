@@ -5,8 +5,8 @@ import { StoreState } from './store-state.interface';
 
 const initialState = {
     // APIデータ
-    account: {},
-    profile: {},
+    account: {} as any,
+    profile: {} as any,
     chatList: [],
     chats: [],
     searchUsers: {},

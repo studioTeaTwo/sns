@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { TopComponent } from './components/top/top.component';
-import { SignupComponent } from 'app/tutorials/signup/signup.component';
 
 const routes: Routes = [
   {
@@ -34,8 +33,8 @@ const routes: Routes = [
   //   loadChildren: './components/account/account.module#AccountModule'
   // },
   {
-    path: 'signup',
-    component: SignupComponent
+    path: 'auth',
+    loadChildren: './components/auth/auth.module#AuthModule'
   },
 ];
 

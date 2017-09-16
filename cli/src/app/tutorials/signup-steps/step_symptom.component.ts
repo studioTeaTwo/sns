@@ -18,12 +18,12 @@ import {
   ChatService,
 } from 'app/shared/services/api';
 import { ChatComponent } from 'app/components/chats/chat/chat.component';
-import { addChat, addChatAndFocus } from '../../shared/chat-operation.function';
+import { addChat, addChatAndFocus } from '../shared/chat-operation.function';
 
 @Component({
   selector: 'app-step-symptom',
-  templateUrl: '../../../components/chats/chat/chat.component.html',
-  styleUrls: ['../../../components/chats/chat/chat.component.scss']
+  templateUrl: '../../components/chats/chat/chat.component.html',
+  styleUrls: ['../../components/chats/chat/chat.component.scss']
 })
 export class StepSymptomComponent extends ChatComponent implements OnInit, AfterViewInit {
   @ViewChild('replyText') input: ElementRef;

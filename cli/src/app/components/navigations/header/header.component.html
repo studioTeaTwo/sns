@@ -1,0 +1,31 @@
+<header *ngIf="isDisplay()">
+  <a class="title-logo" routerLink="/" routerLinkActive="active">ALLERGY LOG</a>
+  <button class="header-menu-button" md-icon-button [mdMenuTriggerFor]="menu">
+    <md-icon>more_vert</md-icon>
+  </button>
+
+  <md-menu #menu="mdMenu">
+    <div class="menu-login" *ngIf="isLogin()">
+      <button md-menu-item [routerLink]="['/user', account?.id]">
+        <md-icon>account_circle</md-icon>
+        <span>公開ページを見る</span>
+      </button>
+      <button md-menu-item routerLink="/user/setting">
+        <md-icon>settings</md-icon>
+        <span>設定変更する</span>
+      </button>
+      <button md-menu-item>
+        <md-icon>input</md-icon>
+        <span>ログアウト</span>
+      </button>
+    </div>
+    <div class="menu-logout" *ngIf="!isLogin()">
+      <button md-menu-item routerLink="/signup">
+        <span>会員登録</span>
+      </button>
+      <button md-menu-item routerLink="/login">
+        <span>ログイン</span>
+      </button>
+    </div>
+  </md-menu>
+</header>

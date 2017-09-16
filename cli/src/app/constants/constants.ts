@@ -1,21 +1,23 @@
-export const NAVI_CHARA = {
+import { User } from 'app/interfaces/api-models';
+
+export const NAVI_CHARA: User = {
   id: 1,
-  avatarUrl: 'assets/images/navi_avatar.png',
+  avatarUrl: 'assets/images/naviAvatar.png',
   email: '',
   name: '',
   selfIntroduction: '',
-  rank: '',
-  titleOfHonor: '',
+  rank: 0,
+  titleOfHonor: 0,
 };
 
-export const SIGNUP_USER = {
+export const SIGNUP_USER: User = {
   id: 0,
-  avatarUrl: 'assets/images/new_user_avatar.png',
+  avatarUrl: 'assets/images/newUserAvatar.png',
   email: '',
   name: '',
   selfIntroduction: '',
-  rank: '',
-  titleOfHonor: '',
+  rank: 0,
+  titleOfHonor: 0,
 };
 
 export const SIGNUP_THREAD = {

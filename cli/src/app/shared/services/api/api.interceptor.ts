@@ -10,7 +10,7 @@ export class ApiInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token = localStorage.getItem('allergylog');
+    const token = localStorage.getItem('token');
     if (!token && !request.url.match(/login/)) {
       // TODO: 認証画面を提示
     }

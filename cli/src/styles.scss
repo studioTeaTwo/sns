@@ -7,10 +7,6 @@
 //------------------------------
 // @: Utility
 //------------------------------
+@import "assets/sass/layouts/main";
 @import "assets/sass/utility/margin";
 
-body, html {
-  background-color: #f0f0f0;
-  margin: 0;
-  height: 100%;
-}

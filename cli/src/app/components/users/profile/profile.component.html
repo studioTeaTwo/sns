@@ -1,5 +1,50 @@
-<p>
-  profile works!
-</p>
+<div class="profile">
+<aside>
+  <section class="user_info">
 
-<label>{{JSON.stringify(profileResponse$ | async)}}</label>
+    <md-grid-list cols="4">
+      
+      <img [src]="(profile$ | async).avatarUrl" />
+      <div class="mdl-cell mdl-cell--3-col">
+        <h1 class="user-name">
+          {{(profile$ | async).name}}
+        </h1>
+        <div class="user-honor">
+          <span class="mdl-chip"><span class="mdl-chip__text">{{(profile$ | async).rank}}</span></span>
+          <span class="mdl-chip"><span class="mdl-chip__text">{{(profile$ | async).titleOfHonor}}</span></span>
+        </div>
+      </div>
+
+    <p class="user-igevalue">総IgE
+      <span>{{(profile$ | async).latestIge}}</span>
+    </p>
+
+    <div class="mdl-grid">
+      <div class="possession-allergen mdl-cell mdl-cell--4-col">
+        <img *ngFor="let allergen of (profile$ | async).positiveAllergenGroups" [src]="'assets/images/' + allergen + '.png'"/>
+      </div>
+    </div>
+
+    <p class="user-introduction">{{(profile$ | async).selfIntroduction}}</p>
+
+    <div class="stats">
+      <a>
+        <strong id="following" class="stat">
+          {{(profile$ | async).followings}}
+        </strong>
+        フォロー中
+      </a>
+      <a>
+        <strong id="followers" class="stat">
+          {{(profile$ | async).followers}}
+        </strong>
+        フォロワー
+      </a>
+    </div>
+
+    
+    </md-grid-list>
+
+  </section>
+</aside>
+</div>

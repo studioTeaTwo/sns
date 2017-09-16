@@ -22,7 +22,7 @@ Rails.application.routes.draw do
           post '/emailverification', to: 'users#verify_email'
         end
         member do
-          resources :profiles, only: [:show]
+          resources :profiles, only: [:index]
           resources :relationships, only: [:create, :destroy]
           resources :followings, only: [:index]
           resources :followers, only: [:index]

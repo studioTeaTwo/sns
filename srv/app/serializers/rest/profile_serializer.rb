@@ -4,7 +4,10 @@
 # @name Profile
 #
 # @attr [integer] latestIge
-# @attr [Array<string>] positiveAllergenGroup
+# @attr [Array<string>] positiveAllergenGroups
+# @attr [integer] followers
+# @attr [integer] followings
+# @attr [Array<string>] positiveAllergenGroups
 # @attr [integer] id
 # @attr [string] email
 # @attr [string] name
@@ -23,7 +26,7 @@
 # @attr [Array<Rest::MicropostSerializer>] microposts
 class Rest::ProfileSerializer < Rest::UserSerializer
   
-  attributes :latest_ige, :positive_allergen_group
+  attributes :latest_ige, :positive_allergen_groups, :followers, :followings
 
   has_many :iges, serializer: Rest::IgeSerializer, unless: :search?
   has_many :microposts, serializer: Rest::MicropostSerializer, unless: :search?
@@ -36,10 +39,18 @@ class Rest::ProfileSerializer < Rest::UserSerializer
     latest_test_result.present? ? latest_test_result.first.ige_value : ''
   end
 
-  def positive_allergen_group
+  def positive_allergen_groups
     return [] unless latest_test_result.present?
-    result = latest_test_result[0].attributes.collect {|k, v| k if k.match(/(allergen_group_.+)/) && v }
+    result = latest_test_result[0].attributes.collect {|k, v| k.camelize(:lower) if k.match(/(allergen_group_.+)/) && v }
     result.compact
+  end
+
+  def followers
+    object.followers.count
+  end
+
+  def followings
+    object.followings.count
   end
 
   # Searchならmicropotやigeは返さない
