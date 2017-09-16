@@ -20,16 +20,6 @@ export class UserService {
       );
   }
 
-  getSearchName(search_key: string) {
-    const params: HttpParams = new HttpParams().set('search_key', search_key);
-    this.httpClient.get<any>(`/api/search/usernames`, { params })
-      .subscribe(
-        response => {
-          this.onSuccessSearchUsers(response);
-        }
-      );
-  }
-
   private onSuccessProfile(data) {
     const currentState = this.store.getState();
     this.store.setState({

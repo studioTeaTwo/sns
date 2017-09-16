@@ -2,6 +2,7 @@
 #
 # @name ChatStrongParameter
 #
+# @attr [integer] id
 # @attr [integer] chatThreadId
 # @attr [integer] senderId
 # @attr [integer] contentType
@@ -9,4 +10,6 @@
 # @attr [hash] itemList
 # @attr [string] result
 # @attr [boolean] expired
+# @attr [date-time] createdAt
+# @attr [date-time] updatedAt
 class Params::Chat; end

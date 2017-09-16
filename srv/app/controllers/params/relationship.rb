@@ -2,6 +2,9 @@
 #
 # @name RelationshipStrongParameter
 #
+# @attr [integer] id
 # @attr [integer] followerId
 # @attr [integer] followedId
+# @attr [date-time] createdAt
+# @attr [date-time] updatedAt
 class Params::Relationship; end

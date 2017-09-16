@@ -41,11 +41,11 @@ namespace :json_params do
         end
       else
         # ActiveRecord Object
-        object.columns.map do |column|
-          next if exclusion_list.include? column.name.to_sym
-          type = special_case_list && special_case_list.keys.include?(column.name.to_sym) ?
-            special_case_list[column.name.to_sym] : adjust(column.type)
-          val << "# @attr [#{type}] #{column.name.camelize(:lower)}\n"
+        object.attribute_types.map do |key, active_model_type|
+          next if exclusion_list.include? key
+          type = special_case_list && special_case_list.keys.include?(key.to_sym) ?
+            special_case_list[key.to_sym] : adjust(active_model_type)
+          val << "# @attr [#{type}] #{key.camelize(:lower)}\n"
         end
       end
 
@@ -61,16 +61,17 @@ EOS
       File.open(file_path,"w") {|file| file.puts str}
     end
 
-    def adjust(type)
-      case type
+    def adjust(model)
+      case model.type
       when :text
         type = 'string'
+      when :time
       when :datetime
         type = 'date-time'
       when :decimal
-        type = 'double'
+        type = 'float' # 'string'
       else
-        type
+        type = model.type
       end
     end
 end

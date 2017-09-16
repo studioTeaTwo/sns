@@ -2,6 +2,9 @@
 #
 # @name ChatThreadStrongParameter
 #
+# @attr [integer] id
 # @attr [Array<integer>] participants
 # @attr [integer] newestChatId
+# @attr [date-time] createdAt
+# @attr [date-time] updatedAt
 class Params::ChaThread; end
