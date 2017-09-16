@@ -1,1 +1,48 @@
+<header *ngIf="isDisplayHeader()">
+  <a class="title-logo" routerLink="/" routerLinkActive="active">ALLERGY LOG</a>
+  <button class="header-menu-button" md-icon-button [mdMenuTriggerFor]="menu">
+    <md-icon>more_vert</md-icon>
+  </button>
+
+  <md-menu #menu="mdMenu">
+    <div class="menu-login" *ngIf="isLogin()">
+      <button md-menu-item routerLink="/user/me">
+        <md-icon>account_circle</md-icon>
+        <span>公開ページを見る</span>
+      </button>
+      <button md-menu-item routerLink="/user/">
+        <md-icon>settings</md-icon>
+        <span>設定変更する</span>
+      </button>
+      <button md-menu-item>
+        <md-icon>input</md-icon>
+        <span>ログアウト</span>
+      </button>
+    </div>
+    <div class="menu-logout" *ngIf="!isLogin()">
+      <button md-menu-item routerLink="/user/">
+        <span>会員登録</span>
+      </button>
+      <button md-menu-item>
+        <span>ログイン</span>
+      </button>
+    </div>
+  </md-menu>
+</header>
+
 <router-outlet></router-outlet>
+
+<div id="global-menu">
+  <a routerLink="/" routerLinkActive="active" class="global-menu-item">
+    <md-icon>home</md-icon>
+  </a>
+  <a routerLink="/" routerLinkActive="active"  class="global-menu-item">
+    <md-icon>watch_later</md-icon>
+  </a>
+  <a routerLink="/chat/list" routerLinkActive="active"  class="global-menu-item">
+    <md-icon>chat</md-icon>
+  </a>
+  <a routerLink="/search" routerLinkActive="active"  class="global-menu-item">
+    <md-icon>group</md-icon>
+  </a>
+</div>

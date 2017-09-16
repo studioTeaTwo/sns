@@ -1,17 +1,23 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { SpyLocation } from '@angular/common/testing';
 
+import { SharedModule } from 'app/shared/shared.module';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        SharedModule,
       ],
       declarations: [
         AppComponent
       ],
+      providers: [
+        SpyLocation,
+      ]
     }).compileComponents();
   }));
 
