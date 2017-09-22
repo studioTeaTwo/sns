@@ -20,8 +20,12 @@
     </p>
 
     <div class="mdl-grid">
-      <div class="possession-allergen mdl-cell mdl-cell--4-col">
-        <img *ngFor="let allergen of (profile$ | async).positiveAllergenGroups" [src]="'assets/images/' + allergen + '.png'"/>
+      <div
+        *ngFor="let allergen of (profile$ | async).positiveAllergenGroups"
+        class="possession-allergen"
+        (click)="onClick(allergen)"
+      >
+        <img [src]="'assets/images/' + allergen + '.png'"/>
       </div>
     </div>
 

@@ -499,6 +499,36 @@ export interface IgeStrongParameter {
     createdAt?: string; // date-time
     updatedAt?: string; // date-time
 }
+export interface MasterAllergen {
+    id?: number; // int32
+    en?: string;
+    ja?: string;
+    category?: string;
+    allergenGroup?: string;
+}
+export interface MasterAllergenGroup {
+    id?: number; // int32
+    en?: string;
+    ja?: string;
+}
+export interface MasterTestCategory {
+    id?: number; // int32
+    sort?: string;
+    name?: string;
+}
+export interface MasterTestUnit {
+    id?: number; // int32
+    sort?: string;
+    name?: string;
+}
+export interface MasterUserHonoraryTitle {
+    id?: number; // int32
+    name?: string;
+}
+export interface MasterUserRank {
+    id?: number; // int32
+    name?: string;
+}
 export interface Micropost {
     id?: number; // int32
     userId?: number; // int32

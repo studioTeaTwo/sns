@@ -43,6 +43,8 @@ Rails.application.routes.draw do
     end
     resources :microposts, only: [:create, :destroy]
     resources :iges
+
+    get '/master_data/allergen_groups',  to: 'master_data#allergen_groups'
   end
 
   # TODO: API化の残タスク

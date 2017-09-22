@@ -12,7 +12,7 @@ class Api::Search::AllergensController < ApplicationController
     if params[:keyword] == 'initial'
       @users = initial_display
     else
-      @users = User.search_by_allergen(params[:keyword])
+      @users = User.search_by_allergen(params[:keyword].underscore)
     end
     
     if @users.present?
@@ -38,7 +38,7 @@ class Api::Search::AllergensController < ApplicationController
     end
 
     def params_present?
-      params[:keyword].present? && ( params[:keyword] == 'initial' || params[:keyword].match(/(allergen_group_.+)/) )
+      params[:keyword].present? && ( params[:keyword] == 'initial' || params[:keyword].match(/(allergenGroup.+)/) )
     end
 
 end

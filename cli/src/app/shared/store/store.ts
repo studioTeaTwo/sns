@@ -9,7 +9,9 @@ const initialState = {
     profile: {} as any,
     chatList: [],
     chats: [],
-    searchUsers: {},
+    searchUsers: [],
+
+    masterAllergenGroups: [],
 
     // 画面状態
     loading: false,

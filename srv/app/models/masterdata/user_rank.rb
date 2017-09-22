@@ -1,3 +1,7 @@
+# @name MasterUserRank
+#
+# @attr [integer] id
+# @attr [string] name
 class Masterdata::UserRank < ActiveHash::Base
 
   # 検査単位

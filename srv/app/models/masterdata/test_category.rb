@@ -1,3 +1,8 @@
+# @name MasterTestCategory
+#
+# @attr [integer] id
+# @attr [string] sort
+# @attr [string] name
 class Masterdata::TestCategory < ActiveHash::Base
 
   # 検査種類

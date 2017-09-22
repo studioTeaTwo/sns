@@ -23,7 +23,7 @@ RSpec.describe "Api::Search::Allergens", type: :request do
 
     context "when user input search_key" do
       it "works!" do
-        get api_search_allergens_path, params: { keyword: :allergen_group_yasai } , headers: { 'Authorization' => "#{current_user.access_token}" }
+        get api_search_allergens_path, params: { keyword: :allergenGroupYasai } , headers: { 'Authorization' => "#{current_user.access_token}" }
         expect(response).to have_http_status(:success)
         expect(json.length).to eq(1)
 

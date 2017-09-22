@@ -8,6 +8,7 @@ import { Store } from 'app/shared/store/store';
 import { MaterialModule } from 'app/shared/material/material.module';
 import {
   ApiInterceptor,
+  MasterDataService,
   AccountService,
   UserService,
   ChatService,
@@ -53,6 +54,7 @@ export class SharedModule {
       providers: [
         Store,
 
+        MasterDataService,
         AccountService,
         UserService,
         ChatService

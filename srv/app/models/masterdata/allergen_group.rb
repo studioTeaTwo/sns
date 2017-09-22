@@ -1,3 +1,8 @@
+# @name MasterAllergenGroup
+#
+# @attr [integer] id
+# @attr [string] en
+# @attr [string] ja
 class Masterdata::AllergenGroup < ActiveHash::Base
 
   # アレルゲン種類

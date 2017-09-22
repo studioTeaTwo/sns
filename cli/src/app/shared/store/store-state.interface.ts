@@ -6,7 +6,9 @@ export interface StoreState {
     profile: API.Profile;
     chatList: API.ChatList;
     chats: API.Chat[];
-    searchUsers: any;
+    searchUsers: API.Profile[];
+
+    masterAllergenGroups: API.MasterAllergenGroup[];
 
     // 外部サービス
 

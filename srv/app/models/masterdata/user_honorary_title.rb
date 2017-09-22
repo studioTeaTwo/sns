@@ -1,3 +1,7 @@
+# @name MasterUserHonoraryTitle
+#
+# @attr [integer] id
+# @attr [string] name
 class Masterdata::UserHonoraryTitle < ActiveHash::Base
 
   # 検査単位

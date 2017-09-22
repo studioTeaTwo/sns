@@ -20,10 +20,10 @@ const routes: Routes = [
     path: 'user',
     loadChildren: './components/users/users.module#UsersModule'
   },
-  // {
-  //   path: 'search',
-  //   loadChildren: './components/search/search.module#SearchModule'
-  // },
+  {
+    path: 'search',
+    loadChildren: './components/search/search.module#SearchModule'
+  },
   // {
   //   path: 'auth',
   //   loadChildren: './components/auth/auth.module#AuthModule'

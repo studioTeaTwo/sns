@@ -133,8 +133,6 @@ class Api::IgesController < ApplicationController
       allergenGroup_list.delete_if {|item| item == 'allergen_group_maruti' }
     end
 
-    private
-
     # 陽性反応か調べる
     def positive_reaction?(inspection_data)
       allergen_class_name = inspection_data[0].match(/(allergen_.+)/)

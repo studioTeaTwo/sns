@@ -1,0 +1,4 @@
+<div *ngFor="let user of (searchUsers$ | async)" (click)="onClick(user)">
+  <img [src]="user.avatarUrl" />
+  <div>{{user.name}}</div>
+</div>

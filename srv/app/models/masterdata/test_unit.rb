@@ -1,3 +1,8 @@
+# @name MasterTestUnit
+#
+# @attr [integer] id
+# @attr [string] sort
+# @attr [string] name
 class Masterdata::TestUnit < ActiveHash::Base
 
   # 検査単位
