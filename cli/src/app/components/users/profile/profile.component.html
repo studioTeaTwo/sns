@@ -19,14 +19,12 @@
       <span>{{(profile$ | async).latestIge}}</span>
     </p>
 
-    <div class="mdl-grid">
-      <div
-        *ngFor="let allergen of (profile$ | async).positiveAllergenGroups"
-        class="possession-allergen"
-        (click)="onClick(allergen)"
-      >
-        <img [src]="'assets/images/' + allergen + '.png'"/>
-      </div>
+    <div
+      *ngFor="let allergen of (profile$ | async).positiveAllergenGroups"
+      class="possession-allergen"
+      (click)="onClick(allergen)"
+    >
+      <img [src]="'assets/images/' + allergen + '.png'"/>
     </div>
 
     <p class="user-introduction">{{(profile$ | async).selfIntroduction}}</p>
@@ -46,6 +44,9 @@
       </a>
     </div>
 
+    <a *ngIf="!isMyself" [routerLink]="['/chat', (profile$ | async).id]" routerLinkActive="active" class="global-menu-item">
+      <md-icon>chat</md-icon>
+    </a>
     
     </md-grid-list>
 

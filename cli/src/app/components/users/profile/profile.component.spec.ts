@@ -6,7 +6,7 @@ import { ProfileComponent } from './profile.component';
 
 import { SharedModule } from 'app/shared/shared.module';
 import { Store } from 'app/shared/store/store';
-import { UserService } from 'app/shared/services/api';
+import { AccountService, UserService } from 'app/shared/services/api';
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
@@ -22,6 +22,7 @@ describe('ProfileComponent', () => {
       declarations: [ ProfileComponent ],
       providers: [
         Store,
+        AccountService,
         UserService,
       ]
     })

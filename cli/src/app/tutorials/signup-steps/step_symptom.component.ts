@@ -39,15 +39,16 @@ export class StepSymptomComponent extends ChatComponent implements OnInit, After
     route: ActivatedRoute,
     renderer: Renderer2,
     store: Store,
+    accountService: AccountService,
     chatService: ChatService,
     private sanitizer: DomSanitizer,
-    private accountService: AccountService,
   ) {
     super(
       router,
       route,
       renderer,
       store,
+      accountService,
       chatService,
     );
     this.height = window.innerHeight;

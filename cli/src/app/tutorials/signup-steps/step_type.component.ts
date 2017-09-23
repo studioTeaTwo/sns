@@ -39,15 +39,16 @@ export class StepTypeComponent extends ChatComponent implements OnInit, AfterVie
     route: ActivatedRoute,
     renderer: Renderer2,
     store: Store,
+    accountService: AccountService,
     chatService: ChatService,
     private sanitizer: DomSanitizer,
-    private accountService: AccountService,
   ) {
     super(
       router,
       route,
       renderer,
       store,
+      accountService,
       chatService,
     );
     this.height = window.innerHeight;

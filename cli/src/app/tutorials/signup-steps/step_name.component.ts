@@ -38,14 +38,15 @@ export class StepNameComponent extends ChatComponent implements OnInit {
     route: ActivatedRoute,
     renderer: Renderer2,
     store: Store,
+    accountService: AccountService,
     chatService: ChatService,
-    private accountService: AccountService,
   ) {
     super(
       router,
       route,
       renderer,
       store,
+      accountService,
       chatService,
     );
     this.height = window.innerHeight;

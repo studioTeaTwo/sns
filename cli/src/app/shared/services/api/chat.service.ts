@@ -8,6 +8,7 @@ import {
   ChatThread,
   Chats,
   Chat,
+  CONTENT_TYPE,
 } from 'app/interfaces/api-models';
 
 @Injectable()
@@ -37,7 +38,6 @@ export class ChatService {
   }
 
   post(opponentUserId: number): Observable<ChatThread> {
-    const myAccount = this.store.getState().account;
     const body = {
       chat_thread: {
         participants: [opponentUserId]
@@ -55,7 +55,8 @@ export class ChatService {
   say(chatThreadId: number, content: string) {
     const body = {
       chat: {
-        chat_thread_id: chatThreadId,
+        chatThreadId: chatThreadId,
+        contentType: CONTENT_TYPE.REPLY,
         body: content
       }
     };
@@ -83,6 +84,7 @@ export class ChatService {
     const currentState = this.store.getState();
     data = this.unique(data.concat(...currentState.chats));
     data.sort(this.compareCreated);
+    console.log('チャット取れた', data);
     this.store.setState({
       ...currentState,
       chats: data,

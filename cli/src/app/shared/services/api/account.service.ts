@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 import { Store } from 'app/shared/store/store';
+import {
+  User,
+} from 'app/interfaces/api-models';
 
 @Injectable()
 export class AccountService {
@@ -38,13 +41,24 @@ export class AccountService {
       );
   }
 
-  get() {
-    this.http.get<any>(`/api/users/${this.userId}`)
-      .subscribe(
-        response => {
-          this.onSuccessAccount(response);
-        }
-      );
+  get(): Observable<User> {
+    if (this.store.getState().account) {
+      return Observable.of(this.store.getState().account);
+    } else {
+      const myself = JSON.parse(localStorage.getItem('account')) as User;
+      if (myself) {
+        this.onSuccessAccount(myself);
+        return Observable.of(myself);
+      } else {
+        return this.http.get<any>(`/api/users/${this.userId}`)
+          .map(
+            response => {
+              this.onSuccessAccount(response);
+              return response;
+            }
+          );
+      }
+    }
   }
 
   create() {

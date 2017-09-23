@@ -75,13 +75,10 @@ RSpec.describe "Api::Chats", type: :request do
     end
 
     context "when existing participants" do
-      it "should be error" do
+      it "return existing data" do
         post api_chats_path, params: { chat_thread: { participants: [another_user.id] }}, headers: { 'Authorization' => "#{current_user.access_token}" }
-        expect(response).to have_http_status(:unprocessable_entity)
-        expect(ChatThread.count).to eq 1
-        expect(ChatStatus.count).to eq 2
-        expect(ChatStatus.where(user_id: current_user.id).count).to eq 1
-        expect(ChatStatus.where(user_id: another_user.id).count).to eq 1
+        expect(response).to have_http_status(:success)
+        # TODO: jsonの内容
       end
     end
   end

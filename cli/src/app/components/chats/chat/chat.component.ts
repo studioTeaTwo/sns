@@ -7,11 +7,11 @@ import { Store } from 'app/shared/store/store';
 import {
   ChatThread,
   Chats,
-  Chat,
+  ChatViewModel,
   CONTENT_TYPE,
   User,
 } from 'app/interfaces/api-models';
-import { ChatService } from 'app/shared/services/api';
+import { AccountService, ChatService } from 'app/shared/services/api';
 
 @Component({
   selector: 'app-chat',
@@ -37,6 +37,7 @@ export class ChatComponent implements OnInit {
     public route: ActivatedRoute,
     private renderer: Renderer2,
     public store: Store,
+    public accountService: AccountService,
     public chatService: ChatService,
   ) {
     this.height = window.innerHeight - 50; // chat.footer.height
@@ -44,13 +45,20 @@ export class ChatComponent implements OnInit {
 
   ngOnInit() {
     this.chats$ = this.store.changes.pluck('chats');
-    this.myself = this.store.getState().account;
+    this.accountService.get().subscribe(response => this.myself = response);
 
     this.route.params
       .map(params => {
         this.chatThread = this.store.getState().chatList.find(value => value.id === +params['id']);
-        this.opponents = this.chatThread.participants.filter(value => value.id !== this.myself.id);
-        this.chatService.get(params['id']);
+        if (this.chatThread) {
+          this.opponents = this.chatThread.participants.filter(value => value.id !== this.myself.id);
+          this.chatService.get(+params['id']);
+        } else {
+          this.chatService.post(+params['id']).subscribe(response => {
+            this.chatThread = response;
+            this.opponents = response.participants.filter(value => value.id !== this.myself.id);
+          });
+        }
       })
       .subscribe(
         () => console.log(),
@@ -60,29 +68,29 @@ export class ChatComponent implements OnInit {
 
   isDisplayDate() {}
 
-  isMyself(chat: Chat): boolean {
+  isMyself(chat: ChatViewModel): boolean {
     if (!chat.body) { return false; }
     return (chat.contentType === CONTENT_TYPE.REPLY) && (chat.senderId === this.myself.id);
   }
 
-  isOpponents(chat: Chat): boolean {
+  isOpponents(chat: ChatViewModel): boolean {
     if (!chat.body) { return false; }
     return (chat.contentType === CONTENT_TYPE.REPLY) && (this.opponents.some(value => value.id === chat.senderId));
   }
 
-  isYesNo(chat: Chat): boolean {
+  isYesNo(chat: ChatViewModel): boolean {
     return (chat.contentType === CONTENT_TYPE.YESNO);
   }
 
-  isCheckbox(chat: Chat): boolean {
+  isCheckbox(chat: ChatViewModel): boolean {
     return (chat.contentType === CONTENT_TYPE.CHECKBOX) && chat.itemList ? true : false;
   }
 
-  isRadiobutton(chat: Chat): boolean {
+  isRadiobutton(chat: ChatViewModel): boolean {
     return (chat.contentType === CONTENT_TYPE.RADIOBUTTON) && chat.itemList ? true : false;
   }
 
-  getImgSrc(chat: Chat): string {
+  getImgSrc(chat: ChatViewModel): string {
     if (chat.senderId === this.myself.id) {
       return this.myself.avatarUrl;
     } else {

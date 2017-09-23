@@ -4,7 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { SharedModule } from 'app/shared/shared.module';
 import { Store } from 'app/shared/store/store';
-import { ChatService } from 'app/shared/services/api';
+import { AccountService, ChatService } from 'app/shared/services/api';
 import { ChatComponent } from './chat.component';
 
 describe('ChatComponent', () => {
@@ -21,6 +21,7 @@ describe('ChatComponent', () => {
       declarations: [ ChatComponent ],
       providers: [
         Store,
+        AccountService,
         ChatService,
       ]
     })

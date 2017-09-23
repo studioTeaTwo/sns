@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 import { Store } from 'app/shared/store/store';
-import { ChatService } from 'app/shared/services/api';
 import { ChatThread, User } from 'app/interfaces/api-models';
+import { AccountService, ChatService } from 'app/shared/services/api';
 
 @Component({
   selector: 'app-chat-list',
@@ -19,12 +19,13 @@ export class ChatListComponent implements OnInit {
   constructor(
     private router: Router,
     private store: Store,
+    private accountService: AccountService,
     private chatService: ChatService,
   ) { }
 
   ngOnInit() {
     this.chatList$ = this.store.changes.pluck('chatList');
-    this.myself = this.store.getState().account;
+    this.accountService.get().subscribe(response => this.myself = response);
 
     this.chatService.list();
   }
@@ -32,6 +33,7 @@ export class ChatListComponent implements OnInit {
   getImgSrc(chatThread: ChatThread) {
     // TODO: 3人以上の時
     const user = chatThread.participants.find(value => value.id !== this.myself.id);
+    console.log(user, this.myself);
     return user.avatarUrl;
   }
 

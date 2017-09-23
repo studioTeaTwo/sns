@@ -19,6 +19,11 @@ class Api::ChatsController < ApplicationController
   # @response_class Rest::ChatThreadSerializer
   def create
     participants = make_participants
+    @existing_chat_thread = current_user.chat_threads.where("participants = ?", participants.to_yaml)
+    if @existing_chat_thread.present?
+      render json: @existing_chat_thread.first, serializer: Rest::ChatThreadSerializer
+      return
+    end
     @chat_thread = current_user.chat_threads.build({participants: participants})
     ActiveRecord::Base.transaction do
       @chat_thread.save!
@@ -70,33 +75,30 @@ class Api::ChatsController < ApplicationController
 
   private
   
-      def chat_thread_params
-        params.fetch(:chat_thread, {}).permit(
-          :chat_thread_id,
-          :participants => []
-        )
-      end
+    def chat_thread_params
+      params.fetch(:chat_thread, {}).permit(
+        :chat_thread_id,
+        :participants => []
+      )
+    end
 
-      def chat_params
-        params.fetch(:chat, {}).permit(
-          :chat_thread_id,
-          :body
-        )
-      end
+    def chat_params
+      params.fetch(:chat, {}).permit(*Chat.column_names)
+    end
 
-      def readChat(chat_thread_id, chat_id)
-        ChatStatus.where(chat_thread_id: chat_thread_id, user_id: current_user.id).first.update(read_until: chat_id)
-      end
+    def readChat(chat_thread_id, chat_id)
+      ChatStatus.where(chat_thread_id: chat_thread_id, user_id: current_user.id).first.update(read_until: chat_id)
+    end
 
-      def correct_user
-        chat_thread = ChatThread.find(params[:id])
-        render json: { error: 'forbidden' }, status: :forbidden if chat_thread.chat_statuses.where(user_id: current_user.id).empty?
-      end
+    def correct_user
+      chat_thread = ChatThread.find(params[:id])
+      render json: { error: 'forbidden' }, status: :forbidden if chat_thread.chat_statuses.where(user_id: current_user.id).empty?
+    end
 
-      def make_participants
-        participants = chat_thread_params[:participants]
-        participants.push(current_user.id)
-        # modelのvalidates :participantsのためにsortする
-        participants.map(&:to_i).sort!        
-      end
+    def make_participants
+      participants = chat_thread_params[:participants]
+      participants.push(current_user.id)
+      # modelのvalidates :participantsのためにsortする
+      participants.map(&:to_i).sort!        
+    end
 end

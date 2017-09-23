@@ -12,7 +12,7 @@
         <tbody *ngFor="let chat of (chats$ | async); let idx = index;">
           
           <!-- 年月日 -->
-          <tr *ngIf="isDisplayDate(idx)"><td colspan="3"><hr class="chat-divider chat-divider-date" [attr.data-content]="chat.created | formatToJapaneseDate"></td></tr>
+          <tr *ngIf="isDisplayDate(idx)"><td colspan="3"><hr class="chat-divider chat-divider-date" [attr.data-content]="chat.createdAt | formatToJapaneseDate"></td></tr>
     
           <!-- me -->
           <tr class="myself" *ngIf="chat && isMyself(chat)">

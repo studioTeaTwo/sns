@@ -5,6 +5,5 @@
 <a *ngFor="let chatThread of (chatList$ | async)" (click)="onClick(chatThread)">
   <img class="chat-avatar" [src]="getImgSrc(chatThread)" />
   <span>{{chatThread.newestChat.createdAt}}</span>
-  <span>{{chatThread.newestChat.createdAt}}</span>
   <span>{{chatThread.newestChat.body | shortenText:20}}</span>
 </a>

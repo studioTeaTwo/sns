@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 
 import { Store } from 'app/shared/store/store';
 import { User } from 'app/interfaces/api-models'
+import { AccountService } from 'app/shared/services/api';
 
 @Component({
   selector: 'app-header',
@@ -16,13 +17,14 @@ export class HeaderComponent implements OnInit {
   constructor(
     private location: Location,
     private store: Store,
+    private accountService: AccountService,
   ) {
     this.currentLocation = location;
   }
 
   ngOnInit() {
     if (this.isLogin()) {
-      this.account = JSON.parse(localStorage.getItem('account')) as User;
+      this.accountService.get().subscribe(response => this.account = response);
     }
   }
 

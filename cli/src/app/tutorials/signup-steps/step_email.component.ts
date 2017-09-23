@@ -39,15 +39,16 @@ export class StepEmailComponent extends ChatComponent implements OnInit, AfterVi
     route: ActivatedRoute,
     renderer: Renderer2,
     store: Store,
+    accountService: AccountService,
     chatService: ChatService,
     private sanitizer: DomSanitizer,
-    private accountService: AccountService,
   ) {
     super(
       router,
       route,
       renderer,
       store,
+      accountService,
       chatService,
     );
     this.height = window.innerHeight;

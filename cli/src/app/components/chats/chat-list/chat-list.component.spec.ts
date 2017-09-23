@@ -4,7 +4,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { SharedModule } from 'app/shared/shared.module';
 import { Store } from 'app/shared/store/store';
-import { ChatService } from 'app/shared/services/api';
+import { AccountService, ChatService } from 'app/shared/services/api';
 import { ShortenTextPipe } from 'app/shared/pipes';
 import { ChatListComponent } from './chat-list.component';
 
@@ -24,6 +24,7 @@ describe('ChatListComponent', () => {
       ],
       providers: [
         Store,
+        AccountService,
         ChatService,
       ]
     })
