@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.profile$ = this.store.changes.pluck('profile') as Observable<Profile>;
+    this.profile$ = this.store.changes.pluck('profile');
     this.route.params.subscribe((params: Params) => {
         this.userService.getProfile(params['userId']);
         this.accountService.get().subscribe(response => this.isMyself = params['userId'] === response.id)

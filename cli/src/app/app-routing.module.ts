@@ -9,6 +9,10 @@ const routes: Routes = [
     component: TopComponent,
   },
   {
+    path: 'home',
+    component: TopComponent,
+  },
+  {
     path: 'chat',
     loadChildren: './components/chats/chats.module#ChatsModule'
   },

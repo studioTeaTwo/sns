@@ -1,12 +1,12 @@
 <header *ngIf="isDisplay()">
-  <a class="title-logo" routerLink="/" routerLinkActive="active">ALLERGY LOG</a>
+  <a class="title-logo" routerLink="/home" routerLinkActive="active">ALLERGY LOG</a>
   <button class="header-menu-button" md-icon-button [mdMenuTriggerFor]="menu">
     <md-icon>more_vert</md-icon>
   </button>
 
   <md-menu #menu="mdMenu">
     <div class="menu-login" *ngIf="isLogin()">
-      <button md-menu-item [routerLink]="['/user', account?.id]">
+      <button md-menu-item [routerLink]="userProfile">
         <md-icon>account_circle</md-icon>
         <span>公開ページを見る</span>
       </button>

@@ -12,6 +12,7 @@ import { Profile } from 'app/interfaces/api-models';
 })
 export class ResultsComponent implements OnInit {
   searchUsers$: Observable<Profile[]>;
+  loading$: Observable<boolean>;
 
   constructor(
     private router: Router,
@@ -20,6 +21,7 @@ export class ResultsComponent implements OnInit {
 
   ngOnInit() {
     this.searchUsers$ = this.store.changes.pluck('searchUsers');
+    this.loading$ = this.store.changes.pluck('loading');
   }
 
   onClick(value: Profile) {

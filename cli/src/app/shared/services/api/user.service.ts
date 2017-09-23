@@ -29,6 +29,9 @@ export class UserService {
       .subscribe(
         response => {
           this.onSuccessSearchUsers(response);
+        },
+        error => {
+          this.onNotFound();
         }
       );
   }
@@ -48,6 +51,16 @@ export class UserService {
     this.store.setState({
       ...currentState,
       searchUsers: data,
+      loading: false,
+      error: false,
+    });
+  }
+
+  private onNotFound() {
+    const currentState = this.store.getState();
+    this.store.setState({
+      ...currentState,
+      searchUsers: [],
       loading: false,
       error: false,
     });

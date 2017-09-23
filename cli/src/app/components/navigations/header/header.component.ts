@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 
-import { Store } from 'app/shared/store/store';
 import { User } from 'app/interfaces/api-models'
-import { AccountService } from 'app/shared/services/api';
 
 @Component({
   selector: 'app-header',
@@ -16,16 +14,18 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private location: Location,
-    private store: Store,
-    private accountService: AccountService,
   ) {
     this.currentLocation = location;
   }
 
   ngOnInit() {
     if (this.isLogin()) {
-      this.accountService.get().subscribe(response => this.account = response);
+      this.account = JSON.parse(localStorage.getItem('account')) as User;
     }
+  }
+
+  get userProfile() {
+    return '/user/' + this.account.id;
   }
 
   isDisplay() {
@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
   }
 
   isLogin() {
-    return localStorage.getItem('token');
+    const token = localStorage.getItem('token');
+    return token && token.length > 0;
   }
-
 }

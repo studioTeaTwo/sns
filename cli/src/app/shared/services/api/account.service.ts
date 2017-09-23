@@ -9,7 +9,7 @@ import {
 
 @Injectable()
 export class AccountService {
-  private userId: string;
+  private userId: number;
   private signupData = {
     name: '',
     email: '',
@@ -30,7 +30,7 @@ export class AccountService {
         password: password
       }
     };
-    this.http.post<any>(`/api/login`, body)
+    this.http.post<User>(`/api/login`, body)
       .subscribe(
         response => {
           this.userId = response.id;
@@ -42,15 +42,16 @@ export class AccountService {
   }
 
   get(): Observable<User> {
-    if (this.store.getState().account) {
+    let myself = this.store.getState().account;
+    if (myself && myself.id) {
       return Observable.of(this.store.getState().account);
     } else {
-      const myself = JSON.parse(localStorage.getItem('account')) as User;
-      if (myself) {
+      myself = JSON.parse(localStorage.getItem('account')) as User;
+      if (myself && myself.id) {
         this.onSuccessAccount(myself);
         return Observable.of(myself);
       } else {
-        return this.http.get<any>(`/api/users/${this.userId}`)
+        return this.http.get<User>(`/api/users/${this.userId}`)
           .map(
             response => {
               this.onSuccessAccount(response);
@@ -109,7 +110,7 @@ export class AccountService {
     this.signupData.password = password;
   }
 
-  private onSuccessAccount(data) {
+  private onSuccessAccount(data: User) {
     const currentState = this.store.getState();
     this.store.setState({
       ...currentState,

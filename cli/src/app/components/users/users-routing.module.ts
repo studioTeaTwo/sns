@@ -6,12 +6,12 @@ import { SettingComponent } from './setting/setting.component';
 
 const routes: Routes = [
   {
-    path: ':userId',
-    component: ProfileComponent,
-  },
-  {
     path: 'setting',
     component: SettingComponent,
+  },
+  {
+    path: ':userId',
+    component: ProfileComponent,
   },
 ];
 

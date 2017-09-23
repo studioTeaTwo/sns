@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 import { Store } from 'app/shared/store/store';
@@ -24,10 +24,11 @@ export class TopComponent implements OnInit {
     private store: Store,
     private accountService: AccountService,
     private chatService: ChatService,
-  ) { }
+  ) {
+    window.scrollTo(0, 0);
+  }
 
   ngOnInit() {
-    this.accountResponse$ = this.store.changes.pluck('account');
   }
 
   sighup() {
