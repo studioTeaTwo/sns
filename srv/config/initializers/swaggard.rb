@@ -3,7 +3,7 @@
 #
 # For more info on configuration settings see http://swagger.io/specification/
 
-if Swaggard.nil?
+if defined? Swaggard
 
   Swaggard.configure do |config|
     # Set an access password.

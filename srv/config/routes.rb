@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  mount Swaggard::Engine, at: '/api_docs/swagger/'
+  if defined? Swaggard
+    mount Swaggard::Engine, at: '/api_docs/swagger/'
+  end
 
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
