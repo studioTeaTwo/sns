@@ -20,6 +20,14 @@ class Api::SessionsController < ApplicationController
     end
   end
 
+  # Destroys a session
+  #
+  # @response_status 200
+  def destroy
+    sign_out current_user
+    head :ok
+  end
+
   private
 
     def session_params

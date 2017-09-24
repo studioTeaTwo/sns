@@ -5,8 +5,15 @@
 //------------------------------
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 //------------------------------
-// @: Utility
+// @: Common Layouts
 //------------------------------
 @import "assets/sass/layouts/main";
+//------------------------------
+// @: Components
+//------------------------------
+@import "assets/sass/components/form";
+//------------------------------
+// @: Utility
+//------------------------------
 @import "assets/sass/utility/margin";
 

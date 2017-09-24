@@ -30,6 +30,7 @@ export interface ChatThread {
     id?: number; // int32
     hasUnread?: boolean;
     readUntil?: number; // int32
+    createdAt?: string; // date-time
     updatedAt?: string; // date-time
     participants?: User[];
     newestChat?: Chat;

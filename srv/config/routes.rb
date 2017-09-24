@@ -51,7 +51,6 @@ Rails.application.routes.draw do
 
   # TODO: API化の残タスク
   post '/signup',  to: 'users#create'
-  delete '/logout',  to: 'sessions#destroy'
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:create, :update]
 

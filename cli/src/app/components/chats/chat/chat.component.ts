@@ -52,9 +52,10 @@ export class ChatComponent implements OnInit {
         this.chatThread = this.store.getState().chatList.find(value => value.id === +params['id']);
         if (this.chatThread) {
           this.opponents = this.chatThread.participants.filter(value => value.id !== this.myself.id);
-          this.chatService.get(+params['id']);
+          this.chatService.getChatThread(+params['id']);
         } else {
-          this.chatService.post(+params['id']).subscribe(response => {
+          // プロフィールなどから新規でチャット開始したとき
+          this.chatService.createChatThread(+params['id']).subscribe(response => {
             this.chatThread = response;
             this.opponents = response.participants.filter(value => value.id !== this.myself.id);
           });

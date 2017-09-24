@@ -33,7 +33,6 @@ export class ChatListComponent implements OnInit {
   getImgSrc(chatThread: ChatThread) {
     // TODO: 3人以上の時
     const user = chatThread.participants.find(value => value.id !== this.myself.id);
-    console.log(user, this.myself);
     return user.avatarUrl;
   }
 

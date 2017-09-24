@@ -23,20 +23,31 @@ export class AccountService {
     private store: Store,
   ) { }
 
-  login(email: string, password: string) {
+  login(email: string, password: string): Observable<User> {
     const body = {
       session: {
         email: email,
         password: password
       }
     };
-    this.http.post<User>(`/api/login`, body)
-      .subscribe(
+    return this.http.post<User>(`/api/login`, body)
+      .map(
         response => {
           this.userId = response.id;
           localStorage.setItem('token', response.accessToken);
           localStorage.setItem('account', JSON.stringify(response));
           this.onSuccessAccount(response);
+          return response;
+        }
+      );
+  }
+
+  logout() {
+    this.http.delete(`/api/logout`)
+      .subscribe(
+        response => {
+          localStorage.removeItem('token');
+          localStorage.removeItem('account');
         }
       );
   }
@@ -108,6 +119,25 @@ export class AccountService {
 
   saveSignupdataPassword(password: string) {
     this.signupData.password = password;
+  }
+
+  emailValidator(email: string): boolean {
+    const mail_regex = new RegExp(
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+    );
+    if (email.match(mail_regex)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  passwordValidator(password: string): boolean {
+    if (password.length && password.length >= 6) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   private onSuccessAccount(data: User) {

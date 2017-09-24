@@ -11,4 +11,11 @@ RSpec.describe "Api::Sessions", type: :request do
       expect(json['accessToken'].length).to be > 0
     end
   end
+
+  describe "DELETE /api/logout" do
+    it "return success status" do
+      delete api_logout_path, headers: { 'Authorization' => "#{user.access_token}" }
+      expect(response).to have_http_status(:success)
+    end
+  end
 end

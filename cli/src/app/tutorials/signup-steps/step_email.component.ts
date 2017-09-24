@@ -84,7 +84,7 @@ export class StepEmailComponent extends ChatComponent implements OnInit, AfterVi
     if (!this.chatHistory.includes(tutorial_script3[0])) {
       // FIXME: 正規表現バリデーション
       // https://blog.ohgaki.net/redos-must-review-mail-address-validation
-      if (!this.emailValidator(text)) {
+      if (!this.accountService.emailValidator(text)) {
         addChatAndFocus({
           body: tutorial_script_error,
           waitTime: 0,
@@ -111,7 +111,7 @@ export class StepEmailComponent extends ChatComponent implements OnInit, AfterVi
     // パスワード
     } else {
       // TODO: パスワードバリデーション。日本語オーケーでいいか？
-      if (!this.passwordValidator(text)) {
+      if (!this.accountService.passwordValidator(text)) {
         addChatAndFocus({
           body: tutorial_script_error,
           waitTime: 0,
@@ -173,25 +173,6 @@ export class StepEmailComponent extends ChatComponent implements OnInit, AfterVi
       waitTime: 0,
     }, this.chatHistory, this.chatSource);
     setTimeout(() => this.scrollToBottom(), 0);
-  }
-
-  private emailValidator(email: string): boolean {
-    const mail_regex = new RegExp(
-      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-    );
-    if (email.match(mail_regex)) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  private passwordValidator(password: string): boolean {
-    if (password.length && password.length >= 6) {
-      return true;
-    } else {
-      return false;
-    }
   }
 }
 

@@ -3,12 +3,13 @@
 # @attr [integer] id
 # @attr [boolean] hasUnread
 # @attr [integer] readUntil
+# @attr [date-time] createdAt
 # @attr [date-time] updatedAt
 # @attr [Array<Rest::UserSerializer>] participants
 # @attr [Rest::ChatSerializer] newestChat
 class Rest::ChatThreadSerializer < ActiveModel::Serializer
   
-  attributes :id, :has_unread, :read_until, :updated_at
+  attributes :id, :has_unread, :read_until, :created_at, :updated_at
   
   has_many :users, key: :participants, serializer: Rest::UserSerializer do
     object.users

@@ -1,0 +1,41 @@
+// Define a value
+$input-error-color: #c92434;
+$require-back-color: #fff4f4;
+
+// Mixin
+@mixin inputError() {
+  box-shadow: 0 0 2px 1px rgba(255, 0, 0, 0.4);
+  border-color: $input-error-color;
+}
+
+/* *****************************************************************
+ * Input・Select・Textarea
+ ***************************************************************** */
+
+.input[type=text], .input[type=date], .input[type=month], .input[type=number], .input[type=password], .input[type=email], .input[type=tel], .input[type=url], .select, .textarea {
+  // required
+  &:required {
+    background: $require-back-color;
+  }
+  // error
+  &.input-error {
+    @include inputError;
+  }
+}
+
+// error
+.textfield {
+  padding-top: 4px;
+  font-size: 1rem;
+  line-height: 1.3;
+  display: block;
+  width: 100%;
+  &-hint {
+    @extend .textfield;
+    color: #aaa;
+  }
+  &-error {
+    @extend .textfield;
+    color: $input-error-color;
+  }
+}

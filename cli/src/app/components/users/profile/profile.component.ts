@@ -34,7 +34,8 @@ export class ProfileComponent implements OnInit {
     this.profile$ = this.store.changes.pluck('profile');
     this.route.params.subscribe((params: Params) => {
         this.userService.getProfile(params['userId']);
-        this.accountService.get().subscribe(response => this.isMyself = params['userId'] === response.id)
+        this.accountService.get()
+          .subscribe(response => this.isMyself = params['userId'] === response.id.toString())
       });
   }
 

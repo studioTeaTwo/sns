@@ -28,7 +28,7 @@ export class ChatService {
       );
   }
 
-  get(chatThreadId: number) {
+  getChatThread(chatThreadId: number) {
     this.httpClient.get<Chats>(`/api/chats/${chatThreadId}`)
       .subscribe(
         response => {
@@ -37,7 +37,7 @@ export class ChatService {
       );
   }
 
-  post(opponentUserId: number): Observable<ChatThread> {
+  createChatThread(opponentUserId: number): Observable<ChatThread> {
     const body = {
       chat_thread: {
         participants: [opponentUserId]

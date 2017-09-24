@@ -19,7 +19,7 @@ export class GlobalMenuComponent implements OnInit {
   }
 
   isDisplay() {
-    return !this.currentLocation.path().match(/(signup|chat)/);
+    return !this.currentLocation.path().match(/(signup|chat+\/[0-9-])/);
   }
 
 }
