@@ -54,7 +54,6 @@ class Api::IgesController < ApplicationController
   # @response_status 200
   # @response_class Rest::IgeSerializer
   def update
-    @ige = Ige.find(params[:id])
     # アレルゲン判定を追加する
     addition_params = calc_allergen_possession(ige_params.to_h)
     ActiveRecord::Base.transaction do
@@ -77,7 +76,6 @@ class Api::IgesController < ApplicationController
   #
   # @response_status 200
   def destroy
-    @ige = current_user.iges.find_by(:id => params[:id])
     if !@ige.nil?
       @ige.destroy
       head :ok

@@ -2,7 +2,6 @@
 #
 # @name UserStrongParameter
 #
-# @attr [integer] id
 # @attr [string] email
 # @attr [string] encryptedPassword
 # @attr [string] resetPasswordToken
@@ -17,8 +16,6 @@
 # @attr [date-time] confirmedAt
 # @attr [date-time] confirmationSentAt
 # @attr [string] unconfirmedEmail
-# @attr [date-time] createdAt
-# @attr [date-time] updatedAt
 # @attr [string] name
 # @attr [boolean] admin
 # @attr [string] selfIntroduction

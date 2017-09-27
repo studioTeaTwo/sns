@@ -2,8 +2,6 @@
 #
 # @name IgeStrongParameter
 #
-# @attr [integer] id
-# @attr [integer] userId
 # @attr [date] testDate
 # @attr [boolean] latestTestResult
 # @attr [integer] testCategory
@@ -224,6 +222,4 @@
 # @attr [integer] allergenInekaClass
 # @attr [integer] allergenKabiClass
 # @attr [integer] allergenZassouClass
-# @attr [date-time] createdAt
-# @attr [date-time] updatedAt
 class Params::Ige; end

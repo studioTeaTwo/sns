@@ -42,6 +42,7 @@ class Api::Users::UsersController < ApplicationController
   # @response_status 200
   # @response_class Rest::UserSerializer
   def update
+    @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       render json: @user, serializer: Rest::UserSerializer
     else
@@ -107,22 +108,22 @@ class Api::Users::UsersController < ApplicationController
           case symptom.to_sym
           when :atopic then
             @user.atopic = true
-            @personal_assistant.diary_atopic = true
+            @personal_assistant.daily_atopic = true
           when :asthma then
             @user.asthma = true
-            @personal_assistant.diary_asthma = true
+            @personal_assistant.daily_asthma = true
           when :rhinitis then
             @user.rhinitis = true
-            @personal_assistant.diary_rhinitis = true
+            @personal_assistant.daily_rhinitis = true
           when :pollen then
             @user.pollen = true
-            @personal_assistant.diary_pollen = true
+            @personal_assistant.daily_pollen = true
           when :gastroenteritis then
             @user.gastroenteritis = true
-            @personal_assistant.diary_gastroenteritis = true
+            @personal_assistant.daily_gastroenteritis = true
           when :conjunctivitis then
             @user.conjunctivitis = true
-            @personal_assistant.diary_conjunctivitis = true
+            @personal_assistant.daily_conjunctivitis = true
           end
         end
       end

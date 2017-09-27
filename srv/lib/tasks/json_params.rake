@@ -4,6 +4,9 @@ namespace :json_params do
   desc "create the definitions of json params"
 
   task :generate => :environment do
+    filenames = Dir.glob("#{Rails.root}/app/controllers/params/*.rb")
+    File.unlink *filenames
+
     create('Session', "#{Rails.root}/app/controllers/params/session.rb",
       nil,
       {email: 'string', password: 'string'}
@@ -25,6 +28,9 @@ namespace :json_params do
     create(Micropost, "#{Rails.root}/app/controllers/params/micropost.rb",
       [:id, :user_id, :created_at, :updated_at]
     )
+    create(DailyLog, "#{Rails.root}/app/controllers/params/daily_log.rb",
+      [:id, :user_id, :created_at, :updated_at]
+    )
     create(Ige, "#{Rails.root}/app/controllers/params/ige.rb",
       [:id, :user_id, :created_at, :updated_at]
     )
@@ -42,7 +48,7 @@ namespace :json_params do
       else
         # ActiveRecord Object
         object.attribute_types.map do |key, active_model_type|
-          next if exclusion_list.include? key
+          next if exclusion_list.include? key.to_sym
           type = special_case_list && special_case_list.keys.include?(key.to_sym) ?
             special_case_list[key.to_sym] : adjust(active_model_type)
           val << "# @attr [#{type}] #{key.camelize(:lower)}\n"

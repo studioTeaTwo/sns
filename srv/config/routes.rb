@@ -44,6 +44,7 @@ Rails.application.routes.draw do
       end
     end
     resources :microposts, only: [:create, :destroy]
+    resources :daily_logs
     resources :iges
 
     get '/master_data/allergen_groups',  to: 'master_data#allergen_groups'

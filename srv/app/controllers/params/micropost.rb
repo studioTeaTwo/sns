@@ -2,10 +2,6 @@
 #
 # @name MicropostStrongParameter
 #
-# @attr [integer] id
 # @attr [string] content
-# @attr [integer] userId
 # @attr [string] picture
-# @attr [date-time] createdAt
-# @attr [date-time] updatedAt
 class Params::Micropost; end

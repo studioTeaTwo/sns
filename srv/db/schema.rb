@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170821201416) do
+ActiveRecord::Schema.define(version: 20170927150358) do
 
   create_table "chat_statuses", force: :cascade do |t|
     t.integer "user_id"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20170821201416) do
     t.integer "newest_chat_id", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["participants"], name: "index_chat_threads_on_participants"
   end
 
   create_table "chats", force: :cascade do |t|
@@ -41,6 +42,21 @@ ActiveRecord::Schema.define(version: 20170821201416) do
     t.datetime "updated_at", null: false
     t.index ["chat_thread_id"], name: "index_chats_on_chat_thread_id"
     t.index ["sender_id"], name: "index_chats_on_sender_id"
+  end
+
+  create_table "daily_logs", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "symptom", limit: 1, default: 0, null: false
+    t.integer "health"
+    t.string "health_memo"
+    t.boolean "medicina"
+    t.string "medicina_memo"
+    t.string "photograph"
+    t.string "photograph_memo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["symptom"], name: "index_daily_logs_on_symptom"
+    t.index ["user_id"], name: "index_daily_logs_on_user_id"
   end
 
   create_table "iges", force: :cascade do |t|
@@ -310,12 +326,12 @@ ActiveRecord::Schema.define(version: 20170821201416) do
   create_table "personal_assistants", force: :cascade do |t|
     t.integer "user_id"
     t.integer "tutorial_status"
-    t.boolean "diary_atopic"
-    t.boolean "diary_asthma"
-    t.boolean "diary_rhinitis"
-    t.boolean "diary_pollen"
-    t.boolean "diary_gastroenteritis"
-    t.boolean "diary_conjunctivitis"
+    t.boolean "daily_atopic"
+    t.boolean "daily_asthma"
+    t.boolean "daily_rhinitis"
+    t.boolean "daily_pollen"
+    t.boolean "daily_gastroenteritis"
+    t.boolean "daily_conjunctivitis"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_personal_assistants_on_user_id"

@@ -1,12 +1,11 @@
 FactoryGirl.define do
   factory :personal_assistant do
-    references ""
-    tutorialStatus 1
-    diaryAtopic false
-    diaryRhinitis false
-    diaryAsthma false
-    diaryPollen false
-    diaryGastroenteritis false
-    diaryConjunctivitis false
+    tutorial_status 1
+    daily_atopic false
+    daily_rhinitis false
+    daily_asthma false
+    daily_pollen false
+    daily_gastroenteritis false
+    daily_conjunctivitis false
   end
 end
