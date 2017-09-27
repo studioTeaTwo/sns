@@ -6,9 +6,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TopComponent } from './components/top/top.component';
+import { TopComponent } from './components/navigations/top/top.component';
 import { HeaderComponent } from './components/navigations/header/header.component';
 import { GlobalMenuComponent } from './components/navigations/global-menu/global-menu.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { GlobalMenuComponent } from './components/navigations/global-menu/global
     TopComponent,
     HeaderComponent,
     GlobalMenuComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

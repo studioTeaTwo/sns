@@ -52,6 +52,19 @@ export class AccountService {
       );
   }
 
+  isLoggedIn(): Promise<boolean> {
+    const myself = this.store.getState().account;
+    if (myself && myself.accessToken) {
+      return Promise.resolve(true);
+    } else {
+      const mytoken = JSON.parse(localStorage.getItem('token'));
+      if (mytoken) {
+        return Promise.resolve(true);
+      }
+    }
+    return Promise.resolve(false);
+  }
+
   get(): Observable<User> {
     let myself = this.store.getState().account;
     if (myself && myself.id) {
@@ -105,7 +118,7 @@ export class AccountService {
     this.signupData.classification = item.id;
   }
 
-  verifyEmail(email: string) {
+  verifyEmail(email: string): Observable<any> {
     return this.http.post<any>(
       `/api/users/emailverification`,
       {user: { email: email }},

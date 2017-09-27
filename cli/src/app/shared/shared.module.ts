@@ -15,9 +15,10 @@ import {
 } from './services/api';
 import {
   FormatToJapaneseDatePipe,
-  RoundOffDatePipe
+  RoundOffDatePipe,
+  ShortenTextPipe,
 } from './pipes';
-import { ShortenTextPipe } from './pipes/shorten-text.pipe';
+import { AuthGuard } from 'app/shared/guards/auth.guard';
 
 @NgModule({
   imports: [
@@ -57,7 +58,9 @@ export class SharedModule {
         MasterDataService,
         AccountService,
         UserService,
-        ChatService
+        ChatService,
+
+        AuthGuard,
       ]
     };
   }
