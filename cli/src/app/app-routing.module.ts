@@ -20,10 +20,10 @@ const routes: Routes = [
     canActivate: [ AuthGuard ],
     loadChildren: './components/chats/chats.module#ChatsModule'
   },
-  // {
-  //   path: 'log',
-  //   loadChildren: './components/lifelogs/lifelogs.module#LifelogsModule'
-  // },
+  {
+    path: 'life-log',
+    loadChildren: './components/life-logs/life-logs.module#LifeLogsModule'
+  },
   {
     path: 'user',
     loadChildren: './components/users/users.module#UsersModule'
@@ -32,10 +32,6 @@ const routes: Routes = [
     path: 'search',
     loadChildren: './components/search/search.module#SearchModule'
   },
-  // {
-  //   path: 'auth',
-  //   loadChildren: './components/auth/auth.module#AuthModule'
-  // },
   // {
   //   path: 'account',
   //   loadChildren: './components/account/account.module#AccountModule'

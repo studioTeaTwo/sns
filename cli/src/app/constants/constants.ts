@@ -20,7 +20,7 @@ export const SIGNUP_USER: User = {
   titleOfHonor: 0,
 };
 
-export const SIGNUP_THREAD = {
+export const NAVI_THREAD = {
   id: 0,
   hasUnread: false,
   updatedAt: new Date(),

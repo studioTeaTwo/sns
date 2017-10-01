@@ -1,0 +1,4 @@
+<div [ngSwitch]="displayState">
+  <app-step-health *ngSwitchCase="DisplayState.HEALTH" (completed)="onCompleted($event)"></app-step-health>
+  <app-step-picture *ngSwitchCase="DisplayState.PICTURE" (completed)="onCompleted($event)"></app-step-picture>
+</div>

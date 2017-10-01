@@ -7,6 +7,8 @@ import { StepNameComponent } from './signup-steps/step_name.component';
 import { StepTypeComponent } from './signup-steps/step_type.component';
 import { StepSymptomComponent } from './signup-steps/step_symptom.component';
 import { StepEmailComponent } from './signup-steps/step_email.component';
+import { StepHealthComponent } from './daily-log-steps/step-health.component';
+import { StepPictureComponent } from './daily-log-steps/step-picture.component';
 
 @NgModule({
   imports: [
@@ -19,12 +21,16 @@ import { StepEmailComponent } from './signup-steps/step_email.component';
     StepTypeComponent,
     StepSymptomComponent,
     StepEmailComponent,
+    StepHealthComponent,
+    StepPictureComponent,
   ],
   exports: [
     StepNameComponent,
     StepTypeComponent,
     StepSymptomComponent,
     StepEmailComponent,
+    StepHealthComponent,
+    StepPictureComponent,
   ]
 })
 export class TutorialsModule { }

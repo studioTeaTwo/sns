@@ -7,6 +7,7 @@ export interface StoreState {
     chatList: API.ChatList;
     chats: API.Chat[];
     searchUsers: API.Profile[];
+    dailyLogs: API.DailyLog[];
 
     masterAllergenGroups: API.MasterAllergenGroup[];
 

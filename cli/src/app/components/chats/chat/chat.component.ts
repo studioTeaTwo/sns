@@ -91,6 +91,10 @@ export class ChatComponent implements OnInit {
     return (chat.contentType === CONTENT_TYPE.RADIOBUTTON) && chat.itemList ? true : false;
   }
 
+  isCamera(chat: ChatViewModel): boolean {
+    return (chat.contentType === CONTENT_TYPE.CAMERA);
+  }
+
   getImgSrc(chat: ChatViewModel): string {
     if (chat.senderId === this.myself.id) {
       return this.myself.avatarUrl;

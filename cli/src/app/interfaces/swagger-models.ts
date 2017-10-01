@@ -14,7 +14,6 @@ export interface ChatRequestBody {
     chat?: ChatStrongParameter;
 }
 export interface ChatStrongParameter {
-    id?: number; // int32
     chatThreadId?: number; // int32
     senderId?: number; // int32
     contentType?: number; // int32
@@ -23,8 +22,6 @@ export interface ChatStrongParameter {
     };
     result?: string;
     expired?: boolean;
-    createdAt?: string; // date-time
-    updatedAt?: string; // date-time
 }
 export interface ChatThread {
     id?: number; // int32
@@ -39,11 +36,31 @@ export interface ChatThreadRequestBody {
     chatThread?: ChatThreadStrongParameter;
 }
 export interface ChatThreadStrongParameter {
-    id?: number; // int32
     participants?: number /* int32 */ [];
     newestChatId?: number; // int32
-    createdAt?: string; // date-time
+}
+export interface DailyLog {
+    id?: number; // int32
+    symptom?: string;
+    health?: number; // int32
+    healthMemo?: string;
+    medicina?: boolean;
+    medicinaMemo?: string;
+    photograph?: string;
+    photographMemo?: string;
     updatedAt?: string; // date-time
+}
+export interface DailyLogRequestBody {
+    daily_log?: DailyLogStrongParameter;
+}
+export interface DailyLogStrongParameter {
+    symptom?: number; // int32
+    health?: number; // int32
+    healthMemo?: string;
+    medicina?: boolean;
+    medicinaMemo?: string;
+    photograph?: string;
+    photographMemo?: string;
 }
 export interface EmailVerifyRequestBody {
     email?: string;
@@ -275,8 +292,6 @@ export interface IgeRequestBody {
     ige?: IgeStrongParameter;
 }
 export interface IgeStrongParameter {
-    id?: number; // int32
-    userId?: number; // int32
     testDate?: string; // date
     latestTestResult?: boolean;
     testCategory?: number; // int32
@@ -497,8 +512,6 @@ export interface IgeStrongParameter {
     allergenInekaClass?: number; // int32
     allergenKabiClass?: number; // int32
     allergenZassouClass?: number; // int32
-    createdAt?: string; // date-time
-    updatedAt?: string; // date-time
 }
 export interface MasterAllergen {
     id?: number; // int32
@@ -541,12 +554,8 @@ export interface MicropostRequestBody {
     micropost?: MicropostStrongParameter;
 }
 export interface MicropostStrongParameter {
-    id?: number; // int32
     content?: string;
-    userId?: number; // int32
     picture?: string;
-    createdAt?: string; // date-time
-    updatedAt?: string; // date-time
 }
 export interface Profile {
     latestIge?: number; // int32
@@ -574,11 +583,8 @@ export interface RelationshipRequestBody {
     relationship?: RelationshipStrongParameter;
 }
 export interface RelationshipStrongParameter {
-    id?: number; // int32
     followerId?: number; // int32
     followedId?: number; // int32
-    createdAt?: string; // date-time
-    updatedAt?: string; // date-time
 }
 export interface SessionRequestBody {
     session?: SessionStrongParameter;
@@ -608,7 +614,6 @@ export interface UserRequestBody {
     user?: UserStrongParameter;
 }
 export interface UserStrongParameter {
-    id?: number; // int32
     email?: string;
     encryptedPassword?: string;
     resetPasswordToken?: string;
@@ -623,8 +628,6 @@ export interface UserStrongParameter {
     confirmedAt?: string; // date-time
     confirmationSentAt?: string; // date-time
     unconfirmedEmail?: string;
-    createdAt?: string; // date-time
-    updatedAt?: string; // date-time
     name?: string;
     admin?: boolean;
     selfIntroduction?: string;

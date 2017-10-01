@@ -19,6 +19,7 @@ export enum CONTENT_TYPE {
   YESNO,
   CHECKBOX,
   RADIOBUTTON,
+  CAMERA,
 }
 
 export type ChatList = ChatThread[];

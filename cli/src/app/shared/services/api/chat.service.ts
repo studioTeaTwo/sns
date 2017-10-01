@@ -4,6 +4,11 @@ import { Observable } from 'rxjs/Observable';
 
 import { Store } from 'app/shared/store/store';
 import {
+  compareCreated,
+  compareUpdated,
+  unique
+} from 'app/shared/functions/array-util.function';
+import {
   ChatList,
   ChatThread,
   Chats,
@@ -70,8 +75,8 @@ export class ChatService {
 
   private onSuccessList(data: ChatList) {
     const currentState = this.store.getState();
-    data = this.unique(data.concat(...currentState.chatList));
-    data.sort(this.compareUpdated);
+    data = unique(data.concat(...currentState.chatList));
+    data.sort((a, b) => compareUpdated<ChatThread>(a, b));
     this.store.setState({
       ...currentState,
       chatList: data,
@@ -82,9 +87,8 @@ export class ChatService {
 
   private onSuccessChats(data: Chat[]) {
     const currentState = this.store.getState();
-    data = this.unique(data.concat(...currentState.chats));
-    data.sort(this.compareCreated);
-    console.log('チャット取れた', data);
+    data = unique(data.concat(...currentState.chats));
+    data.sort((a, b) => compareCreated<Chat>(a, b));
     this.store.setState({
       ...currentState,
       chats: data,
@@ -92,31 +96,4 @@ export class ChatService {
       error: false,
     });
   }
-
-  private compareCreated(a: Chat, b: Chat): number {
-    if (a.createdAt < b.createdAt) {
-      return -1;
-    }
-    if (a.createdAt > b.createdAt) {
-      return 1;
-    }
-    return 0;
-  }
-
-  private compareUpdated(a: ChatThread, b: ChatThread): number {
-    if (a.updatedAt < b.updatedAt) {
-      return -1;
-    }
-    if (a.updatedAt > b.updatedAt) {
-      return 1;
-    }
-    return 0;
-  }
-
-  private unique(array: Array<any>) {
-    return array.filter((value, index, self) => {
-      return self.findIndex(value2 => value.id === value2.id ) === index;
-    });
-  }
-
 }

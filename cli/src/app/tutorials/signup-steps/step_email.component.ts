@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
 import { Store } from 'app/shared/store/store';
-import { NAVI_CHARA, SIGNUP_USER, SIGNUP_THREAD } from 'app/constants/constants';
+import { NAVI_CHARA, SIGNUP_USER, NAVI_THREAD } from 'app/constants/constants';
 import {
   ChatThread,
   Chats,
@@ -60,7 +60,7 @@ export class StepEmailComponent extends ChatComponent implements OnInit, AfterVi
   ngOnInit() {
     this.myself = SIGNUP_USER;
     this.opponents = [{...NAVI_CHARA}];
-    this.chatThread = SIGNUP_THREAD;
+    this.chatThread = NAVI_THREAD;
 
     this.toggleReplyText(false);
 
@@ -82,8 +82,6 @@ export class StepEmailComponent extends ChatComponent implements OnInit, AfterVi
   onClickReply(text: string) {
     // eメール
     if (!this.chatHistory.includes(tutorial_script3[0])) {
-      // FIXME: 正規表現バリデーション
-      // https://blog.ohgaki.net/redos-must-review-mail-address-validation
       if (!this.accountService.emailValidator(text)) {
         addChatAndFocus({
           body: tutorial_script_error,

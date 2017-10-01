@@ -10,6 +10,7 @@ const initialState = {
     chatList: [],
     chats: [],
     searchUsers: [],
+    dailyLogs: [],
 
     masterAllergenGroups: [],
 

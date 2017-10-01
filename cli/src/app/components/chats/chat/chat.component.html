@@ -39,7 +39,7 @@
             <td class="chat-column-body">
               <div *ngIf="chat.body" class="chat-body mb15" [innerHtml]="chat.body"></div>
               <button md-raised-button color="primary" (click)="onClickYes()">はい</button>
-              <button md-raised-button (click)="onClickNo()">ちょっと待って</button>
+              <button md-raised-button (click)="onClickNo()">いいえ</button>
             </td>
             <td class="chat-column-time">
               <div class="chat-read" *ngIf="chat.createdAt <= chatThread.readUntil[0].readUntil">既読</div>
@@ -68,6 +68,19 @@
               <md-radio-group class="example-radio-group" [(ngModel)]="chat.result">
                 <md-radio-button *ngFor="let item of chat.itemList" [value]="item.id" (change)="onChangeRadio(item)" [disabled]="chat.expired">{{item.name}}</md-radio-button>
               </md-radio-group>
+            </td>
+            <td class="chat-column-time">
+              <div class="chat-read" *ngIf="chat.createdAt <= chatThread.readUntil[0].readUntil">既読</div>
+              <div class="chat-created">{{chat.createdAt | date:'HH:mm'}}</div>
+            </td>
+          </tr>
+
+          <!-- camera -->
+          <tr [ngClass]="chat.senderId === myself.id ? 'myself' : 'opponent'" *ngIf="chat && isCamera(chat)">
+            <td class="chat-column-avatar"><img class="chat-avatar" [src]="getImgSrc(chat)" /></td>
+            <td class="chat-column-body">
+              <div *ngIf="chat.body" class="chat-body mb15" [innerHtml]="chat.body"></div>
+              <video id="video" #video autoplay playsinline></video>
             </td>
             <td class="chat-column-time">
               <div class="chat-read" *ngIf="chat.createdAt <= chatThread.readUntil[0].readUntil">既読</div>

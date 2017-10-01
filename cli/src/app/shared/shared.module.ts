@@ -12,6 +12,7 @@ import {
   AccountService,
   UserService,
   ChatService,
+  DailyLogService,
 } from './services/api';
 import {
   FormatToJapaneseDatePipe,
@@ -59,6 +60,7 @@ export class SharedModule {
         AccountService,
         UserService,
         ChatService,
+        DailyLogService,
 
         AuthGuard,
       ]

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
 import { Store } from 'app/shared/store/store';
-import { NAVI_CHARA, SIGNUP_USER, SIGNUP_THREAD } from 'app/constants/constants';
+import { NAVI_CHARA, SIGNUP_USER, NAVI_THREAD } from 'app/constants/constants';
 import {
   ChatThread,
   Chats,
@@ -30,9 +30,9 @@ export class StepSymptomComponent extends ChatComponent implements OnInit, After
   chatSource: Subject<ChatViewModel[]>;
   chatHistory: ChatViewModel[] = [];
 
-  private selectedSymptoms = '';
-
   @Output() completed = new EventEmitter();
+
+  private selectedSymptoms = '';
 
   constructor(
     router: Router,
@@ -62,7 +62,7 @@ export class StepSymptomComponent extends ChatComponent implements OnInit, After
   ngOnInit() {
     this.myself = SIGNUP_USER;
     this.opponents = [{...NAVI_CHARA}];
-    this.chatThread = SIGNUP_THREAD;
+    this.chatThread = NAVI_THREAD;
 
     this.toggleReplyText(false);
 
