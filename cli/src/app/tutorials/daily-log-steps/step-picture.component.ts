@@ -30,10 +30,15 @@ import { addChat, addChatAndFocus } from '../shared/chat-operation.function';
 export class StepPictureComponent extends ChatComponent implements OnInit {
   @ViewChild('replyText') inputElm: ElementRef;
   @ViewChild('video') videoElm: ElementRef;
+  @ViewChild('canvas') canvasElm: ElementRef;
   chatSource: Subject<ChatViewModel[]>;
   chatHistory: ChatViewModel[] = [];
 
-  readonly medias = {audio : false, video : true};
+  readonly medias = {audio : false, video : {
+    facingMode : {
+      exact : 'environment'
+    }
+  }};
 
   @Output() completed = new EventEmitter();
 
@@ -79,6 +84,7 @@ export class StepPictureComponent extends ChatComponent implements OnInit {
 
   onClickYes() {
     window.navigator.getUserMedia(this.medias, this.successCallback, this.errorCallback);
+    this.draw();
   }
 
   onClickNo() {
@@ -86,13 +92,22 @@ export class StepPictureComponent extends ChatComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  successCallback(stream) {
+  private successCallback(stream) {
     this.videoElm.nativeElement.srcObject = stream;
   };
 
-  errorCallback(err) {
+  private errorCallback(err) {
     alert(err);
   };
+
+  private draw() {
+    const ctx = this.canvasElm.nativeElement.getContext('2d');
+    this.canvasElm.nativeElement.width  = window.innerWidth;
+    this.canvasElm.nativeElement.height = window.innerHeight;
+    ctx.drawImage(this.videoElm.nativeElement, 0, 0);
+
+    requestAnimationFrame(this.draw);
+  }
 }
 
 const daily_log_script1: ChatViewModel[] = [

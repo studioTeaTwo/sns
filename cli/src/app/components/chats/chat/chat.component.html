@@ -80,6 +80,7 @@
             <td class="chat-column-avatar"><img class="chat-avatar" [src]="getImgSrc(chat)" /></td>
             <td class="chat-column-body">
               <div *ngIf="chat.body" class="chat-body mb15" [innerHtml]="chat.body"></div>
+              <canvas id="canvas" #canvas></canvas>
               <video id="video" #video autoplay playsinline></video>
             </td>
             <td class="chat-column-time">
