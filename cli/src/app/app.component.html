@@ -1,6 +1,7 @@
 <app-header></app-header>
 
 <div id="main">
+  <md-spinner class="main-loading" *ngIf="loading$ | async"></md-spinner>
   <router-outlet></router-outlet>
 </div>
 

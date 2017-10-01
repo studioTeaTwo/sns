@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { SpyLocation } from '@angular/common/testing';
 
 import { SharedModule } from 'app/shared/shared.module';
+import { Store } from 'app/shared/store/store';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/navigations/header/header.component';
 import { GlobalMenuComponent } from './components/navigations/global-menu/global-menu.component';
@@ -20,6 +21,9 @@ describe('AppComponent', () => {
         AppComponent,
         HeaderComponent,
         GlobalMenuComponent,
+      ],
+      providers: [
+        Store,
       ]
     }).compileComponents();
   }));
