@@ -22,6 +22,7 @@ const routes: Routes = [
   },
   {
     path: 'life-log',
+    canActivate: [ AuthGuard ],
     loadChildren: './components/life-logs/life-logs.module#LifeLogsModule'
   },
   {

@@ -1,5 +1,6 @@
 # @tag Users
 class Api::Users::ProfilesController < ApplicationController
+  skip_before_action :logged_in_user, only: [:index]
 
   # Returns profile
   #

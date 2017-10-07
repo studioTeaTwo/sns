@@ -1,5 +1,6 @@
 # @tag Search
 class Api::Search::AllergensController < ApplicationController
+  skip_before_action :logged_in_user, only: [:index]
 
   # Returns the list of allergens
   #
@@ -25,6 +26,7 @@ class Api::Search::AllergensController < ApplicationController
   private
 
     def initial_display
+      return unless logged_in_user
       # 検索前に表示しておく人たちを作成する
       # ログインユーザーが持っているアレルゲンを、10人になるまで再帰検索する
       latest_ige = current_user.iges.where(:latest_test_result => true)

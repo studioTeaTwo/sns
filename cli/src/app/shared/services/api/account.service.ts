@@ -42,12 +42,13 @@ export class AccountService {
       );
   }
 
-  logout() {
-    this.http.delete(`/api/logout`)
-      .subscribe(
+  logout(): Observable<void> {
+    return this.http.delete(`/api/logout`)
+      .map(
         response => {
           localStorage.removeItem('token');
           localStorage.removeItem('account');
+          this.onSuccess();
         }
       );
   }
@@ -151,6 +152,15 @@ export class AccountService {
     } else {
       return false;
     }
+  }
+
+  private onSuccess() {
+    const currentState = this.store.getState();
+    this.store.setState({
+      ...currentState,
+      loading: false,
+      error: false,
+    });
   }
 
   private onSuccessAccount(data: User) {

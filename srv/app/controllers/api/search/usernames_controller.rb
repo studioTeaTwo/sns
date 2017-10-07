@@ -1,5 +1,6 @@
 # @tag Search
 class Api::Search::UsernamesController < ApplicationController
+  skip_before_action :logged_in_user, only: [:index]
 
   # Returns the list of usernames
   #

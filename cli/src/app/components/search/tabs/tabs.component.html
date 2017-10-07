@@ -1,5 +1,5 @@
 <md-tab-group>
   <md-tab label="アレルゲンから"><app-allergens></app-allergens></md-tab>
-  <md-tab label="IgE値から"></md-tab>
+  <md-tab label="IgE値から" *ngIf="isLogin()"></md-tab>
   <md-tab label="名前から"></md-tab>
 </md-tab-group>
