@@ -1,0 +1,13 @@
+<p>
+  list works!
+</p>
+
+<button md-raised-button type="button" routerLink="/life-log/daily/create">logを作る</button>
+
+<div *ngFor="let dailyLog of (dailyLogList$ | async)" (click)="routeWithDate(dailyLog)">
+  {{dailyLog.id}}
+  {{dailyLog.symptom}}
+  {{dailyLog.health}}
+  {{dailyLog.healthMemo}}
+</div>
+

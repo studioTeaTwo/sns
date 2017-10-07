@@ -10,7 +10,8 @@ const initialState = {
     chatList: [],
     chats: [],
     searchUsers: [],
-    dailyLogs: [],
+    dailyLogList: [],
+    dailyLog: {},
 
     masterAllergenGroups: [],
 
@@ -23,7 +24,7 @@ const store = new BehaviorSubject<StoreState>(initialState);
 
 @Injectable()
 export class Store {
-  store = store;
+  private store = store;
   changes = store.asObservable().distinctUntilChanged();
 
   getState() {

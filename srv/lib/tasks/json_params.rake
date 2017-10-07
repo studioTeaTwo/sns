@@ -29,7 +29,8 @@ namespace :json_params do
       [:id, :user_id, :created_at, :updated_at]
     )
     create(DailyLog, "#{Rails.root}/app/controllers/params/daily_log.rb",
-      [:id, :user_id, :created_at, :updated_at]
+      [:id, :user_id, :created_at, :updated_at],
+      {symptom: 'string'}
     )
     create(Ige, "#{Rails.root}/app/controllers/params/ige.rb",
       [:id, :user_id, :created_at, :updated_at]

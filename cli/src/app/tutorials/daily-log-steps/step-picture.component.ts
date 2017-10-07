@@ -83,11 +83,22 @@ export class StepPictureComponent extends ChatComponent implements OnInit {
   }
 
   onClickYes() {
-    window.navigator.getUserMedia(this.medias, this.successCallback, this.errorCallback);
-    this.draw();
+    // 写真
+    if (!this.chatHistory.includes(daily_log_script2[0])) {
+      window.navigator.getUserMedia(this.medias, this.successCallback, this.errorCallback);
+      this.draw();
+
+      addChat({
+        body: daily_log_script2,
+        waitTime: 1000,
+      }, this.chatHistory, this.chatSource);
+    } else {
+      this.dailyLogService.create().subscribe();
+    }
   }
 
   onClickNo() {
+    this.dailyLogService.create().subscribe();
     // 次のステップへ
     this.router.navigate(['/']);
   }
@@ -116,6 +127,15 @@ const daily_log_script1: ChatViewModel[] = [
     senderId: NAVI_CHARA.id,
     contentType: CONTENT_TYPE.YESNO,
     body: '写真で記録する？',
+    createdAt: new Date()
+  },
+];
+const daily_log_script2: ChatViewModel[] = [
+  {
+    id: 2,
+    senderId: NAVI_CHARA.id,
+    contentType: CONTENT_TYPE.YESNO,
+    body: 'これでオーケー？',
     createdAt: new Date()
   },
 ];

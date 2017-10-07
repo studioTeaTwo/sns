@@ -8,5 +8,5 @@
     <span>{{chatThread.newestChat.createdAt}}</span>
     <span>{{chatThread.newestChat.body | shortenText:20}}</span>
   </div>
-  <div *ngIf="!chatThread.newestChat">{{chatThread.createdAt}}</div>
+  <div *ngIf="!chatThread.newestChat">{{chatThread.updatedAt}}</div>
 </a>

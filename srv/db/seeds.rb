@@ -29,10 +29,14 @@ User.create!(
   self_introduction: "自己紹介が入ります。自己紹介が入ります。自己紹介が入ります。",
   admin: true
 )
+PersonalAssistant.create!(
+  user_id: 2,
+  daily_atopic: true,
+)
 # 管理者ユーザーの最新IgE検査の登録
 latest_test_date = Faker::Time.between(1.months.ago, Date.today, :day)
 Ige.create!(
-  user_id: 1,
+  user_id: 2,
   latest_test_result: true,
   test_date: latest_test_date,
   test_category: Random.rand(0 .. 10),
@@ -47,7 +51,7 @@ Ige.create!(
 10.times do |n|
   test_date = Faker::Time.between(10.years.ago, 1.months.ago, :day)
   Ige.create!(
-              user_id: 1,
+              user_id: 2,
               latest_test_result: false,
               test_date: test_date,
               test_category: Random.rand(0 .. 10),

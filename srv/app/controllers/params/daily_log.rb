@@ -2,7 +2,7 @@
 #
 # @name DailyLogStrongParameter
 #
-# @attr [integer] symptom
+# @attr [string] symptom
 # @attr [integer] health
 # @attr [string] healthMemo
 # @attr [boolean] medicina

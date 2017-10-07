@@ -32,10 +32,9 @@ export class StepHealthComponent extends ChatComponent implements OnInit {
   chatSource: Subject<ChatViewModel[]>;
   chatHistory: ChatViewModel[] = [];
 
-  private selectedResult: number;
-
   @Output() completed = new EventEmitter();
 
+  private selectedResult: number;
   private emitClick = () => setTimeout(() => this.inputElm.nativeElement.click(), 0);
 
   constructor(
@@ -134,7 +133,7 @@ const daily_log_script2: ChatViewModel[] = [
     id: 2,
     senderId: NAVI_CHARA.id,
     contentType: CONTENT_TYPE.RADIOBUTTON,
-    body: 'さあ記録しよう！',
+    body: 'さあ記録しよう！まずは気分を聞かせて',
     itemList: [
       {
         id: 1,

@@ -57,7 +57,7 @@ export class AccountService {
     if (myself && myself.accessToken) {
       return Promise.resolve(true);
     } else {
-      const mytoken = JSON.parse(localStorage.getItem('token'));
+      const mytoken = localStorage.getItem('token');
       if (mytoken) {
         return Promise.resolve(true);
       }

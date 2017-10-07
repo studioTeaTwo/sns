@@ -6,7 +6,7 @@
 
   <md-menu #menu="mdMenu">
     <div class="menu-login" *ngIf="isLogin()">
-      <button md-menu-item [routerLink]="userId">
+      <button md-menu-item (click)="getMyProfile()">
         <md-icon>account_circle</md-icon>
         <span>公開ページを見る</span>
       </button>

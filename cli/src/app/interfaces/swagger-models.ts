@@ -54,7 +54,7 @@ export interface DailyLogRequestBody {
     daily_log?: DailyLogStrongParameter;
 }
 export interface DailyLogStrongParameter {
-    symptom?: number; // int32
+    symptom?: string;
     health?: number; // int32
     healthMemo?: string;
     medicina?: boolean;
