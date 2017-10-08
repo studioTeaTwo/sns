@@ -30,10 +30,6 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  isDisplay() {
-    return !this.currentLocation.path().match(/chat+\/[0-9-]/);
-  }
-
   isLogin() {
     const token = localStorage.getItem('token');
     return token && token.length > 0;
