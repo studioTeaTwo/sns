@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpHandler, HttpRequest, HttpEvent } from '@angular/common/http';
+import { HttpInterceptor, HttpHandler, HttpRequest, HttpEvent, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 import { environment } from 'environments/environment';
@@ -25,7 +25,23 @@ export class ApiInterceptor implements HttpInterceptor {
       setHeaders: { Authorization: token ? token : '' },
     });
     console.log('インターセプト！', req);
-    return next.handle(req);
+    return next.handle(req)
+             .map((event: HttpEvent<any>) => {
+                if (event instanceof HttpResponse && event.status > 300) {
+                  this.onError();
+                } else {
+                  // 正常レスポンス
+                };
+                return event;
+              })
+              .catch((err: any, caught) => {
+                if (err instanceof HttpErrorResponse) {
+                  if (err.status === 403) {
+                    this.onError();
+                  }
+                  return Observable.throw(err);
+                }
+              });
   }
 
   private setLoading() {
@@ -34,6 +50,15 @@ export class ApiInterceptor implements HttpInterceptor {
       ...currentState,
       loading: true,
       error: false,
+    });
+  }
+
+  private onError() {
+    const currentState = this.store.getState();
+    this.store.setState({
+      ...currentState,
+      loading: false,
+      error: true,
     });
   }
 

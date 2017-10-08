@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 import { Store } from 'app/shared/store/store';
@@ -119,12 +119,16 @@ export class AccountService {
     this.signupData.classification = item.id;
   }
 
-  verifyEmail(email: string): Observable<any> {
+  verifyEmail(email: string): Observable<HttpResponse<any>> {
     return this.http.post<any>(
-      `/api/users/emailverification`,
-      {user: { email: email }},
-      {observe: 'response'}
-    );
+              `/api/users/emailverification`,
+              {user: { email: email }},
+              {observe: 'response'}
+            )
+            .map(response => {
+              this.onSuccess();
+              return response;
+            });
   }
 
   saveSignupdataEmail(email: string) {
