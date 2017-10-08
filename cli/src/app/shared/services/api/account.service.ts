@@ -93,6 +93,7 @@ export class AccountService {
         response => {
           this.userId = response.userId;
           localStorage.setItem('token', response.accessToken);
+          this.onSuccess();
         }
       );
   }

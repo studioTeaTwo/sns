@@ -39,6 +39,8 @@ export class ApiInterceptor implements HttpInterceptor {
                   if (err.status === 403) {
                     this.onError();
                   }
+                  // 500系
+                  this.onError();
                   return Observable.throw(err);
                 }
               });

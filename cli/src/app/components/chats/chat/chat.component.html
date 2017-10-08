@@ -17,6 +17,7 @@
           <!-- me -->
           <tr class="myself" *ngIf="chat && isMyself(chat)">
             <td class="chat-column-time">
+              <div class="chat-read" *ngIf="isRead(chat)">既読</div>
               <div class="chat-created">{{chat.createdAt | date:'HH:mm'}}</div>
             </td>
             <td class="chat-column-body"><div class="chat-body" [innerHtml]="chat.body"></div></td>
@@ -28,7 +29,6 @@
             <td class="chat-column-avatar"><img class="chat-avatar" [src]="getImgSrc(chat)" /></td>
             <td class="chat-column-body"><div class="chat-body" [innerHtml]="chat.body"></div></td>
             <td class="chat-column-time">
-              <div class="chat-read" *ngIf="chat.createdAt <= chatThread.readUntil[0].readUntil">既読</div>
               <div class="chat-created">{{chat.createdAt | date:'HH:mm'}}</div>
             </td>
           </tr>
@@ -42,7 +42,6 @@
               <button md-raised-button (click)="onClickNo()">いいえ</button>
             </td>
             <td class="chat-column-time">
-              <div class="chat-read" *ngIf="chat.createdAt <= chatThread.readUntil[0].readUntil">既読</div>
               <div class="chat-created">{{chat.createdAt | date:'HH:mm'}}</div>
             </td>
           </tr>
@@ -52,10 +51,13 @@
             <td class="chat-column-avatar"><img class="chat-avatar" [src]="getImgSrc(chat)" /></td>
             <td class="chat-column-body">
               <div *ngIf="chat.body" class="chat-body mb15" [innerHtml]="chat.body"></div>
-              <md-checkbox *ngFor="let item of chat.itemList" [(ngModel)]="item.checked" (change)="onChangeChecked(item)" [disabled]="chat.expired">{{item.name}}</md-checkbox>
+              <md-checkbox *ngFor="let item of chat.itemList"
+                [(ngModel)]="item.checked"
+                (change)="onChangeChecked(item)"
+                [disabled]="chat.expired"
+              >{{item.name}}</md-checkbox>
             </td>
             <td class="chat-column-time">
-              <div class="chat-read" *ngIf="chat.createdAt <= chatThread.readUntil[0].readUntil">既読</div>
               <div class="chat-created">{{chat.createdAt | date:'HH:mm'}}</div>
             </td>
           </tr>
@@ -65,12 +67,15 @@
             <td class="chat-column-avatar"><img class="chat-avatar" [src]="getImgSrc(chat)" /></td>
             <td class="chat-column-body">
               <div *ngIf="chat.body" class="chat-body mb15" [innerHtml]="chat.body"></div>
-              <md-radio-group class="example-radio-group" [(ngModel)]="chat.result">
-                <md-radio-button *ngFor="let item of chat.itemList" [value]="item.id" (change)="onChangeRadio(item)" [disabled]="chat.expired">{{item.name}}</md-radio-button>
+              <md-radio-group class="chat-radio-group" [(ngModel)]="chat.result">
+                <md-radio-button *ngFor="let item of chat.itemList"
+                  [value]="item.id"
+                  (change)="onChangeRadio(item)"
+                  [disabled]="chat.expired"
+                >{{item.name}}</md-radio-button>
               </md-radio-group>
             </td>
             <td class="chat-column-time">
-              <div class="chat-read" *ngIf="chat.createdAt <= chatThread.readUntil[0].readUntil">既読</div>
               <div class="chat-created">{{chat.createdAt | date:'HH:mm'}}</div>
             </td>
           </tr>
@@ -84,7 +89,6 @@
               <video id="video" #video autoplay playsinline></video>
             </td>
             <td class="chat-column-time">
-              <div class="chat-read" *ngIf="chat.createdAt <= chatThread.readUntil[0].readUntil">既読</div>
               <div class="chat-created">{{chat.createdAt | date:'HH:mm'}}</div>
             </td>
           </tr>
@@ -103,7 +107,7 @@
   </div>
 
   <div id="footer-chat" *ngIf="showReplyText">
-    <input id="replyText" #replyText placeholder="メッセージを入力してください" class="footer-chat-item footer-chat-replyText"  [class.is-active]="isActive" (click)="setFocus($event)" />
+    <input id="replyText" #replyText placeholder="メッセージを入力" class="footer-chat-item footer-chat-replyText"  [class.is-active]="isActive" (click)="setFocus($event)" />
     <button md-raised-button color="primary" class="footer-chat-item footer-chat-replyButton" (click)="onClickReply(replyText.value); replyText.value=''">送信</button>
   </div>
 

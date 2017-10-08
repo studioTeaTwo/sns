@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild, ElementRef, SecurityContext } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
@@ -33,12 +33,12 @@ export class ChatComponent implements OnInit {
   loadingChatForward$: Observable<boolean>;
 
   constructor(
-    public router: Router,
-    public route: ActivatedRoute,
-    private renderer: Renderer2,
-    public store: Store,
-    public accountService: AccountService,
-    public chatService: ChatService,
+    protected router: Router,
+    protected route: ActivatedRoute,
+    protected renderer: Renderer2,
+    protected store: Store,
+    protected accountService: AccountService,
+    protected chatService: ChatService,
   ) {
     this.height = window.innerHeight - 50; // chat.footer.height
   }
@@ -51,13 +51,18 @@ export class ChatComponent implements OnInit {
       .map(params => {
         this.chatThread = this.store.getState().chatList.find(value => value.id === +params['id']);
         if (this.chatThread) {
+          // チャットリストから開始したとき
           this.opponents = this.chatThread.participants.filter(value => value.id !== this.myself.id);
           this.chatService.getChatThread(+params['id']);
         } else {
-          // プロフィールなどから新規でチャット開始したとき
+          // プロフィールなどからチャット開始したとき
           this.chatService.createChatThread(+params['id']).subscribe(response => {
             this.chatThread = response;
             this.opponents = response.participants.filter(value => value.id !== this.myself.id);
+            // もう既存のスレッドがあった
+            if (this.chatThread.newestChat.id) {
+              this.chatService.getChatThread(this.chatThread.id);
+            }
           });
         }
       })
@@ -104,6 +109,11 @@ export class ChatComponent implements OnInit {
     }
   }
 
+  isRead(chat: ChatViewModel): boolean {
+    const opponent = this.chatThread.readUntil.find(value => value.userId !== this.myself.id);
+    return chat.id <= opponent.readUntil;
+  }
+
   isUnread() {}
 
   getUnreadChat() {}
@@ -119,7 +129,7 @@ export class ChatComponent implements OnInit {
   }
 
   onClickReply(replyText: string) {
-    this.chatService.say(this.chatThread['id'], replyText);
+    this.chatService.say(this.chatThread['id'], String(replyText).replace(/<[^>]+>/gm, ''));
   }
 
   // 継承先で使うためprivateにしていない
