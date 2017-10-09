@@ -6,7 +6,7 @@ echo $HOME
 
 clear() {
     cd ./srv/public && \
-    ls | grep -v -E 'robots.txt' | xargs rm -r && \
+    ls | grep -v -E 'robots.txt' | xargs rm -rff && \
     cd $HOME
 }
 

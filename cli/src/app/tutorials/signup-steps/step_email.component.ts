@@ -214,7 +214,7 @@ const tutorial_script_error: ChatViewModel[] = [{
   id: 6,
   senderId: NAVI_CHARA.id,
   contentType: CONTENT_TYPE.REPLY,
-  body: '入力が正しく無いよ。もう一回入力してみて！',
+  body: 'eメールの形式じゃないみたい。もう一回入力してみて！',
   createdAt: new Date()
 }];
 const tutorial_script_error_email: ChatViewModel[] = [{
