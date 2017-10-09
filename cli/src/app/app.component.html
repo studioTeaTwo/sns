@@ -2,6 +2,7 @@
 
 <div id="main">
   <md-spinner class="main-loading" *ngIf="loading$ | async"></md-spinner>
+  <p class="error-message" *ngIf="!(loading$ | async) && error$ | async">{{errorMsg$ | async}}</p>
   <router-outlet></router-outlet>
 </div>
 

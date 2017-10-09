@@ -17,6 +17,7 @@ export interface StoreState {
     // 画面状態
     loading: boolean;
     error: boolean;
+    errorMsg: string;
 
     // 開発用メニュー
   };

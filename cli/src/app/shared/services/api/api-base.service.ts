@@ -17,12 +17,34 @@ export class ApiBaseService {
     });
   }
 
+  setLoading() {
+    const currentState = this.store.getState();
+    this.store.setState({
+      ...currentState,
+      loading: true,
+      error: false,
+      errorMsg: '',
+    });
+  }
+
   onSuccess() {
     const currentState = this.store.getState();
     this.store.setState({
       ...currentState,
       loading: false,
       error: false,
+      errorMsg: '',
+    });
+  }
+
+  onError(msg?: string) {
+    const currentState = this.store.getState();
+    const newState = msg ? msg : '';
+    this.store.setState({
+      ...currentState,
+      loading: false,
+      error: true,
+      errorMsg: newState,
     });
   }
 
@@ -31,8 +53,7 @@ export class ApiBaseService {
     this.store.setState({
       ...currentState,
       ...data,
-      loading: false,
-      error: false,
+      error: true,
     });
   }
 }

@@ -95,8 +95,8 @@ export class StepSymptomComponent extends ChatComponent implements OnInit, After
 
   private createReply(result) {
     this.selectedSymptoms = result.checked ?
-      this.selectedSymptoms.concat(result.name + 'です。<br/>') :
-      this.selectedSymptoms.replace(result.name + 'です。<br/>', '');
+      this.selectedSymptoms.concat(result.name + 'です。<br>') :
+      this.selectedSymptoms.replace(result.name + 'です。<br>', '');
     const body = this.selectedSymptoms.length !== 0 ? this.selectedSymptoms : '特に無い。';
 
     const reply: ChatViewModel[] = [{

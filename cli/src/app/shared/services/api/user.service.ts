@@ -59,7 +59,6 @@ export class UserService {
     this.store.setState({
       ...currentState,
       profile: data,
-      loading: false,
       error: false,
     });
   }
@@ -69,7 +68,6 @@ export class UserService {
     this.store.setState({
       ...currentState,
       searchUsers: data,
-      loading: false,
       error: false,
     });
   }

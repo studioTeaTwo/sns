@@ -35,7 +35,6 @@ export class MasterDataService {
     this.store.setState({
       ...currentState,
       masterAllergenGroups: data,
-      loading: false,
       error: false,
     });
   }

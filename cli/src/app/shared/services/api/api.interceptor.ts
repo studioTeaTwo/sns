@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpHandler, HttpRequest, HttpEvent, HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 import { environment } from 'environments/environment';
+import { API_ERROR_MSGS } from 'app/constants/constants';
 import { Store } from 'app/shared/store/store';
+import { ApiBaseService } from 'app/shared/services/api/api-base.service';
 
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
   readonly domain: string = environment.domain;
 
   constructor(
+    private router: Router,
     private store: Store,
+    private apiBaseService: ApiBaseService,
   ) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -19,7 +24,7 @@ export class ApiInterceptor implements HttpInterceptor {
       // TODO: 認証画面を提示
     }
 
-    this.setLoading();
+    this.apiBaseService.setLoading();
     const req = request.clone({
       url: this.domain + request.url,
       setHeaders: { Authorization: token ? token : '' },
@@ -28,40 +33,28 @@ export class ApiInterceptor implements HttpInterceptor {
     return next.handle(req)
              .map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse && event.status >= 400) {
-                  this.onError();
+                  this.apiBaseService.onError();
                 } else {
                   // 正常レスポンス
+                  this.apiBaseService.onSuccess();
                 };
                 return event;
               })
               .catch((err: any, caught) => {
                 if (err instanceof HttpErrorResponse) {
-                  if (err.status === 403) {
-                    this.onError();
+                  if (err.status === 401) {
+                    this.apiBaseService.onError(API_ERROR_MSGS.UNAUTHORIZED_401);
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('account');
+                    this.router.navigate(['/auth/login']);
+                  } else if (err.status === 403) {
+                    this.apiBaseService.onError();
+                  } else {
+                    // 500系
+                    this.apiBaseService.onError();
                   }
-                  // 500系
-                  this.onError();
                   return Observable.throw(err);
                 }
               });
   }
-
-  private setLoading() {
-    const currentState = this.store.getState();
-    this.store.setState({
-      ...currentState,
-      loading: true,
-      error: false,
-    });
-  }
-
-  private onError() {
-    const currentState = this.store.getState();
-    this.store.setState({
-      ...currentState,
-      loading: false,
-      error: true,
-    });
-  }
-
 }

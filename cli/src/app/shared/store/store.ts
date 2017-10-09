@@ -18,6 +18,7 @@ const initialState = {
     // 画面状態
     loading: false,
     error: false,
+    errorMsg: '',
 };
 
 const store = new BehaviorSubject<StoreState>(initialState);
