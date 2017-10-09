@@ -15,7 +15,7 @@ export function addChat(
   newChats: NewChats,
   currentThread: Chat[],
   chatSource: Subject<Chat[]>,
-  callbackNextStep?: () => {},
+  callbackAdditionalEffect?: () => {},
 ) {
   setTimeout(() => {
     // 使い捨て
@@ -26,7 +26,7 @@ export function addChat(
       currentThread.push(...newChats.body);
       chatSource.next(currentThread);
     }
-    if (callbackNextStep) { callbackNextStep() };
+    if (callbackAdditionalEffect) { callbackAdditionalEffect() };
   }, newChats.waitTime);
 }
 

@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { StepHealthComponent } from './step-health.component';
 
@@ -21,6 +22,7 @@ describe('DailyLogHealthComponent', () => {
       imports: [
         HttpClientTestingModule,
         RouterTestingModule,
+        NoopAnimationsModule,
         SharedModule,
       ],
       declarations: [ StepHealthComponent ],

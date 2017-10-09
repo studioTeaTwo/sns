@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef, Renderer2, ViewChild, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { trigger } from '@angular/animations';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
@@ -23,7 +24,10 @@ import { addChat, addChatAndFocus } from '../shared/chat-operation.function';
 @Component({
   selector: 'app-step-email',
   templateUrl: '../../components/chats/chat/chat.component.html',
-  styleUrls: ['../../components/chats/chat/chat.component.scss']
+  styleUrls: ['../../components/chats/chat/chat.component.scss'],
+  animations: [
+    trigger('wholeanimation', []) // ダミー
+  ]
 })
 export class StepEmailComponent extends ChatComponent implements OnInit, AfterViewInit {
   @ViewChild('replyText') inputElm: ElementRef;

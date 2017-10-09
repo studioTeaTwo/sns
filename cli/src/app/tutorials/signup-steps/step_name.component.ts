@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef, Renderer2, ViewChild, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
@@ -22,7 +23,28 @@ import { addChat, addChatAndFocus } from '../shared/chat-operation.function';
 @Component({
   selector: 'app-step-name',
   templateUrl: '../../components/chats/chat/chat.component.html',
-  styleUrls: ['../../components/chats/chat/chat.component.scss']
+  styleUrls: ['../../components/chats/chat/chat.component.scss'],
+  animations: [
+    trigger('wholeanimation', [
+        state('selected', style({ // 選択（selected）のスタイル
+        })),
+        transition('default => firstAction', [
+          animate('0ms ease-in', style({transform: 'scale(1.2)'})),
+          animate('50ms ease-in', style({transform: 'scale(1.0)'})),
+          animate('100ms ease-in', style({transform: 'scale(1.3)'})),
+          animate('150ms ease-in', style({transform: 'scale(1.0)'})),
+          animate('200ms ease-in', style({transform: 'scale(1.3)'})),
+          animate('250ms ease-in', style({transform: 'scale(1.0)'})),
+        ]),
+        transition('firstAction => secondAction', [
+          animate('50ms ease-in', style({transform: 'translate(0px, 0px) rotateZ(0deg)'})),
+          animate('100ms ease-in', style({transform: 'translate(2px, 2px) rotateZ(1deg)'})),
+          animate('150ms ease-in', style({transform: 'translate(0px, 2px) rotateZ(0deg)'})),
+          animate('200ms ease-in', style({transform: 'translate(2px, 0px) rotateZ(-1deg)'})),
+          animate('250ms ease-in', style({transform: 'translate(0px, 0px) rotateZ(0deg)'})),
+        ])
+    ])
+  ]
 })
 export class StepNameComponent extends ChatComponent implements OnInit {
   @ViewChild('replyText') inputElm: ElementRef;
@@ -50,6 +72,8 @@ export class StepNameComponent extends ChatComponent implements OnInit {
       chatService,
     );
     this.height = window.innerHeight;
+
+    this.animeState = 'default';
 
     this.showReplyText = false;
     this.chatSource = new Subject<ChatViewModel[]>();
@@ -87,14 +111,24 @@ export class StepNameComponent extends ChatComponent implements OnInit {
       waitTime: 0
     }, this.chatHistory, this.chatSource);
 
-    tutorial_script3[0].body = `すごい！${text}って言うんだ！`;
+    tutorial_script3[0].body = `すごい！`;
     addChat({
-      body: tutorial_script3,
-      waitTime: 1000
-    }, this.chatHistory, this.chatSource,
-      // 次のステップへ
-      () => setTimeout(() => this.completed.emit(1), 2000)
+        body: tutorial_script3,
+        waitTime: 1000
+      }, this.chatHistory, this.chatSource,
+      () => this.animeState = 'firstAction'
     );
+
+    tutorial_script4[0].body = `${text}って言うんだ！`;
+    addChat({
+        body: tutorial_script4,
+        waitTime: 2000
+      }, this.chatHistory, this.chatSource,
+      // 次のステップへ
+      () => {
+        this.animeState = 'secondAction';
+        return setTimeout(() => this.completed.emit(1), 2000);
+      });
   }
 }
 
@@ -114,6 +148,13 @@ const tutorial_script2: ChatViewModel[] = [{
 }];
 const tutorial_script3: ChatViewModel[] = [{
   id: 4,
+  senderId: NAVI_CHARA.id,
+  contentType: CONTENT_TYPE.REPLY,
+  body: '',
+  createdAt: new Date()
+}];
+const tutorial_script4: ChatViewModel[] = [{
+  id: 5,
   senderId: NAVI_CHARA.id,
   contentType: CONTENT_TYPE.REPLY,
   body: '',

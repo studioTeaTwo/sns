@@ -1,5 +1,6 @@
 import { Component, OnInit, Renderer2, ViewChild, ElementRef, SecurityContext } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { trigger } from '@angular/animations';
 import { Observable } from 'rxjs/Observable';
 
 import { MaterialModule } from 'app/shared/material/material.module';
@@ -16,11 +17,15 @@ import { AccountService, ChatService } from 'app/shared/services/api';
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.scss']
+  styleUrls: ['./chat.component.scss'],
+  animations: [
+    trigger('wholeanimation', []) // ダミー
+  ]
 })
 export class ChatComponent implements OnInit {
   @ViewChild('scrollMove') scrollContainer: ElementRef;
   height: number;
+  animeState: string;
 
   chats$: Observable<Chats>;
   chatThread: ChatThread;
@@ -67,7 +72,7 @@ export class ChatComponent implements OnInit {
         }
       })
       .subscribe(
-        () => console.log(),
+        () => this.scrollToBottom(),
         error => this.router.navigate(['/chat/list'])
       );
   }
