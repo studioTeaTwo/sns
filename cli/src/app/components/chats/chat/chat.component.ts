@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { MaterialModule } from 'app/shared/material/material.module';
 import { Store } from 'app/shared/store/store';
+import { KEY_CODE } from 'app/constants/constants';
 import {
   ChatThread,
   Chats,
@@ -156,8 +157,14 @@ export class ChatComponent implements OnInit {
   }
 
   private setFocus(event: Event) {
-    event.preventDefault();
     const element = this.renderer.selectRootElement('#replyText') as HTMLInputElement;
     element.focus();
+  }
+
+  private onKeyPress(event: KeyboardEvent) {
+    if (event.keyCode === KEY_CODE.KEY_ENTER) {
+      const element = this.renderer.selectRootElement('#replyText') as HTMLInputElement;
+      element.blur();
+    }
   }
 }
