@@ -1,11 +1,11 @@
-<div id="container-chat">
+<div id="container-chat" [@wholeanimation]="animeState">
   
   <div id="header-chat">
   </div>
 
   <div id="contents-chat">
     <div #scrollMove class="history-scrollbox" [style.height.px]="height">
-      <div ><md-spinner class="history-loading" *ngIf="loadingChatBack$ | async"></md-spinner></div>
+      <div ><mat-spinner class="history-loading" *ngIf="loadingChatBack$ | async"></mat-spinner></div>
     
       <table class="chats">
     
@@ -38,8 +38,8 @@
             <td class="chat-column-avatar"><img class="chat-avatar" [src]="getImgSrc(chat)" /></td>
             <td class="chat-column-body">
               <div *ngIf="chat.body" class="chat-body mb15" [innerHtml]="chat.body"></div>
-              <button md-raised-button color="primary" (click)="onClickYes()">はい</button>
-              <button md-raised-button (click)="onClickNo()">いいえ</button>
+              <button mat-raised-button color="primary" (click)="onClickYes()">はい</button>
+              <button mat-raised-button (click)="onClickNo()">いいえ</button>
             </td>
             <td class="chat-column-time">
               <div class="chat-created">{{chat.createdAt | date:'HH:mm'}}</div>
@@ -51,11 +51,11 @@
             <td class="chat-column-avatar"><img class="chat-avatar" [src]="getImgSrc(chat)" /></td>
             <td class="chat-column-body">
               <div *ngIf="chat.body" class="chat-body mb15" [innerHtml]="chat.body"></div>
-              <md-checkbox *ngFor="let item of chat.itemList"
+              <mat-checkbox *ngFor="let item of chat.itemList"
                 [(ngModel)]="item.checked"
                 (change)="onChangeChecked(item)"
                 [disabled]="chat.expired"
-              >{{item.name}}</md-checkbox>
+              >{{item.name}}</mat-checkbox>
             </td>
             <td class="chat-column-time">
               <div class="chat-created">{{chat.createdAt | date:'HH:mm'}}</div>
@@ -67,13 +67,13 @@
             <td class="chat-column-avatar"><img class="chat-avatar" [src]="getImgSrc(chat)" /></td>
             <td class="chat-column-body">
               <div *ngIf="chat.body" class="chat-body mb15" [innerHtml]="chat.body"></div>
-              <md-radio-group class="chat-radio-group" [(ngModel)]="chat.result">
-                <md-radio-button *ngFor="let item of chat.itemList"
+              <mat-radio-group class="chat-radio-group" [(ngModel)]="chat.result">
+                <mat-radio-button *ngFor="let item of chat.itemList"
                   [value]="item.id"
                   (change)="onChangeRadio(item)"
                   [disabled]="chat.expired"
-                >{{item.name}}</md-radio-button>
-              </md-radio-group>
+                >{{item.name}}</mat-radio-button>
+              </mat-radio-group>
             </td>
             <td class="chat-column-time">
               <div class="chat-created">{{chat.createdAt | date:'HH:mm'}}</div>
@@ -98,17 +98,17 @@
       </table>
     
       <div class="history-unread" *ngIf="isUnread()" (click)="getUnreadChat()">
-        <md-icon>expand_more</md-icon>
+        <mat-icon>expand_more</mat-icon>
         <span>未読があります</span>
       </div>
-      <div class="history-loading" *ngIf="loadingChatForward$ | async"><md-spinner></md-spinner></div>
+      <div class="history-loading" *ngIf="loadingChatForward$ | async"><mat-spinner></mat-spinner></div>
     
     </div>
   </div>
 
   <div id="footer-chat" *ngIf="showReplyText">
     <input id="replyText" type="text" #replyText placeholder="メッセージを入力" class="footer-chat-item footer-chat-replyText"  [class.is-active]="isActive" (click)="setFocus($event)" />
-    <button md-raised-button color="primary" class="footer-chat-item footer-chat-replyButton" (click)="onClickReply(replyText.value); replyText.value=''">送信</button>
+    <button mat-raised-button color="primary" class="footer-chat-item footer-chat-replyButton" (click)="onClickReply(replyText.value); replyText.value=''">送信</button>
   </div>
 
 </div>

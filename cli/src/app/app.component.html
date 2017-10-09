@@ -1,7 +1,7 @@
 <app-header></app-header>
 
 <div id="main">
-  <md-spinner class="main-loading" *ngIf="loading$ | async"></md-spinner>
+  <mat-spinner class="main-loading" *ngIf="loading$ | async"></mat-spinner>
   <p class="error-message" *ngIf="!(loading$ | async) && error$ | async">{{errorMsg$ | async}}</p>
   <router-outlet></router-outlet>
 </div>

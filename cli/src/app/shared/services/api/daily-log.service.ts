@@ -83,6 +83,7 @@ export class DailyLogService {
     this.store.setState({
       ...currentState,
       dailyLogList: data,
+      loading: false,
       error: false,
     });
   }
@@ -95,6 +96,7 @@ export class DailyLogService {
     this.store.setState({
       ...currentState,
       dailyLogList: newState,
+      loading: false,
       error: false,
     });
   }

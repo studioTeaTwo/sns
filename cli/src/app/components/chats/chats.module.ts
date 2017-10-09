@@ -12,6 +12,9 @@ import { ChatListComponent } from './chat-list/chat-list.component';
     SharedModule,
     ChatsRoutingModule
   ],
-  declarations: [ChatComponent, ChatListComponent]
+  declarations: [
+    ChatComponent,
+    ChatListComponent,
+  ],
 })
 export class ChatsModule { }

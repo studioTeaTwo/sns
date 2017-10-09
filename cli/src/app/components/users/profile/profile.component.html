@@ -2,16 +2,16 @@
 <aside>
   <section class="user_info">
 
-    <md-grid-list cols="4">
+    <mat-grid-list cols="4">
       
       <img [src]="(profile$ | async).avatarUrl" />
-      <div class="mdl-cell mdl-cell--3-col">
+      <div class="matl-cell matl-cell--3-col">
         <h1 class="user-name">
           {{(profile$ | async).name}}
         </h1>
         <div class="user-honor">
-          <span class="mdl-chip"><span class="mdl-chip__text">{{(profile$ | async).rank}}</span></span>
-          <span class="mdl-chip"><span class="mdl-chip__text">{{(profile$ | async).titleOfHonor}}</span></span>
+          <span class="matl-chip"><span class="matl-chip__text">{{(profile$ | async).rank}}</span></span>
+          <span class="matl-chip"><span class="matl-chip__text">{{(profile$ | async).titleOfHonor}}</span></span>
         </div>
       </div>
 
@@ -45,10 +45,10 @@
     </div>
 
     <a *ngIf="!isMyself" [routerLink]="['/chat', (profile$ | async).id]" routerLinkActive="active" class="global-menu-item">
-      <md-icon>chat</md-icon>
+      <mat-icon>chat</mat-icon>
     </a>
     
-    </md-grid-list>
+    </mat-grid-list>
 
   </section>
 </aside>

@@ -167,6 +167,7 @@ export class AccountService {
     this.store.setState({
       ...currentState,
       account: data,
+      loading: false,
       error: false,
     });
   }

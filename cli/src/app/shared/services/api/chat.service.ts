@@ -80,6 +80,7 @@ export class ChatService {
     this.store.setState({
       ...currentState,
       chatList: data,
+      loading: false,
       error: false,
     });
   }
@@ -91,6 +92,7 @@ export class ChatService {
     this.store.setState({
       ...currentState,
       chats: data,
+      loading: false,
       error: false,
     });
   }

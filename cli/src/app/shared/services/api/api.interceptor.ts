@@ -5,7 +5,6 @@ import { Observable } from 'rxjs/Observable';
 
 import { environment } from 'environments/environment';
 import { API_ERROR_MSGS } from 'app/constants/constants';
-import { Store } from 'app/shared/store/store';
 import { ApiBaseService } from 'app/shared/services/api/api-base.service';
 
 @Injectable()
@@ -14,7 +13,6 @@ export class ApiInterceptor implements HttpInterceptor {
 
   constructor(
     private router: Router,
-    private store: Store,
     private apiBaseService: ApiBaseService,
   ) {}
 
@@ -31,30 +29,33 @@ export class ApiInterceptor implements HttpInterceptor {
     });
     console.log('インターセプト！', req);
     return next.handle(req)
-             .map((event: HttpEvent<any>) => {
-                if (event instanceof HttpResponse && event.status >= 400) {
+            .map((event: HttpEvent<any>) => {
+              // ネットワーク通信前に動く
+              if (event instanceof HttpResponse && event.status >= 400) {
+                this.apiBaseService.onError();
+              } else {
+              };
+              return event;
+            })
+            .catch((err: any, caught) => {
+              if (err instanceof HttpErrorResponse) {
+                if (err.status === 401) {
+                  this.apiBaseService.onError(API_ERROR_MSGS.UNAUTHORIZED_401);
+                  this.goBackLogin();
+                } else if (err.status === 403) {
                   this.apiBaseService.onError();
                 } else {
-                  // 正常レスポンス
-                  this.apiBaseService.onSuccess();
-                };
-                return event;
-              })
-              .catch((err: any, caught) => {
-                if (err instanceof HttpErrorResponse) {
-                  if (err.status === 401) {
-                    this.apiBaseService.onError(API_ERROR_MSGS.UNAUTHORIZED_401);
-                    localStorage.removeItem('token');
-                    localStorage.removeItem('account');
-                    this.router.navigate(['/auth/login']);
-                  } else if (err.status === 403) {
-                    this.apiBaseService.onError();
-                  } else {
-                    // 500系
-                    this.apiBaseService.onError();
-                  }
-                  return Observable.throw(err);
+                  // 500系
+                  this.apiBaseService.onError();
                 }
-              });
+                return Observable.throw(err);
+              }
+            });
+  }
+
+  private goBackLogin() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('account');
+    this.router.navigate(['/auth/login']);
   }
 }

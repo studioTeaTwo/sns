@@ -48,12 +48,15 @@ export class ApiBaseService {
     });
   }
 
+  // 正常扱いにする時に使う
   onNotFound(data: any) {
     const currentState = this.store.getState();
     this.store.setState({
       ...currentState,
       ...data,
-      error: true,
+      loading: false,
+      error: false,
+      errorMsg: '',
     });
   }
 }
