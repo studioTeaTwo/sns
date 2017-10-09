@@ -1,14 +1,14 @@
 <div id="global-menu" *ngIf="isDisplay()">
-  <a routerLink="/home" routerLinkActive="active" class="global-menu-item">
+  <a routerLink="/home" routerLinkActive="active" class="global-menu-item" (click)="sound()">
     <mat-icon>home</mat-icon>
   </a>
-  <a routerLink="/life-log/daily/list" routerLinkActive="active"  class="global-menu-item">
+  <a routerLink="/life-log/daily/list" routerLinkActive="active" class="global-menu-item" (click)="sound()">
     <mat-icon>watch_later</mat-icon>
   </a>
-  <a routerLink="/chat/list" routerLinkActive="active"  class="global-menu-item">
+  <a routerLink="/chat/list" routerLinkActive="active" class="global-menu-item" (click)="sound()">
     <mat-icon>chat</mat-icon>
   </a>
-  <a routerLink="/search" routerLinkActive="active"  class="global-menu-item">
+  <a routerLink="/search" routerLinkActive="active" class="global-menu-item" (click)="sound()">
     <mat-icon>group</mat-icon>
   </a>
 </div>

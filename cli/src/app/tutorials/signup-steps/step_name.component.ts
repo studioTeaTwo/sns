@@ -116,7 +116,11 @@ export class StepNameComponent extends ChatComponent implements OnInit {
         body: tutorial_script3,
         waitTime: 1000
       }, this.chatHistory, this.chatSource,
-      () => this.animeState = 'firstAction'
+      () => {
+        const soundfile = this.renderer.selectRootElement('#soundsignup') as HTMLAudioElement;
+        soundfile.play();
+        return this.animeState = 'firstAction';
+      }
     );
 
     tutorial_script4[0].body = `${text}って言うんだ！`;
