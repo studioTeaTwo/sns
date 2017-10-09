@@ -1,7 +1,7 @@
 import { User } from 'app/interfaces/api-models';
 
 export const NAVI_CHARA: User = {
-  id: 1,
+  id: 0,
   avatarUrl: 'assets/images/naviAvatar.png',
   email: '',
   name: '',
@@ -11,7 +11,7 @@ export const NAVI_CHARA: User = {
 };
 
 export const SIGNUP_USER: User = {
-  id: 0,
+  id: -1,
   avatarUrl: 'assets/images/newUserAvatar.png',
   email: '',
   name: '',
@@ -27,7 +27,7 @@ export const NAVI_THREAD = {
   readUntil: [{
     chatThreadId: 0,
     userId: NAVI_CHARA.id,
-    readUntil: 1
+    readUntil: 0
   }],
   participants: [],
   newestChat: null,

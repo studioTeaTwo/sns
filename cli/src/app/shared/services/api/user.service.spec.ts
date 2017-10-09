@@ -4,6 +4,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { UserService } from './user.service';
 
 import { Store } from 'app/shared/store/store';
+import { ApiBaseService } from 'app/shared/services/api/api-base.service';
 
 describe('UserService', () => {
   beforeEach(() => {
@@ -13,6 +14,7 @@ describe('UserService', () => {
       ],
       providers: [
         Store,
+        ApiBaseService,
         UserService
       ]
     });

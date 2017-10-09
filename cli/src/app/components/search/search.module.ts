@@ -6,6 +6,7 @@ import { SearchRoutingModule } from './search-routing.module';
 import { AllergensComponent } from './allergens/allergens.component';
 import { ResultsComponent } from './results/results.component';
 import { TabsComponent } from './tabs/tabs.component';
+import { NameComponent } from './name/name.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { TabsComponent } from './tabs/tabs.component';
   declarations: [
     AllergensComponent,
     ResultsComponent,
-    TabsComponent
+    TabsComponent,
+    NameComponent
   ]
 })
 export class SearchModule { }

@@ -8,6 +8,7 @@ import { Store } from 'app/shared/store/store';
 import { MaterialModule } from 'app/shared/material/material.module';
 import {
   ApiInterceptor,
+  ApiBaseService,
   MasterDataService,
   AccountService,
   UserService,
@@ -41,6 +42,7 @@ import { AuthGuard } from 'app/shared/guards/auth.guard';
     ShortenTextPipe,
   ],
   providers: [
+    ApiBaseService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ApiInterceptor,

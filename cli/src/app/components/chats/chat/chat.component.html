@@ -107,7 +107,7 @@
   </div>
 
   <div id="footer-chat" *ngIf="showReplyText">
-    <input id="replyText" #replyText placeholder="メッセージを入力" class="footer-chat-item footer-chat-replyText"  [class.is-active]="isActive" (click)="setFocus($event)" />
+    <input id="replyText" type="text" #replyText placeholder="メッセージを入力" class="footer-chat-item footer-chat-replyText"  [class.is-active]="isActive" (click)="setFocus($event)" />
     <button md-raised-button color="primary" class="footer-chat-item footer-chat-replyButton" (click)="onClickReply(replyText.value); replyText.value=''">送信</button>
   </div>
 

@@ -6,6 +6,7 @@ import { TopComponent } from './top.component';
 
 import { Store } from 'app/shared/store/store';
 import {
+  ApiBaseService,
   AccountService,
   ChatService,
  } from 'app/shared/services/api';
@@ -23,6 +24,7 @@ describe('TopComponent', () => {
       declarations: [ TopComponent ],
       providers: [
         Store,
+        ApiBaseService,
         AccountService,
         ChatService,
       ]

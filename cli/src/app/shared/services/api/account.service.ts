@@ -6,6 +6,7 @@ import { Store } from 'app/shared/store/store';
 import {
   User,
 } from 'app/interfaces/api-models';
+import { ApiBaseService } from 'app/shared/services/api/api-base.service';
 
 @Injectable()
 export class AccountService {
@@ -21,6 +22,7 @@ export class AccountService {
   constructor(
     private http: HttpClient,
     private store: Store,
+    private apiBaseService: ApiBaseService,
   ) { }
 
   login(email: string, password: string): Observable<User> {
@@ -48,7 +50,7 @@ export class AccountService {
         response => {
           localStorage.removeItem('token');
           localStorage.removeItem('account');
-          this.onSuccess();
+          this.apiBaseService.onSuccess();
         }
       );
   }
@@ -67,6 +69,7 @@ export class AccountService {
   }
 
   get(): Observable<User> {
+    this.apiBaseService.resetBeforeRequest({profile: {}});
     let myself = this.store.getState().account;
     if (myself && myself.id) {
       return Observable.of(this.store.getState().account);
@@ -93,7 +96,7 @@ export class AccountService {
         response => {
           this.userId = response.userId;
           localStorage.setItem('token', response.accessToken);
-          this.onSuccess();
+          this.apiBaseService.onSuccess();
         }
       );
   }
@@ -127,7 +130,7 @@ export class AccountService {
               {observe: 'response'}
             )
             .map(response => {
-              this.onSuccess();
+              this.apiBaseService.onSuccess();
               return response;
             });
   }
@@ -157,15 +160,6 @@ export class AccountService {
     } else {
       return false;
     }
-  }
-
-  private onSuccess() {
-    const currentState = this.store.getState();
-    this.store.setState({
-      ...currentState,
-      loading: false,
-      error: false,
-    });
   }
 
   private onSuccessAccount(data: User) {

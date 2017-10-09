@@ -1,4 +1,5 @@
 export * from './api.interceptor';
+export * from './api-base.service';
 export * from './master-data.service';
 export * from './account.service';
 export * from './user.service';

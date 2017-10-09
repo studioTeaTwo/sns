@@ -12,6 +12,8 @@ import {
   UserService,
 } from 'app/shared/services/api';
 import { AllergensComponent } from '../allergens/allergens.component';
+import { NameComponent } from '../name/name.component';
+import { ResultsComponent } from '../results/results.component';
 
 describe('TabComponent', () => {
   let component: TabsComponent;
@@ -28,6 +30,8 @@ describe('TabComponent', () => {
       declarations: [
         TabsComponent,
         AllergensComponent,
+        NameComponent,
+        ResultsComponent,
       ],
       providers: [
         Store,

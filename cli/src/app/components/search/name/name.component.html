@@ -1,0 +1,3 @@
+<input type="text" #input class="mt5 mb15" placeholder="検索したい名前を入力" (input)="onInput(input.value)">
+
+<app-results *ngIf="input.value.length > 0"></app-results>

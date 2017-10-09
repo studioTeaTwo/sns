@@ -6,6 +6,7 @@ import { AuthGuard } from './auth.guard';
 
 import { Store } from 'app/shared/store/store';
 import {
+  ApiBaseService,
   AccountService,
 } from 'app/shared/services/api';
 
@@ -19,6 +20,7 @@ describe('AuthGuard', () => {
       providers: [
         AuthGuard,
         Store,
+        ApiBaseService,
         AccountService,
       ]
     });

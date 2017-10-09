@@ -27,7 +27,7 @@ export class ApiInterceptor implements HttpInterceptor {
     console.log('インターセプト！', req);
     return next.handle(req)
              .map((event: HttpEvent<any>) => {
-                if (event instanceof HttpResponse && event.status > 300) {
+                if (event instanceof HttpResponse && event.status >= 400) {
                   this.onError();
                 } else {
                   // 正常レスポンス
