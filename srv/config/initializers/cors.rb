@@ -8,7 +8,7 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   if Rails.env.development?
     allow do
-      origins 'localhost:4200'
+      origins ['localhost:4200', '10.0.1.2:4200']
 
       resource '/api/*',
         headers: :any,

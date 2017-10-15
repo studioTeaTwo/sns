@@ -46,20 +46,25 @@ export class DailyLogService {
       );
   }
 
-  create(body?: DailyLogRequestBody): Observable<DailyLog> {
+  create(body?: DailyLogRequestBody) {
     if (!body) {
       body = {
         daily_log: this.dailyLogParam,
       }
     }
-    return this.httpClient.post<DailyLog>(`/api/daily_logs`, body)
-      .map(
+    this.httpClient.post<DailyLog>(`/api/daily_logs`, body)
+      .subscribe(
         response => {
           this.onSuccessLog(response);
           this.dailyLogParam = this.initialState;
-          return response
         }
       );
+
+    // TODO: multi-partで送るなら
+    if (this.dailyLogParam.photograph && this.dailyLogParam.photograph.length > 0) {
+      const fileData: FormData = new FormData();
+      fileData.append('imageFile', this.Base64ToImage(this.dailyLogParam.photograph));
+    }
   }
 
   storeData(dailyLog: DailyLog) {
@@ -76,6 +81,14 @@ export class DailyLogService {
 
   saveHealthMemo(text: string) {
     this.dailyLogParam.healthMemo = text;
+  }
+
+  savePhotograph(data: string) {
+    this.dailyLogParam.photograph = data;
+  }
+
+  savePhotographMemo(text: string) {
+    this.dailyLogParam.photographMemo = text;
   }
 
   private onSuccessList(data: DailyLog[]) {
@@ -99,6 +112,18 @@ export class DailyLogService {
       loading: false,
       error: false,
     });
+  }
+
+  private Base64ToImage(uploadFile: string) {
+    const bin = atob(uploadFile.replace(/^.*,/, ''));
+    const buffer = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) {
+        buffer[i] = bin.charCodeAt(i);
+    }
+    const blob = new Blob([buffer.buffer], {
+        type: 'png'
+    });
+    return blob;
   }
 
 }

@@ -72,6 +72,9 @@ export class StepHealthComponent extends ChatComponent implements OnInit {
 
     this.toggleReplyText(false);
 
+    // TODO: アンケートの初期化をもうちょいちゃんとやる
+    daily_log_script2[0].result = '';
+
     addChat({
       body: daily_log_script1,
       waitTime: 0

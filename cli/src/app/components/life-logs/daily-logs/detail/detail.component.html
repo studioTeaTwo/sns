@@ -1,14 +1,16 @@
-<p>
-  detail works!
-</p>
-
-<p>
-  {{(dailyLog$ | async)?.id}}
-  {{(dailyLog$ | async)?.symptom}}
-  {{(dailyLog$ | async)?.health}}
-  {{(dailyLog$ | async)?.healthMemo}}
-  {{(dailyLog$ | async)?.medicina}}
-  {{(dailyLog$ | async)?.medicinaMemo}}
-  {{(dailyLog$ | async)?.photograph}}
-  {{(dailyLog$ | async)?.photographMemo}}
-</p>  
+<label>日付</label>
+<p>{{(dailyLog$ | async)?.updatedAt}}</p>
+<label>症状</label>
+<p>{{(dailyLog$ | async)?.symptom}}</p>
+<label>気分</label>
+<p>{{(dailyLog$ | async)?.health}}</p>
+<label>メモ</label>
+<p>{{(dailyLog$ | async)?.healthMemo}}</p>
+<label>薬</label>
+<p>{{(dailyLog$ | async)?.medicina}}</p>
+<label>メモ</label>
+<p>{{(dailyLog$ | async)?.medicinaMemo}}</p>
+<label>写真</label>
+<img [src]="(dailyLog$ | async)?.photograph" />
+<label>写真メモ</label>
+<p>{{(dailyLog$ | async)?.photographMemo}}</p>

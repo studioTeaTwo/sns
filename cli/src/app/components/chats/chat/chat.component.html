@@ -82,14 +82,9 @@
 
           <!-- camera -->
           <tr [ngClass]="chat.senderId === myself.id ? 'myself' : 'opponent'" *ngIf="chat && isCamera(chat)">
-            <td class="chat-column-avatar"><img class="chat-avatar" [src]="getImgSrc(chat)" /></td>
-            <td class="chat-column-body">
-              <div *ngIf="chat.body" class="chat-body mb15" [innerHtml]="chat.body"></div>
-              <canvas id="canvas" #canvas></canvas>
+            <td class="chat-column-camera" colspan="3">
+              <canvas id="canvas" #canvas style="display: none"></canvas>
               <video id="video" #video autoplay playsinline></video>
-            </td>
-            <td class="chat-column-time">
-              <div class="chat-created">{{chat.createdAt | date:'HH:mm'}}</div>
             </td>
           </tr>
     
