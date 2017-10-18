@@ -50,7 +50,7 @@ export class AccountService {
         response => {
           localStorage.removeItem('token');
           localStorage.removeItem('account');
-          this.apiBaseService.onSuccess();
+          this.onSuccessAccount({});
         }
       );
   }
@@ -96,7 +96,8 @@ export class AccountService {
         response => {
           this.userId = response.userId;
           localStorage.setItem('token', response.accessToken);
-          this.apiBaseService.onSuccess();
+          localStorage.setItem('account', JSON.stringify(response));
+          this.onSuccessAccount(response);
         }
       );
   }
@@ -144,14 +145,10 @@ export class AccountService {
   }
 
   emailValidator(email: string): boolean {
-    const mail_regex = new RegExp(
-      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-    );
-    if (email.match(mail_regex)) {
-      return true;
-    } else {
-      return false;
-    }
+    const mail_regex =
+      // tslint:disable-next-line:max-line-length
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return mail_regex.test(email);
   }
 
   passwordValidator(password: string): boolean {

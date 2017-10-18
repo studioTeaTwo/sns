@@ -25,7 +25,7 @@ class Api::SessionsController < ApplicationController
   # @response_status 200
   def destroy
     sign_out current_user
-    head :ok
+    render json: {}, status: :ok
   end
 
   private

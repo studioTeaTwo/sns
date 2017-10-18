@@ -107,6 +107,7 @@ class Api::Users::UsersController < ApplicationController
         user_params[:symptoms].each do |symptom|
           case symptom.to_sym
           when :atopic then
+            puts 'atopicだよ'
             @user.atopic = true
             @personal_assistant.daily_atopic = true
           when :asthma then
