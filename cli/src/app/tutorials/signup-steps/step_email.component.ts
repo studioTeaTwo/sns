@@ -128,8 +128,27 @@ export class StepEmailComponent extends ChatComponent implements OnInit, AfterVi
   }
 
   onClickYes() {
-    this.accountService.create();
-    this.router.navigate(['']);
+    this.accountService.create()
+      .subscribe(
+        () => {
+          addChat(
+            {
+              body: tutorial_script1,
+              waitTime: 0
+            }, this.chatHistory, this.chatSource,
+          );
+          setTimeout(() => this.router.navigate(['']), 2000);
+        },
+        error => {
+          addChat(
+            {
+              body: tutorial_script_error_regist,
+              waitTime: 0
+            }, this.chatHistory, this.chatSource,
+          );
+          setTimeout(() => this.router.navigate(['']), 2000);
+        }
+      );
   }
 
   onClickNo() {
@@ -210,6 +229,20 @@ const tutorial_script4: ChatViewModel[] = [{
   body: 'これでOKかい？',
   createdAt: new Date()
 }];
+const tutorial_script5: ChatViewModel[] = [{
+  id: 6,
+  senderId: NAVI_CHARA.id,
+  contentType: CONTENT_TYPE.REPLY,
+  body: 'さあ、入国の手続きは完了だ！',
+  createdAt: new Date()
+},
+{
+  id: 7,
+  senderId: NAVI_CHARA.id,
+  contentType: CONTENT_TYPE.REPLY,
+  body: '毎日症状を記録して、一緒に戦う仲間を見つけよう！',
+  createdAt: new Date()
+}];
 const tutorial_script_error: ChatViewModel[] = [{
   id: 6,
   senderId: NAVI_CHARA.id,
@@ -222,5 +255,19 @@ const tutorial_script_error_email: ChatViewModel[] = [{
   senderId: NAVI_CHARA.id,
   contentType: CONTENT_TYPE.REPLY,
   body: 'もうこのアドレスは登録されてるってさ！',
+  createdAt: new Date()
+}];
+const tutorial_script_error_regist: ChatViewModel[] = [{
+  id: 7,
+  senderId: NAVI_CHARA.id,
+  contentType: CONTENT_TYPE.REPLY,
+  body: '申し訳ない＞＜',
+  createdAt: new Date()
+},
+{
+  id: 7,
+  senderId: NAVI_CHARA.id,
+  contentType: CONTENT_TYPE.REPLY,
+  body: 'サーバエラーです。しばらくしてからもう一度お願いします。',
   createdAt: new Date()
 }];

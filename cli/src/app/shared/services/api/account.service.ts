@@ -90,9 +90,9 @@ export class AccountService {
     }
   }
 
-  create() {
-    this.http.post<any>(`/api/users`, {user: this.signupData})
-      .subscribe(
+  create(): Observable<void> {
+    return this.http.post<any>(`/api/users`, {user: this.signupData})
+      .map(
         response => {
           this.userId = response.userId;
           localStorage.setItem('token', response.accessToken);
