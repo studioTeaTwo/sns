@@ -66,7 +66,7 @@ export class ChatComponent implements OnInit {
             this.chatThread = response;
             this.opponents = response.participants.filter(value => value.id !== this.myself.id);
             // もう既存のスレッドがあった
-            if (this.chatThread.newestChat.id) {
+            if (this.chatThread.newestChat) {
               this.chatService.getChatThread(this.chatThread.id);
             }
           });
