@@ -2,6 +2,7 @@
 #
 # @name IgeStrongParameter
 #
+# @attr [integer] id
 # @attr [date] testDate
 # @attr [boolean] latestTestResult
 # @attr [integer] testCategory

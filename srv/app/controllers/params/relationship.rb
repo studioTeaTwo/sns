@@ -2,6 +2,7 @@
 #
 # @name RelationshipStrongParameter
 #
+# @attr [integer] id
 # @attr [integer] followerId
 # @attr [integer] followedId
 class Params::Relationship; end

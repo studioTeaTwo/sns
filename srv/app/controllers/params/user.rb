@@ -2,6 +2,7 @@
 #
 # @name UserStrongParameter
 #
+# @attr [integer] id
 # @attr [string] email
 # @attr [string] encryptedPassword
 # @attr [string] resetPasswordToken

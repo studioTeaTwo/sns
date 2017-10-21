@@ -2,6 +2,7 @@
 #
 # @name ChatStrongParameter
 #
+# @attr [integer] id
 # @attr [integer] chatThreadId
 # @attr [integer] senderId
 # @attr [integer] contentType

@@ -1,16 +1,62 @@
-<label>日付</label>
-<p>{{(dailyLog$ | async)?.updatedAt}}</p>
-<label>症状</label>
-<p>{{(dailyLog$ | async)?.symptom}}</p>
-<label>気分</label>
-<p>{{(dailyLog$ | async)?.health}}</p>
-<label>メモ</label>
-<p>{{(dailyLog$ | async)?.healthMemo}}</p>
-<label>薬</label>
-<p>{{(dailyLog$ | async)?.medicina}}</p>
-<label>メモ</label>
-<p>{{(dailyLog$ | async)?.medicinaMemo}}</p>
-<label>写真</label>
-<img [src]="(dailyLog$ | async)?.photograph" />
-<label>写真メモ</label>
-<p>{{(dailyLog$ | async)?.photographMemo}}</p>
+<div id="container">
+  
+  <div id="header">
+    <mat-form-field class="form-date">
+      <input matInput type="date" [(ngModel)]="dailyLogParam.date" />
+    </mat-form-field>
+    <div id="submit">
+      <button type="button" mat-raised-button color="primary" *ngIf="displayMode === MODE.CREATE" (click)="onClickSubmit()">記録する</button>
+      <button type="button" mat-raised-button color="primary" *ngIf="displayMode === MODE.EDIT" (click)="onClickUpdate()">変更する</button>
+      <button type="button" mat-raised-button color="primary" *ngIf="displayMode === MODE.ROM" (click)="onClickEdit()">編集する</button>
+    </div>
+  </div>
+
+  <mat-card>
+    <mat-card-header>
+        <md-card-title>今日の気分は？</md-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-button-toggle-group id="health" [(ngModel)]="dailyLogParam.health" [disabled]="displayMode === MODE.ROM">
+        <mat-button-toggle value="1">😄</mat-button-toggle>
+        <mat-button-toggle value="2">☺️</mat-button-toggle>
+        <mat-button-toggle value="3">😥</mat-button-toggle>
+      </mat-button-toggle-group>
+      <mat-form-field class="form-memo">
+        <textarea matInput matTextareaAutosize placeholder="メモ" [(ngModel)]="dailyLogParam.healthMemo" [readonly]="displayMode === MODE.ROM"></textarea>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <md-card-title>薬は服用した？</md-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-radio-group id="medicina" [(ngModel)]="dailyLogParam.medicina" [disabled]="displayMode === MODE.ROM">
+        <mat-radio-button [value]="true">OK！</mat-radio-button>
+        <mat-radio-button [value]="false">忘れた</mat-radio-button>
+      </mat-radio-group>
+      <mat-form-field class="form-memo">
+        <textarea matInput matTextareaAutosize placeholder="メモ" [(ngModel)]="dailyLogParam.medicinaMemo" [readonly]="displayMode === MODE.ROM"></textarea>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <md-card-title>写真の記録</md-card-title>
+      <div id="camera">
+        <button type="button" mat-raised-button (click)="onClickCamera()" *ngIf="displayMode !== MODE.ROM">写真を撮る</button>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <div id="photograph">
+          
+      </div>
+      <mat-form-field class="form-memo">
+        <textarea matInput matTextareaAutosize placeholder="メモ" [(ngModel)]="dailyLogParam.photographMemo" [readonly]="displayMode === MODE.ROM"></textarea>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+
+</div>

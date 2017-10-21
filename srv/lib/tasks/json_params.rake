@@ -12,28 +12,28 @@ namespace :json_params do
       {email: 'string', password: 'string'}
     )
     create(User, "#{Rails.root}/app/controllers/params/user.rb",
-      [:id, :created_at, :updated_at]
+      [:created_at, :updated_at]
     )
     create(Relationship, "#{Rails.root}/app/controllers/params/relationship.rb", 
-      [:id, :user_id, :created_at, :updated_at]
+      [:user_id, :created_at, :updated_at]
     )
     create(Chat, "#{Rails.root}/app/controllers/params/chat.rb",
-      [:id, :user_id, :created_at, :updated_at],
+      [:user_id, :created_at, :updated_at],
       {item_list: 'hash'}
     )
     create(ChatThread, "#{Rails.root}/app/controllers/params/chat_thread.rb",
-      [:id, :user_id, :created_at, :updated_at],
+      [:user_id, :created_at, :updated_at],
       {participants: 'Array<integer>'}
     )
     create(Micropost, "#{Rails.root}/app/controllers/params/micropost.rb",
-      [:id, :user_id, :created_at, :updated_at]
+      [:user_id, :created_at, :updated_at]
     )
     create(DailyLog, "#{Rails.root}/app/controllers/params/daily_log.rb",
-      [:id, :user_id, :created_at, :updated_at],
+      [:user_id, :created_at, :updated_at],
       {symptom: 'string'}
     )
     create(Ige, "#{Rails.root}/app/controllers/params/ige.rb",
-      [:id, :user_id, :created_at, :updated_at]
+      [:user_id, :created_at, :updated_at]
     )
   end
 

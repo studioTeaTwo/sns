@@ -2,6 +2,7 @@
 #
 # @name MicropostStrongParameter
 #
+# @attr [integer] id
 # @attr [string] content
 # @attr [string] picture
 class Params::Micropost; end

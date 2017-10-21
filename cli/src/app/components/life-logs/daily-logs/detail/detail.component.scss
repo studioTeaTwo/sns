@@ -1,0 +1,36 @@
+mat-card {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+#header {
+  display: flex;
+  flex-direction: row;
+  .form-date {
+    width: 40%;
+  }
+  #submit {
+    margin-left: auto;
+  }  
+}
+
+.form-memo {
+  width: 100%;
+  margin-top: 15px;
+}
+
+#health {
+  mat-button-toggle {
+    font-size: 3.5em;
+  }
+}
+
+#medicina {
+}
+
+#camera {
+  margin-left: auto;
+}
+
+#photograph {
+}

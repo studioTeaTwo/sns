@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import * as moment from 'moment';
 
 import { Store } from 'app/shared/store/store';
 import {
@@ -18,7 +19,7 @@ import {
 @Injectable()
 export class DailyLogService {
 
-  private dailyLogParam: DailyLogStrongParameter = this.initialState;
+  dailyLogParam: DailyLogStrongParameter = this.initialState;
 
   constructor(
     private httpClient: HttpClient,
@@ -27,10 +28,11 @@ export class DailyLogService {
 
   get initialState(): DailyLogStrongParameter {
     return {
+      date: moment().format('YYYY-MM-DD'),
       symptom: 'atopic',
       health: 0,
       healthMemo: '',
-      medicina: false,
+      medicina: undefined,
       medicinaMemo: '',
       photograph: '',
       photographMemo: '',
@@ -46,25 +48,46 @@ export class DailyLogService {
       );
   }
 
-  create(body?: DailyLogRequestBody) {
-    if (!body) {
-      body = {
-        daily_log: this.dailyLogParam,
-      }
-    }
-    this.httpClient.post<DailyLog>(`/api/daily_logs`, body)
-      .subscribe(
+  get(id: number): Observable<DailyLog> {
+    return this.httpClient.get<DailyLog>(`/api/daily_logs/${id}`)
+      .map(
         response => {
           this.onSuccessLog(response);
-          this.dailyLogParam = this.initialState;
+          return response;
         }
       );
+  }
+
+  create(param?: DailyLogStrongParameter): Observable<void> {
+    const body: DailyLogRequestBody = {
+      daily_log: param ? param : this.dailyLogParam,
+    };
 
     // TODO: multi-partで送るなら
     if (this.dailyLogParam.photograph && this.dailyLogParam.photograph.length > 0) {
       const fileData: FormData = new FormData();
       fileData.append('imageFile', this.Base64ToImage(this.dailyLogParam.photograph));
     }
+
+    return this.httpClient.post<DailyLog>(`/api/daily_logs`, body)
+      .map(
+        response => {
+          this.onSuccessLog(response);
+          this.dailyLogParam = this.initialState;
+        }
+      );
+  }
+
+  update(param: DailyLogStrongParameter): Observable<void> {
+    const body: DailyLogRequestBody = {
+      daily_log: param,
+    };
+    return this.httpClient.put<DailyLog>(`/api/daily_logs/${param.id}`, body)
+      .map(
+        response => {
+          this.onSuccessLog(response);
+        }
+      );
   }
 
   storeData(dailyLog: DailyLog) {

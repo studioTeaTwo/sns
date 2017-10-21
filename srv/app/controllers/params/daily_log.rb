@@ -2,6 +2,8 @@
 #
 # @name DailyLogStrongParameter
 #
+# @attr [integer] id
+# @attr [date] date
 # @attr [string] symptom
 # @attr [integer] health
 # @attr [string] healthMemo

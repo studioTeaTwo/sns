@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ListComponent } from './daily-logs/list/list.component';
 import { LoggingComponent } from './daily-logs/logging/logging.component';
-import { CreateComponent } from './daily-logs/create/create.component';
 import { DetailComponent } from './daily-logs/detail/detail.component';
 
 const routes: Routes = [
@@ -20,7 +19,7 @@ const routes: Routes = [
       },
       {
         path: 'create',
-        component: CreateComponent,
+        component: DetailComponent,
       },
       {
         path: ':id',

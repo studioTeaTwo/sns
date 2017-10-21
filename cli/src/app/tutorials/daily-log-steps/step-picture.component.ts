@@ -216,7 +216,7 @@ export class StepPictureComponent extends ChatComponent implements OnInit {
     }, this.chatHistory = [], this.chatSource);
 
     // データ送信
-    this.dailyLogService.create();
+    this.dailyLogService.create().subscribe();
     // 次のステップへ
     setTimeout(() => this.router.navigate(['/']), 2000);
   }

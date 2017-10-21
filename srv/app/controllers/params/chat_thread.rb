@@ -2,6 +2,7 @@
 #
 # @name ChatThreadStrongParameter
 #
+# @attr [integer] id
 # @attr [Array<integer>] participants
 # @attr [integer] newestChatId
-class Params::ChaThread; end
+class Params::ChatThread; end

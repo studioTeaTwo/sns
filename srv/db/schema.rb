@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20170927150358) do
 
   create_table "daily_logs", force: :cascade do |t|
     t.integer "user_id"
+    t.date "date"
     t.integer "symptom", limit: 1, default: 0, null: false
     t.integer "health"
     t.string "health_memo"
