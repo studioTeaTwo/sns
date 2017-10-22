@@ -43,12 +43,13 @@ export interface ChatThreadStrongParameter {
 }
 export interface DailyLog {
     id?: number; // int32
+    date?: string;
     symptom?: string;
     health?: number; // int32
     healthMemo?: string;
     medicina?: boolean;
     medicinaMemo?: string;
-    photograph?: string;
+    photograph?: string[];
     photographMemo?: string;
     updatedAt?: string; // date-time
 }
@@ -63,7 +64,7 @@ export interface DailyLogStrongParameter {
     healthMemo?: string;
     medicina?: boolean;
     medicinaMemo?: string;
-    photograph?: string;
+    photograph?: string[];
     photographMemo?: string;
 }
 export interface EmailVerifyRequestBody {

@@ -7,7 +7,7 @@
     <div id="submit">
       <button type="button" mat-raised-button color="primary" *ngIf="displayMode === MODE.CREATE" (click)="onClickSubmit()">記録する</button>
       <button type="button" mat-raised-button color="primary" *ngIf="displayMode === MODE.EDIT" (click)="onClickUpdate()">変更する</button>
-      <button type="button" mat-raised-button color="primary" *ngIf="displayMode === MODE.ROM" (click)="onClickEdit()">編集する</button>
+      <button type="button" mat-raised-button *ngIf="displayMode === MODE.ROM" (click)="onClickEdit()">編集する</button>
     </div>
   </div>
 
@@ -50,8 +50,9 @@
       </div>
     </mat-card-header>
     <mat-card-content>
-      <div id="photograph">
-          
+      <div id="photograph" *ngFor="let photo of dailyLogParam.photograph">
+        <mat-icon *ngIf="!(displayMode === MODE.ROM)" (click)="onClickPhotoDel(photo)">cancel</mat-icon>
+        <img class="photo" [src]="photo">
       </div>
       <mat-form-field class="form-memo">
         <textarea matInput matTextareaAutosize placeholder="メモ" [(ngModel)]="dailyLogParam.photographMemo" [readonly]="displayMode === MODE.ROM"></textarea>

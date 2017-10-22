@@ -34,7 +34,7 @@ export class DailyLogService {
       healthMemo: '',
       medicina: undefined,
       medicinaMemo: '',
-      photograph: '',
+      photograph: [],
       photographMemo: '',
     }
   }
@@ -66,7 +66,7 @@ export class DailyLogService {
     // TODO: multi-partで送るなら
     if (this.dailyLogParam.photograph && this.dailyLogParam.photograph.length > 0) {
       const fileData: FormData = new FormData();
-      fileData.append('imageFile', this.Base64ToImage(this.dailyLogParam.photograph));
+      this.dailyLogParam.photograph.forEach(photo => fileData.append('imageFile', this.Base64ToImage(photo)));
     }
 
     return this.httpClient.post<DailyLog>(`/api/daily_logs`, body)
@@ -107,7 +107,8 @@ export class DailyLogService {
   }
 
   savePhotograph(data: string) {
-    this.dailyLogParam.photograph = data;
+    this.dailyLogParam.photograph.push(data);
+    console.log(this.dailyLogParam);
   }
 
   savePhotographMemo(text: string) {

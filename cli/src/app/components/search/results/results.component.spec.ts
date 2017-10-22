@@ -3,6 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { ResultsComponent } from './results.component';
 
+import { SharedModule } from 'app/shared/shared.module';
 import { Store } from 'app/shared/store/store';
 
 describe('ResultsComponent', () => {
@@ -13,6 +14,7 @@ describe('ResultsComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
+        SharedModule,
       ],
       declarations: [ ResultsComponent ],
       providers: [

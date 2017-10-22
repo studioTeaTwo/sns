@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { ListComponent } from './list.component';
 
+import { SharedModule } from 'app/shared/shared.module';
 import { Store } from 'app/shared/store/store';
 import { DailyLogService } from 'app/shared/services/api';
 
@@ -16,6 +17,7 @@ describe('ListComponent', () => {
       imports: [
         HttpClientTestingModule,
         RouterTestingModule,
+        SharedModule,
       ],
       declarations: [ ListComponent ],
       providers: [

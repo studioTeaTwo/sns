@@ -12,9 +12,10 @@ import { AccountService, ChatService } from 'app/shared/services/api';
   styleUrls: ['./chat-list.component.scss']
 })
 export class ChatListComponent implements OnInit {
-  JSON = JSON;
   chatList$: Observable<ChatThread[]>;
   myself: User;
+
+  loading$: Observable<boolean>;
 
   constructor(
     private router: Router,
@@ -24,6 +25,7 @@ export class ChatListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loading$ = this.store.changes.pluck('loading');
     this.chatList$ = this.store.changes.pluck('chatList');
     this.accountService.get().subscribe(response => this.myself = response);
 

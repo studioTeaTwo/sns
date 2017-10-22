@@ -9,6 +9,6 @@
 # @attr [string] healthMemo
 # @attr [boolean] medicina
 # @attr [string] medicinaMemo
-# @attr [string] photograph
+# @attr [Array<string>] photograph
 # @attr [string] photographMemo
 class Params::DailyLog; end

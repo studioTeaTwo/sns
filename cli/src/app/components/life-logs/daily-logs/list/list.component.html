@@ -1,17 +1,26 @@
-<p>
-  list works!
-</p>
+<div id="header">
+  <h3>記録</h3>
+  <button type="button" class="button-log" mat-raised-button routerLink="/life-log/daily/create">日誌を書く</button>
+</div>
 
-<button type="button" mat-raised-button routerLink="/life-log/daily/create">logを作る</button>
-
-<ol>
-  <li *ngFor="let dailyLog of (dailyLogList$ | async)" (click)="routeWithDate(dailyLog)">
-    {{dailyLog.id}}
-    {{dailyLog.symptom}}
-    {{dailyLog.health}}
-    {{dailyLog.healthMemo}}
-    {{dailyLog.photograph}}
-    {{dailyLog.photographMemo}}
-  </li>
-</ol>
+<mat-card *ngFor="let dailyLog of (dailyLogList$ | async)" (click)="routeWithDate(dailyLog)">
+  <mat-grid-list cols="8">
+    <mat-grid-tile [colspan]="3" [rowspan]="1">
+      {{dailyLog.date | formatToJapaneseDate}}
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="2" [rowspan]="1">
+      {{dailyLog.symptom}}
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <div class="health">{{getIcon(dailyLog.health)}}</div>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-icon *ngIf="dailyLog.medicina">local_pharmacy</mat-icon>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-icon *ngIf="dailyLog.photograph">photo_camera</mat-icon>
+    </mat-grid-tile>
+  </mat-grid-list>
+</mat-card>
+<div *ngIf="!(loading$ | async) && (dailyLogList$ | async).length === 0">まだ記録がありません。</div>
 

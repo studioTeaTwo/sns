@@ -16,7 +16,7 @@ export class RoundOffDatePipe implements PipeTransform {
     const diffDay = nowDate.diff(sendDate, 'days', false);
     switch (diffDay) {
       case 0:
-        return moment(sendDate).format('H:m');
+        return moment(sendDate).format('H:mm');
       case 1:
         return '昨日';
       case 2:

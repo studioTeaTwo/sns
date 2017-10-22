@@ -5,4 +5,4 @@
 # @attr [integer] id
 # @attr [Array<integer>] participants
 # @attr [integer] newestChatId
-class Params::ChatThread; end
+class Params::ChaThread; end

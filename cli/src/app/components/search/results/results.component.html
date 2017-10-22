@@ -1,5 +1,18 @@
-<div *ngFor="let user of (searchUsers$ | async)" (click)="onClick(user)">
-  <img [src]="user.avatarUrl" />
-  <div>{{user.name}}</div>
-</div>
+<mat-card *ngFor="let user of (searchUsers$ | async)" (click)="onClick(user)">
+  <mat-grid-list cols="4">
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <img [src]="user.avatarUrl" />
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="3" [rowspan]="1">
+      <div class="discription">
+        <div class="user-name">{{user.name}}</div>
+        <div class="possession-allergen">
+          <img *ngFor="let allergen of user.positiveAllergenGroups"
+            [src]="'assets/images/' + allergen + '.png'"
+            (click)="onClick(allergen)" />
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</mat-card>
 <div *ngIf="!(loading$ | async) && (searchUsers$ | async).length === 0">ユーザーはいませんでした。</div>

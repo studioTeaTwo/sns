@@ -18,6 +18,8 @@ export class ListComponent implements OnInit {
 
   dailyLogList$: Observable<DailyLog[]>;
 
+  loading$: Observable<boolean>;
+
   constructor(
     private router: Router,
     private store: Store,
@@ -25,6 +27,7 @@ export class ListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loading$ = this.store.changes.pluck('loading');
     this.dailyLogList$ = this.store.changes.pluck('dailyLogList');
 
     this.dailyLogService.list();
@@ -33,6 +36,17 @@ export class ListComponent implements OnInit {
   routeWithDate(dailyLog: DailyLog) {
     this.dailyLogService.storeData(dailyLog);
     this.router.navigate([`/life-log/daily/${dailyLog.id}`]);
+  }
+
+  getIcon(input: number): string {
+    switch (input) {
+      case 1:
+        return '😄'
+      case 2:
+        return '☺️'
+      case 3:
+        return '😥'
+    }
   }
 
 }

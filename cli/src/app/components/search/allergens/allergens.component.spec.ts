@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { AllergensComponent } from './allergens.component';
 
+import { SharedModule } from 'app/shared/shared.module';
 import { Store } from 'app/shared/store/store';
 import {
   ApiBaseService,
@@ -20,6 +21,7 @@ describe('AllergensComponent', () => {
       imports: [
         HttpClientTestingModule,
         RouterTestingModule,
+        SharedModule,
       ],
       declarations: [ AllergensComponent ],
       providers: [

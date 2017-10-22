@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 20170927150358) do
     t.string "health_memo"
     t.boolean "medicina"
     t.string "medicina_memo"
-    t.string "photograph"
+    t.text "photograph"
     t.string "photograph_memo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -8,7 +8,7 @@ class CreateDailyLogs < ActiveRecord::Migration[5.1]
       t.string :health_memo
       t.boolean :medicina
       t.string :medicina_memo
-      t.string :photograph
+      t.text :photograph
       t.string :photograph_memo
 
       t.timestamps

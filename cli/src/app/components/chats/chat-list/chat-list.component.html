@@ -1,12 +1,17 @@
-<p>
-  chat-list works!
-</p>
+<h3>チャットリスト</h3>
 
-<a *ngFor="let chatThread of (chatList$ | async)" (click)="onClick(chatThread)">
-  <img class="chat-avatar" [src]="getImgSrc(chatThread)" />
-  <div *ngIf="chatThread.newestChat">
-    <span>{{chatThread.newestChat.createdAt}}</span>
-    <span>{{chatThread.newestChat.body | shortenText:20}}</span>
-  </div>
-  <div *ngIf="!chatThread.newestChat">{{chatThread.updatedAt}}</div>
-</a>
+<mat-card *ngFor="let chatThread of (chatList$ | async).reverse()" (click)="onClick(chatThread)">
+  <mat-grid-list cols="4">
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <img class="avatar" [src]="getImgSrc(chatThread)" />
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="3" [rowspan]="1">
+      <div class="description">
+        <span>{{chatThread.updatedAt | roundOffDate}}</span>
+        <span *ngIf="chatThread.newestChat">{{chatThread.newestChat.body | shortenText:20}}</span>
+        <span *ngIf="!chatThread.newestChat">まだ会話はありません</span>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</mat-card>
+<div *ngIf="!(loading$ | async) && (chatList$ | async).length === 0">まだチャットを開始している友達はいません。</div>

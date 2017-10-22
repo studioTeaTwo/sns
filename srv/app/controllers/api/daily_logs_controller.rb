@@ -67,7 +67,17 @@ class Api::DailyLogsController < ApplicationController
   private
 
     def daily_log_params
-      params.fetch(:daily_log, {}).permit(*DailyLog.column_names)
+      params.fetch(:daily_log, {}).permit(
+                                          :id,
+                                          :date,
+                                          :symptom,
+                                          :health,
+                                          :health_memo,
+                                          :medicina,
+                                          :medicina_memo,
+                                          :photograph_memo,
+                                          :photograph => []
+                                         )
     end
 
     def correct_user

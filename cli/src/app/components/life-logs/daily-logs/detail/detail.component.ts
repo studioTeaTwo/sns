@@ -69,7 +69,7 @@ export class DetailComponent implements OnInit {
       healthMemo: '',
       medicina: undefined,
       medicinaMemo: '',
-      photograph: '',
+      photograph: [],
       photographMemo: '',
     }
   }
@@ -83,6 +83,11 @@ export class DetailComponent implements OnInit {
       });
   }
 
+  onClickPhotoDel(photo: string) {
+    const result = this.dailyLogParam.photograph.indexOf(photo);
+    this.dailyLogParam.photograph.splice(result, 1);
+  }
+
   onClickEdit() {
     this.displayMode = MODE.EDIT;
   }
@@ -91,20 +96,20 @@ export class DetailComponent implements OnInit {
     this.dailyLogService.update(this.dailyLogParam)
       .subscribe(
         () => {
-          console.log('完了');
           this.snackBar.open('変更されました！', null, {
-          duration: 2000,
-        });
+            duration: 2000,
+          });
         });
   }
 
   onClickSubmit() {
     this.dailyLogService.create(this.dailyLogParam)
       .subscribe(
-        () => this.snackBar.open('記録されました！', null, {
-          duration: 2000,
-        })
-      );
+        () => {
+          this.snackBar.open('記録されました！', null, {
+            duration: 2000,
+          });
+        });
   }
 
 }
