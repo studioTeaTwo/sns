@@ -1,0 +1,17 @@
+.discription {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-right: auto;
+  .user-name {
+    padding-bottom: 8px;
+  }
+  .possession-allergen {
+    display: flex;
+    flex-direction: row wrap;
+    img {
+      width: 32px;
+      height: 32px;
+    }
+  }
+}

@@ -22,7 +22,7 @@ RSpec.describe "Api::Users::Relationships", type: :request do
     
     it "deletes" do
       expect{
-        delete api_relationship_path(current_user, Relationship.first.id), headers: { 'Authorization' => "#{current_user.access_token}" }
+        delete api_relationship_path(current_user, another_user.id), headers: { 'Authorization' => "#{current_user.access_token}" }
       }.to change(Relationship, :count).by(-1)
     end
   end

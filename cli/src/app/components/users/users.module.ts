@@ -3,8 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { SharedModule } from 'app/shared/shared.module';
 import { UsersRoutingModule } from './users-routing.module';
-import { ProfileComponent } from './profile/profile.component';
 import { SettingComponent } from './setting/setting.component';
+import { ProfileComponent } from './profile/profile.component';
+import { RelationshipComponent } from './relationship/relationship.component';
 
 @NgModule({
   imports: [
@@ -12,6 +13,10 @@ import { SettingComponent } from './setting/setting.component';
     SharedModule,
     UsersRoutingModule
   ],
-  declarations: [ProfileComponent, SettingComponent]
+  declarations: [
+    SettingComponent,
+    ProfileComponent,
+    RelationshipComponent,
+  ]
 })
 export class UsersModule { }

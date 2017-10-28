@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ProfileComponent } from './profile/profile.component';
 import { SettingComponent } from './setting/setting.component';
+import { ProfileComponent } from './profile/profile.component';
+import { RelationshipComponent } from './relationship/relationship.component';
 
 const routes: Routes = [
   {
@@ -11,7 +12,20 @@ const routes: Routes = [
   },
   {
     path: ':userId',
-    component: ProfileComponent,
+    children: [
+      {
+        path: '',
+        component: ProfileComponent,
+      },
+      {
+        path: 'followings',
+        component: RelationshipComponent,
+      },
+      {
+        path: 'followers',
+        component: RelationshipComponent,
+      }
+    ]
   },
 ];
 

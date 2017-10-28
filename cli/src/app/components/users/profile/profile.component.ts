@@ -18,7 +18,6 @@ import { AccountService } from 'app/shared/services/api';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  JSON = JSON;
   profile$: Observable<Profile>;
   isMyself = false;
 
@@ -37,6 +36,14 @@ export class ProfileComponent implements OnInit {
         this.accountService.get()
           .subscribe(response => this.isMyself = params['userId'] === response.id.toString())
       });
+  }
+
+  getFollowings() {
+    return '/user/' + this.store.getState().profile.id + '/followings';
+  }
+
+  getFollowers() {
+    return '/user/' + this.store.getState().profile.id + '/followers';
   }
 
   onClickSearch(value: string) {

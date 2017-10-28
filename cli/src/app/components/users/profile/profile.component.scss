@@ -12,4 +12,12 @@
       }
     }
   }
+  #followings, #followers {
+    color: #000;
+    text-decoration: none;
+  }
+  .followings-disabled, .followers-disabled {
+    pointer-events: none;
+    cursor: default;
+  }
 }

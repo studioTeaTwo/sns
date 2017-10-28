@@ -26,6 +26,26 @@ export class UserService {
       );
   }
 
+  getFollowings() {
+    this.apiBaseService.setLoading();
+    this.httpClient.get<Profile[]>(`/api/users/${this.store.getState().profile.id}/followings`)
+      .subscribe(
+        response => {
+          this.onSuccessSearchUsers(response);
+        }
+      );
+  }
+
+  getFollowers() {
+    this.apiBaseService.setLoading();
+    this.httpClient.get<Profile[]>(`/api/users/${this.store.getState().profile.id}/followers`)
+      .subscribe(
+        response => {
+          this.onSuccessSearchUsers(response);
+        }
+      );
+  }
+
   follow(followedId: number) {
     const body: RelationshipRequestBody = {
       relationship: {

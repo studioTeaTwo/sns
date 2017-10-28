@@ -30,14 +30,14 @@
     <p class="user-introduction">{{(profile$ | async).selfIntroduction}}</p>
 
     <div class="stats">
-      <a>
-        <strong id="following" class="stat">
+      <a id="followings" [routerLink]="getFollowings()" routerLinkActive="active" [ngClass]="(profile$ | async).followings === 0 ? 'followings-disabled' : ''">
+        <strong class="stat">
           {{(profile$ | async).followings}}
         </strong>
         フォロー中
       </a>
-      <a>
-        <strong id="followers" class="stat">
+      <a id="followers" [routerLink]="getFollowers()" routerLinkActive="active" [ngClass]="(profile$ | async).followers === 0 ? 'followers-disabled' : ''">
+        <strong class="stat">
           {{(profile$ | async).followers}}
         </strong>
         フォロワー
