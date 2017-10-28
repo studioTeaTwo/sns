@@ -1,5 +1,0 @@
-<%= form_for(current_user.active_relationships.find_by(followed_id: @user.id),
-             html: { method: :delete },
-             remote: true) do |f| %>
-  <%= f.submit "フォローを外す", class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" %>
-<% end %>

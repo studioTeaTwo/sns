@@ -1,6 +1,0 @@
-<%= @user.name %> 様
-
-<%= Constants::SITE_TITLE %>をご登録くださりありがとうございます！
-下記リンクからアカウントの有効化を行ってください。
-
-<%= edit_account_activation_url(@user.activation_token, email: @user.email) %>
