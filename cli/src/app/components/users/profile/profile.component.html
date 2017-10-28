@@ -22,7 +22,7 @@
     <div
       *ngFor="let allergen of (profile$ | async).positiveAllergenGroups"
       class="possession-allergen"
-      (click)="onClick(allergen)"
+      (click)="onClickSearch(allergen)"
     >
       <img [src]="'assets/images/' + allergen + '.png'"/>
     </div>
@@ -43,6 +43,9 @@
         フォロワー
       </a>
     </div>
+
+    <button type="button" mat-raised-button color="primary" *ngIf="!isMyself && !(profile$ | async).isFollow" (click)="onClickFollow()">フォローする</button>
+    <button type="button" mat-raised-button color="primary" *ngIf="!isMyself && (profile$ | async).isFollow" (click)="onClickUnfollow()">フォローを外す</button>
 
     <a *ngIf="!isMyself" [routerLink]="['/chat', (profile$ | async).id]" routerLinkActive="active" class="global-menu-item">
       <mat-icon>chat</mat-icon>

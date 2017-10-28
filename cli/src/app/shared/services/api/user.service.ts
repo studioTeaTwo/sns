@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Store } from 'app/shared/store/store';
 import {
-  Profile,
+  Profile, RelationshipRequestBody,
 } from 'app/interfaces/api-models';
 import { ApiBaseService } from 'app/shared/services/api/api-base.service';
 
@@ -23,6 +23,29 @@ export class UserService {
         response => {
           this.onSuccessProfile(response);
         }
+      );
+  }
+
+  follow(followedId: number) {
+    const body: RelationshipRequestBody = {
+      relationship: {
+        followedId: followedId
+      },
+    };
+    this.httpClient.post(
+        `/api/users/${this.store.getState().account.id}/relationships`, body
+      )
+      .subscribe(
+        response => this.onSuccessProfile(response),
+      );
+  }
+
+  unfollow(followedId: number) {
+    this.httpClient.delete(
+        `/api/users/${this.store.getState().account.id}/relationships/${followedId}`
+      )
+      .subscribe(
+        response => this.onSuccessProfile(response),
       );
   }
 

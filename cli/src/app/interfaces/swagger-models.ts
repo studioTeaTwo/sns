@@ -569,6 +569,7 @@ export interface Profile {
     positiveAllergenGroups?: string[];
     followers?: number; // int32
     followings?: number; // int32
+    isFollow?: boolean;
     id?: number; // int32
     email?: string;
     name?: string;

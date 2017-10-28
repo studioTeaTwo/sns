@@ -39,9 +39,17 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  onClick(value: string) {
+  onClickSearch(value: string) {
     this.userService.searchByAllergenGroup(value);
     this.router.navigate(['search/results']);
+  }
+
+  onClickFollow() {
+    this.userService.follow(this.store.getState().profile.id);
+  }
+
+  onClickUnfollow() {
+    this.userService.unfollow(this.store.getState().profile.id);
   }
 
 }

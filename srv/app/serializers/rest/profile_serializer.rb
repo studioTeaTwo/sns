@@ -7,6 +7,7 @@
 # @attr [Array<string>] positiveAllergenGroups
 # @attr [integer] followers
 # @attr [integer] followings
+# @attr [boolean] isFollow
 # @attr [Array<string>] positiveAllergenGroups
 # @attr [integer] id
 # @attr [string] email
@@ -26,7 +27,8 @@
 # @attr [Array<Rest::MicropostSerializer>] microposts
 class Rest::ProfileSerializer < Rest::UserSerializer
   
-  attributes :latest_ige, :positive_allergen_groups, :followers, :followings
+  attributes :latest_ige, :positive_allergen_groups,
+             :followers, :followings, :isFollow
 
   has_many :iges, serializer: Rest::IgeSerializer, unless: :search?
   has_many :microposts, serializer: Rest::MicropostSerializer, unless: :search?
@@ -53,9 +55,13 @@ class Rest::ProfileSerializer < Rest::UserSerializer
     object.followings.count
   end
 
+  def isFollow
+    instance_options[:option][:isFollow] unless instance_options[:option][:isFollow].nil?
+  end
+
   # Searchならmicropotやigeは返さない
   def search?
-    instance_options[:sort] == :search
+    instance_options[:option][:sort] == :search
   end
 
 end

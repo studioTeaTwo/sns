@@ -7,16 +7,22 @@ class Api::Users::RelationshipsController < ApplicationController
   # @body_parameter [Params::Relationship] relationship
   # @response_status 200
   def create
-    @user = User.find(relationship_params[:followed_id])
-    current_user.follow(@user)
+    user = User.find(relationship_params[:followed_id])
+    current_user.follow(user)
+    isFollow = current_user.following? user
+    render json: user, include: [:iges, :microposts], serializer: Rest::ProfileSerializer,
+      option: {sort: :profile, isFollow: isFollow}
   end
 
   # Destroys a relationship
   #
   # @response_status 200
   def destroy
-    @user = Relationship.find(params[:id]).followed
-    current_user.unfollow(@user)
+    user = User.find(params[:id])
+    current_user.unfollow(user)
+    isFollow = current_user.following? user
+    render json: user, include: [:iges, :microposts], serializer: Rest::ProfileSerializer,
+      option: {sort: :profile, isFollow: isFollow}
   end
 
   private
