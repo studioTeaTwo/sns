@@ -203,6 +203,9 @@ export class StepPictureComponent extends ChatComponent implements OnInit {
   }
 
   private stopCamera() {
+    if (!this.videoElm) {
+      return;
+    }
     const track = this.videoElm.nativeElement.srcObject.getTracks()[0] as MediaStreamTrack;
     track.stop();
   }
