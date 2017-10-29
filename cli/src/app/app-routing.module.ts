@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { TopComponent } from './components/navigations/top/top.component';
-import { HomeComponent } from './components/home/home.component';
+import { TopComponent } from 'app/components/navigations/top/top.component';
+import { HomeComponent } from 'app/components/home/home.component';
+import { ContactComponent } from 'app/components/navigations/contact/contact.component';
 import { AuthGuard } from 'app/shared/guards/auth.guard';
 
 const routes: Routes = [
@@ -41,6 +42,10 @@ const routes: Routes = [
     path: 'auth',
     loadChildren: './components/auth/auth.module#AuthModule'
   },
+  {
+    path: 'contact',
+    component: ContactComponent,
+  }
 ];
 
 @NgModule({

@@ -10,6 +10,7 @@ import { TopComponent } from './components/navigations/top/top.component';
 import { HeaderComponent } from './components/navigations/header/header.component';
 import { GlobalMenuComponent } from './components/navigations/global-menu/global-menu.component';
 import { HomeComponent } from './components/home/home.component';
+import { ContactComponent } from './components/navigations/contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { HomeComponent } from './components/home/home.component';
     HeaderComponent,
     GlobalMenuComponent,
     HomeComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,
