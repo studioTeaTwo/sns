@@ -26,6 +26,8 @@ enum MODE {
 export class DetailComponent implements OnInit {
   MODE = MODE;
   displayMode: number;
+  uploadOpen = false;
+  inputFiles: any;
 
   dailyLogParam: DailyLogStrongParameter = this.initialState;
 
@@ -74,6 +76,31 @@ export class DetailComponent implements OnInit {
     }
   }
 
+  onClickEdit() {
+    this.displayMode = MODE.EDIT;
+  }
+
+  onClickUpdate() {
+    this.dailyLogService.update(this.dailyLogParam)
+      .subscribe(
+        () => {
+          this.displayMode = MODE.ROM;
+          this.snackBar.open('変更されました！', null, {
+            duration: 2000,
+          });
+        });
+  }
+
+  onClickCreate() {
+    this.dailyLogService.create(this.dailyLogParam)
+      .subscribe(
+        () => {
+          this.snackBar.open('記録されました！', null, {
+            duration: 2000,
+          });
+        });
+  }
+
   onClickCamera() {
     window.navigator.mediaDevices.getUserMedia(this.medias)
       .then(stream => this.videoElm.nativeElement.srcObject = stream)
@@ -83,33 +110,19 @@ export class DetailComponent implements OnInit {
       });
   }
 
+  onChangeFile(input: any) {
+    this.uploadOpen = true;
+    this.inputFiles = input.files;
+  }
+
   onClickPhotoDel(photo: string) {
     const result = this.dailyLogParam.photograph.indexOf(photo);
     this.dailyLogParam.photograph.splice(result, 1);
   }
 
-  onClickEdit() {
-    this.displayMode = MODE.EDIT;
-  }
-
-  onClickUpdate() {
-    this.dailyLogService.update(this.dailyLogParam)
-      .subscribe(
-        () => {
-          this.snackBar.open('変更されました！', null, {
-            duration: 2000,
-          });
-        });
-  }
-
-  onClickSubmit() {
-    this.dailyLogService.create(this.dailyLogParam)
-      .subscribe(
-        () => {
-          this.snackBar.open('記録されました！', null, {
-            duration: 2000,
-          });
-        });
+  getImage(file: any) {
+    this.uploadOpen = false;
+    this.dailyLogParam.photograph.push(file);
   }
 
 }

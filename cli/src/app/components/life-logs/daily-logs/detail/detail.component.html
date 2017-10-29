@@ -5,7 +5,7 @@
       <input matInput type="date" [(ngModel)]="dailyLogParam.date" />
     </mat-form-field>
     <div id="submit">
-      <button type="button" mat-raised-button color="primary" *ngIf="displayMode === MODE.CREATE" (click)="onClickSubmit()">記録する</button>
+      <button type="button" mat-raised-button color="primary" *ngIf="displayMode === MODE.CREATE" (click)="onClickCreate()">記録する</button>
       <button type="button" mat-raised-button color="primary" *ngIf="displayMode === MODE.EDIT" (click)="onClickUpdate()">変更する</button>
       <button type="button" mat-raised-button *ngIf="displayMode === MODE.ROM" (click)="onClickEdit()">編集する</button>
     </div>
@@ -46,10 +46,12 @@
     <mat-card-header>
       <md-card-title>写真の記録</md-card-title>
       <div id="camera">
-        <button type="button" mat-raised-button (click)="onClickCamera()" *ngIf="displayMode !== MODE.ROM">写真を撮る</button>
+        <input type="file" #file (change)="onChangeFile(file)" *ngIf="displayMode !== MODE.ROM" />
+        <button type="button" mat-raised-button (click)="onClickCamera()" *ngIf="displayMode !== MODE.ROM" disabled>(工事中)写真を撮る</button>
       </div>
     </mat-card-header>
     <mat-card-content>
+      <app-image-upload *ngIf="uploadOpen" [imgSrc]="inputFiles" (onUploaded)="getImage($event)"></app-image-upload>
       <div id="photograph" *ngFor="let photo of dailyLogParam.photograph">
         <mat-icon *ngIf="!(displayMode === MODE.ROM)" (click)="onClickPhotoDel(photo)">cancel</mat-icon>
         <img class="photo" [src]="photo">

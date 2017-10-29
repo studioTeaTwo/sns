@@ -21,6 +21,7 @@ import {
   ShortenTextPipe,
 } from './pipes';
 import { AuthGuard } from 'app/shared/guards/auth.guard';
+import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import { AuthGuard } from 'app/shared/guards/auth.guard';
     FormatToJapaneseDatePipe,
     RoundOffDatePipe,
     ShortenTextPipe,
+    ImageUploadComponent,
   ],
   exports: [
     FormsModule,
@@ -40,6 +42,8 @@ import { AuthGuard } from 'app/shared/guards/auth.guard';
     FormatToJapaneseDatePipe,
     RoundOffDatePipe,
     ShortenTextPipe,
+
+    ImageUploadComponent,
   ],
   providers: [
     ApiBaseService,

@@ -1,0 +1,33 @@
+.image-upload-container {
+  display: inline-block;
+  width: 100%;
+  margin: 0;
+  padding: 10px;
+  background-color: #F1F8E9;
+  .image-upload-button {
+      .image-upload-circle {
+          position: absolute;
+          z-index: 999;
+          top: 150px; // header.height + profilImage.height/2 + profile-container.padding + image-upload-container.padding
+          left: 70px; // profilImage.width/2 + profile-container.padding + image-upload-container.padding
+      }
+      input {
+          display: none;
+      }
+      #profileImage {
+          img {
+              width: 150px;
+              height: 200px;
+              border: 1px solid #eaeaea;
+          }
+      }
+  }
+  .image-upload-description {
+      color: gray;
+      font-size: 0.5em;
+      line-height: 0.5em;
+  }
+  #preview {
+      display: inline-block;
+  }
+}
