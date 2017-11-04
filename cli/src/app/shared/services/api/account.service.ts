@@ -90,11 +90,21 @@ export class AccountService {
     }
   }
 
-  create(): Observable<void> {
-    return this.http.post<any>(`/api/users`, {user: this.signupData})
+  update(user: User): Observable<void> {
+    return this.http.put<User>(`/api/users/${user.id}`, {user: user})
       .map(
         response => {
-          this.userId = response.userId;
+          localStorage.setItem('account', JSON.stringify(response));
+          this.onSuccessAccount(response);
+        }
+      );
+  }
+
+  create(): Observable<void> {
+    return this.http.post<User>(`/api/users`, {user: this.signupData})
+      .map(
+        response => {
+          this.userId = response.id;
           localStorage.setItem('token', response.accessToken);
           localStorage.setItem('account', JSON.stringify(response));
           this.onSuccessAccount(response);

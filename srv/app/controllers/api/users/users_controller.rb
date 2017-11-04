@@ -80,7 +80,13 @@ class Api::Users::UsersController < ApplicationController
                                       :password_confirmation,
                                       :self_introduction,
                                       :classification,
-                                      :symptoms => []
+                                      :atopic,
+                                      :asthma,
+                                      :rhinitis,
+                                      :pollen,
+                                      :gastroenteritis,
+                                      :conjunctivitis,
+                                      :symptoms => [],
                                     )
     end
 

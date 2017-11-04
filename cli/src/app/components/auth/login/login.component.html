@@ -1,9 +1,9 @@
-<mat-form-field class="example-full-width">
-  <input matInput placeholder="eメール" [(ngModel)]="email" (change)="onChangeEmail()" [class.input-error]="isErrorEmail">
+<mat-form-field class="auth-input">
+  <input type="email" matInput placeholder="eメール" [(ngModel)]="email" (change)="onChangeEmail()" [class.input-error]="isErrorEmail">
   <span class="textfield-error" *ngIf="isErrorEmail">入力内容を見直してください</span>
 </mat-form-field>
-<mat-form-field class="example-full-width">
-  <input matInput placeholder="パスワード" [(ngModel)]="password" (change)="onChangePassword()" [class.input-error]="isErrorPassword">
+<mat-form-field class="auth-input">
+  <input type="password" matInput placeholder="パスワード" [(ngModel)]="password" (change)="onChangePassword()" [class.input-error]="isErrorPassword">
   <span class="textfield-error" *ngIf="isErrorPassword">入力内容を見直してください</span>
 </mat-form-field>
 <div class="button-row">
