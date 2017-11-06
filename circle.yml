@@ -7,11 +7,11 @@ machine:
   node:
     version: 8.2.0
   post:
-    - npm install -g npm
+    - npm i -g npm && npm i -g yarn
 dependencies:
   override:
     - cd ./srv && bundle install
-    - cd ./cli && npm install
+    - cd ./cli && yarn
 database:
   override:
     - cd ./srv && bundle exec rails db:create db:schema:load RAILS_ENV=test
@@ -20,7 +20,7 @@ test:
   override:
     - bash ./build.sh
     - cd ./srv && RAILS_ENV=test bundle exec rspec spec/
-    - cd ./cli && npm run lint && npm run test
+    - cd ./cli && npm run lint && npm run test --progress false
 
 deployment:
   staging:
