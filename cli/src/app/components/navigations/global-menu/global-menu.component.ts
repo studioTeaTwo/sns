@@ -7,20 +7,18 @@ import { Location } from '@angular/common';
   styleUrls: ['./global-menu.component.scss']
 })
 export class GlobalMenuComponent implements OnInit {
-  private currentLocation;
 
   constructor(
     private location: Location,
     private renderer: Renderer2,
   ) {
-    this.currentLocation = location;
   }
 
   ngOnInit() {
   }
 
   isDisplay() {
-    return !this.currentLocation.path().match(/(signup|chat+\/[0-9-]|life-log\/daily\/logging)/);
+    return !this.location.path().match(/(signup|chat+\/[0-9-]|life-log\/daily\/logging)/);
   }
 
   sound() {

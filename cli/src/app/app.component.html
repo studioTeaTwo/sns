@@ -3,7 +3,7 @@
 <div id="main">
   <mat-spinner class="main-loading" *ngIf="loading$ | async"></mat-spinner>
   <p class="error-message" *ngIf="!(loading$ | async) && error$ | async">{{errorMsg$ | async}}</p>
-  <router-outlet></router-outlet>
+  <router-outlet (deactivate)="onDeactive()"></router-outlet>
 </div>
 
 <app-global-menu></app-global-menu>
