@@ -28,6 +28,12 @@
 
 # Ignore Production build
 .ruby-version
+/public/*.html
+/public/*.js
+/public/*.css
+/public/favicon.ico
+/public/3rdpartylicenses.txt
+/public/assets
 
 # OS/editor
 .DS_Store
