@@ -54,6 +54,6 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:create, :update]
 
-  get '*path', to: redirect('/')
+  get '*path', to: 'static_pages#spa_forward'
 
 end

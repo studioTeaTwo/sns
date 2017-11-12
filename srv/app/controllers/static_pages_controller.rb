@@ -5,6 +5,12 @@ class StaticPagesController < ApplicationController
     render file: 'public/index.html'
   end
 
+  def spa_forward
+    uri = URI('/')
+    uri.query = { url: request.original_fullpath}.to_param
+    redirect_to uri.to_s
+  end
+
   def help
   end
   

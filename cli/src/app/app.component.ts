@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
+import { UrlSerializer } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 import { Store } from 'app/shared/store/store';
@@ -16,11 +17,18 @@ export class AppComponent {
 
   constructor(
     private location: Location,
+    private urlSerializer: UrlSerializer,
     private store: Store,
   ) {
     this.loading$ = this.store.changes.pluck('loading');
     this.error$ = this.store.changes.pluck('error');
     this.errorMsg$ = this.store.changes.pluck('errorMsg');
+
+    // フロントのURLでサーバに飛んだ時の対応
+    if (this.location.path().match(/url/)) {
+      const urlTree = this.urlSerializer.parse(this.location.path());
+      this.location.replaceState(urlTree.queryParams['url']);
+    }
   }
 
   onDeactive() {
