@@ -6,9 +6,13 @@ class StaticPagesController < ApplicationController
   end
 
   def spa_forward
-    uri = URI('/')
-    uri.query = { url: request.original_fullpath}.to_param
-    redirect_to uri.to_s
+    if request.original_fullpath =~ /^\/(home|chat|life-log|user|search|auth|contact)(|\/.*)$/
+      uri = URI('/')
+      uri.query = { url: request.original_fullpath}.to_param
+      redirect_to uri.to_s
+    else
+      redirect_to root_url
+    end  
   end
 
   def help
