@@ -3,10 +3,12 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
+import { ChatComponent } from './chat.component';
+
 import { SharedModule } from 'app/shared/shared.module';
 import { Store } from 'app/shared/store/store';
 import { AccountService, ChatService } from 'app/shared/services/api';
-import { ChatComponent } from './chat.component';
+import { MockAccountService } from 'app/mock/api/mock-account-service';
 
 describe('ChatComponent', () => {
   let component: ChatComponent;
@@ -23,7 +25,10 @@ describe('ChatComponent', () => {
       declarations: [ ChatComponent ],
       providers: [
         Store,
-        AccountService,
+        {
+          provide: AccountService,
+          useClass: MockAccountService
+        },
         ChatService,
       ]
     })

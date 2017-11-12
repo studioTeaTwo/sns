@@ -9,8 +9,8 @@ import { AccountService } from 'app/shared/services/api';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  email: string;
-  password: string;
+  email = '';
+  password = '';
 
   isErrorEmail = false;
   isErrorPassword = false;
@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
 
   onChangeEmail() {
     this.isErrorEmail = !this.accountService.emailValidator(this.email);
-    console.log(this.isErrorEmail);
   }
 
   onChangePassword() {

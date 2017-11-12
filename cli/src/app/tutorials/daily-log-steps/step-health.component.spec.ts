@@ -12,6 +12,7 @@ import {
   ChatService,
   DailyLogService,
  } from 'app/shared/services/api';
+import { MockAccountService } from 'app/mock/api/mock-account-service';
 
 describe('DailyLogHealthComponent', () => {
   let component: StepHealthComponent;
@@ -28,7 +29,10 @@ describe('DailyLogHealthComponent', () => {
       declarations: [ StepHealthComponent ],
       providers: [
         Store,
-        AccountService,
+        {
+          provide: AccountService,
+          useClass: MockAccountService
+        },
         ChatService,
         DailyLogService,
       ]

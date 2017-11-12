@@ -2,11 +2,13 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
+import { ChatListComponent } from './chat-list.component';
+
 import { SharedModule } from 'app/shared/shared.module';
 import { Store } from 'app/shared/store/store';
 import { AccountService, ChatService } from 'app/shared/services/api';
 import { ShortenTextPipe } from 'app/shared/pipes';
-import { ChatListComponent } from './chat-list.component';
+import { MockAccountService } from 'app/mock/api/mock-account-service';
 
 describe('ChatListComponent', () => {
   let component: ChatListComponent;
@@ -24,7 +26,10 @@ describe('ChatListComponent', () => {
       ],
       providers: [
         Store,
-        AccountService,
+        {
+          provide: AccountService,
+          useClass: MockAccountService
+        },
         ChatService,
       ]
     })

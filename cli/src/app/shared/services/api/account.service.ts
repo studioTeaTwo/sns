@@ -110,7 +110,7 @@ export class AccountService {
     this.signupData.name = name;
   }
 
-  saveSignupdataSymptom(item?: any): any[] {
+  saveSignupdataSymptom(item?: any) {
     if (!item) {
       this.signupData.symptoms = [];
       return;
@@ -128,6 +128,14 @@ export class AccountService {
     this.signupData.classification = item.id;
   }
 
+  saveSignupdataEmail(email: string) {
+    this.signupData.email = email;
+  }
+
+  saveSignupdataPassword(password: string) {
+    this.signupData.password = password;
+  }
+
   verifyEmail(email: string): Observable<HttpResponse<any>> {
     return this.http.post<any>(
               `/api/users/emailverification`,
@@ -138,14 +146,6 @@ export class AccountService {
               this.apiBaseService.onSuccess();
               return response;
             });
-  }
-
-  saveSignupdataEmail(email: string) {
-    this.signupData.email = email;
-  }
-
-  saveSignupdataPassword(password: string) {
-    this.signupData.password = password;
   }
 
   emailValidator(email: string): boolean {

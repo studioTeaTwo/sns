@@ -14,6 +14,7 @@ import {
  } from 'app/shared/services/api';
 import { StepHealthComponent } from 'app/tutorials/daily-log-steps/step-health.component';
 import { StepPictureComponent } from 'app/tutorials/daily-log-steps/step-picture.component';
+import { MockAccountService } from 'app/mock/api/mock-account-service';
 
 describe('LoggingComponent', () => {
   let component: LoggingComponent;
@@ -34,7 +35,10 @@ describe('LoggingComponent', () => {
       ],
       providers: [
         Store,
-        AccountService,
+        {
+          provide: AccountService,
+          useClass: MockAccountService
+        },
         ChatService,
         DailyLogService,
       ]

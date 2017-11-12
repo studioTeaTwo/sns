@@ -10,6 +10,7 @@ import {
   ChatService,
  } from 'app/shared/services/api';
 import { StepSymptomComponent } from './step_symptom.component';
+import { MockAccountService } from 'app/mock/api/mock-account-service';
 
 describe('StepSymptomComponent', () => {
   let component: StepSymptomComponent;
@@ -26,7 +27,10 @@ describe('StepSymptomComponent', () => {
       declarations: [ StepSymptomComponent ],
       providers: [
         Store,
-        AccountService,
+        {
+          provide: AccountService,
+          useClass: MockAccountService
+        },
         ChatService,
       ]
     })

@@ -8,6 +8,7 @@ import { LoginComponent } from './login.component';
 import { SharedModule } from 'app/shared/shared.module';
 import { Store } from 'app/shared/store/store';
 import { AccountService } from 'app/shared/services/api';
+import { MockAccountService } from 'app/mock/api/mock-account-service';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -24,7 +25,10 @@ describe('LoginComponent', () => {
       declarations: [ LoginComponent ],
       providers: [
         Store,
-        AccountService,
+        {
+          provide: AccountService,
+          useClass: MockAccountService
+        },
       ]
     })
     .compileComponents();

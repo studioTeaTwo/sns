@@ -12,6 +12,7 @@ import {
   ChatService,
   DailyLogService,
  } from 'app/shared/services/api';
+import { MockAccountService } from 'app/mock/api/mock-account-service';
 
 describe('StepPictureComponent', () => {
   let component: StepPictureComponent;
@@ -28,7 +29,10 @@ describe('StepPictureComponent', () => {
       declarations: [ StepPictureComponent ],
       providers: [
         Store,
-        AccountService,
+        {
+          provide: AccountService,
+          useClass: MockAccountService
+        },
         ChatService,
         DailyLogService,
       ]

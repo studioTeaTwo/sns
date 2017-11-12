@@ -10,6 +10,7 @@ import {
   ChatService,
  } from 'app/shared/services/api';
 import { StepNameComponent } from './step_name.component';
+import { MockAccountService } from 'app/mock/api/mock-account-service';
 
 describe('StepNameComponent', () => {
   let component: StepNameComponent;
@@ -26,7 +27,10 @@ describe('StepNameComponent', () => {
       declarations: [ StepNameComponent ],
       providers: [
         Store,
-        AccountService,
+        {
+          provide: AccountService,
+          useClass: MockAccountService
+        },
         ChatService,
       ]
     })

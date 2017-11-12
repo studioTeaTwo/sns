@@ -6,7 +6,8 @@ import { ProfileComponent } from './profile.component';
 
 import { SharedModule } from 'app/shared/shared.module';
 import { Store } from 'app/shared/store/store';
-import { AccountService, UserService } from 'app/shared/services/api';
+import { AccountService, UserService, ChatService } from 'app/shared/services/api';
+import { MockAccountService } from 'app/mock/api/mock-account-service';
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
@@ -22,8 +23,12 @@ describe('ProfileComponent', () => {
       declarations: [ ProfileComponent ],
       providers: [
         Store,
-        AccountService,
+        {
+          provide: AccountService,
+          useClass: MockAccountService
+        },
         UserService,
+        ChatService,
       ]
     })
     .compileComponents();
