@@ -7,6 +7,12 @@ body, html {
 #main {
   margin-top: 42px; // header.height
   padding: 10px;
+
+  @media screen and (min-width: 1280px) {
+    width: 780px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 h1 {

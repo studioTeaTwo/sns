@@ -34,6 +34,9 @@
         background-color: #fff;
         bottom: 0;
         width: 100%;
+        @media screen and (min-width: 1280px) {
+            width: 780px;
+        }
         height: 50px;
         padding-bottom: 5px;
         text-align: center;
