@@ -31,6 +31,7 @@
 /public/*.html
 /public/*.js
 /public/*.css
+/public/*.map
 /public/favicon.ico
 /public/3rdpartylicenses.txt
 /public/assets
