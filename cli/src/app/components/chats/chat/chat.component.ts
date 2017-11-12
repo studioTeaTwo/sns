@@ -57,19 +57,13 @@ export class ChatComponent implements OnInit {
       .map(params => {
         this.chatThread = this.store.getState().chatList.find(value => value.id === +params['id']);
         if (this.chatThread) {
-          // チャットリストから開始したとき
           this.opponents = this.chatThread.participants.filter(value => value.id !== this.myself.id);
-          this.chatService.getChatThread(+params['id']);
+          // もう既存のスレッドがあった
+          if (this.chatThread.newestChat) {
+            this.chatService.getChatThread(this.chatThread.id);
+          }
         } else {
-          // プロフィールなどからチャット開始したとき
-          this.chatService.createChatThread(+params['id']).subscribe(response => {
-            this.chatThread = response;
-            this.opponents = response.participants.filter(value => value.id !== this.myself.id);
-            // もう既存のスレッドがあった
-            if (this.chatThread.newestChat) {
-              this.chatService.getChatThread(this.chatThread.id);
-            }
-          });
+          throw new Error();
         }
       })
       .subscribe(

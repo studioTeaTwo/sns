@@ -35,11 +35,11 @@ export class ChatListComponent implements OnInit {
   getImgSrc(chatThread: ChatThread) {
     // TODO: 3人以上の時
     const user = chatThread.participants.find(value => value.id !== this.myself.id);
-    return user.avatarUrl;
+    return user ? user.avatarUrl : null;
   }
 
-  onClick(chatTread: ChatThread) {
-    this.router.navigate([`/chat/${chatTread.id}`]);
+  onClick(chatThread: ChatThread) {
+    this.router.navigate([`/chat/${chatThread.id}`]);
   }
 
 }

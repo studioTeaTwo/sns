@@ -30,13 +30,13 @@
     <p class="user-introduction">{{(profile$ | async).selfIntroduction}}</p>
 
     <div class="stats">
-      <a id="followings" [routerLink]="getFollowings()" routerLinkActive="active" [ngClass]="(profile$ | async).followings === 0 ? 'followings-disabled' : ''">
+      <a id="followings" [routerLink]="getFollowingsLink()" routerLinkActive="active" [ngClass]="(profile$ | async).followings === 0 ? 'followings-disabled' : ''">
         <strong class="stat">
           {{(profile$ | async).followings}}
         </strong>
         フォロー中
       </a>
-      <a id="followers" [routerLink]="getFollowers()" routerLinkActive="active" [ngClass]="(profile$ | async).followers === 0 ? 'followers-disabled' : ''">
+      <a id="followers" [routerLink]="getFollowersLink()" routerLinkActive="active" [ngClass]="(profile$ | async).followers === 0 ? 'followers-disabled' : ''">
         <strong class="stat">
           {{(profile$ | async).followers}}
         </strong>
@@ -47,7 +47,7 @@
     <button type="button" mat-raised-button color="primary" *ngIf="!isMyself && !(profile$ | async).isFollow" (click)="onClickFollow()">フォローする</button>
     <button type="button" mat-raised-button color="primary" *ngIf="!isMyself && (profile$ | async).isFollow" (click)="onClickUnfollow()">フォローを外す</button>
 
-    <a *ngIf="!isMyself" [routerLink]="['/chat', (profile$ | async).id]" routerLinkActive="active" class="global-menu-item">
+    <a *ngIf="!isMyself" (click)="forwardChat()" class="global-menu-item">
       <mat-icon>chat</mat-icon>
     </a>
     

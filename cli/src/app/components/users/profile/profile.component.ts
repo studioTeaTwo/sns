@@ -10,7 +10,7 @@ import {
   MasterAllergenGroup,
   Profile,
 } from 'app/interfaces/api-models';
-import { AccountService } from 'app/shared/services/api';
+import { AccountService, ChatService } from 'app/shared/services/api';
 
 @Component({
   selector: 'app-profile',
@@ -27,6 +27,7 @@ export class ProfileComponent implements OnInit {
     private store: Store,
     private accountService: AccountService,
     private userService: UserService,
+    private chatService: ChatService,
   ) { }
 
   ngOnInit() {
@@ -38,12 +39,21 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  getFollowings() {
+  getFollowingsLink() {
     return '/user/' + this.store.getState().profile.id + '/followings';
   }
 
-  getFollowers() {
+  getFollowersLink() {
     return '/user/' + this.store.getState().profile.id + '/followers';
+  }
+
+  forwardChat() {
+    this.profile$.map(data => data.id)
+      .concatMap(id => this.chatService.createChatThread(id))
+      .take(1)
+      .subscribe(response => {
+        this.router.navigate(['/chat', response.id]);
+      });
   }
 
   onClickSearch(value: string) {
