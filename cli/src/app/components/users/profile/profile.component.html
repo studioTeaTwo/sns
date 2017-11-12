@@ -47,7 +47,7 @@
     <button type="button" mat-raised-button color="primary" *ngIf="!isMyself && !(profile$ | async).isFollow" (click)="onClickFollow()">フォローする</button>
     <button type="button" mat-raised-button color="primary" *ngIf="!isMyself && (profile$ | async).isFollow" (click)="onClickUnfollow()">フォローを外す</button>
 
-    <a *ngIf="!isMyself" (click)="forwardChat()" class="global-menu-item">
+    <a *ngIf="!isMyself" routerLinkActive="active" (click)="forwardChat()" class="global-menu-item">
       <mat-icon>chat</mat-icon>
     </a>
     

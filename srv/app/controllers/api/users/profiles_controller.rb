@@ -18,7 +18,7 @@ class Api::Users::ProfilesController < ApplicationController
     def followcheck_if_login
       #before_actionでloginをスキップしているのでカレントユーザーを取り直す
       auth_token = request.headers['Authorization']
-      if auth_token
+      if auth_token.present?
         authenticate_with_auth_token(auth_token)
         @isFollow = current_user.following? @user
       end

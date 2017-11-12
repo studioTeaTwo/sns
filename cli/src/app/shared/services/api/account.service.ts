@@ -79,13 +79,7 @@ export class AccountService {
         this.onSuccessAccount(myself);
         return Observable.of(myself);
       } else {
-        return this.http.get<User>(`/api/users/${this.userId}`)
-          .map(
-            response => {
-              this.onSuccessAccount(response);
-              return response;
-            }
-          );
+        return Observable.throw(new Error());
       }
     }
   }

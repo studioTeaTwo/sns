@@ -35,7 +35,10 @@ export class ProfileComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
         this.userService.getProfile(params['userId']);
         this.accountService.get()
-          .subscribe(response => this.isMyself = params['userId'] === response.id.toString())
+          .subscribe(
+            response => this.isMyself = params['userId'] === response.id.toString(),
+            error => this.isMyself = true // ログイン外からのアクセス
+          );
       });
   }
 
