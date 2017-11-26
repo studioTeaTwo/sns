@@ -43,6 +43,7 @@ Rails.application.routes.draw do
       end
     end
     resources :microposts, only: [:create, :destroy]
+    resources :experiences, only: [:index]
     resources :daily_logs
     resources :iges
 

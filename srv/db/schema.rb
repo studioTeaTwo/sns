@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170927150358) do
+ActiveRecord::Schema.define(version: 20171111165150) do
 
   create_table "chat_statuses", force: :cascade do |t|
     t.integer "user_id"
@@ -58,6 +58,16 @@ ActiveRecord::Schema.define(version: 20170927150358) do
     t.datetime "updated_at", null: false
     t.index ["symptom"], name: "index_daily_logs_on_symptom"
     t.index ["user_id"], name: "index_daily_logs_on_user_id"
+  end
+
+  create_table "experiences", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "activity_id"
+    t.string "activity_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "activity_id", "activity_type"], name: "self_experience", unique: true
+    t.index ["user_id"], name: "index_experiences_on_user_id"
   end
 
   create_table "iges", force: :cascade do |t|
