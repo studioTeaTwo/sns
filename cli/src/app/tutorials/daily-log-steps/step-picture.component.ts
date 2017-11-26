@@ -99,69 +99,82 @@ export class StepPictureComponent extends ChatComponent implements OnInit {
   }
 
   onClickYes() {
-    // カメラを起動
-    if (this.step === STEP.CAMERA_YESNO) {
-      this.startCamera();
-      this.step = STEP.CAMERA_ON;
-    // 写真の確認
-    } else if (this.step === STEP.CAMERA_ON) {
-      addChat(
-        {
-          body: [daily_log_script2[0], ...daily_log_script3],
+    switch (this.step) {
+      case STEP.CAMERA_YESNO:
+        // カメラを起動
+        this.startCamera();
+        this.step = STEP.CAMERA_ON;
+        break;
+
+      case STEP.CAMERA_ON:
+        // 写真の確認
+        addChat(
+          {
+            body: [daily_log_script2[0], ...daily_log_script3],
+            waitTime: 0,
+          }, this.chatHistory = [], this.chatSource,
+          () => {
+            this.captureData = this.draw();
+            this.pauseCamera();
+            return true;
+          }
+        );
+
+        this.step = STEP.PICTURE_YESNO;
+        break;
+
+      case STEP.PICTURE_YESNO:
+        // 写真へのコメント
+        this.dailyLogService.savePhotograph(this.captureData);
+        this.localSave();
+
+        addChat({
+          body: [daily_log_script2[0], ...daily_log_script4],
           waitTime: 0,
-        }, this.chatHistory = [], this.chatSource,
-        () => {
-          this.captureData = this.draw();
-          this.pauseCamera();
-          return true;
-        }
-      );
+        }, this.chatHistory = [], this.chatSource);
 
-      this.step = STEP.PICTURE_YESNO;
-    // 写真へのコメント
-    } else if (this.step === STEP.PICTURE_YESNO) {
-      this.dailyLogService.savePhotograph(this.captureData);
-      this.localSave();
+        this.step = STEP.PICTUREMEMO_YESNO;
+        break;
 
-      addChat({
-        body: [daily_log_script2[0], ...daily_log_script4],
-        waitTime: 0,
-      }, this.chatHistory = [], this.chatSource);
-
-      this.step = STEP.PICTUREMEMO_YESNO;
-    // テキストボックス表示
-    } else if (this.step === STEP.PICTUREMEMO_YESNO) {
-      addChatAndFocus(
-        {
-          body: [daily_log_script2[0]],
-          waitTime: 0,
-        }, this.chatHistory, this.chatSource,
-        () => this.toggleReplyText(true), this.emitClick
-      );
-    // 終了
-    } else {
+      case STEP.PICTUREMEMO_YESNO:
+        // テキストボックス表示
+        addChatAndFocus(
+          {
+            body: [daily_log_script2[0]],
+            waitTime: 0,
+          }, this.chatHistory, this.chatSource,
+          () => this.toggleReplyText(true), this.emitClick
+        );
+        break;
     }
   }
 
   onClickNo() {
-    if (this.step === STEP.CAMERA_YESNO || this.step === STEP.PICTUREMEMO_YESNO) {
-      this.end();
-    // 初めに戻る
-    } else if (this.step === STEP.CAMERA_ON) {
-      addChat({
-        body: daily_log_script1,
-        waitTime: 0,
-        tmp: true,
-      }, this.chatHistory = [], this.chatSource);
+    switch (this.step) {
+      case STEP.CAMERA_YESNO:
+      case STEP.PICTUREMEMO_YESNO:
+        // 次のステップへ
+        this.end();
+        break;
 
-      this.step = STEP.CAMERA_YESNO;
-    // 写真の取り直し
-    } else if (this.step === STEP.PICTURE_YESNO) {
-      this.chatHistory = [];
-      this.startCamera();
+      case STEP.CAMERA_ON:
+        // 初めに戻る
+        addChat({
+          body: daily_log_script1,
+          waitTime: 0,
+          tmp: true,
+        }, this.chatHistory = [], this.chatSource);
 
-      this.step = STEP.CAMERA_ON;
-    } else {
+        this.step = STEP.CAMERA_YESNO;
+        break;
+
+      case STEP.PICTURE_YESNO:
+        // 写真の取り直し
+        this.chatHistory = [];
+        this.startCamera();
+
+        this.step = STEP.CAMERA_ON;
+        break;
     }
   }
 
@@ -173,7 +186,7 @@ export class StepPictureComponent extends ChatComponent implements OnInit {
     this.end();
   }
 
-  private draw() {
+  private draw(): string {
     const WIDTH = this.videoElm.nativeElement.clientWidth;
     const HEIGHT = this.videoElm.nativeElement.clientHeight;
 
