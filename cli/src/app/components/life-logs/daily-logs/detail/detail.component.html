@@ -13,7 +13,7 @@
 
   <mat-card>
     <mat-card-header>
-        <md-card-title>今日の気分は？</md-card-title>
+      <mat-card-title>今日の気分は？</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <mat-button-toggle-group id="health" [(ngModel)]="dailyLogParam.health" [disabled]="displayMode === MODE.ROM">
@@ -29,7 +29,7 @@
 
   <mat-card>
     <mat-card-header>
-      <md-card-title>薬は服用した？</md-card-title>
+      <mat-card-title>薬は服用した？</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <mat-radio-group id="medicina" [(ngModel)]="dailyLogParam.medicina" [disabled]="displayMode === MODE.ROM">
@@ -44,7 +44,7 @@
 
   <mat-card>
     <mat-card-header>
-      <md-card-title>写真の記録</md-card-title>
+      <mat-card-title>写真の記録</mat-card-title>
       <div id="camera">
         <input type="file" #file (change)="onChangeFile(file)" *ngIf="displayMode !== MODE.ROM" />
         <button type="button" mat-raised-button (click)="onClickCamera()" *ngIf="displayMode !== MODE.ROM" disabled>(工事中)写真を撮る</button>
