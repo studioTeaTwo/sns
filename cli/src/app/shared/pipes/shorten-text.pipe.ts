@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ShortenTextPipe implements PipeTransform {
 
-  transform(value: string, limitNumber: number): any {
+  transform(value: string, limitNumber: number): string {
     let val = '';
     let sum = 0;
     for (let i = 0, len = value.length; i < len; i++) {

@@ -28,7 +28,7 @@ export class Store {
   private store = store;
   changes = store.asObservable().distinctUntilChanged();
 
-  getState() {
+  getState(): StoreState {
     return this.store.value;
   }
 

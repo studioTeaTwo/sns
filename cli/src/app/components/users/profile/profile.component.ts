@@ -42,11 +42,11 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  getFollowingsLink() {
+  getFollowingsLink(): string {
     return '/user/' + this.store.getState().profile.id + '/followings';
   }
 
-  getFollowersLink() {
+  getFollowersLink(): string {
     return '/user/' + this.store.getState().profile.id + '/followers';
   }
 

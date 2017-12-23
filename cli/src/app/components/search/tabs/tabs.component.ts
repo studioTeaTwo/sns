@@ -12,7 +12,7 @@ export class TabsComponent implements OnInit {
   ngOnInit() {
   }
 
-  isLogin() {
+  isLogin(): boolean {
     const token = localStorage.getItem('token');
     return token && token.length > 0;
   }

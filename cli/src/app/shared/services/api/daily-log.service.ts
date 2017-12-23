@@ -138,7 +138,7 @@ export class DailyLogService {
     });
   }
 
-  private Base64ToImage(uploadFile: string) {
+  private Base64ToImage(uploadFile: string): Blob {
     const bin = atob(uploadFile.replace(/^.*,/, ''));
     const buffer = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; i++) {
