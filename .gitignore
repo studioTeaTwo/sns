@@ -8,6 +8,9 @@
 .DS_Store
 .vscode/
 
+# rbenv
+.ruby-version
+
 # circleCI
 .config/
 vendor/

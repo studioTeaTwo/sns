@@ -3,9 +3,9 @@ machine:
     Asia/Tokyo
   ruby:
     version:
-      2.3.3
+      2.4.0
   node:
-    version: 8.2.0
+    version: 8.9.3
   post:
     - npm i -g npm && npm i -g yarn
 dependencies:
