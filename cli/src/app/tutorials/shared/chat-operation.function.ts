@@ -26,7 +26,7 @@ export function addChat(
       currentThread.push(...newChats.body);
       chatSource.next(currentThread);
     }
-    if (callbackAdditionalEffect) { callbackAdditionalEffect() };
+    if (callbackAdditionalEffect) { callbackAdditionalEffect(); }
   }, newChats.waitTime);
 }
 

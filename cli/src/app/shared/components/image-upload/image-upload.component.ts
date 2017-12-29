@@ -1,5 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChange} from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+
+interface ImageFile {
+  type: string;
+  data: string;
+}
 
 @Component({
   selector: 'app-image-upload',
@@ -8,8 +13,8 @@ import { Observable } from 'rxjs/Rx';
 })
 export class ImageUploadComponent implements OnInit, OnChanges {
   @Input() imgSrc: any;
-  @Output() onUploaded  = new EventEmitter();
-  private newFile = {
+  @Output() imageUploaded  = new EventEmitter<string>();
+  private newFile: ImageFile = {
     type: null,
     data: null
   };
@@ -40,7 +45,7 @@ export class ImageUploadComponent implements OnInit, OnChanges {
   }
 
   onClick() {
-    this.onUploaded.emit(this.newFile.data);
+    this.imageUploaded.emit(this.newFile.data);
   }
 
   private readFile(file: File): Observable<string> {

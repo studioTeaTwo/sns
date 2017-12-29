@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
-import { User } from 'app/interfaces/api-models'
+import { User } from 'app/interfaces/api-models';
 import { AccountService } from 'app/shared/services/api';
 
 @Component({

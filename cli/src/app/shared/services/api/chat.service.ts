@@ -52,7 +52,7 @@ export class ChatService {
       .map(
         response => {
           this.onSuccessList([response]);
-          return response
+          return response;
         }
       );
   }

@@ -31,7 +31,7 @@ describe('SettingComponent', () => {
       conjunctivitis: false,
       avatarUrl: '',
       accessToken: '',
-  }
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

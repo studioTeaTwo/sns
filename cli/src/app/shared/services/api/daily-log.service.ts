@@ -36,7 +36,7 @@ export class DailyLogService {
       medicinaMemo: '',
       photograph: [],
       photographMemo: '',
-    }
+    };
   }
 
   list() {
@@ -99,7 +99,7 @@ export class DailyLogService {
   }
 
   saveHealth(item: any) {
-    this.dailyLogParam.health = item.id
+    this.dailyLogParam.health = item.id;
   }
 
   saveHealthMemo(text: string) {

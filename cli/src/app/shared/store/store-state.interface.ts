@@ -20,4 +20,4 @@ export interface StoreState {
     errorMsg: string;
 
     // 開発用メニュー
-  };
+  }

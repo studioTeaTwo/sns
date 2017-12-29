@@ -33,7 +33,7 @@ export class ApiInterceptor implements HttpInterceptor {
               if (event instanceof HttpResponse && event.status >= 400) {
                 this.apiBaseService.onError();
               } else {
-              };
+              }
               return event;
             })
             .catch((err: any, caught) => {

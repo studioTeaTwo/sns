@@ -51,7 +51,7 @@
       </div>
     </mat-card-header>
     <mat-card-content>
-      <app-image-upload *ngIf="uploadOpen" [imgSrc]="inputFiles" (onUploaded)="getImage($event)"></app-image-upload>
+      <app-image-upload *ngIf="uploadOpen" [imgSrc]="inputFiles" (imageUploaded)="getImage($event)"></app-image-upload>
       <div id="photograph" *ngFor="let photo of dailyLogParam.photograph">
         <mat-icon *ngIf="!(displayMode === MODE.ROM)" (click)="onClickPhotoDel(photo)">cancel</mat-icon>
         <img class="photo" [src]="photo">

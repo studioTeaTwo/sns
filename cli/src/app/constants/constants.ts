@@ -75,4 +75,4 @@ export enum KEY_CODE {
   NUMPAD_7 = 103,
   NUMPAD_8 = 104,
   NUMPAD_9 = 105,
-};
+}

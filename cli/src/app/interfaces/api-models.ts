@@ -10,7 +10,7 @@ export interface ChatViewModel extends Chat {
   contentType: CONTENT_TYPE;
   body?: any;
   itemList?: any;
-  result?: string,
+  result?: string;
   expired?: boolean;
   createdAt?: any;
 }

@@ -41,11 +41,11 @@ export class ListComponent implements OnInit {
   getIcon(input: number): string {
     switch (input) {
       case 1:
-        return '😄'
+        return '😄';
       case 2:
-        return '☺️'
+        return '☺️';
       case 3:
-        return '😥'
+        return '😥';
     }
   }
 

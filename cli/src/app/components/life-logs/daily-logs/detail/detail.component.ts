@@ -73,7 +73,7 @@ export class DetailComponent implements OnInit {
       medicinaMemo: '',
       photograph: [],
       photographMemo: '',
-    }
+    };
   }
 
   onClickEdit() {
