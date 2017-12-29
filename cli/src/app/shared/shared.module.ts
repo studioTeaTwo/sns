@@ -11,9 +11,10 @@ import {
   ApiBaseService,
   MasterDataService,
   AccountService,
-  UserService,
   ChatService,
   DailyLogService,
+  FeedService,
+  UserService,
 } from './services/api';
 import {
   FormatToJapaneseDatePipe,
@@ -64,9 +65,10 @@ export class SharedModule {
 
         MasterDataService,
         AccountService,
-        UserService,
         ChatService,
         DailyLogService,
+        FeedService,
+        UserService,
 
         AuthGuard,
       ]

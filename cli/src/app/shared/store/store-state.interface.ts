@@ -4,6 +4,7 @@ export interface StoreState {
     // APIデータ
     account: API.User;
     profile: API.Profile;
+    feedList: API.Feed;
     chatList: API.ChatList;
     chats: API.Chat[];
     searchUsers: API.Profile[];

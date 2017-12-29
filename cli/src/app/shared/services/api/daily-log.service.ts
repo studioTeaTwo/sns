@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
 import * as moment from 'moment';
 
 import { Store } from 'app/shared/store/store';
