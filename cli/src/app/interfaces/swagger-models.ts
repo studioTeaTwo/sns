@@ -13,8 +13,20 @@ export interface Chat {
 export interface ChatRequestBody {
     chat?: ChatStrongParameter;
 }
+export interface ChatStatus {
+    id?: number; // int32
+    chatThreadId?: number; // int32
+    senderId?: number; // int32
+    contentType?: number; // int32
+    body?: string;
+    itemList?: {
+    };
+    result?: string;
+    expired?: boolean;
+    createdAt?: string; // date-time
+}
 export interface ChatStrongParameter {
-    id?: number;
+    id?: number; // int32
     chatThreadId?: number; // int32
     senderId?: number; // int32
     contentType?: number; // int32
@@ -27,7 +39,7 @@ export interface ChatStrongParameter {
 export interface ChatThread {
     id?: number; // int32
     hasUnread?: boolean;
-    readUntil?: number; // int32
+    readUntil?: ChatStatus[];
     createdAt?: string; // date-time
     updatedAt?: string; // date-time
     participants?: User[];
@@ -37,13 +49,13 @@ export interface ChatThreadRequestBody {
     chatThread?: ChatThreadStrongParameter;
 }
 export interface ChatThreadStrongParameter {
-    id?: number;
+    id?: number; // int32
     participants?: number /* int32 */ [];
     newestChatId?: number; // int32
 }
 export interface DailyLog {
     id?: number; // int32
-    date?: string;
+    date?: string; // date
     symptom?: string;
     health?: number; // int32
     healthMemo?: string;
@@ -57,9 +69,9 @@ export interface DailyLogRequestBody {
     daily_log?: DailyLogStrongParameter;
 }
 export interface DailyLogStrongParameter {
-    id?: number;
+    id?: number; // int32
+    date?: string; // date
     symptom?: string;
-    date?: string; // date-time
     health?: number; // int32
     healthMemo?: string;
     medicina?: boolean;
@@ -69,6 +81,18 @@ export interface DailyLogStrongParameter {
 }
 export interface EmailVerifyRequestBody {
     email?: string;
+}
+export interface ExperienceStrongParameter {
+    id?: number; // int32
+    userId?: number; // int32
+    activityId?: number; // int32
+    activityType?: string;
+    createdAt?: string; // date-time
+    updatedAt?: string; // date-time
+}
+export interface Feed {
+    mine?: ExperienceStrongParameter[];
+    other?: ExperienceStrongParameter[];
 }
 export interface Ige {
     id?: number; // int32
@@ -297,7 +321,7 @@ export interface IgeRequestBody {
     ige?: IgeStrongParameter;
 }
 export interface IgeStrongParameter {
-    id?: number;
+    id?: number; // int32
     testDate?: string; // date
     latestTestResult?: boolean;
     testCategory?: number; // int32
@@ -560,7 +584,7 @@ export interface MicropostRequestBody {
     micropost?: MicropostStrongParameter;
 }
 export interface MicropostStrongParameter {
-    id?: number;
+    id?: number; // int32
     content?: string;
     picture?: string;
 }
@@ -591,7 +615,7 @@ export interface RelationshipRequestBody {
     relationship?: RelationshipStrongParameter;
 }
 export interface RelationshipStrongParameter {
-    id?: number;
+    id?: number; // int32
     followerId?: number; // int32
     followedId?: number; // int32
 }
@@ -599,7 +623,6 @@ export interface SessionRequestBody {
     session?: SessionStrongParameter;
 }
 export interface SessionStrongParameter {
-    id?: number;
     email?: string;
     password?: string;
 }
@@ -624,7 +647,7 @@ export interface UserRequestBody {
     user?: UserStrongParameter;
 }
 export interface UserStrongParameter {
-    id?: number;
+    id?: number; // int32
     email?: string;
     encryptedPassword?: string;
     resetPasswordToken?: string;

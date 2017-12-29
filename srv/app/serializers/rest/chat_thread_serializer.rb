@@ -2,7 +2,7 @@
 #
 # @attr [integer] id
 # @attr [boolean] hasUnread
-# @attr [Array<ChatStatusSerializer>] readUntil
+# @attr [Array<Rest::ChatStatusSerializer>] readUntil
 # @attr [date-time] createdAt
 # @attr [date-time] updatedAt
 # @attr [Array<Rest::UserSerializer>] participants
