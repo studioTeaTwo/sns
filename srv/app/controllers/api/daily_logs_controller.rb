@@ -31,6 +31,7 @@ class Api::DailyLogsController < ApplicationController
     symptom = { 'daily_' + daily_log_params[:symptom] => true }
     ActiveRecord::Base.transaction do
       @daily_log.save!
+      record_experience @daily_log
       current_user.personal_assistant.update_attributes(symptom)
     end
     render json: @daily_log, status: :created, serializer: Rest::DailyLogSerializer
@@ -83,5 +84,10 @@ class Api::DailyLogsController < ApplicationController
     def correct_user
       @daily_log = current_user.daily_logs.find_by(:id => params[:id])
       render json: { error: 'forbidden' }, status: :forbidden if @daily_log.nil?
+    end
+
+    def record_experience(daily_log)
+      experience = daily_log.experiences.build({user_id: current_user.id})
+      experience.save!
     end
 end

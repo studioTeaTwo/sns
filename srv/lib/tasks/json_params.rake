@@ -8,7 +8,7 @@ namespace :json_params do
     File.unlink *filenames
 
     create('Session', "#{Rails.root}/app/controllers/params/session.rb",
-      nil,
+      [],
       {email: 'string', password: 'string'}
     )
     create(User, "#{Rails.root}/app/controllers/params/user.rb",
@@ -35,11 +35,13 @@ namespace :json_params do
     create(Ige, "#{Rails.root}/app/controllers/params/ige.rb",
       [:user_id, :created_at, :updated_at]
     )
+    create(Experience, "#{Rails.root}/app/controllers/params/experience.rb"
+    )
   end
 
   private
 
-    def create(object, file_path, exclusion_list, special_case_list=nil)
+    def create(object, file_path, exclusion_list=[], special_case_list=nil)
       val = ''
       if (object.instance_of?(String))
         # Custom Definitions
