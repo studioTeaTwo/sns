@@ -92,7 +92,7 @@ export interface ExperienceStrongParameter {
 }
 export interface Feed {
     mine?: ExperienceStrongParameter[];
-    other?: ExperienceStrongParameter[];
+    others?: ExperienceStrongParameter[];
 }
 export interface Ige {
     id?: number; // int32

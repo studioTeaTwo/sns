@@ -4,3 +4,11 @@
   background: url("/assets/images/home_bg.png") 0 0 no-repeat;
   background-size: contain;
 }
+
+.mat-header-row {
+  display: none;
+}
+
+.mat-column-date {
+  max-width: 100px;
+}

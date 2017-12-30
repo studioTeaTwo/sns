@@ -1,18 +1,16 @@
-import { SafeHtml } from '@angular/platform-browser';
-
-import { Chat, User } from './swagger-models';
+import { Chat, User, Feed, ExperienceStrongParameter } from './swagger-models';
 
 export * from './swagger-models';
 
+
+/**
+ * viewのためにswagger-modelsのプロパティを変更する
+ */
+
 export interface ChatViewModel extends Chat {
-  id: number;
-  senderId: number;
   contentType: CONTENT_TYPE;
   body?: any;
   itemList?: any;
-  result?: string;
-  expired?: boolean;
-  createdAt?: any;
 }
 export enum CONTENT_TYPE {
   REPLY,
@@ -21,21 +19,15 @@ export enum CONTENT_TYPE {
   RADIOBUTTON,
   CAMERA,
 }
-
 export type ChatList = ChatThread[];
 export interface ChatThread {
-  id: number;
-  hasUnread: boolean;
-  updatedAt: Date;
-  readUntil: ChatStatus[];
-  participants: User[];
   newestChat: ChatViewModel;
 }
-
-export interface ChatStatus {
-  userId: number;
-  chatThreadId: number;
-  readUntil: number;
-}
-
 export type Chats = ChatViewModel[];
+
+export interface OtherExperienceStrongParameter extends ExperienceStrongParameter {
+  name?: string;
+}
+export interface FeedViewModel extends Feed {
+  others?: OtherExperienceStrongParameter[];
+}

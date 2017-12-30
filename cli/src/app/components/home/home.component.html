@@ -1,29 +1,33 @@
 <section id="home-content">
-  <mat-table [dataSource]="experienceDataSource">
+  <mat-table [dataSource]="myExperienceDataSource">
     <ng-container matColumnDef="date">
-      <mat-header-cell *matHeaderCellDef>日時</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.date}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.date | date:'MM/dd HH:mm'}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="activity">
-      <mat-header-cell *matHeaderCellDef>活動</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.activity}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.activity}}</mat-cell>
     </ng-container>
-    <mat-header-row *matHeaderRowDef="experienceColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: experienceColumns;"></mat-row>
+    <mat-header-row *matHeaderRowDef="myDisplayColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: myDisplayColumns;"></mat-row>
   </mat-table>
 
-  <label>友達の活動</label>
+  <label *ngIf="otherExperienceDataSource.rowCount > 0">友達の活動</label>
 
-  <mat-table [dataSource]="experienceDataSource">
+  <mat-table [dataSource]="otherExperienceDataSource">
     <ng-container matColumnDef="date">
-      <mat-header-cell *matHeaderCellDef>誰</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.date | date:'MM/dd HH:mm'}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="activity">
-      <mat-header-cell *matHeaderCellDef>活動</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.activity}} </mat-cell>
     </ng-container>
-    <mat-header-row *matHeaderRowDef="experienceColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: experienceColumns;"></mat-row>
+    <mat-header-row *matHeaderRowDef="otherDisplayColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: otherDisplayColumns;"></mat-row>
   </mat-table>
 </section>

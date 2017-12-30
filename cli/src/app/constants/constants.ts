@@ -33,6 +33,11 @@ export const NAVI_THREAD = {
   newestChat: null,
 };
 
+export type Activity = '活動日記を付けました！';
+export const ActivityName = {
+  DailyLog: '活動日記を付けました！',
+};
+
 export const API_ERROR_MSGS = {
   BAD_REQUEST_400: '入力項目の確認をし、もう一度お試しください。',
   UNAUTHORIZED_401: '認証の有効期限が切れました\nお手数ですが、再度ログインをお願い致します。',

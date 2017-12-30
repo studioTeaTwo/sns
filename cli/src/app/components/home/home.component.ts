@@ -1,6 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import {DataSource} from '@angular/cdk/collections';
-import {Observable} from 'rxjs/Observable';
+import { DataSource } from '@angular/cdk/collections';
+import { Observable } from 'rxjs/Observable';
+
+import { Store } from 'app/shared/store/store';
+import { FeedViewModel, OtherExperienceStrongParameter } from 'app/interfaces/api-models';
+import { Activity, ActivityName } from 'app/constants/constants';
+import { FeedService } from 'app/shared/services/api';
+
+interface Experience {
+  date: string;
+  name: string;
+  activity: Activity;
+}
 
 @Component({
   selector: 'app-home',
@@ -8,23 +19,49 @@ import {Observable} from 'rxjs/Observable';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  experienceDataSource = new ExperienceDataSource();
-  experienceColumns = ['date', 'activity'];
+  myExperienceDataSource: ExperienceDataSource | null;
+  otherExperienceDataSource: ExperienceDataSource | null;
+  myDisplayColumns = ['date', 'activity'];
+  otherDisplayColumns = ['date', 'name', 'activity'];
 
-  constructor() { }
+  constructor(
+    private store: Store,
+    private feedService: FeedService,
+  ) { }
 
   ngOnInit() {
+    this.feedService.list();
+    this.myExperienceDataSource = new ExperienceDataSource(this.store.changes.pluck('feedList', 'mine'));
+    this.otherExperienceDataSource = new ExperienceDataSource(this.store.changes.pluck('feedList', 'others'));
   }
 }
 
-const data = [
-  {date: '11/15', name: 'とたたけ', activity: '治療日記を付けました！'},
-];
+class ExperienceDataSource extends DataSource<any> {
+  rowCount: number;
 
-export class ExperienceDataSource extends DataSource<any> {
+  constructor(
+    private feedSource: Observable<OtherExperienceStrongParameter[]>
+  ) {
+    super();
+  }
+
   /** Connect function called by the table to retrieve one stream containing the data to render. */
-  connect(): Observable<any> {
-    return Observable.of(data);
+  connect(): Observable<Experience[]> {
+    return this.feedSource
+      .filter(data => data && data.length > 0)
+      .map(data => {
+        const newData: Experience[] = [];
+        // データを表示形式に整形する
+        data.forEach(value => {
+          newData.push({
+            date: value.createdAt,
+            name: value.name,
+            activity: ActivityName[value.activityType],
+          });
+        });
+        this.rowCount = newData.length;
+        return newData;
+      });
   }
 
   disconnect() {}
