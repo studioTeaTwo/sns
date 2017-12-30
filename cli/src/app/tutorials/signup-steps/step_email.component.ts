@@ -169,7 +169,7 @@ export class StepEmailComponent extends ChatComponent implements OnInit, AfterVi
       senderId: this.myself.id,
       contentType: CONTENT_TYPE.REPLY,
       body: text,
-      createdAt: new Date()
+      createdAt: new Date().toString()
     }];
 
     addChatAndFocus({
@@ -186,7 +186,7 @@ export class StepEmailComponent extends ChatComponent implements OnInit, AfterVi
       senderId: this.myself.id,
       contentType: CONTENT_TYPE.REPLY,
       body: text,
-      createdAt: new Date()
+      createdAt: new Date().toString()
     }];
 
     addChat({
@@ -203,7 +203,7 @@ const tutorial_script1: ChatViewModel[] = [
     senderId: NAVI_CHARA.id,
     contentType: CONTENT_TYPE.REPLY,
     body: '王国へ入場するためのパスポートを発行するよ！',
-    createdAt: new Date()
+    createdAt: new Date().toString()
   },
 ];
 const tutorial_script2: ChatViewModel[] = [
@@ -212,7 +212,7 @@ const tutorial_script2: ChatViewModel[] = [
     senderId: NAVI_CHARA.id,
     contentType: CONTENT_TYPE.REPLY,
     body: '君のメールアドレスを教えて',
-    createdAt: new Date()
+    createdAt: new Date().toString()
   },
 ];
 const tutorial_script3: ChatViewModel[] = [{
@@ -220,54 +220,54 @@ const tutorial_script3: ChatViewModel[] = [{
   senderId: NAVI_CHARA.id,
   contentType: CONTENT_TYPE.REPLY,
   body: 'パスワードはどうする？君の好きな暗号を6文字以上で設定するんだ',
-  createdAt: new Date()
+  createdAt: new Date().toString()
 }];
 const tutorial_script4: ChatViewModel[] = [{
   id: 5,
   senderId: NAVI_CHARA.id,
   contentType: CONTENT_TYPE.YESNO,
   body: 'これでOKかい？',
-  createdAt: new Date()
+  createdAt: new Date().toString()
 }];
 const tutorial_script5: ChatViewModel[] = [{
   id: 6,
   senderId: NAVI_CHARA.id,
   contentType: CONTENT_TYPE.REPLY,
   body: 'さあ、入国の手続きは完了だ！',
-  createdAt: new Date()
+  createdAt: new Date().toString()
 },
 {
   id: 7,
   senderId: NAVI_CHARA.id,
   contentType: CONTENT_TYPE.REPLY,
   body: '毎日症状を記録して、一緒に戦う仲間を見つけよう！',
-  createdAt: new Date()
+  createdAt: new Date().toString()
 }];
 const tutorial_script_error: ChatViewModel[] = [{
   id: 6,
   senderId: NAVI_CHARA.id,
   contentType: CONTENT_TYPE.REPLY,
   body: 'eメールの形式じゃないみたい。もう一回入力してみて！',
-  createdAt: new Date()
+  createdAt: new Date().toString()
 }];
 const tutorial_script_error_email: ChatViewModel[] = [{
   id: 7,
   senderId: NAVI_CHARA.id,
   contentType: CONTENT_TYPE.REPLY,
   body: 'もうこのアドレスは登録されてるってさ！',
-  createdAt: new Date()
+  createdAt: new Date().toString()
 }];
 const tutorial_script_error_regist: ChatViewModel[] = [{
   id: 7,
   senderId: NAVI_CHARA.id,
   contentType: CONTENT_TYPE.REPLY,
   body: '申し訳ない＞＜',
-  createdAt: new Date()
+  createdAt: new Date().toString()
 },
 {
   id: 7,
   senderId: NAVI_CHARA.id,
   contentType: CONTENT_TYPE.REPLY,
   body: 'サーバエラーです。しばらくしてからもう一度お願いします。',
-  createdAt: new Date()
+  createdAt: new Date().toString()
 }];

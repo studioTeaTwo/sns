@@ -1,17 +1,15 @@
-import { Chat, User, Feed, ExperienceStrongParameter } from './swagger-models';
+import {
+  Chat,
+  Feed,
+  ExperienceStrongParameter
+} from './swagger-models';
 
 export * from './swagger-models';
-
 
 /**
  * viewのためにswagger-modelsのプロパティを変更する
  */
 
-export interface ChatViewModel extends Chat {
-  contentType: CONTENT_TYPE;
-  body?: any;
-  itemList?: any;
-}
 export enum CONTENT_TYPE {
   REPLY,
   YESNO,
@@ -19,9 +17,10 @@ export enum CONTENT_TYPE {
   RADIOBUTTON,
   CAMERA,
 }
-export type ChatList = ChatThread[];
-export interface ChatThread {
-  newestChat: ChatViewModel;
+export interface ChatViewModel extends Chat {
+  contentType: CONTENT_TYPE;
+  body?: any; // アンケートのSafeHTMLを許可するため
+  itemList?: any[]; // アンケートの質問
 }
 export type Chats = ChatViewModel[];
 

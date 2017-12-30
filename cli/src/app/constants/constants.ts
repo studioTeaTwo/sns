@@ -23,7 +23,7 @@ export const SIGNUP_USER: User = {
 export const NAVI_THREAD = {
   id: 0,
   hasUnread: false,
-  updatedAt: new Date(),
+  updatedAt: new Date().toString(),
   readUntil: [{
     chatThreadId: 0,
     userId: NAVI_CHARA.id,

@@ -9,7 +9,6 @@ import {
   unique
 } from 'app/shared/functions/array-util.function';
 import {
-  ChatList,
   ChatThread,
   Chats,
   Chat,
@@ -25,7 +24,7 @@ export class ChatService {
   ) { }
 
   list() {
-    this.httpClient.get<ChatList>(`/api/chats`)
+    this.httpClient.get<ChatThread[]>(`/api/chats`)
       .subscribe(
         response => {
           this.onSuccessList(response);
@@ -73,7 +72,15 @@ export class ChatService {
       );
   }
 
-  private onSuccessList(data: ChatList) {
+  resetChat() {
+    const currentState = this.store.getState();
+    this.store.setState({
+      ...currentState,
+      chats: [],
+    });
+  }
+
+  private onSuccessList(data: ChatThread[]) {
     const currentState = this.store.getState();
     data = unique(data.concat(...currentState.chatList));
     data.sort((a, b) => compareUpdated<ChatThread>(a, b));
@@ -87,7 +94,6 @@ export class ChatService {
 
   private onSuccessChats(data: Chat[]) {
     const currentState = this.store.getState();
-    data = unique(data.concat(...currentState.chats));
     data.sort((a, b) => compareCreated<Chat>(a, b));
     this.store.setState({
       ...currentState,

@@ -252,7 +252,7 @@ const daily_log_script1: ChatViewModel[] = [
     senderId: NAVI_CHARA.id,
     contentType: CONTENT_TYPE.YESNO,
     body: '写真で記録する？',
-    createdAt: new Date()
+    createdAt: new Date().toString()
   },
 ];
 const daily_log_script2: ChatViewModel[] = [
@@ -261,14 +261,14 @@ const daily_log_script2: ChatViewModel[] = [
     senderId: NAVI_CHARA.id,
     contentType: CONTENT_TYPE.CAMERA,
     body: '',
-    createdAt: new Date()
+    createdAt: new Date().toString()
   },
   {
     id: 3,
     senderId: NAVI_CHARA.id,
     contentType: CONTENT_TYPE.YESNO,
     body: '写真にしたい時に「はい」を押してね',
-    createdAt: new Date()
+    createdAt: new Date().toString()
   },
 ];
 const daily_log_script3: ChatViewModel[] = [
@@ -277,7 +277,7 @@ const daily_log_script3: ChatViewModel[] = [
     senderId: NAVI_CHARA.id,
     contentType: CONTENT_TYPE.YESNO,
     body: 'これでいいかな？',
-    createdAt: new Date()
+    createdAt: new Date().toString()
   },
 ];
 const daily_log_script4: ChatViewModel[] = [
@@ -286,7 +286,7 @@ const daily_log_script4: ChatViewModel[] = [
     senderId: NAVI_CHARA.id,
     contentType: CONTENT_TYPE.YESNO,
     body: '何か写真にコメントしておく？',
-    createdAt: new Date()
+    createdAt: new Date().toString()
   },
 ];
 const daily_log_script5: ChatViewModel[] = [
@@ -295,6 +295,6 @@ const daily_log_script5: ChatViewModel[] = [
     senderId: NAVI_CHARA.id,
     contentType: CONTENT_TYPE.REPLY,
     body: 'おつかれさま！',
-    createdAt: new Date()
+    createdAt: new Date().toString()
   },
 ];

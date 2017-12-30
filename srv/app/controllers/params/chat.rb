@@ -7,7 +7,7 @@
 # @attr [integer] senderId
 # @attr [integer] contentType
 # @attr [string] body
-# @attr [hash] itemList
+# @attr [Array<hash>] itemList
 # @attr [string] result
 # @attr [boolean] expired
 class Params::Chat; end

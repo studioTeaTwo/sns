@@ -5,7 +5,7 @@ export interface Chat {
     contentType?: number; // int32
     body?: string;
     itemList?: {
-    };
+    }[];
     result?: string;
     expired?: boolean;
     createdAt?: string; // date-time
@@ -20,7 +20,7 @@ export interface ChatStatus {
     contentType?: number; // int32
     body?: string;
     itemList?: {
-    };
+    }[];
     result?: string;
     expired?: boolean;
     createdAt?: string; // date-time
@@ -32,7 +32,7 @@ export interface ChatStrongParameter {
     contentType?: number; // int32
     body?: string;
     itemList?: {
-    };
+    }[];
     result?: string;
     expired?: boolean;
 }

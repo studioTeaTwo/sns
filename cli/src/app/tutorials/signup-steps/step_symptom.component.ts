@@ -108,7 +108,7 @@ export class StepSymptomComponent extends ChatComponent implements OnInit, After
       senderId: this.myself.id,
       contentType: CONTENT_TYPE.REPLY,
       body: this.sanitizer.bypassSecurityTrustHtml(body),
-      createdAt: new Date()
+      createdAt: new Date().toString()
     }];
     addChat({
       body: reply.concat(tutorial_script2),
@@ -172,7 +172,7 @@ const tutorial_script1: ChatViewModel[] = [
         checked: false,
       },
     ],
-    createdAt: new Date()
+    createdAt: new Date().toString()
   },
 ];
 const tutorial_script2: ChatViewModel[] = [
@@ -181,6 +181,6 @@ const tutorial_script2: ChatViewModel[] = [
     senderId: NAVI_CHARA.id,
     contentType: CONTENT_TYPE.YESNO,
     body: 'これでいいかい？',
-    createdAt: new Date()
+    createdAt: new Date().toString()
   },
 ];

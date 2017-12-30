@@ -9,6 +9,9 @@ class ApplicationController < ActionController::API
     # ユーザーのログインを確認する
     # Authenticates the user with OAuth2 Resource Owner Password Credentials
     def logged_in_user
+      # swaggerをパスする
+      return if request.original_fullpath =~ /^\/api_docs\/.*$/
+
       auth_token = request.headers['Authorization']
       auth_token ? authenticate_with_auth_token(auth_token) : authenticate_error
     end

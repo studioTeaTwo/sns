@@ -61,6 +61,8 @@ export class ChatComponent implements OnInit {
           // もう既存のスレッドがあった
           if (this.chatThread.newestChat) {
             this.chatService.getChatThread(this.chatThread.id);
+          } else {
+            this.chatService.resetChat();
           }
         } else {
           throw new Error();
@@ -110,8 +112,8 @@ export class ChatComponent implements OnInit {
   }
 
   isRead(chat: ChatViewModel): boolean {
-    const opponent = this.chatThread.readUntil.find(value => value.userId !== this.myself.id);
-    return chat.id <= opponent.readUntil;
+    const opponent = this.chatThread.readUntil.find(value => value.senderId !== this.myself.id);
+    return chat.id <= opponent.id;
   }
 
   isUnread() {}

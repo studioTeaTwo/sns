@@ -114,7 +114,7 @@ export class StepHealthComponent extends ChatComponent implements OnInit {
       senderId: this.myself.id,
       contentType: CONTENT_TYPE.REPLY,
       body: this.sanitizer.bypassSecurityTrustHtml(body),
-      createdAt: new Date()
+      createdAt: new Date().toString()
     }];
 
     addChat({
@@ -132,7 +132,7 @@ const daily_log_script1: ChatViewModel[] = [
     senderId: NAVI_CHARA.id,
     contentType: CONTENT_TYPE.REPLY,
     body: '今日の調子はどうだった？',
-    createdAt: new Date()
+    createdAt: new Date().toString()
   },
 ];
 const daily_log_script2: ChatViewModel[] = [
@@ -156,7 +156,7 @@ const daily_log_script2: ChatViewModel[] = [
       },
     ],
     result: '',
-    createdAt: new Date()
+    createdAt: new Date().toString()
   },
 ];
 const daily_log_script３: ChatViewModel[] = [
@@ -165,6 +165,6 @@ const daily_log_script３: ChatViewModel[] = [
     senderId: NAVI_CHARA.id,
     contentType: CONTENT_TYPE.YESNO,
     body: 'そうなんだ！何かメモしておく？（後でもできるよ）',
-    createdAt: new Date()
+    createdAt: new Date().toString()
   },
 ];

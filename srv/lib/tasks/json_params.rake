@@ -19,7 +19,7 @@ namespace :json_params do
     )
     create(Chat, "#{Rails.root}/app/controllers/params/chat.rb",
       [:user_id, :created_at, :updated_at],
-      {item_list: 'hash'}
+      {item_list: 'Array<hash>'}
     )
     create(ChatThread, "#{Rails.root}/app/controllers/params/chat_thread.rb",
       [:user_id, :created_at, :updated_at],

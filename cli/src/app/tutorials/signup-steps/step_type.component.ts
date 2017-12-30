@@ -115,7 +115,7 @@ export class StepTypeComponent extends ChatComponent implements OnInit, AfterVie
       senderId: this.myself.id,
       contentType: CONTENT_TYPE.REPLY,
       body: this.sanitizer.bypassSecurityTrustHtml(body),
-      createdAt: new Date()
+      createdAt: new Date().toString()
     }];
 
     addChat({
@@ -144,7 +144,7 @@ const tutorial_script1: ChatViewModel[] = [{
   senderId: NAVI_CHARA.id,
   contentType: CONTENT_TYPE.REPLY,
   body: 'ここはアレルギー王国',
-  createdAt: new Date()
+  createdAt: new Date().toString()
 }];
 const tutorial_script2: ChatViewModel[] = [
   {
@@ -171,7 +171,7 @@ const tutorial_script2: ChatViewModel[] = [
       },
     ],
     result: '',
-    createdAt: new Date()
+    createdAt: new Date().toString()
   },
 ];
 const tutorial_script3: ChatViewModel[] = [
@@ -180,6 +180,6 @@ const tutorial_script3: ChatViewModel[] = [
     senderId: NAVI_CHARA.id,
     contentType: CONTENT_TYPE.YESNO,
     body: 'これでいいかい？',
-    createdAt: new Date()
+    createdAt: new Date().toString()
   },
 ];

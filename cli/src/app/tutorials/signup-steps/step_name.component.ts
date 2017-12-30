@@ -104,7 +104,7 @@ export class StepNameComponent extends ChatComponent implements OnInit {
       senderId: this.myself.id,
       contentType: CONTENT_TYPE.REPLY,
       body: text,
-      createdAt: new Date()
+      createdAt: new Date().toString()
     }];
     addChat({
       body: reply,
@@ -141,26 +141,26 @@ const tutorial_script1: ChatViewModel[] = [{
   senderId: NAVI_CHARA.id,
   contentType: CONTENT_TYPE.REPLY,
   body: 'ようこそ！',
-  createdAt: new Date()
+  createdAt: new Date().toString()
 }];
 const tutorial_script2: ChatViewModel[] = [{
   id: 2,
   senderId: NAVI_CHARA.id,
   contentType: CONTENT_TYPE.REPLY,
   body: '君の名前を教えて！',
-  createdAt: new Date()
+  createdAt: new Date().toString()
 }];
 const tutorial_script3: ChatViewModel[] = [{
   id: 4,
   senderId: NAVI_CHARA.id,
   contentType: CONTENT_TYPE.REPLY,
   body: '',
-  createdAt: new Date()
+  createdAt: new Date().toString()
 }];
 const tutorial_script4: ChatViewModel[] = [{
   id: 5,
   senderId: NAVI_CHARA.id,
   contentType: CONTENT_TYPE.REPLY,
   body: '',
-  createdAt: new Date()
+  createdAt: new Date().toString()
 }];
