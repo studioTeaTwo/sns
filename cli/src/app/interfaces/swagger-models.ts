@@ -1,3 +1,7 @@
+export interface Activity {
+    mine?: MyExperienceStrongParameter[];
+    friend?: FriendExperienceStrongParameter[];
+}
 export interface Chat {
     id?: number; // int32
     chatThreadId?: number; // int32
@@ -82,17 +86,14 @@ export interface DailyLogStrongParameter {
 export interface EmailVerifyRequestBody {
     email?: string;
 }
-export interface ExperienceStrongParameter {
+export interface FriendExperienceStrongParameter {
     id?: number; // int32
     userId?: number; // int32
     activityId?: number; // int32
     activityType?: string;
     createdAt?: string; // date-time
     updatedAt?: string; // date-time
-}
-export interface Feed {
-    mine?: ExperienceStrongParameter[];
-    others?: ExperienceStrongParameter[];
+    name?: string;
 }
 export interface Ige {
     id?: number; // int32
@@ -587,6 +588,14 @@ export interface MicropostStrongParameter {
     id?: number; // int32
     content?: string;
     picture?: string;
+}
+export interface MyExperienceStrongParameter {
+    id?: number; // int32
+    userId?: number; // int32
+    activityId?: number; // int32
+    activityType?: string;
+    createdAt?: string; // date-time
+    updatedAt?: string; // date-time
 }
 export interface Profile {
     latestIge?: number; // int32

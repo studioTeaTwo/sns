@@ -1,7 +1,5 @@
 import {
   Chat,
-  Feed,
-  ExperienceStrongParameter
 } from './swagger-models';
 
 export * from './swagger-models';
@@ -23,10 +21,3 @@ export interface ChatViewModel extends Chat {
   itemList?: any[]; // アンケートの質問
 }
 export type Chats = ChatViewModel[];
-
-export interface OtherExperienceStrongParameter extends ExperienceStrongParameter {
-  name?: string;
-}
-export interface FeedViewModel extends Feed {
-  others?: OtherExperienceStrongParameter[];
-}

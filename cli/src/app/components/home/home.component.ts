@@ -3,7 +3,7 @@ import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
 
 import { Store } from 'app/shared/store/store';
-import { FeedViewModel, OtherExperienceStrongParameter } from 'app/interfaces/api-models';
+import { FriendExperienceStrongParameter } from 'app/interfaces/api-models';
 import { Activity, ActivityName } from 'app/constants/constants';
 import { FeedService } from 'app/shared/services/api';
 
@@ -20,9 +20,9 @@ interface Experience {
 })
 export class HomeComponent implements OnInit {
   myExperienceDataSource: ExperienceDataSource | null;
-  otherExperienceDataSource: ExperienceDataSource | null;
+  friendExperienceDataSource: ExperienceDataSource | null;
   myDisplayColumns = ['date', 'activity'];
-  otherDisplayColumns = ['date', 'name', 'activity'];
+  friendDisplayColumns = ['date', 'name', 'activity'];
 
   constructor(
     private store: Store,
@@ -30,9 +30,9 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.feedService.list();
-    this.myExperienceDataSource = new ExperienceDataSource(this.store.changes.pluck('feedList', 'mine'));
-    this.otherExperienceDataSource = new ExperienceDataSource(this.store.changes.pluck('feedList', 'others'));
+    this.feedService.listActivities();
+    this.myExperienceDataSource = new ExperienceDataSource(this.store.changes.pluck('activityList', 'mine'));
+    this.friendExperienceDataSource = new ExperienceDataSource(this.store.changes.pluck('activityList', 'friend'));
   }
 }
 
@@ -40,7 +40,7 @@ class ExperienceDataSource extends DataSource<any> {
   rowCount: number;
 
   constructor(
-    private feedSource: Observable<OtherExperienceStrongParameter[]>
+    private feedSource: Observable<FriendExperienceStrongParameter[]>
   ) {
     super();
   }

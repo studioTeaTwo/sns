@@ -36,6 +36,10 @@ Rails.application.routes.draw do
       resources :allergens, only: [:index]
       resources :ige_ranks, only: [:index]
     end
+
+    namespace :feed do
+      resources :activities, only: [:index]
+    end
     
     resources :chats, only: [:index, :create, :show, :destroy] do
       member do
@@ -43,7 +47,6 @@ Rails.application.routes.draw do
       end
     end
     resources :microposts, only: [:create, :destroy]
-    resources :feeds, only: [:index]
     resources :daily_logs
     resources :iges
 
