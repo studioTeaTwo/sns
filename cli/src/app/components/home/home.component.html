@@ -1,3 +1,20 @@
+<section id="home-header">
+  <div class="home-notification">
+    <span [attr.data-badge-notification]="notificationCount" [matMenuTriggerFor]="notification">
+      <mat-icon>notifications</mat-icon>
+    </span>
+  </div>
+
+  <mat-menu #notification="matMenu">
+    <a mat-menu-item routerLink="/life-log/daily/logging" routerLinkActive="active">
+      <span>●●の治療日記を書こう！</span>
+    </a>
+    <a mat-menu-item routerLink="/chat/list" routerLinkActive="active">
+      <span>△△からチャットが来てるよ！</span>
+    </a>
+  </mat-menu>
+</section>
+
 <section id="home-content">
   <mat-table [dataSource]="myExperienceDataSource">
     <ng-container matColumnDef="date">

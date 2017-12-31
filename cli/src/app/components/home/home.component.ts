@@ -19,6 +19,11 @@ interface Experience {
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+
+  // 通知
+  notificationCount = 2;
+
+  // アクティビティ
   myExperienceDataSource: ExperienceDataSource | null;
   friendExperienceDataSource: ExperienceDataSource | null;
   myDisplayColumns = ['date', 'activity'];
@@ -33,6 +38,10 @@ export class HomeComponent implements OnInit {
     this.feedService.listActivities();
     this.myExperienceDataSource = new ExperienceDataSource(this.store.changes.pluck('activityList', 'mine'));
     this.friendExperienceDataSource = new ExperienceDataSource(this.store.changes.pluck('activityList', 'friend'));
+  }
+
+  onClickBadge() {
+
   }
 }
 

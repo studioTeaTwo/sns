@@ -1,14 +1,53 @@
+#home-header {
+
+  .home-notification {
+    margin-right: 20px;
+    text-align: right;
+    color: #fff;
+
+    mat-icon {
+      color: #000;
+      font-size: 1.5em;
+    }
+
+    span[data-badge-notification] {
+      position: relative;
+    }
+
+    span[data-badge-notification]:before {
+      // アイコンの形状
+      position: absolute;
+      display: inline-block;
+      font-weight: bold;
+      background-color: #f00;
+      border-radius: 50%;
+      font-size: 0.5em;
+      line-height: 0.8;
+      min-width: 0.5em;
+      padding: 5px;
+      border: 2px solid #fff;
+      box-shadow: 0px 0px 3px #999;
+  
+      // アイコンの位置
+      top: 0;
+      right: 0;
+      transform: translate(50%, -50%);
+      content: attr(data-badge-notification)"";
+    }
+  }
+}
+
 #home-content {
   height: 0;
   padding-top: 72%; // 表示画像の高さ ÷ 表示画像の幅 × 100
   background: url("/assets/images/home_bg.png") 0 0 no-repeat;
   background-size: contain;
-}
 
-.mat-header-row {
-  display: none;
-}
-
-.mat-column-date {
-  max-width: 100px;
+  .mat-header-row {
+    display: none;
+  }
+  
+  .mat-column-date {
+    max-width: 100px;
+  }
 }
