@@ -1,6 +1,9 @@
 import {
   Chat,
 } from './swagger-models';
+import {
+  NotificationType,
+} from 'app/constants/constants';
 
 export * from './swagger-models';
 
@@ -21,3 +24,7 @@ export interface ChatViewModel extends Chat {
   itemList?: any[]; // アンケートの質問
 }
 export type Chats = ChatViewModel[];
+
+export interface NotificationViewModel extends Notification {
+  type: NotificationType;
+}

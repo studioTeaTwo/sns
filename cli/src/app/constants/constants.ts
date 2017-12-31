@@ -33,10 +33,12 @@ export const NAVI_THREAD = {
   newestChat: null,
 };
 
-export type Activity = '活動日記を付けました！';
-export const ActivityName = {
+export type ActivityType = '活動日記を付けました！';
+export const ActivityTypeName = {
   DailyLog: '活動日記を付けました！',
 };
+
+export type NotificationType = 'DailyLog';
 
 export const API_ERROR_MSGS = {
   BAD_REQUEST_400: '入力項目の確認をし、もう一度お試しください。',

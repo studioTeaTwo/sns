@@ -7,6 +7,7 @@ const initialState = {
     // APIデータ
     account: {} as any,
     profile: {} as any,
+    notificationList: [],
     activityList: {} as any,
     chatList: [],
     chats: [],

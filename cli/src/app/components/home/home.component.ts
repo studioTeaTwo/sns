@@ -3,14 +3,14 @@ import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
 
 import { Store } from 'app/shared/store/store';
-import { FriendExperienceStrongParameter } from 'app/interfaces/api-models';
-import { Activity, ActivityName } from 'app/constants/constants';
+import { FriendExperienceStrongParameter, NotificationViewModel } from 'app/interfaces/api-models';
+import { ActivityType, ActivityTypeName } from 'app/constants/constants';
 import { FeedService } from 'app/shared/services/api';
 
 interface Experience {
   date: string;
   name: string;
-  activity: Activity;
+  activity: ActivityType;
 }
 
 @Component({
@@ -21,7 +21,7 @@ interface Experience {
 export class HomeComponent implements OnInit {
 
   // 通知
-  notificationCount = 2;
+  notifications$: Observable<NotificationViewModel[]>;
 
   // アクティビティ
   myExperienceDataSource: ExperienceDataSource | null;
@@ -35,13 +35,19 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.feedService.listNotifications();
     this.feedService.listActivities();
+    this.notifications$ = this.store.changes.pluck('notificationList');
     this.myExperienceDataSource = new ExperienceDataSource(this.store.changes.pluck('activityList', 'mine'));
     this.friendExperienceDataSource = new ExperienceDataSource(this.store.changes.pluck('activityList', 'friend'));
   }
 
-  onClickBadge() {
-
+  getNotificationLink(value: NotificationViewModel): string {
+    let link: string;
+    if (value.type === 'DailyLog') {
+      link = '/life-log/daily/logging';
+    }
+    return link;
   }
 }
 
@@ -65,7 +71,7 @@ class ExperienceDataSource extends DataSource<any> {
           newData.push({
             date: value.createdAt,
             name: value.name,
-            activity: ActivityName[value.activityType],
+            activity: ActivityTypeName[value.activityType],
           });
         });
         this.rowCount = newData.length;

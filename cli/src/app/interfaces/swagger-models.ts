@@ -597,6 +597,13 @@ export interface MyExperienceStrongParameter {
     createdAt?: string; // date-time
     updatedAt?: string; // date-time
 }
+export interface Notification {
+    type?: string;
+    userId?: number; // int32
+    name?: string;
+    avatarUrl?: string;
+    description?: string;
+}
 export interface Profile {
     latestIge?: number; // int32
     positiveAllergenGroups?: string[];
