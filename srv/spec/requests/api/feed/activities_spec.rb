@@ -14,7 +14,6 @@ RSpec.describe "Api::Feed::Activities", type: :request do
       post api_relationships_path(current_user), params: { relationship: {followed_id: other_user.id} }, headers: { 'Authorization' => "#{current_user.access_token}" }
       get api_feed_activities_path, headers: { 'Authorization' => "#{current_user.access_token}" }
       expect(response).to have_http_status(:success)
-      puts response, json, json['mine'].class
       expect(json.length).to eq(2)
       expect(json).to have_key('mine')
       expect(json).to have_key('friend')

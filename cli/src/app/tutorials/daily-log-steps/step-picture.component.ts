@@ -234,7 +234,7 @@ export class StepPictureComponent extends ChatComponent implements OnInit {
     // データ送信
     this.dailyLogService.create().subscribe();
     // 次のステップへ
-    setTimeout(() => this.router.navigate(['/']), 2000);
+    setTimeout(() => this.router.navigate(['/home']), 2000);
   }
 
   private localSave() {

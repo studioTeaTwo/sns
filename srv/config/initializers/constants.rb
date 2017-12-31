@@ -4,5 +4,5 @@ module Constants
     DIAGNOSISCHECK_URL = 'http://check.allergy.blue/test'
     ALLERGYBLUE_URL = 'http://allergy.blue'
 
-    PERSONAL_ASSISTANT = 1;
+    PERSONAL_ASSISTANT = { id: 1, name: 'パルマコ' }
 end

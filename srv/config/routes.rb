@@ -38,6 +38,7 @@ Rails.application.routes.draw do
     end
 
     namespace :feed do
+      resources :notifications, only: [:index]
       resources :activities, only: [:index]
     end
     

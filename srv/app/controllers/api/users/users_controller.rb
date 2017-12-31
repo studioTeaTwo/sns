@@ -136,11 +136,11 @@ class Api::Users::UsersController < ApplicationController
     end
 
     def createChatThread(user)
-      @chat_thread = user.chat_threads.build({participants: [user.id, Constants::PERSONAL_ASSISTANT]})
+      @chat_thread = user.chat_threads.build({participants: [user.id, Constants::PERSONAL_ASSISTANT[:id]]})
       ActiveRecord::Base.transaction do
         @chat_thread.save!
         ChatStatus.create(chat_thread_id: @chat_thread.id, user_id: user.id)
-        ChatStatus.create(chat_thread_id: @chat_thread.id, user_id: Constants::PERSONAL_ASSISTANT)
+        ChatStatus.create(chat_thread_id: @chat_thread.id, user_id: Constants::PERSONAL_ASSISTANT[:id])
       end
     end
 end
