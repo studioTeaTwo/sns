@@ -42,7 +42,7 @@ class Api::ChatsController < ApplicationController
   # @response_class Array<Rest::ChatSerializer>
   def show
     @chat_thread = ChatThread.find(params[:id])
-    # 既読チェック
+    # 既読つける
     readChat(@chat_thread.id, @chat_thread.chats.last.id) if @chat_thread.chats.count > 0
     render json: @chat_thread.chats, each_serializer: Rest::ChatSerializer
   end
@@ -58,9 +58,13 @@ class Api::ChatsController < ApplicationController
     @chat.sender_id = current_user.id
     ActiveRecord::Base.transaction do
       @chat.save!
+      # チャットスレッドの更新
       chat_thread = ChatThread.find(chat_params[:chat_thread_id])
       chat_thread.update(newest_chat_id: @chat.id)
+      # 発言者本人のステータス更新
       readChat(chat_thread.id, @chat.id)
+      # 他の参加者のステータス更新
+      mark_unread_other_participants(chat_thread.id)
     end
     render json: @chat, serializer: Rest::ChatSerializer
   rescue => e
@@ -87,7 +91,11 @@ class Api::ChatsController < ApplicationController
     end
 
     def readChat(chat_thread_id, chat_id)
-      ChatStatus.where(chat_thread_id: chat_thread_id, user_id: current_user.id).first.update(read_until: chat_id)
+      ChatStatus.where(chat_thread_id: chat_thread_id, user_id: current_user.id).first.update(read_until: chat_id, has_unread: false)
+    end
+
+    def mark_unread_other_participants(chat_thread_id)
+      ChatStatus.where(chat_thread_id: chat_thread_id).where.not(user_id: current_user.id).update_all(has_unread: true)
     end
 
     def correct_user

@@ -20,14 +20,11 @@ export interface ChatRequestBody {
 export interface ChatStatus {
     id?: number; // int32
     chatThreadId?: number; // int32
-    senderId?: number; // int32
-    contentType?: number; // int32
-    body?: string;
-    itemList?: {
-    }[];
-    result?: string;
-    expired?: boolean;
+    userId?: number; // int32
+    readUntil?: number; // int32
+    hasUnread?: boolean;
     createdAt?: string; // date-time
+    updatedAt?: string; // date-time
 }
 export interface ChatStrongParameter {
     id?: number; // int32
@@ -42,11 +39,10 @@ export interface ChatStrongParameter {
 }
 export interface ChatThread {
     id?: number; // int32
-    hasUnread?: boolean;
-    readUntil?: ChatStatus[];
     createdAt?: string; // date-time
     updatedAt?: string; // date-time
     participants?: User[];
+    statuses?: ChatStatus[];
     newestChat?: Chat;
 }
 export interface ChatThreadRequestBody {

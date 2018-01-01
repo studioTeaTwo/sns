@@ -2,13 +2,11 @@
 #
 # @attr [integer] id
 # @attr [integer] chatThreadId
-# @attr [integer] senderId
-# @attr [integer] contentType
-# @attr [string] body
-# @attr [Array<hash>] itemList
-# @attr [string] result
-# @attr [boolean] expired
+# @attr [integer] userId
+# @attr [integer] readUntil
+# @attr [boolean] hasUnread
 # @attr [date-time] createdAt
+# @attr [date-time] updatedAt
 class Rest::ChatStatusSerializer < ActiveModel::Serializer
   attributes(*ChatStatus.attribute_names.map(&:to_sym))
 end

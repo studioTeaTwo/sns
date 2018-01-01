@@ -112,8 +112,9 @@ export class ChatComponent implements OnInit {
   }
 
   isRead(chat: ChatViewModel): boolean {
-    const opponent = this.chatThread.readUntil.find(value => value.senderId !== this.myself.id);
-    return chat.id <= opponent.id;
+    const opponent = this.chatThread.statuses.find(value => value.userId !== this.myself.id);
+    // TODO: 3人以上の時
+    return chat.id <= opponent.readUntil;
   }
 
   isUnread() {}

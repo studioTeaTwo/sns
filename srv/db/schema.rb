@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20171111165150) do
     t.integer "user_id"
     t.integer "chat_thread_id"
     t.integer "read_until", default: 0
+    t.boolean "has_unread", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["chat_thread_id"], name: "index_chat_statuses_on_chat_thread_id"

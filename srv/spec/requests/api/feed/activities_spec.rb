@@ -15,8 +15,6 @@ RSpec.describe "Api::Feed::Activities", type: :request do
       get api_feed_activities_path, headers: { 'Authorization' => "#{current_user.access_token}" }
       expect(response).to have_http_status(:success)
       expect(json.length).to eq(2)
-      expect(json).to have_key('mine')
-      expect(json).to have_key('friend')
 
       expect(json['mine'][0]['activityId']).to eq(my_experience.activity_id)
       expect(json['friend'][0]['activityId']).to eq(friend_experience.activity_id)
