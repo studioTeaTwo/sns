@@ -28,7 +28,7 @@ export class DailyLogService {
   get initialState(): DailyLogStrongParameter {
     return {
       date: moment().format('YYYY-MM-DD'),
-      symptom: 'atopic',
+      symptom: '',
       health: 0,
       healthMemo: '',
       medicina: undefined,

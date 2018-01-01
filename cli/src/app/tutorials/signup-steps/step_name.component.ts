@@ -18,7 +18,7 @@ import {
   ChatService,
 } from 'app/shared/services/api';
 import { ChatComponent } from 'app/components/chats/chat/chat.component';
-import { DisplayState } from 'app/components/life-logs/daily-logs/logging/logging.component';
+import { DisplayState } from 'app/components/auth/signup/signup.component';
 import { addChat, addChatAndFocus, NAVI_THREAD } from '../shared/chat-operation.function';
 
 @Component({

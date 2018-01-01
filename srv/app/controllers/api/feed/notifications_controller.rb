@@ -23,37 +23,49 @@ class Api::Feed::NotificationsController < ApplicationController
 
     def check_personal_assistant
       @personal_assistant_notification = []
-      content = {
+      template = {
         type: 'DailyLog',
         user_id: Constants::PERSONAL_ASSISTANT[:id],
         name: Constants::PERSONAL_ASSISTANT[:name]
       }
       my_personal_assistant = PersonalAssistant.where({user_id: current_user.id}).first
       if my_personal_assistant.daily_atopic
-        content[:description] = 'アトピーの治療日記を書こう！'
-        content[:link_id] = 'atopic'
-        @personal_assistant_notification.push(content)
-      elsif my_personal_assistant.daily_asthma
-        content[:description] = '喘息の治療日記を書こう！'
-        content[:link_id] = 'asthma'
-        @personal_assistant_notification.push(content)
-      elsif my_personal_assistant.daily_rhinitis
-        content[:description] = '鼻炎の治療日記を書こう！'
-        content[:link_id] = 'rhinitis'
-        @personal_assistant_notification.push(content)
-      elsif my_personal_assistant.daily_pollen
-        content[:description] = '花粉症の治療日記を書こう！'
-        content[:link_id] = 'pollen'
-        @personal_assistant_notification.push(content)
-      elsif my_personal_assistant.daily_gastroenteritis
-        content[:description] = '胃腸炎の治療日記を書こう！'
-        content[:link_id] = 'gastroenteritis'
-        @personal_assistant_notification.push(content)
-      elsif my_personal_assistant.daily_conjunctivitis
-        content[:description] = '結膜炎の治療日記を書こう！'
-        content[:link_id] = 'conjunctivitis'
-        @personal_assistant_notification.push(content)
+        notification = template.dup
+        notification[:description] = 'アトピーの治療日記を書こう！'
+        notification[:link_id] = 'atopic'
+        @personal_assistant_notification.push(notification)
       end
+      if my_personal_assistant.daily_asthma
+        notification = template.dup
+        notification[:description] = '喘息の治療日記を書こう！'
+        notification[:link_id] = 'asthma'
+        @personal_assistant_notification.push(notification)
+      end
+      if my_personal_assistant.daily_rhinitis
+        notification = template.dup
+        notification[:description] = '鼻炎の治療日記を書こう！'
+        notification[:link_id] = 'rhinitis'
+        @personal_assistant_notification.push(notification)
+      end
+      if my_personal_assistant.daily_pollen
+        notification = template.dup
+        notification[:description] = '花粉症の治療日記を書こう！'
+        notification[:link_id] = 'pollen'
+        @personal_assistant_notification.push(notification)
+      end
+      if my_personal_assistant.daily_gastroenteritis
+        notification = template.dup
+        notification[:description] = '胃腸炎の治療日記を書こう！'
+        notification[:link_id] = 'gastroenteritis'
+        @personal_assistant_notification.push(notification)
+      end
+      if my_personal_assistant.daily_conjunctivitis
+        notification = template.dup
+        notification[:description] = '結膜炎の治療日記を書こう！'
+        notification[:link_id] = 'conjunctivitis'
+        @personal_assistant_notification.push(notification)
+      end
+      @personal_assistant_notification
     end
 
     def check_unread_chat
@@ -74,5 +86,6 @@ class Api::Feed::NotificationsController < ApplicationController
           @unread_chat_notification.push(content)
         end
       end
+      @unread_chat_notification
     end
 end

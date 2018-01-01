@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
   getNotificationLink(value: NotificationViewModel): string {
     let link: string;
     if (value.type === 'DailyLog') {
-      link = '/life-log/daily/logging';
+      link = `/life-log/daily/logging/${value.linkId}`;
     } else if (value.type === 'Chat') {
       link = `/chat/${value.linkId}`;
     }

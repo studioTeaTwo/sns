@@ -20,19 +20,6 @@ export const SIGNUP_USER: User = {
   titleOfHonor: 0,
 };
 
-export const NAVI_THREAD = {
-  id: 0,
-  hasUnread: false,
-  updatedAt: new Date().toString(),
-  readUntil: [{
-    chatThreadId: 0,
-    userId: NAVI_CHARA.id,
-    readUntil: 0
-  }],
-  participants: [],
-  newestChat: null,
-};
-
 export type ActivityType = '活動日記を付けました！';
 export const ActivityTypeName = {
   DailyLog: '活動日記を付けました！',

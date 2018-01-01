@@ -24,7 +24,7 @@ class Rest::NotificationSerializer < ActiveModel::Serializer
   def avatar_url
     user = User.find(object[:user_id])
     gravatar_id = Digest::MD5::hexdigest(user.email.downcase)
-    size = 20
+    size = 25
     "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
   end
 

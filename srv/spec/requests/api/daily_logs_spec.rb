@@ -27,6 +27,7 @@ RSpec.describe "Api::DailyLogs", type: :request do
   describe "POST /api/daily_logs" do
     before do
       expect(DailyLog.count).to eq 1
+      expect(PersonalAssistant.where(:user_id => current_user.id).first.daily_atopic).to eq true
       post api_daily_logs_path, params: { daily_log: attributes_for(:daily_log) }, headers: { 'Authorization' => "#{current_user.access_token}" }
     end
 
@@ -41,7 +42,7 @@ RSpec.describe "Api::DailyLogs", type: :request do
     end
 
     it "completed today's check" do
-      expect(PersonalAssistant.where(:user_id => current_user.id).first.daily_asthma).to eq true
+      expect(PersonalAssistant.where(:user_id => current_user.id).first.daily_atopic).to eq false
     end
   end
 

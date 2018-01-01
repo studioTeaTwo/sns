@@ -28,11 +28,11 @@ class Api::DailyLogsController < ApplicationController
   # @response_class Rest::DailyLogSerializer
   def create
     @daily_log = current_user.daily_logs.build(daily_log_params)
-    symptom = { 'daily_' + daily_log_params[:symptom] => true }
+    symptom = { "daily_#{daily_log_params[:symptom]}" => false }
     ActiveRecord::Base.transaction do
       @daily_log.save!
-      record_experience @daily_log
       current_user.personal_assistant.update_attributes(symptom)
+      record_experience @daily_log
     end
     render json: @daily_log, status: :created, serializer: Rest::DailyLogSerializer
   rescue => e

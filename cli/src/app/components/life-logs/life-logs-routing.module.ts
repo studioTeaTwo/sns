@@ -14,7 +14,7 @@ const routes: Routes = [
         component: ListComponent,
       },
       {
-        path: 'logging',
+        path: 'logging/:id',
         component: LoggingComponent,
       },
       {

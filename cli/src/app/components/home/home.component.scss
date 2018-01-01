@@ -15,7 +15,6 @@
     span[data-badge-notification] {
       position: relative;
     }
-
     span[data-badge-notification]:before {
       // アイコンの形状
       position: absolute;
@@ -37,6 +36,11 @@
       content: attr(data-badge-notification)"";
     }
   }
+}
+
+// 通知のアバター
+a img {
+  vertical-align: middle;
 }
 
 #home-content {

@@ -8,8 +8,8 @@
 
 # ナビキャラ
 User.create!( 
-  name: "ハロ",
-  email: "studioTeaTwo@gmail.com",
+  name: Constants::PERSONAL_ASSISTANT[:name],
+  email: "allelog.info@gmail.com",
   password: "allergy",
   encrypted_password: User.digest('allergy'),
   rank: 1,

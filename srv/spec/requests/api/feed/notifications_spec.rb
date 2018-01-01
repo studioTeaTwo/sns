@@ -20,7 +20,7 @@ RSpec.describe "Api::Feed::Notifications", type: :request do
         'linkId' => 'atopic',
         'userId' => Constants::PERSONAL_ASSISTANT[:id],
         'name' => Constants::PERSONAL_ASSISTANT[:name],
-        'avatarUrl' => "https://secure.gravatar.com/avatar/#{Digest::MD5::hexdigest(user.email.downcase)}?s=20",
+        'avatarUrl' => "https://secure.gravatar.com/avatar/#{Digest::MD5::hexdigest(user.email.downcase)}?s=25",
         'description' => 'アトピーの治療日記を書こう！'
       }
       expect(json[0]).to eq(notification)
@@ -46,7 +46,7 @@ RSpec.describe "Api::Feed::Notifications", type: :request do
           'linkId' => @chat_thread_id.to_s,
           'userId' => another_user.id,
           'name' => another_user.name,
-          'avatarUrl' => "https://secure.gravatar.com/avatar/#{Digest::MD5::hexdigest(another_user.email.downcase)}?s=20",
+          'avatarUrl' => "https://secure.gravatar.com/avatar/#{Digest::MD5::hexdigest(another_user.email.downcase)}?s=25",
           'description' => 'チャットが届いているよ！'
         }
         expect(json[1]).to eq(notification)
