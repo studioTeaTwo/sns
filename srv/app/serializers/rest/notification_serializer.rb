@@ -1,15 +1,20 @@
 # @name Notification
 #
 # @attr [string] type
+# @attr [string] linkId
 # @attr [integer] userId
 # @attr [string] name
 # @attr [string] avatarUrl
 # @attr [string] description
 class Rest::NotificationSerializer < ActiveModel::Serializer
-  attributes :type, :user_id, :name, :avatar_url, :description
+  attributes :type, :link_id, :user_id, :name, :avatar_url, :description
 
   def type
     object[:type]
+  end
+
+  def link_id
+    object[:link_id]
   end
 
   def user_id
