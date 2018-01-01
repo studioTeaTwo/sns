@@ -46,6 +46,8 @@ export class HomeComponent implements OnInit {
     let link: string;
     if (value.type === 'DailyLog') {
       link = '/life-log/daily/logging';
+    } else if (value.type === 'Chat') {
+      link = `/chat/${value.linkId}`;
     }
     return link;
   }

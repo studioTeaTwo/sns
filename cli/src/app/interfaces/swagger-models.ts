@@ -595,6 +595,7 @@ export interface MyExperienceStrongParameter {
 }
 export interface Notification {
     type?: string;
+    linkId?: string;
     userId?: number; // int32
     name?: string;
     avatarUrl?: string;

@@ -38,7 +38,7 @@ export const ActivityTypeName = {
   DailyLog: '活動日記を付けました！',
 };
 
-export type NotificationType = 'DailyLog';
+export type NotificationType = 'DailyLog' | 'Chat';
 
 export const API_ERROR_MSGS = {
   BAD_REQUEST_400: '入力項目の確認をし、もう一度お試しください。',

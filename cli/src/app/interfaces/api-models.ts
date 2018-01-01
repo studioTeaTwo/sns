@@ -1,5 +1,6 @@
 import {
   Chat,
+  Notification,
 } from './swagger-models';
 import {
   NotificationType,
