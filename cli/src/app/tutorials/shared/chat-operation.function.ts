@@ -4,12 +4,25 @@ import {
   Chats,
   Chat,
 } from 'app/interfaces/api-models';
+import { NAVI_CHARA } from 'app/constants/constants';
 
 interface NewChats {
   body: Chat[];
   waitTime: number;
   tmp?: boolean;
 }
+
+export const NAVI_THREAD: ChatThread = {
+  id: 0,
+  updatedAt: new Date().toString(),
+  statuses: [{
+    chatThreadId: 0,
+    userId: NAVI_CHARA.id,
+    readUntil: 0
+  }],
+  participants: [],
+  newestChat: null,
+};
 
 export function addChat(
   newChats: NewChats,

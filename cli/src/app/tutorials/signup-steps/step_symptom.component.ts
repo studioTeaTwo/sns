@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
 import { Store } from 'app/shared/store/store';
-import { NAVI_CHARA, SIGNUP_USER, NAVI_THREAD } from 'app/constants/constants';
+import { NAVI_CHARA, SIGNUP_USER } from 'app/constants/constants';
 import {
   ChatThread,
   Chats,
@@ -19,7 +19,8 @@ import {
   ChatService,
 } from 'app/shared/services/api';
 import { ChatComponent } from 'app/components/chats/chat/chat.component';
-import { addChat, addChatAndFocus } from '../shared/chat-operation.function';
+import { DisplayState } from 'app/components/life-logs/daily-logs/logging/logging.component';
+import { addChat, addChatAndFocus, NAVI_THREAD } from '../shared/chat-operation.function';
 
 @Component({
   selector: 'app-step-symptom',
@@ -87,7 +88,7 @@ export class StepSymptomComponent extends ChatComponent implements OnInit, After
 
   onClickYes() {
     // 次のステップへ
-    this.completed.emit(3);
+    this.completed.emit(DisplayState.EMAIL);
   }
 
   onClickNo() {

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
 import { Store } from 'app/shared/store/store';
-import { NAVI_CHARA, NAVI_THREAD } from 'app/constants/constants';
+import { NAVI_CHARA } from 'app/constants/constants';
 import {
   ChatThread,
   Chats,
@@ -21,7 +21,8 @@ import {
   DailyLogService,
 } from 'app/shared/services/api';
 import { ChatComponent } from 'app/components/chats/chat/chat.component';
-import { addChat, addChatAndFocus } from '../shared/chat-operation.function';
+import { DisplayState } from 'app/components/life-logs/daily-logs/logging/logging.component';
+import { addChat, addChatAndFocus, NAVI_THREAD } from '../shared/chat-operation.function';
 
 @Component({
   selector: 'app-step-health',
@@ -99,12 +100,13 @@ export class StepHealthComponent extends ChatComponent implements OnInit {
 
   onClickNo() {
     // 次のステップへ
-    this.completed.emit(1);
+    this.completed.emit(DisplayState.PICTURE);
   }
 
   onClickReply(text: string) {
     this.dailyLogService.saveHealthMemo(text);
-    this.completed.emit(1);
+    // 次のステップへ
+    this.completed.emit(DisplayState.PICTURE);
   }
 
   private createReply(result: any) {

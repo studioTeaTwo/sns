@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-enum DisplayState {
+export enum DisplayState {
   NAME,
   TYPE,
   SYMPTOM,
   EMAIL,
+  BACK,
 }
 
 @Component({
@@ -16,13 +18,19 @@ export class SignupComponent implements OnInit {
   readonly DisplayState = DisplayState;
   displayState: DisplayState;
 
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
   ngOnInit() {
     this.displayState = DisplayState.NAME;
   }
 
-  onCompleted(displayState) {
+  onCompleted(displayState: DisplayState) {
+    if (displayState === DisplayState.BACK) {
+      this.router.navigate(['/home']);
+      return;
+    }
     this.displayState = displayState;
   }
 }

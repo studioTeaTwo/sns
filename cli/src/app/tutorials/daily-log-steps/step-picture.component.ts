@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
 import { Store } from 'app/shared/store/store';
-import { NAVI_CHARA, NAVI_THREAD } from 'app/constants/constants';
+import { NAVI_CHARA } from 'app/constants/constants';
 import {
   ChatThread,
   Chats,
@@ -21,7 +21,8 @@ import {
   DailyLogService,
 } from 'app/shared/services/api';
 import { ChatComponent } from 'app/components/chats/chat/chat.component';
-import { addChat, addChatAndFocus } from '../shared/chat-operation.function';
+import { DisplayState } from 'app/components/life-logs/daily-logs/logging/logging.component';
+import { addChat, addChatAndFocus, NAVI_THREAD } from '../shared/chat-operation.function';
 
 enum STEP {
   CAMERA_YESNO,
@@ -234,7 +235,7 @@ export class StepPictureComponent extends ChatComponent implements OnInit {
     // データ送信
     this.dailyLogService.create().subscribe();
     // 次のステップへ
-    setTimeout(() => this.router.navigate(['/home']), 2000);
+    setTimeout(() => this.completed.emit(DisplayState.BACK), 2000);
   }
 
   private localSave() {

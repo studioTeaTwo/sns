@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-enum DisplayState {
+export enum DisplayState {
   HEALTH,
   PICTURE,
+  BACK,
 }
 
 @Component({
@@ -14,13 +16,19 @@ export class LoggingComponent implements OnInit {
   readonly DisplayState = DisplayState;
   displayState: DisplayState;
 
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
   ngOnInit() {
     this.displayState = DisplayState.HEALTH;
   }
 
-  onCompleted(displayState) {
+  onCompleted(displayState: DisplayState) {
+    if (displayState === DisplayState.BACK) {
+      this.router.navigate(['/home']);
+      return;
+    }
     this.displayState = displayState;
   }
 }

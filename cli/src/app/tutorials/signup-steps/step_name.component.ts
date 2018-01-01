@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
 import { Store } from 'app/shared/store/store';
-import { NAVI_CHARA, SIGNUP_USER, NAVI_THREAD } from 'app/constants/constants';
+import { NAVI_CHARA, SIGNUP_USER } from 'app/constants/constants';
 import {
   ChatThread,
   Chats,
@@ -18,7 +18,8 @@ import {
   ChatService,
 } from 'app/shared/services/api';
 import { ChatComponent } from 'app/components/chats/chat/chat.component';
-import { addChat, addChatAndFocus } from '../shared/chat-operation.function';
+import { DisplayState } from 'app/components/life-logs/daily-logs/logging/logging.component';
+import { addChat, addChatAndFocus, NAVI_THREAD } from '../shared/chat-operation.function';
 
 @Component({
   selector: 'app-step-name',
@@ -131,7 +132,7 @@ export class StepNameComponent extends ChatComponent implements OnInit {
       // 次のステップへ
       () => {
         this.animeState = 'secondAction';
-        return setTimeout(() => this.completed.emit(1), 2000);
+        return setTimeout(() => this.completed.emit(DisplayState.TYPE), 2000);
       });
   }
 }
