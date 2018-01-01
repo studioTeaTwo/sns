@@ -69,6 +69,7 @@ GEM
     case_transform (0.2)
       activesupport
     choice (0.2.0)
+    chronic (0.10.2)
     coderay (1.1.2)
     concurrent-ruby (1.0.5)
     devise (4.3.0)
@@ -408,6 +409,8 @@ GEM
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
+    whenever (0.10.0)
+      chronic (>= 0.6.3)
     xml-simple (1.1.5)
     yard (0.9.11)
 
@@ -445,6 +448,7 @@ DEPENDENCIES
   terminal-notifier-guard
   tzinfo-data
   web-console (~> 3.1)
+  whenever
 
 RUBY VERSION
    ruby 2.4.0p0

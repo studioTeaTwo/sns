@@ -17,6 +17,9 @@ User.create!(
   self_introduction: "よろしくにゃ！",
   admin: true
 )
+PersonalAssistant.create!(
+  user_id: 1
+)
 
 # 管理者ユーザー
 User.create!( 
@@ -83,10 +86,14 @@ end
                rank: Random.rand(0 .. 4),
                title_of_honor: Random.rand(10 .. 14)
               )
+  # パーソナルアシスタントの作成
+  PersonalAssistant.create!(
+    user_id: n+3
+  )
   # 最新IgE検査の登録
   latest_test_date = Faker::Time.between(1.months.ago, Date.today, :day)
   Ige.create!(
-              user_id: n+2,
+              user_id: n+3,
               latest_test_result: true,
               test_date: latest_test_date,
               test_category: Random.rand(0 .. 10),
@@ -102,7 +109,7 @@ end
   ige_count.times do |n2|
     test_date = Faker::Time.between(10.years.ago, 1.months.ago, :day)
     Ige.create!(
-                user_id: n+2,
+                user_id: n+3,
                 latest_test_result: false,
                 test_date: test_date,
                 test_category: Random.rand(0 .. 10),
