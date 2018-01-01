@@ -5,7 +5,7 @@ body, html {
 }
 
 #main {
-  padding: 42px 10px 0 10px; // 42 = header.height
+  padding: 42px 10px 50px 10px; // 42 = header.height 50 = footer.height
 
   @media screen and (min-width: 1280px) {
     width: 780px;

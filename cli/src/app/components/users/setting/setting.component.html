@@ -1,22 +1,24 @@
-<mat-form-field class="setting-input">
-  <input type="text" matInput placeholder="名前" [(ngModel)]="account.name" />
-</mat-form-field>
-<mat-form-field class="setting-input">
-  <input type="email" matInput placeholder="eメール" [(ngModel)]="account.email" />
-</mat-form-field>
-<mat-form-field class="setting-input">
-  <textarea matInput placeholder="自己紹介" [(ngModel)]="account.selfIntroduction"></textarea>
-</mat-form-field>
-<section class="example-section">
+<section id="setting-content">
+  <mat-form-field class="setting-input">
+    <input type="text" matInput placeholder="名前" [(ngModel)]="account.name" />
+  </mat-form-field>
+  <mat-form-field class="setting-input">
+    <input type="email" matInput placeholder="eメール" [(ngModel)]="account.email" />
+  </mat-form-field>
+  <mat-form-field class="setting-input">
+    <textarea matInput placeholder="自己紹介" [(ngModel)]="account.selfIntroduction"></textarea>
+  </mat-form-field>
   <label class="symptom">症状:</label>
-  <mat-checkbox [(ngModel)]="account.atopic">アトピー</mat-checkbox>
-  <mat-checkbox [(ngModel)]="account.asthma">喘息</mat-checkbox>
-  <mat-checkbox [(ngModel)]="account.rhinitis">鼻炎</mat-checkbox>
-  <mat-checkbox [(ngModel)]="account.pollen">花粉症</mat-checkbox>
-  <mat-checkbox [(ngModel)]="account.gastroenteritis">胃腸炎</mat-checkbox>
-  <mat-checkbox [(ngModel)]="account.conjunctivitis">結膜炎</mat-checkbox>
-</section>
+  <mat-grid-list cols="3" rowHeight="2:1">
+    <mat-grid-tile><mat-checkbox [(ngModel)]="account.atopic">アトピー</mat-checkbox></mat-grid-tile>
+    <mat-grid-tile><mat-checkbox [(ngModel)]="account.asthma">喘息</mat-checkbox></mat-grid-tile>
+    <mat-grid-tile><mat-checkbox [(ngModel)]="account.rhinitis">鼻炎</mat-checkbox></mat-grid-tile>
+    <mat-grid-tile><mat-checkbox [(ngModel)]="account.pollen">花粉症</mat-checkbox></mat-grid-tile>
+    <mat-grid-tile><mat-checkbox [(ngModel)]="account.gastroenteritis">胃腸炎</mat-checkbox></mat-grid-tile>
+    <mat-grid-tile><mat-checkbox [(ngModel)]="account.conjunctivitis">結膜炎</mat-checkbox></mat-grid-tile>
+  </mat-grid-list>
 
-<div class="button-row">
-  <button mat-raised-button color="primary" (click)="update()">変更する</button>
-</div>
+  <div class="setting-button">
+    <button mat-raised-button color="primary" (click)="update()">変更する</button>
+  </div>
+</section>

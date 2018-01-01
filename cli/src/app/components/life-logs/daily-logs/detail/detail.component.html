@@ -1,15 +1,15 @@
-<div id="container">
-  
-  <div id="header">
-    <mat-form-field class="form-date">
-      <input matInput type="date" [(ngModel)]="dailyLogParam.date" />
-    </mat-form-field>
-    <div id="submit">
-      <button type="button" mat-raised-button color="primary" *ngIf="displayMode === MODE.CREATE" (click)="onClickCreate()">記録する</button>
-      <button type="button" mat-raised-button color="primary" *ngIf="displayMode === MODE.EDIT" (click)="onClickUpdate()">変更する</button>
-      <button type="button" mat-raised-button *ngIf="displayMode === MODE.ROM" (click)="onClickEdit()">編集する</button>
-    </div>
+<section id="log-header">
+  <mat-form-field class="form-date">
+    <input matInput type="date" [(ngModel)]="dailyLogParam.date" />
+  </mat-form-field>
+  <div id="submit">
+    <button type="button" mat-raised-button color="primary" *ngIf="displayMode === MODE.CREATE" (click)="onClickCreate()">記録する</button>
+    <button type="button" mat-raised-button color="primary" *ngIf="displayMode === MODE.EDIT" (click)="onClickUpdate()">変更する</button>
+    <button type="button" mat-raised-button *ngIf="displayMode === MODE.ROM" (click)="onClickEdit()">編集する</button>
   </div>
+</section>
+
+<section id="log-content">
 
   <mat-card>
     <mat-card-header>
@@ -41,7 +41,7 @@
       </mat-form-field>
     </mat-card-content>
   </mat-card>
-
+  
   <mat-card>
     <mat-card-header>
       <mat-card-title>写真の記録</mat-card-title>
@@ -62,4 +62,4 @@
     </mat-card-content>
   </mat-card>
 
-</div>
+</section>

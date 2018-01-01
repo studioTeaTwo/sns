@@ -28,28 +28,28 @@ class Api::Feed::NotificationsController < ApplicationController
         user_id: Constants::PERSONAL_ASSISTANT[:id],
         name: Constants::PERSONAL_ASSISTANT[:name]
       }
-      my_personal_assistant = PersonalAssistant.where({user_id: current_user.id})
-      if my_personal_assistant[0].daily_atopic
+      my_personal_assistant = PersonalAssistant.where({user_id: current_user.id}).first
+      if my_personal_assistant.daily_atopic
         content[:description] = 'アトピーの治療日記を書こう！'
         content[:link_id] = 'atopic'
         @personal_assistant_notification.push(content)
-      elsif my_personal_assistant[0].daily_asthma
+      elsif my_personal_assistant.daily_asthma
         content[:description] = '喘息の治療日記を書こう！'
         content[:link_id] = 'asthma'
         @personal_assistant_notification.push(content)
-      elsif my_personal_assistant[0].daily_rhinitis
+      elsif my_personal_assistant.daily_rhinitis
         content[:description] = '鼻炎の治療日記を書こう！'
         content[:link_id] = 'rhinitis'
         @personal_assistant_notification.push(content)
-      elsif my_personal_assistant[0].daily_pollen
+      elsif my_personal_assistant.daily_pollen
         content[:description] = '花粉症の治療日記を書こう！'
         content[:link_id] = 'pollen'
         @personal_assistant_notification.push(content)
-      elsif my_personal_assistant[0].daily_gastroenteritis
+      elsif my_personal_assistant.daily_gastroenteritis
         content[:description] = '胃腸炎の治療日記を書こう！'
         content[:link_id] = 'gastroenteritis'
         @personal_assistant_notification.push(content)
-      elsif my_personal_assistant[0].daily_conjunctivitis
+      elsif my_personal_assistant.daily_conjunctivitis
         content[:description] = '結膜炎の治療日記を書こう！'
         content[:link_id] = 'conjunctivitis'
         @personal_assistant_notification.push(content)

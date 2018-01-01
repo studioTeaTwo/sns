@@ -6,9 +6,11 @@ mat-card {
   padding-bottom: 10px;
 }
 
-#header {
+#log-header {
   display: flex;
   flex-direction: row;
+  margin-top: 10px;
+
   .form-date {
     width: 40%;
   }
@@ -17,31 +19,34 @@ mat-card {
   }  
 }
 
-.form-memo {
-  width: 100%;
-  margin-top: 15px;
-}
-
-#health {
-  mat-button-toggle {
-    font-size: 3.5em;
-  }
-}
-
-#medicina {
-}
-
-#camera {
-  margin-left: auto;
-  margin-bottom: 10px;
-}
-
-#photograph {
-  text-align: right;
-  mat-icon {
-  }
-  .photo {
+#log-content {
+  
+  .form-memo {
     width: 100%;
-    height: auto;
+    margin-top: 15px;
+  }
+
+  #health {
+    mat-button-toggle {
+      font-size: 3.5em;
+    }
+  }
+
+  #medicina {
+  }
+
+  #camera {
+    margin-left: auto;
+    margin-bottom: 10px;
+  }
+
+  #photograph {
+    text-align: right;
+    mat-icon {
+    }
+    .photo {
+      width: 100%;
+      height: auto;
+    }
   }
 }
