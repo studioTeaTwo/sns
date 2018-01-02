@@ -52,6 +52,26 @@ RSpec.describe "Api::Feed::Notifications", type: :request do
         expect(json[1]).to eq(notification)
       end
     end
+
+    context "when you have followed notification" do
+
+      it "should contain notification of followed" do
+        post api_relationships_path(another_user), params: { relationship: {followed_id: current_user.id} }, headers: { 'Authorization' => "#{another_user.access_token}" }
+        get api_feed_notifications_path, headers: { 'Authorization' => "#{current_user.access_token}" }
+        expect(response).to have_http_status(:success)
+        expect(json.length).to eq(2)
+
+        notification = {
+          'type' => 'Followed',
+          'linkId' => another_user.id.to_s,
+          'userId' => another_user.id,
+          'name' => another_user.name,
+          'avatarUrl' => "https://secure.gravatar.com/avatar/#{Digest::MD5::hexdigest(another_user.email.downcase)}?s=25",
+          'description' => "#{another_user.name}さんにフォローされたよ！"
+        }
+        expect(json[1]).to eq(notification)
+      end
+    end
     
   end
 end

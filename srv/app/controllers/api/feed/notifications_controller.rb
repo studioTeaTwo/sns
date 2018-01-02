@@ -5,6 +5,7 @@ class Api::Feed::NotificationsController < ApplicationController
   # 1. パーソナルアシスタントからのお知らせ
   #   本日の治療日記が未了
   # 2. チャットの未読スレッド
+  # 3. フォローされた
   #
   # @response_status 200
   # @response_class Array<Rest::NotificationSerializer>
@@ -16,10 +17,20 @@ class Api::Feed::NotificationsController < ApplicationController
     if check_unread_chat.present?
       @notifications.concat(@unread_chat_notification)
     end
+    if check_followed.present?
+      @notifications.concat(@followed_notification)
+    end
+    reorder
     render json: @notifications, each_serializer: Rest::NotificationSerializer
   end
 
   private
+
+    def reorder
+      # 10件
+      # TODO: スクロールできるようにする
+      @notifications = @notifications.slice(0, 10)
+    end
 
     def check_personal_assistant
       @personal_assistant_notification = []
@@ -70,7 +81,7 @@ class Api::Feed::NotificationsController < ApplicationController
 
     def check_unread_chat
       @unread_chat_notification = []
-      content = {
+      template = {
         type: 'Chat',
         description: 'チャットが届いているよ！'
       }
@@ -80,12 +91,35 @@ class Api::Feed::NotificationsController < ApplicationController
           participaints = ChatThread.find(chat_status.chat_thread_id).users
           # TODO: 3人以上の時
           opponent = participaints.select { |user| user.id != current_user.id }
-          content[:user_id] = opponent[0].id
-          content[:name] = opponent[0].name
-          content[:link_id] = chat_status.chat_thread_id.to_s
-          @unread_chat_notification.push(content)
+          notification = template.dup
+          notification[:user_id] = opponent[0].id
+          notification[:name] = opponent[0].name
+          notification[:link_id] = chat_status.chat_thread_id.to_s
+          @unread_chat_notification.push(notification)
         end
       end
       @unread_chat_notification
+    end
+
+    def check_followed
+      @followed_notification = []
+      template = {
+        type: 'Followed'
+      }
+      notifications = current_user.notifications.order("updated_at DESC")
+      if notifications.present?
+        # TODO: followed以外の場合
+        notifications.each do |notification|
+          follower = Relationship.find(notification.activity_id)
+          user = User.find(follower.follower_id)
+          notification = template.dup
+          notification[:user_id] = user.id
+          notification[:name] = user.name
+          notification[:link_id] = user.id.to_s
+          notification[:description] = "#{user.name}さんにフォローされたよ！"
+          @followed_notification.push(notification)
+        end
+      end
+      @followed_notification
     end
 end

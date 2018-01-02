@@ -20,7 +20,8 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :follower
   has_many :daily_logs
   has_many :iges
-  has_many :experiences
+  has_many :experiences, dependent: :destroy
+  has_many :notifications, dependent: :destroy
   
   attr_accessor :remember_token, :activation_token, :reset_token
 

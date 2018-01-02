@@ -9,9 +9,9 @@ class Api::Users::RelationshipsController < ApplicationController
   def create
     user = User.find(relationship_params[:followed_id])
     current_user.follow(user)
-    isFollow = current_user.following? user
+    record_notification(relationship_params[:followed_id])
     render json: user, include: [:iges, :microposts], serializer: Rest::ProfileSerializer,
-      option: {sort: :profile, isFollow: isFollow}
+      option: {sort: :profile, isFollow: true}
   end
 
   # Destroys a relationship
@@ -20,15 +20,20 @@ class Api::Users::RelationshipsController < ApplicationController
   def destroy
     user = User.find(params[:id])
     current_user.unfollow(user)
-    isFollow = current_user.following? user
     render json: user, include: [:iges, :microposts], serializer: Rest::ProfileSerializer,
-      option: {sort: :profile, isFollow: isFollow}
+      option: {sort: :profile, isFollow: false}
   end
 
   private
 
     def relationship_params
       params.fetch(:relationship, {}).permit(:followed_id)
+    end
+
+    def record_notification(followed_id)
+      followed = Relationship.where(follower_id: current_user.id, followed_id: followed_id).first
+      notification = followed.notifications.build({user_id: followed_id})
+      notification.save!
     end
 
 end

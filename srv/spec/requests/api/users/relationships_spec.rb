@@ -14,6 +14,7 @@ RSpec.describe "Api::Users::Relationships", type: :request do
       expect{
         post api_relationships_path(current_user), params: { relationship: {followed_id: another_user.id} }, headers: { 'Authorization' => "#{current_user.access_token}" }
       }.to change(Relationship, :count).by(1)
+      expect(Notification.count).to eq 1
     end
   end
 
