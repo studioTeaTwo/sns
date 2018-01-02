@@ -4,6 +4,10 @@
   .setting-input {
     display: block;
   }
+
+  .setting-input-name, .setting-input-email, .setting-input-password {
+    width: 50%;
+  }
   
   mat-checkbox {
     margin-right: auto;

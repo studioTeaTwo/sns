@@ -43,11 +43,24 @@ class Api::Users::UsersController < ApplicationController
   # @response_class Rest::UserSerializer
   def update
     @user = User.find(params[:id])
-    if @user.update_attributes(user_params)
-      render json: @user, serializer: Rest::UserSerializer
-    else
-      render json: { error: @user.errors.full_messages }, status: :unprocessable_entity
+    main_params, password_params = divide_user_params
+    ActiveRecord::Base.transaction do
+      if password_params.present?
+        if current_user.update_with_password(password_params)
+          # パスワードを変更するとログアウトしてしまうので、再ログインが必要
+          sign_in(current_user, bypass: true)
+        else
+          raise StandardError.new
+        end
+      end
+      if @user.update_attributes(main_params)
+        render json: @user, serializer: Rest::UserSerializer
+      else
+        raise StandardError.new
+      end
     end
+  rescue => e
+    render json: { error: @user.errors.full_messages }, status: :unprocessable_entity
   end
 
   # Verifies a email
@@ -78,6 +91,7 @@ class Api::Users::UsersController < ApplicationController
                                       :email,
                                       :password,
                                       :password_confirmation,
+                                      :current_password,
                                       :self_introduction,
                                       :classification,
                                       :atopic,
@@ -142,5 +156,20 @@ class Api::Users::UsersController < ApplicationController
         ChatStatus.create(chat_thread_id: @chat_thread.id, user_id: user.id)
         ChatStatus.create(chat_thread_id: @chat_thread.id, user_id: Constants::PERSONAL_ASSISTANT[:id])
       end
+    end
+
+    def divide_user_params
+      main_params = {}
+      password_params = {}
+      if user_params.has_key? :password
+        password_params[:password] = user_params[:password]
+        password_params[:password_confirmation] = user_params[:password_confirmation]
+        password_params[:current_password] = user_params[:current_password]
+
+        main_params = user_params.select {|key, val| key != 'password' && key != 'password_confirmation' && key != 'current_password'}
+      else
+        main_params = user_params
+      end
+      return main_params, password_params
     end
 end

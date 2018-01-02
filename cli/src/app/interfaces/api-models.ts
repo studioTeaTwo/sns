@@ -27,5 +27,5 @@ export interface ChatViewModel extends Chat {
 export type Chats = ChatViewModel[];
 
 export interface NotificationViewModel extends Notification {
-  type: NotificationType;
+  type: NotificationType; // enum型をつける
 }

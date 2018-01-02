@@ -1,24 +1,48 @@
-<section id="setting-content">
-  <mat-form-field class="setting-input">
-    <input type="text" matInput placeholder="名前" [(ngModel)]="account.name" />
+<form id="setting-content" #form="ngForm">
+  <mat-form-field class="setting-input setting-input-name">
+    <input type="text" name="name" matInput placeholder="名前" [(ngModel)]="account.name" #name="ngModel" />
+    <span class="textfield-error" *ngIf="name.invalid">入力内容を見直してください</span>
+  </mat-form-field>
+  <mat-form-field class="setting-input setting-input-email">
+    <input type="email" name="email" matInput placeholder="eメール" [(ngModel)]="account.email" (change)="onChangeEmail()" />
+    <span class="textfield-error" *ngIf="isErrorEmail">入力内容を見直してください</span>
+  </mat-form-field>
+  <mat-form-field class="setting-input setting-input-password">
+    <input type="password" name="password" matInput placeholder="新しいパスワード" [(ngModel)]="password" (change)="onChangePassword()" />
+    <span class="textfield-error" *ngIf="isErrorPassword">入力内容を見直してください</span>
+  </mat-form-field>
+  <mat-form-field class="setting-input setting-input-password" *ngIf="password.length > 0">
+    <input type="password" name="rePassword" matInput placeholder="パスワード再確認" #rePasswordRef="ngModel" required
+      [(ngModel)]="rePassword"
+      (change)="onChangeRePassword()"
+    />
+    <span class="textfield-error" *ngIf="rePasswordRef.hasError('required')">必須です</span>
+    <span class="textfield-error" *ngIf="isErrorRePassword">パスワードが一致しません</span>
+  </mat-form-field>
+  <mat-form-field class="setting-input setting-input-password" *ngIf="password.length > 0">
+    <input type="password" name="currentPassword" matInput placeholder="今のパスワード" #currentPasswordRef="ngModel" required
+      [(ngModel)]="currentPassword"
+    />
+    <span class="textfield-error" *ngIf="currentPasswordRef.hasError('required')">必須です</span>
   </mat-form-field>
   <mat-form-field class="setting-input">
-    <input type="email" matInput placeholder="eメール" [(ngModel)]="account.email" />
+    <textarea matInput name="selfIntroduction" placeholder="自己紹介" [(ngModel)]="account.selfIntroduction"></textarea>
   </mat-form-field>
-  <mat-form-field class="setting-input">
-    <textarea matInput placeholder="自己紹介" [(ngModel)]="account.selfIntroduction"></textarea>
-  </mat-form-field>
+
   <label class="symptom">症状:</label>
   <mat-grid-list cols="3" rowHeight="2:1">
-    <mat-grid-tile><mat-checkbox [(ngModel)]="account.atopic">アトピー</mat-checkbox></mat-grid-tile>
-    <mat-grid-tile><mat-checkbox [(ngModel)]="account.asthma">喘息</mat-checkbox></mat-grid-tile>
-    <mat-grid-tile><mat-checkbox [(ngModel)]="account.rhinitis">鼻炎</mat-checkbox></mat-grid-tile>
-    <mat-grid-tile><mat-checkbox [(ngModel)]="account.pollen">花粉症</mat-checkbox></mat-grid-tile>
-    <mat-grid-tile><mat-checkbox [(ngModel)]="account.gastroenteritis">胃腸炎</mat-checkbox></mat-grid-tile>
-    <mat-grid-tile><mat-checkbox [(ngModel)]="account.conjunctivitis">結膜炎</mat-checkbox></mat-grid-tile>
+    <mat-grid-tile><mat-checkbox name="atopic" [(ngModel)]="account.atopic">アトピー</mat-checkbox></mat-grid-tile>
+    <mat-grid-tile><mat-checkbox name="asthma" [(ngModel)]="account.asthma">喘息</mat-checkbox></mat-grid-tile>
+    <mat-grid-tile><mat-checkbox name="rhinitis" [(ngModel)]="account.rhinitis">鼻炎</mat-checkbox></mat-grid-tile>
+    <mat-grid-tile><mat-checkbox name="pollen" [(ngModel)]="account.pollen">花粉症</mat-checkbox></mat-grid-tile>
+    <mat-grid-tile><mat-checkbox name="gastroenteritis" [(ngModel)]="account.gastroenteritis">胃腸炎</mat-checkbox></mat-grid-tile>
+    <mat-grid-tile><mat-checkbox name="conjunctivitis" [(ngModel)]="account.conjunctivitis">結膜炎</mat-checkbox></mat-grid-tile>
   </mat-grid-list>
 
   <div class="setting-button">
-    <button mat-raised-button color="primary" (click)="update()">変更する</button>
+    <button mat-raised-button color="primary"
+      (click)="update(form)"
+      [disabled]="form.invalid || isErrorRePassword"
+    >変更する</button>
   </div>
-</section>
+</form>

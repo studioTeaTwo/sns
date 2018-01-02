@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Api::Users", type: :request do
   let(:current_user) { create(:user) }
+  let(:password_change_user) { create(:password_change_user) }
   let(:another_user) { create(:another_user) }
   let(:admin_user) { create(:admin_user) }
 
@@ -41,17 +42,25 @@ RSpec.describe "Api::Users", type: :request do
 
   describe "PUT /api/users/:id" do
     context "when current user is owner" do
-      before do
-        put api_user_path(current_user), params: { user: attributes_for(
-          :user,
-          email: 'update@sample.com'
-        )},
-        headers: { 'Authorization' => "#{current_user.access_token}" }
-      end
-
       it "changes" do
+        put api_user_path(current_user), params: { user: {
+          email: 'update@sample.com'
+        }}, headers: { 'Authorization' => "#{current_user.access_token}" }
         expect(response).to have_http_status(:success)
         expect(json['email']).to eq('update@sample.com')
+      end
+    end
+
+    context "when current user change password" do
+      it "changes" do
+        put api_user_path(password_change_user), params: { user: attributes_for(
+          :password_change_user,
+          current_password: 'testtest'
+        )}, headers: { 'Authorization' => "#{password_change_user.access_token}" }
+        expect(response).to have_http_status(:success)
+
+        post api_login_path, params: { session: {email: password_change_user.email, password: password_change_user.password} }
+        expect(response).to have_http_status(:success)
       end
     end
 

@@ -8,6 +8,12 @@ import {
 } from 'app/interfaces/api-models';
 import { ApiBaseService } from 'app/shared/services/api/api-base.service';
 
+interface UserRequestBody extends User {
+  password?: string;
+  passwordConfirmation?: string;
+  currentPassword?: string;
+}
+
 @Injectable()
 export class AccountService {
   private userId: number;
@@ -84,8 +90,19 @@ export class AccountService {
     }
   }
 
-  update(user: User): Observable<void> {
-    return this.http.put<User>(`/api/users/${user.id}`, {user: user})
+  update(user: User, newPassword: string, currentPassword: string): Observable<void> {
+    let requestBody: UserRequestBody;
+    if (newPassword.length > 0) {
+      requestBody = {
+        ...user,
+        password: newPassword,
+        passwordConfirmation: newPassword,
+        currentPassword: currentPassword,
+      };
+    } else {
+      requestBody = user;
+    }
+    return this.http.put<User>(`/api/users/${user.id}`, {user: requestBody})
       .map(
         response => {
           localStorage.setItem('account', JSON.stringify(response));
