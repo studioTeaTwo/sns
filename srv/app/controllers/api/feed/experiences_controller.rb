@@ -1,5 +1,5 @@
 # @tag feed
-class Api::Feed::ActivitiesController < ApplicationController
+class Api::Feed::ExperiencesController < ApplicationController
 
   DEFAULT_NOTIFICATIONS_LIMIT = 5
 
@@ -8,12 +8,12 @@ class Api::Feed::ActivitiesController < ApplicationController
   # 2. 友達の活動記録
   #
   # @response_status 200
-  # @response_class Rest::ActivitySerializer
+  # @response_class Rest::ExperienceSerializer
   def index
     my_experiences = current_user.experiences.order("created_at DESC").limit(DEFAULT_NOTIFICATIONS_LIMIT)
     friend_experiences = get_friend_experiences
     @experiences = { mine: my_experiences.to_a, friend: friend_experiences.to_a }
-    render json: @experiences, serializer: Rest::ActivitySerializer
+    render json: @experiences, serializer: Rest::ExperienceSerializer
   end
 
   private

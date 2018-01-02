@@ -5,7 +5,7 @@ export interface StoreState {
     account: API.User;
     profile: API.Profile;
     notificationList: API.Notification[];
-    activityList: API.Activity;
+    experienceList: API.Experience;
     chatList: API.ChatThread[];
     chats: API.Chat[];
     searchUsers: API.Profile[];

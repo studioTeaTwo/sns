@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 import { Store } from 'app/shared/store/store';
-import { Activity, Notification } from 'app/interfaces/api-models';
+import { Experience, Notification } from 'app/interfaces/api-models';
 
 @Injectable()
 export class FeedService {
@@ -22,11 +22,11 @@ export class FeedService {
       );
   }
 
-  listActivities() {
-    this.httpClient.get<Activity>(`/api/feed/activities`)
+  listExperiences() {
+    this.httpClient.get<Experience>(`/api/feed/experiences`)
       .subscribe(
         response => {
-          this.onSuccessActivityList(response);
+          this.onSuccessExperienceList(response);
         }
       );
   }
@@ -41,11 +41,11 @@ export class FeedService {
     });
   }
 
-  private onSuccessActivityList(data: Activity) {
+  private onSuccessExperienceList(data: Experience) {
     const currentState = this.store.getState();
     this.store.setState({
       ...currentState,
-      activityList: data,
+      experienceList: data,
       loading: false,
       error: false,
     });

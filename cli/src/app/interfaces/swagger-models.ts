@@ -1,7 +1,3 @@
-export interface Activity {
-    mine?: MyExperienceStrongParameter[];
-    friend?: FriendExperienceStrongParameter[];
-}
 export interface Chat {
     id?: number; // int32
     chatThreadId?: number; // int32
@@ -81,6 +77,10 @@ export interface DailyLogStrongParameter {
 }
 export interface EmailVerifyRequestBody {
     email?: string;
+}
+export interface Experience {
+    mine?: MyExperienceStrongParameter[];
+    friend?: FriendExperienceStrongParameter[];
 }
 export interface FriendExperienceStrongParameter {
     id?: number; // int32

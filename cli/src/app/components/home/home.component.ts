@@ -23,11 +23,11 @@ export class HomeComponent implements OnInit {
   // 通知
   notifications$: Observable<NotificationViewModel[]>;
 
-  // アクティビティ
+  // 経験
   myExperienceDataSource: ExperienceDataSource | null;
   friendExperienceDataSource: ExperienceDataSource | null;
-  myDisplayColumns = ['date', 'activity'];
-  friendDisplayColumns = ['date', 'name', 'activity'];
+  myDisplayColumns = ['date', 'experience'];
+  friendDisplayColumns = ['date', 'name', 'experience'];
 
   constructor(
     private store: Store,
@@ -36,10 +36,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.feedService.listNotifications();
-    this.feedService.listActivities();
+    this.feedService.listExperiences();
     this.notifications$ = this.store.changes.pluck('notificationList');
-    this.myExperienceDataSource = new ExperienceDataSource(this.store.changes.pluck('activityList', 'mine'));
-    this.friendExperienceDataSource = new ExperienceDataSource(this.store.changes.pluck('activityList', 'friend'));
+    this.myExperienceDataSource = new ExperienceDataSource(this.store.changes.pluck('experienceList', 'mine'));
+    this.friendExperienceDataSource = new ExperienceDataSource(this.store.changes.pluck('experienceList', 'friend'));
   }
 
   getNotificationLink(value: NotificationViewModel): string {

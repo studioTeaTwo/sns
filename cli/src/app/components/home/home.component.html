@@ -22,9 +22,9 @@
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let element">{{element.date | date:'MM/dd HH:mm'}}</mat-cell>
     </ng-container>
-    <ng-container matColumnDef="activity">
+    <ng-container matColumnDef="experience">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.activity}}</mat-cell>
+      <mat-cell *matCellDef="let element">{{element.experience}}</mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="myDisplayColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: myDisplayColumns;"></mat-row>
@@ -41,9 +41,9 @@
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
     </ng-container>
-    <ng-container matColumnDef="activity">
+    <ng-container matColumnDef="experience">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.activity}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.experience}} </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="friendDisplayColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: friendDisplayColumns;"></mat-row>

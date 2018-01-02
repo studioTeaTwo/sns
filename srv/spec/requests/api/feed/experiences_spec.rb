@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Api::Feed::Activities", type: :request do
+RSpec.describe "Api::Feed::Experiences", type: :request do
   let(:current_user) { create(:user) }
   let(:other_user) { create(:another_user) }
   let(:existing_daily_log) { create(:daily_log, { user_id: current_user.id}) }
@@ -8,11 +8,11 @@ RSpec.describe "Api::Feed::Activities", type: :request do
   let!(:my_experience) { create(:experience, { user: current_user, activity: existing_daily_log}) }
   let!(:friend_experience) { create(:experience, { user: other_user, activity: existing_daily_log}) }
 
-  describe "GET /api/feed/activities" do
+  describe "GET /api/feed/experiences" do
 
     it "works!" do
       post api_relationships_path(current_user), params: { relationship: {followed_id: other_user.id} }, headers: { 'Authorization' => "#{current_user.access_token}" }
-      get api_feed_activities_path, headers: { 'Authorization' => "#{current_user.access_token}" }
+      get api_feed_experiences_path, headers: { 'Authorization' => "#{current_user.access_token}" }
       expect(response).to have_http_status(:success)
       expect(json.length).to eq(2)
 

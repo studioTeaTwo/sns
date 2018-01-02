@@ -8,7 +8,7 @@ const initialState = {
     account: {} as any,
     profile: {} as any,
     notificationList: [],
-    activityList: {} as any,
+    experienceList: {} as any,
     chatList: [],
     chats: [],
     searchUsers: [],

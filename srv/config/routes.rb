@@ -39,7 +39,7 @@ Rails.application.routes.draw do
 
     namespace :feed do
       resources :notifications, only: [:index]
-      resources :activities, only: [:index]
+      resources :experiences, only: [:index]
     end
     
     resources :chats, only: [:index, :create, :show, :destroy] do
