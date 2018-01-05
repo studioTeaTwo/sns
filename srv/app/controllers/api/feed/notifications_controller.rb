@@ -24,6 +24,12 @@ class Api::Feed::NotificationsController < ApplicationController
     render json: @notifications, each_serializer: Rest::NotificationSerializer
   end
 
+  # Destroys a notification
+  #
+  # @response_status 200
+  def destroy
+  end
+
   private
 
     def reorder
@@ -42,36 +48,42 @@ class Api::Feed::NotificationsController < ApplicationController
       my_personal_assistant = PersonalAssistant.where({user_id: current_user.id}).first
       if my_personal_assistant.daily_atopic
         notification = template.dup
+        notification[:id] = nil
         notification[:description] = 'アトピーの治療日記を書こう！'
         notification[:link_id] = 'atopic'
         @personal_assistant_notification.push(notification)
       end
       if my_personal_assistant.daily_asthma
         notification = template.dup
+        notification[:id] = nil
         notification[:description] = '喘息の治療日記を書こう！'
         notification[:link_id] = 'asthma'
         @personal_assistant_notification.push(notification)
       end
       if my_personal_assistant.daily_rhinitis
         notification = template.dup
+        notification[:id] = nil
         notification[:description] = '鼻炎の治療日記を書こう！'
         notification[:link_id] = 'rhinitis'
         @personal_assistant_notification.push(notification)
       end
       if my_personal_assistant.daily_pollen
         notification = template.dup
+        notification[:id] = nil
         notification[:description] = '花粉症の治療日記を書こう！'
         notification[:link_id] = 'pollen'
         @personal_assistant_notification.push(notification)
       end
       if my_personal_assistant.daily_gastroenteritis
         notification = template.dup
+        notification[:id] = nil
         notification[:description] = '胃腸炎の治療日記を書こう！'
         notification[:link_id] = 'gastroenteritis'
         @personal_assistant_notification.push(notification)
       end
       if my_personal_assistant.daily_conjunctivitis
         notification = template.dup
+        notification[:id] = nil
         notification[:description] = '結膜炎の治療日記を書こう！'
         notification[:link_id] = 'conjunctivitis'
         @personal_assistant_notification.push(notification)
@@ -92,6 +104,7 @@ class Api::Feed::NotificationsController < ApplicationController
           # TODO: 3人以上の時
           opponent = participaints.select { |user| user.id != current_user.id }
           notification = template.dup
+          notification[:id] = nil
           notification[:user_id] = opponent[0].id
           notification[:name] = opponent[0].name
           notification[:link_id] = chat_status.chat_thread_id.to_s
@@ -109,10 +122,11 @@ class Api::Feed::NotificationsController < ApplicationController
       notifications = current_user.notifications.order("updated_at DESC")
       if notifications.present?
         # TODO: followed以外の場合
-        notifications.each do |notification|
-          follower = Relationship.find(notification.activity_id)
+        notifications.each do |item|
+          follower = Relationship.find(item.activity_id)
           user = User.find(follower.follower_id)
           notification = template.dup
+          notification[:id] = item.id
           notification[:user_id] = user.id
           notification[:name] = user.name
           notification[:link_id] = user.id.to_s

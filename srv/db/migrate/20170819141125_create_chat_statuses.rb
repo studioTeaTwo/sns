@@ -8,5 +8,7 @@ class CreateChatStatuses < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
+
+    add_index :chat_statuses, :has_unread
   end
 end

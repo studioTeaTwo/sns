@@ -16,6 +16,7 @@ RSpec.describe "Api::Feed::Notifications", type: :request do
 
       user = User.find(Constants::PERSONAL_ASSISTANT[:id])
       notification = {
+        'id' => nil,
         'type' => 'DailyLog',
         'linkId' => 'atopic',
         'userId' => Constants::PERSONAL_ASSISTANT[:id],
@@ -42,6 +43,7 @@ RSpec.describe "Api::Feed::Notifications", type: :request do
         expect(json.length).to eq(2)
 
         notification = {
+          'id' => nil,
           'type' => 'Chat',
           'linkId' => @chat_thread_id.to_s,
           'userId' => another_user.id,
@@ -62,6 +64,7 @@ RSpec.describe "Api::Feed::Notifications", type: :request do
         expect(json.length).to eq(2)
 
         notification = {
+          'id' => 1,
           'type' => 'Followed',
           'linkId' => another_user.id.to_s,
           'userId' => another_user.id,

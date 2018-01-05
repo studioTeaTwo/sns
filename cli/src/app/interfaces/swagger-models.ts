@@ -594,6 +594,7 @@ export interface MyExperienceStrongParameter {
     updatedAt?: string; // date-time
 }
 export interface Notification {
+    id?: number; // int32
     type?: string;
     linkId?: string;
     userId?: number; // int32

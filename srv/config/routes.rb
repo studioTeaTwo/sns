@@ -38,7 +38,7 @@ Rails.application.routes.draw do
     end
 
     namespace :feed do
-      resources :notifications, only: [:index]
+      resources :notifications, only: [:index, :destroy]
       resources :experiences, only: [:index]
     end
     
@@ -55,7 +55,6 @@ Rails.application.routes.draw do
   end
 
   # TODO: API化の残タスク
-  post '/signup',  to: 'users#create'
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:create, :update]
 

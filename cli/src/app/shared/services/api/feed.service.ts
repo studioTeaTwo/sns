@@ -31,6 +31,15 @@ export class FeedService {
       );
   }
 
+  readNotification(id: number) {
+    this.httpClient.delete(`/api/feed/notifications/${id}`)
+      .subscribe(
+        response => {
+          this.onSuccessReadNotification(id);
+        }
+      );
+  }
+
   private onSuccessNotificationList(data: Notification[]) {
     const currentState = this.store.getState();
     this.store.setState({
@@ -46,6 +55,17 @@ export class FeedService {
     this.store.setState({
       ...currentState,
       experienceList: data,
+      loading: false,
+      error: false,
+    });
+  }
+
+  private onSuccessReadNotification(id: number) {
+    const currentState = this.store.getState();
+    const newData = currentState.notificationList.filter(value => value.id !== id);
+    this.store.setState({
+      ...currentState,
+      notificationList: newData,
       loading: false,
       error: false,
     });
