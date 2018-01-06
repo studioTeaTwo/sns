@@ -20,8 +20,17 @@
     "updateMode": "prefetch",
     "resources": {
       "files": [
-        "/assets/**/**"
+        "/assets/**"
       ]
+    }
+  }],
+  "dataGroups": [{
+    "name": "cdn",
+    "urls": ["https://fonts.googleapis.com/icon?family=Material+Icons"],
+    "cacheConfig": {
+      "maxSize": 1,
+      "maxAge": "7d",
+      "strategy": "performance"
     }
   }]
 }
