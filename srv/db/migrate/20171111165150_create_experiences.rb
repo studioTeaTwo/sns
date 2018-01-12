@@ -4,7 +4,8 @@ class CreateExperiences < ActiveRecord::Migration[5.1]
       t.references :user, foreign_key: true
       t.integer :activity_id
       t.string :activity_type
-
+      t.integer :from_user_id
+      
       t.timestamps
     end
 

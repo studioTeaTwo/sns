@@ -14,17 +14,14 @@ RSpec.describe "Api::Feed::Notifications", type: :request do
       expect(response).to have_http_status(:success)
       expect(json.length).to eq(1)
 
+      expect(json[0]['type']).to eq('DailyLog')
+      expect(json[0]['linkId']).to eq('atopic')
+      expect(json[0]['userId']).to eq(Constants::PERSONAL_ASSISTANT[:id])
+      expect(json[0]['name']).to eq(Constants::PERSONAL_ASSISTANT[:name])
+      # TODO: ナビキャラのemailアドレス
       user = User.find(Constants::PERSONAL_ASSISTANT[:id])
-      notification = {
-        'id' => nil,
-        'type' => 'DailyLog',
-        'linkId' => 'atopic',
-        'userId' => Constants::PERSONAL_ASSISTANT[:id],
-        'name' => Constants::PERSONAL_ASSISTANT[:name],
-        'avatarUrl' => "https://secure.gravatar.com/avatar/#{Digest::MD5::hexdigest(user.email.downcase)}?s=25",
-        'description' => 'アトピーの治療日記を書こう！'
-      }
-      expect(json[0]).to eq(notification)
+      expect(json[0]['avatarUrl']).to eq("https://secure.gravatar.com/avatar/#{Digest::MD5::hexdigest(user.email.downcase)}?s=25")
+      expect(json[0]['description']).to eq('アトピーの治療日記を書こう！')
     end
 
     context "when you have unread chat thread" do
@@ -42,16 +39,12 @@ RSpec.describe "Api::Feed::Notifications", type: :request do
         expect(response).to have_http_status(:success)
         expect(json.length).to eq(2)
 
-        notification = {
-          'id' => nil,
-          'type' => 'Chat',
-          'linkId' => @chat_thread_id.to_s,
-          'userId' => another_user.id,
-          'name' => another_user.name,
-          'avatarUrl' => "https://secure.gravatar.com/avatar/#{Digest::MD5::hexdigest(another_user.email.downcase)}?s=25",
-          'description' => 'チャットが届いているよ！'
-        }
-        expect(json[1]).to eq(notification)
+        expect(json[1]['type']).to eq('Chat')
+        expect(json[1]['linkId']).to eq(@chat_thread_id.to_s)
+        expect(json[1]['userId']).to eq(another_user.id)
+        expect(json[1]['name']).to eq(another_user.name)
+        expect(json[1]['avatarUrl']).to eq("https://secure.gravatar.com/avatar/#{Digest::MD5::hexdigest(another_user.email.downcase)}?s=25")
+        expect(json[1]['description']).to eq('チャットが届いているよ！')
       end
     end
 
@@ -63,16 +56,12 @@ RSpec.describe "Api::Feed::Notifications", type: :request do
         expect(response).to have_http_status(:success)
         expect(json.length).to eq(2)
 
-        notification = {
-          'id' => 1,
-          'type' => 'Followed',
-          'linkId' => another_user.id.to_s,
-          'userId' => another_user.id,
-          'name' => another_user.name,
-          'avatarUrl' => "https://secure.gravatar.com/avatar/#{Digest::MD5::hexdigest(another_user.email.downcase)}?s=25",
-          'description' => "#{another_user.name}さんにフォローされたよ！"
-        }
-        expect(json[1]).to eq(notification)
+        expect(json[1]['type']).to eq('Followed')
+        expect(json[1]['linkId']).to eq(another_user.id.to_s)
+        expect(json[1]['userId']).to eq(another_user.id)
+        expect(json[1]['name']).to eq(another_user.name)
+        expect(json[1]['avatarUrl']).to eq("https://secure.gravatar.com/avatar/#{Digest::MD5::hexdigest(another_user.email.downcase)}?s=25")
+        expect(json[1]['description']).to eq("#{another_user.name}さんにフォローされたよ！")
       end
     end
     

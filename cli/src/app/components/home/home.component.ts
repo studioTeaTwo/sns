@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
 
 import { Store } from 'app/shared/store/store';
-import { FriendExperienceStrongParameter, NotificationViewModel } from 'app/interfaces/api-models';
-import { ActivityType, ActivityTypeName } from 'app/constants/constants';
+import { FriendExperienceStrongParameter, NotificationViewModel, Notification } from 'app/interfaces/api-models';
 import { FeedService } from 'app/shared/services/api';
 
 interface Experience {
   date: string;
   name: string;
-  activity: ActivityType;
+  activity: string;
 }
 
 @Component({
@@ -26,10 +26,11 @@ export class HomeComponent implements OnInit {
   // 経験
   myExperienceDataSource: ExperienceDataSource | null;
   friendExperienceDataSource: ExperienceDataSource | null;
-  myDisplayColumns = ['date', 'experience'];
-  friendDisplayColumns = ['date', 'name', 'experience'];
+  myDisplayColumns = ['date', 'activity'];
+  friendDisplayColumns = ['date', 'name', 'activity'];
 
   constructor(
+    private router: Router,
     private store: Store,
     private feedService: FeedService,
   ) { }
@@ -42,14 +43,15 @@ export class HomeComponent implements OnInit {
     this.friendExperienceDataSource = new ExperienceDataSource(this.store.changes.pluck('experienceList', 'friend'));
   }
 
-  getNotificationLink(value: NotificationViewModel): string {
-    let link: string;
+  onClickNotification(value: NotificationViewModel) {
     if (value.type === 'DailyLog') {
-      link = `/life-log/daily/logging/${value.linkId}`;
+      this.router.navigateByUrl(`/life-log/daily/logging/${value.linkId}`);
     } else if (value.type === 'Chat') {
-      link = `/chat/${value.linkId}`;
+      this.router.navigateByUrl(`/chat/${value.linkId}`);
+    } else if (value.type === 'Followed') {
+      this.feedService.readNotification(value.id);
+      this.router.navigateByUrl(`/user/${value.linkId}`);
     }
-    return link;
   }
 }
 
@@ -57,7 +59,7 @@ class ExperienceDataSource extends DataSource<any> {
   rowCount: number;
 
   constructor(
-    private feedSource: Observable<FriendExperienceStrongParameter[]>
+    private feedSource: Observable<Notification[]>
   ) {
     super();
   }
@@ -73,7 +75,7 @@ class ExperienceDataSource extends DataSource<any> {
           newData.push({
             date: value.createdAt,
             name: value.name,
-            activity: ActivityTypeName[value.activityType],
+            activity: value.description,
           });
         });
         this.rowCount = newData.length;

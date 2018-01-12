@@ -16,8 +16,17 @@ RSpec.describe "Api::Feed::Experiences", type: :request do
       expect(response).to have_http_status(:success)
       expect(json.length).to eq(2)
 
-      expect(json['mine'][0]['activityId']).to eq(my_experience.activity_id)
-      expect(json['friend'][0]['activityId']).to eq(friend_experience.activity_id)
+      expect(json['mine'][0]['type']).to eq(my_experience.activity_type)
+      expect(json['mine'][0]['userId']).to eq(current_user.id)
+      expect(json['mine'][0]['linkId']).to eq(my_experience.activity_id.to_s)
+
+      expect(json['friend'][0]['type']).to eq('Relationship')
+      expect(json['friend'][0]['userId']).to eq(other_user.id)
+      expect(json['friend'][0]['linkId']).to eq(current_user.id.to_s)
+
+      expect(json['friend'][1]['type']).to eq(friend_experience.activity_type)
+      expect(json['friend'][1]['userId']).to eq(other_user.id)
+      expect(json['friend'][1]['linkId']).to eq(friend_experience.activity_id.to_s)
     end
     
   end

@@ -7,8 +7,9 @@
 # @attr [string] name
 # @attr [string] avatarUrl
 # @attr [string] description
+# @attr [date-time] createdAt
 class Rest::NotificationSerializer < ActiveModel::Serializer
-  attributes :id, :type, :link_id, :user_id, :name, :avatar_url, :description
+  attributes :id, :type, :link_id, :user_id, :name, :avatar_url, :description, :created_at
 
   def id
     object[:id]
@@ -39,5 +40,9 @@ class Rest::NotificationSerializer < ActiveModel::Serializer
 
   def description
     object[:description]
+  end
+
+  def created_at
+    object[:created_at]
   end
 end

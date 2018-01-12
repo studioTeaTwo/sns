@@ -79,8 +79,8 @@ export interface EmailVerifyRequestBody {
     email?: string;
 }
 export interface Experience {
-    mine?: MyExperienceStrongParameter[];
-    friend?: FriendExperienceStrongParameter[];
+    mine?: Notification[];
+    friend?: Notification[];
 }
 export interface FriendExperienceStrongParameter {
     id?: number; // int32
@@ -601,6 +601,7 @@ export interface Notification {
     name?: string;
     avatarUrl?: string;
     description?: string;
+    createdAt?: string; // date-time
 }
 export interface Profile {
     latestIge?: number; // int32

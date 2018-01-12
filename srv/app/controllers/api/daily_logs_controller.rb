@@ -87,7 +87,6 @@ class Api::DailyLogsController < ApplicationController
     end
 
     def record_experience(daily_log)
-      experience = daily_log.experiences.build({user_id: current_user.id})
-      experience.save!
+      daily_log.create_experience(user_id: current_user.id)
     end
 end

@@ -1,14 +1,12 @@
 # @name Experience
 #
-# @attr [Array<Params::MyExperience>] mine
-# @attr [Array<Params::FriendExperience>] friend
+# @attr [Array<Rest::NotificationSerializer>] mine
+# @attr [Array<Rest::NotificationSerializer>] friend
 class Rest::ExperienceSerializer < ActiveModel::Serializer
   has_many :mine do
-    results = object[:mine]&.map{ |p| p.attributes }
-    results
+    object[:mine]
   end
   has_many :friend do
-    results = object[:friend]&.map{ |p| p.attributes }
-    results
+    object[:friend]
   end
 end

@@ -28,6 +28,7 @@ class Api::Feed::NotificationsController < ApplicationController
   #
   # @response_status 200
   def destroy
+    Notification.find(params[:id]).destroy
   end
 
   private
@@ -45,6 +46,7 @@ class Api::Feed::NotificationsController < ApplicationController
         user_id: Constants::PERSONAL_ASSISTANT[:id],
         name: Constants::PERSONAL_ASSISTANT[:name]
       }
+
       my_personal_assistant = PersonalAssistant.where({user_id: current_user.id}).first
       if my_personal_assistant.daily_atopic
         notification = template.dup
@@ -97,6 +99,7 @@ class Api::Feed::NotificationsController < ApplicationController
         type: 'Chat',
         description: 'チャットが届いているよ！'
       }
+
       unread_chats = ChatStatus.where(user_id: current_user.id, has_unread: true).order("updated_at DESC")
       if unread_chats.present?
         unread_chats.each do |chat_status|
@@ -119,6 +122,7 @@ class Api::Feed::NotificationsController < ApplicationController
       template = {
         type: 'Followed'
       }
+
       notifications = current_user.notifications.order("updated_at DESC")
       if notifications.present?
         # TODO: followed以外の場合

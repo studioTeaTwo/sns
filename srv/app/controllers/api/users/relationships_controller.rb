@@ -9,7 +9,7 @@ class Api::Users::RelationshipsController < ApplicationController
   def create
     user = User.find(relationship_params[:followed_id])
     current_user.follow(user)
-    record_notification(relationship_params[:followed_id])
+    record_activity(relationship_params[:followed_id])
     render json: user, include: [:iges, :microposts], serializer: Rest::ProfileSerializer,
       option: {sort: :profile, isFollow: true}
   end
@@ -30,10 +30,10 @@ class Api::Users::RelationshipsController < ApplicationController
       params.fetch(:relationship, {}).permit(:followed_id)
     end
 
-    def record_notification(followed_id)
+    def record_activity(followed_id)
       followed = Relationship.where(follower_id: current_user.id, followed_id: followed_id).first
-      notification = followed.notifications.build({user_id: followed_id})
-      notification.save!
+      followed.create_notification(user_id: followed_id)
+      followed.create_experience(user_id: followed_id)
     end
 
 end

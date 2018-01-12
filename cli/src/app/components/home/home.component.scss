@@ -38,14 +38,17 @@
   }
 }
 
-// 通知のアバター
+// 通知メッセージ
 a img {
   vertical-align: middle;
 }
+.home-notification-message {
+  font-size: 0.5em;
+}
 
 #home-content {
-  height: 0;
   padding-top: 72%; // 表示画像の高さ ÷ 表示画像の幅 × 100
+  padding-bottom: 10px;
   background: url("/assets/images/home_bg.png") 0 0 no-repeat;
   background-size: contain;
 

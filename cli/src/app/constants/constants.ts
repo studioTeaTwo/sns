@@ -20,12 +20,7 @@ export const SIGNUP_USER: User = {
   titleOfHonor: 0,
 };
 
-export type ActivityType = '活動日記を付けました！';
-export const ActivityTypeName = {
-  DailyLog: '活動日記を付けました！',
-};
-
-export type NotificationType = 'DailyLog' | 'Chat';
+export type NotificationType = 'DailyLog' | 'Chat' | 'Followed';
 
 export const API_ERROR_MSGS = {
   BAD_REQUEST_400: '入力項目の確認をし、もう一度お試しください。',
