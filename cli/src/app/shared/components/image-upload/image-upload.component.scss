@@ -14,10 +14,10 @@
       input {
           display: none;
       }
-      #profileImage {
+      #previewImage {
           img {
               width: 150px;
-              height: 200px;
+              height: 150px;
               border: 1px solid #eaeaea;
           }
       }
@@ -27,7 +27,7 @@
       font-size: 0.5em;
       line-height: 0.5em;
   }
-  #preview {
+  #drawImage {
       display: inline-block;
   }
 }

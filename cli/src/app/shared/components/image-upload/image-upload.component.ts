@@ -61,7 +61,7 @@ export class ImageUploadComponent implements OnInit, OnChanges {
   }
 
   private loadFile(result: string): HTMLImageElement {
-    const previewEl = document.getElementById('preview').children[0] as HTMLImageElement;
+    const previewEl = document.getElementById('drawImage').children[0] as HTMLImageElement;
     previewEl.setAttribute('src', result);
     // ユーザーには見せない
     previewEl.setAttribute('style', 'display:none');
@@ -69,7 +69,7 @@ export class ImageUploadComponent implements OnInit, OnChanges {
   }
 
   private resize(img: HTMLImageElement): Observable<string> {
-    const MAX_WIDTH = 300;
+    const MAX_WIDTH = 400;
     const MAX_HEIGHT = 400;
 
     return new Observable(obs => {
@@ -105,7 +105,7 @@ export class ImageUploadComponent implements OnInit, OnChanges {
     this.newFile.data = resizedImg;
 
     // リサイズした画像をユーザーに見せる
-    const drawFiled = document.getElementById('profileImage').children[0] as HTMLImageElement;
+    const drawFiled = document.getElementById('previewImage').children[0] as HTMLImageElement;
     drawFiled.setAttribute('src', resizedImg);
   }
 }

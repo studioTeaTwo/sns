@@ -35,18 +35,22 @@ mat-card {
   #medicina {
   }
 
-  #camera {
-    margin-left: auto;
-    margin-bottom: 10px;
-  }
-
-  #photograph {
-    text-align: right;
-    mat-icon {
+  .form-photograph {
+    &-upload {
+      margin-left: auto;
+      margin-bottom: 10px;
+      &-button {
+        display: inline-block;
+      }
     }
-    .photo {
-      width: 100%;
-      height: auto;
+
+    &-image {
+      text-align: right;
+      .photo {
+        width: 100%;
+        height: auto;
+        border: 1px solid #eaeaea;
+      }
     }
   }
 }
