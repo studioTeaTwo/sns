@@ -14,7 +14,15 @@ export class MockAccountService {
   }
 
   get() {
-    return Observable.of();
+    return Observable.of({
+      id: 1,
+      atopic: true,
+      asthma: true,
+      pollen: false,
+      rhinitis: false,
+      gastroenteritis: false,
+      conjunctivitis: false,
+    });
   }
 
   saveSignupdataName() {

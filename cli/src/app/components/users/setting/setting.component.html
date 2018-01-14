@@ -9,7 +9,7 @@
   </mat-form-field>
   <mat-form-field class="setting-input setting-input-password">
     <input type="password" name="password" matInput placeholder="新しいパスワード" [(ngModel)]="password" (change)="onChangePassword()" />
-    <span class="textfield-error" *ngIf="isErrorPassword">入力内容を見直してください</span>
+    <span class="textfield-error" *ngIf="isErrorPassword">英数字6文字以上にしてください</span>
   </mat-form-field>
   <mat-form-field class="setting-input setting-input-password" *ngIf="password.length > 0">
     <input type="password" name="rePassword" matInput placeholder="パスワード再確認" #rePasswordRef="ngModel" required
@@ -31,12 +31,12 @@
 
   <label class="symptom">症状:</label>
   <mat-grid-list cols="3" rowHeight="2:1">
-    <mat-grid-tile><mat-checkbox name="atopic" [(ngModel)]="account.atopic">アトピー</mat-checkbox></mat-grid-tile>
-    <mat-grid-tile><mat-checkbox name="asthma" [(ngModel)]="account.asthma">喘息</mat-checkbox></mat-grid-tile>
-    <mat-grid-tile><mat-checkbox name="rhinitis" [(ngModel)]="account.rhinitis">鼻炎</mat-checkbox></mat-grid-tile>
-    <mat-grid-tile><mat-checkbox name="pollen" [(ngModel)]="account.pollen">花粉症</mat-checkbox></mat-grid-tile>
-    <mat-grid-tile><mat-checkbox name="gastroenteritis" [(ngModel)]="account.gastroenteritis">胃腸炎</mat-checkbox></mat-grid-tile>
-    <mat-grid-tile><mat-checkbox name="conjunctivitis" [(ngModel)]="account.conjunctivitis">結膜炎</mat-checkbox></mat-grid-tile>
+    <mat-grid-tile><mat-checkbox name="atopic" [(ngModel)]="account.atopic">{{SymptomName.get('atopic')}}</mat-checkbox></mat-grid-tile>
+    <mat-grid-tile><mat-checkbox name="asthma" [(ngModel)]="account.asthma">{{SymptomName.get('asthma')}}</mat-checkbox></mat-grid-tile>
+    <mat-grid-tile><mat-checkbox name="rhinitis" [(ngModel)]="account.rhinitis">{{SymptomName.get('rhinitis')}}</mat-checkbox></mat-grid-tile>
+    <mat-grid-tile><mat-checkbox name="pollen" [(ngModel)]="account.pollen">{{SymptomName.get('pollen')}}</mat-checkbox></mat-grid-tile>
+    <mat-grid-tile><mat-checkbox name="gastroenteritis" [(ngModel)]="account.gastroenteritis">{{SymptomName.get('gastroenteritis')}}</mat-checkbox></mat-grid-tile>
+    <mat-grid-tile><mat-checkbox name="conjunctivitis" [(ngModel)]="account.conjunctivitis">{{SymptomName.get('conjunctivitis')}}</mat-checkbox></mat-grid-tile>
   </mat-grid-list>
 
   <div class="setting-button">

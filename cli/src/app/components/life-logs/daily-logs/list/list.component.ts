@@ -7,7 +7,8 @@ import {
   User,
   DailyLog,
 } from 'app/interfaces/api-models';
-import { DailyLogService } from 'app/shared/services/api';
+import { SymptomName, Symptom } from 'app/constants/constants';
+import { AccountService, DailyLogService } from 'app/shared/services/api';
 
 @Component({
   selector: 'app-list',
@@ -16,6 +17,7 @@ import { DailyLogService } from 'app/shared/services/api';
 })
 export class ListComponent implements OnInit {
 
+  user: User;
   dailyLogList$: Observable<DailyLog[]>;
 
   loading$: Observable<boolean>;
@@ -23,11 +25,13 @@ export class ListComponent implements OnInit {
   constructor(
     private router: Router,
     private store: Store,
+    private accountService: AccountService,
     private dailyLogService: DailyLogService,
   ) { }
 
   ngOnInit() {
     this.loading$ = this.store.changes.pluck('loading');
+    this.accountService.get().subscribe(user => this.user = user);
     this.dailyLogList$ = this.store.changes.pluck('dailyLogList');
 
     this.dailyLogService.list();
@@ -36,6 +40,10 @@ export class ListComponent implements OnInit {
   routeWithDate(dailyLog: DailyLog) {
     this.dailyLogService.storeData(dailyLog);
     this.router.navigate([`/life-log/daily/${dailyLog.id}`]);
+  }
+
+  getSymptomName(symptom: Symptom): string {
+    return SymptomName.get(symptom);
   }
 
   getIcon(input: number): string {

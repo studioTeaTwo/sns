@@ -6,7 +6,8 @@ import { ListComponent } from './list.component';
 
 import { SharedModule } from 'app/shared/shared.module';
 import { Store } from 'app/shared/store/store';
-import { DailyLogService } from 'app/shared/services/api';
+import { AccountService, DailyLogService } from 'app/shared/services/api';
+import { MockAccountService } from 'app/mock/api/mock-account-service';
 
 describe('ListComponent', () => {
   let component: ListComponent;
@@ -22,6 +23,10 @@ describe('ListComponent', () => {
       declarations: [ ListComponent ],
       providers: [
         Store,
+        {
+          provide: AccountService,
+          useClass: MockAccountService
+        },
         DailyLogService,
       ]
     })

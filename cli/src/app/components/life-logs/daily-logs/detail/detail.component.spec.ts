@@ -8,7 +8,8 @@ import { DetailComponent } from './detail.component';
 
 import { SharedModule } from 'app/shared/shared.module';
 import { Store } from 'app/shared/store/store';
-import { DailyLogService } from 'app/shared/services/api';
+import { AccountService, DailyLogService } from 'app/shared/services/api';
+import { MockAccountService } from 'app/mock/api/mock-account-service';
 
 describe('DetailComponent', () => {
   let component: DetailComponent;
@@ -26,6 +27,10 @@ describe('DetailComponent', () => {
       declarations: [ DetailComponent ],
       providers: [
         Store,
+        {
+          provide: AccountService,
+          useClass: MockAccountService
+        },
         DailyLogService,
       ]
     })

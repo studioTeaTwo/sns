@@ -9,8 +9,10 @@ import {
   DailyLog,
   DailyLogStrongParameter,
   DailyLogRequestBody,
+  User,
 } from 'app/interfaces/api-models';
-import { DailyLogService } from 'app/shared/services/api';
+import { SymptomName, Symptom } from 'app/constants/constants';
+import { AccountService, DailyLogService } from 'app/shared/services/api';
 
 enum MODE {
   CREATE = 1,
@@ -29,7 +31,10 @@ export class DetailComponent implements OnInit {
   uploadOpen = false;
   inputFiles: any;
 
+  user: User;
+  isMultipleSymptom = true;
   dailyLogParam: DailyLogStrongParameter = this.initialState;
+  readonly SymptomName = SymptomName;
 
   @ViewChild('video') videoElm: ElementRef;
   @ViewChild('canvas') canvasElm: ElementRef;
@@ -42,10 +47,16 @@ export class DetailComponent implements OnInit {
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
     private store: Store,
+    private accountService: AccountService,
     private dailyLogService: DailyLogService,
   ) { }
 
   ngOnInit() {
+    this.accountService.get().subscribe(user => {
+      this.user = user;
+      this.judgeMultipleSymptom(user);
+    });
+
     this.route.url.subscribe(url => {
       // 新規作成ページ
       if (url[0].path === 'create') {
@@ -66,7 +77,7 @@ export class DetailComponent implements OnInit {
   get initialState(): DailyLogStrongParameter {
     return {
       date: moment().format('YYYY-MM-DD'),
-      symptom: 'atopic',
+      symptom: '',
       health: 0,
       healthMemo: '',
       medicina: undefined,
@@ -85,7 +96,7 @@ export class DetailComponent implements OnInit {
       .subscribe(
         () => {
           this.displayMode = MODE.ROM;
-          this.snackBar.open('変更されました！', null, {
+          this.snackBar.open('修正しました！', null, {
             duration: 2000,
           });
         });
@@ -95,7 +106,7 @@ export class DetailComponent implements OnInit {
     this.dailyLogService.create(this.dailyLogParam)
       .subscribe(
         () => {
-          this.snackBar.open('記録されました！', null, {
+          this.snackBar.open('記録しました！', null, {
             duration: 2000,
           });
         });
@@ -123,6 +134,22 @@ export class DetailComponent implements OnInit {
   getImage(file: any) {
     this.uploadOpen = false;
     this.dailyLogParam.photograph.push(file);
+  }
+
+  private judgeMultipleSymptom(user: User) {
+    const symptomList: Symptom[] = [];
+    if (user.atopic) { symptomList.push('atopic'); }
+    if (user.asthma) { symptomList.push('asthma'); }
+    if (user.rhinitis) { symptomList.push('rhinitis'); }
+    if (user.pollen) { symptomList.push('pollen'); }
+    if (user.gastroenteritis) { symptomList.push('gastroenteritis'); }
+    if (user.conjunctivitis) { symptomList.push('conjunctivitis'); }
+
+    // trueが一つだけならsingle。2つ以上と0個はmultiple扱い。0個は任意で指定させる必要があるため。
+    if (symptomList.length === 1) {
+      this.isMultipleSymptom = false;
+      this.dailyLogParam.symptom = symptomList[0];
+    }
   }
 
 }

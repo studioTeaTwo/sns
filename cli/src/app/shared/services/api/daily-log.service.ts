@@ -107,7 +107,6 @@ export class DailyLogService {
 
   savePhotograph(data: string) {
     this.dailyLogParam.photograph.push(data);
-    console.log(this.dailyLogParam);
   }
 
   savePhotographMemo(text: string) {

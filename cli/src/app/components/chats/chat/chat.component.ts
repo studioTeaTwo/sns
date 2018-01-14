@@ -69,8 +69,8 @@ export class ChatComponent implements OnInit {
         }
       })
       .subscribe(
-        () => this.scrollToBottom(),
-        error => this.router.navigate(['/chat/list'])
+        (next: void) => this.scrollToBottom(),
+        (error: any) => this.router.navigateByUrl('/chat/list'),
       );
   }
 

@@ -1,7 +1,11 @@
-<div id="header">
+<section id="header">
   <h3>記録</h3>
-  <button type="button" class="button-log" mat-raised-button routerLink="/life-log/daily/create">日誌を書く</button>
-</div>
+  <div class="log-list-button">
+    <button *ngIf="user.classification === 1 || user.classification === 2" type="button" mat-raised-button routerLink="/life-log/daily/create">日誌を書く</button>
+  </div>
+</section>
+
+<span *ngIf="!(user.classification === 1 || user.classification === 2)">このメニューは患者専用です。</span>
 
 <mat-card *ngFor="let dailyLog of (dailyLogList$ | async)" (click)="routeWithDate(dailyLog)">
   <mat-grid-list cols="8">
@@ -9,7 +13,7 @@
       {{dailyLog.date | formatToJapaneseDate}}
     </mat-grid-tile>
     <mat-grid-tile [colspan]="2" [rowspan]="1">
-      {{dailyLog.symptom}}
+      {{getSymptomName(dailyLog.symptom)}}
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <div class="health">{{getIcon(dailyLog.health)}}</div>

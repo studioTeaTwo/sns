@@ -9,6 +9,7 @@ import { SharedModule } from 'app/shared/shared.module';
 import { Store } from 'app/shared/store/store';
 import { AccountService, ChatService } from 'app/shared/services/api';
 import { MockAccountService } from 'app/mock/api/mock-account-service';
+import { ChatListComponent } from 'app/components/chats/chat-list/chat-list.component';
 
 describe('ChatComponent', () => {
   let component: ChatComponent;
@@ -18,11 +19,16 @@ describe('ChatComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([
+          { path: 'chat/list', component: ChatListComponent}
+        ]),
         NoopAnimationsModule,
         SharedModule,
       ],
-      declarations: [ ChatComponent ],
+      declarations: [
+        ChatComponent,
+        ChatListComponent
+      ],
       providers: [
         Store,
         {

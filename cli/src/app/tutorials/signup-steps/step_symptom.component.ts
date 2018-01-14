@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
 import { Store } from 'app/shared/store/store';
-import { NAVI_CHARA, SIGNUP_USER } from 'app/constants/constants';
+import { NAVI_CHARA, SIGNUP_USER, SymptomName } from 'app/constants/constants';
 import {
   ChatThread,
   Chats,
@@ -144,32 +144,32 @@ const tutorial_script1: ChatViewModel[] = [
     itemList: [
       {
         id: 'atopic',
-        name: 'アトピー',
+        name: SymptomName.get('atopic'),
         checked: false,
       },
       {
         id: 'asthma',
-        name: '喘息',
+        name: SymptomName.get('asthma'),
         checked: false,
       },
       {
         id: 'pollen',
-        name: '花粉症',
+        name: SymptomName.get('pollen'),
         checked: false,
       },
       {
         id: 'rhinitis',
-        name: '鼻炎',
+        name: SymptomName.get('rhinitis'),
         checked: false,
       },
       {
         id: 'gastroenteritis',
-        name: '胃腸炎',
+        name: SymptomName.get('gastroenteritis'),
         checked: false,
       },
       {
         id: 'conjunctivitis',
-        name: '結膜炎',
+        name: SymptomName.get('conjunctivitis'),
         checked: false,
       },
     ],

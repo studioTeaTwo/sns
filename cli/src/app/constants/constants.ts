@@ -22,6 +22,16 @@ export const SIGNUP_USER: User = {
 
 export type NotificationType = 'DailyLog' | 'Chat' | 'Followed';
 
+export type Symptom = 'atopic' | 'asthma' | 'rhinitis' | 'pollen' | 'gastroenteritis' | 'conjunctivitis';
+const SymptomMap: Map<Symptom, string> = new Map();
+SymptomMap.set('atopic', 'アトピー');
+SymptomMap.set('asthma', '喘息');
+SymptomMap.set('rhinitis', '鼻炎');
+SymptomMap.set('pollen', '花粉症');
+SymptomMap.set('gastroenteritis', '胃腸炎');
+SymptomMap.set('conjunctivitis', '結膜炎');
+export const SymptomName = SymptomMap;
+
 export const API_ERROR_MSGS = {
   BAD_REQUEST_400: '入力項目の確認をし、もう一度お試しください。',
   UNAUTHORIZED_401: '認証の有効期限が切れました\nお手数ですが、再度ログインをお願い致します。',

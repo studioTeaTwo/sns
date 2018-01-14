@@ -30,6 +30,8 @@ User.create!(
   rank: 1,
   title_of_honor: 11,
   self_introduction: "自己紹介が入ります。自己紹介が入ります。自己紹介が入ります。",
+  classification: 1,
+  atopic: true,
   admin: true
 )
 PersonalAssistant.create!(
@@ -84,7 +86,9 @@ end
                password: password,
                encrypted_password: User.digest(password),
                rank: Random.rand(0 .. 4),
-               title_of_honor: Random.rand(10 .. 14)
+               title_of_honor: Random.rand(10 .. 14),
+               classification: Random.rand(1 .. 4),
+               atopic: true,
               )
   # パーソナルアシスタントの作成
   PersonalAssistant.create!(
