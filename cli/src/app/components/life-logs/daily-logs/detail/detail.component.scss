@@ -20,6 +20,12 @@ mat-card {
 }
 
 #log-content {
+
+  mat-card-title {
+    mat-icon{
+      vertical-align: bottom;
+    }
+  }
   
   .form-memo {
     width: 100%;

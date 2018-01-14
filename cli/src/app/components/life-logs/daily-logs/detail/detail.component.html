@@ -26,7 +26,7 @@
 
   <mat-card>
     <mat-card-header>
-      <mat-card-title>今日の気分は？</mat-card-title>
+      <mat-card-title><mat-icon>face</mat-icon>今日の気分は？</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <mat-button-toggle-group id="health" [(ngModel)]="dailyLogParam.health" [disabled]="displayMode === MODE.ROM">
@@ -42,7 +42,7 @@
 
   <mat-card>
     <mat-card-header>
-      <mat-card-title>薬は服用した？</mat-card-title>
+      <mat-card-title><mat-icon>local_pharmacy</mat-icon>薬は服用した？</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <mat-radio-group id="medicina" [(ngModel)]="dailyLogParam.medicina" [disabled]="displayMode === MODE.ROM">
@@ -57,14 +57,14 @@
   
   <mat-card>
     <mat-card-header>
-      <mat-card-title>写真の記録</mat-card-title>
+      <mat-card-title><mat-icon>photo_camera</mat-icon>写真の記録</mat-card-title>
       <div class="form-photograph-upload">
         <div class="form-photograph-upload-button" (click)="file.click()">
           <input type="file" accept="image/*" #file (change)="onChangeFile(file)" [style.display]="'none'" />
-          <mat-icon *ngIf="displayMode !== MODE.ROM">add_a_photo</mat-icon>
+          <mat-icon *ngIf="displayMode !== MODE.ROM">photo_library</mat-icon>
         </div>
         <button type="button" mat-raised-button (click)="onClickCamera()" *ngIf="displayMode !== MODE.ROM" disabled>
-          <mat-icon>photo_camera</mat-icon>(工事中)写真を撮る
+          <mat-icon>add_a_photo</mat-icon>(工事中)
         </button>
       </div>
     </mat-card-header>
