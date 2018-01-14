@@ -12,8 +12,8 @@ import { UserService } from 'app/shared/services/api';
   styleUrls: ['./results.component.scss']
 })
 export class ResultsComponent implements OnInit {
-  searchUsers$: Observable<Profile[]>;
-  loading$: Observable<boolean>;
+  searchUsers$ = this.store.select<Profile[]>(state => state.searchUsers);
+  loading$ = this.store.select<boolean>(state => state.loading);
 
   constructor(
     private router: Router,
@@ -22,8 +22,6 @@ export class ResultsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.searchUsers$ = this.store.changes.pluck('searchUsers');
-    this.loading$ = this.store.changes.pluck('loading');
   }
 
   onClickUser(value: Profile) {

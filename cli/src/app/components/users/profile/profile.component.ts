@@ -18,7 +18,7 @@ import { AccountService, ChatService } from 'app/shared/services/api';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  profile$: Observable<Profile>;
+  profile$ = this.store.select<Profile>(state => state.profile);
   isMyself = false;
 
   constructor(
@@ -31,7 +31,6 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.profile$ = this.store.changes.pluck('profile');
     this.route.params.subscribe((params: Params) => {
         this.userService.getProfile(params['userId']);
         this.accountService.get()

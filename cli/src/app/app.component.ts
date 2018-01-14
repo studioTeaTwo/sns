@@ -11,19 +11,15 @@ import { Store } from 'app/shared/store/store';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  loading$: Observable<boolean>;
-  error$: Observable<boolean>;
-  errorMsg$: Observable<string>;
+  loading$ = this.store.select<boolean>(state => state.loading);
+  error$ = this.store.select<boolean>(state => state.error);
+  errorMsg$ = this.store.select<string>(state => state.errorMsg);
 
   constructor(
     private location: Location,
     private urlSerializer: UrlSerializer,
     private store: Store,
   ) {
-    this.loading$ = this.store.changes.pluck('loading');
-    this.error$ = this.store.changes.pluck('error');
-    this.errorMsg$ = this.store.changes.pluck('errorMsg');
-
     // フロントのURLでサーバに飛んだ時の対応
     if (this.location.path().match(/url/)) {
       const urlTree = this.urlSerializer.parse(this.location.path());

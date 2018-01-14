@@ -4,10 +4,10 @@ export interface StoreState {
     // APIデータ
     account: API.User;
     profile: API.Profile;
-    notificationList: API.Notification[];
+    notificationList: API.NotificationViewModel[];
     experienceList: API.Experience;
     chatList: API.ChatThread[];
-    chats: API.Chat[];
+    chats: API.ChatViewModel[];
     searchUsers: API.Profile[];
     dailyLogList: API.DailyLog[];
     dailyLog: API.DailyLog;

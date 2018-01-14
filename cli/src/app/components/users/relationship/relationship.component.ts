@@ -12,8 +12,8 @@ import { UserService } from 'app/shared/services/api';
   styleUrls: ['./relationship.component.scss']
 })
 export class RelationshipComponent implements OnInit {
-  users$: Observable<Profile[]>;
-  loading$: Observable<boolean>;
+  users$ = this.store.select<Profile[]>(state => state.searchUsers);
+  loading$ = this.store.select<boolean>(state => state.loading);
 
   constructor(
     private router: Router,
@@ -23,9 +23,6 @@ export class RelationshipComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.users$ = this.store.changes.pluck('searchUsers');
-    this.loading$ = this.store.changes.pluck('loading');
-
     this.route.url.subscribe(urls => {
       if (urls[0].path === 'followings') {
         this.userService.getFollowings();

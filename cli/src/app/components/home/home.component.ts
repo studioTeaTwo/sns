@@ -21,7 +21,7 @@ interface Experience {
 export class HomeComponent implements OnInit {
 
   // 通知
-  notifications$: Observable<NotificationViewModel[]>;
+  notifications$ = this.store.select<NotificationViewModel[]>(state => state.notificationList);
 
   // 経験
   myExperienceDataSource: ExperienceDataSource | null;
@@ -38,9 +38,8 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.feedService.listNotifications();
     this.feedService.listExperiences();
-    this.notifications$ = this.store.changes.pluck('notificationList');
-    this.myExperienceDataSource = new ExperienceDataSource(this.store.changes.pluck('experienceList', 'mine'));
-    this.friendExperienceDataSource = new ExperienceDataSource(this.store.changes.pluck('experienceList', 'friend'));
+    this.myExperienceDataSource = new ExperienceDataSource(this.store.select<Notification[]>(state => state.experienceList.mine));
+    this.friendExperienceDataSource = new ExperienceDataSource(this.store.select<Notification[]>(state => state.experienceList.friend));
   }
 
   onClickNotification(value: NotificationViewModel) {

@@ -18,9 +18,9 @@ import { AccountService, DailyLogService } from 'app/shared/services/api';
 export class ListComponent implements OnInit {
 
   user: User;
-  dailyLogList$: Observable<DailyLog[]>;
+  dailyLogList$ = this.store.select<DailyLog[]>(state => state.dailyLogList);
 
-  loading$: Observable<boolean>;
+  loading$ = this.store.select<boolean>(state => state.loading);
 
   constructor(
     private router: Router,
@@ -30,9 +30,7 @@ export class ListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loading$ = this.store.changes.pluck('loading');
     this.accountService.get().subscribe(user => this.user = user);
-    this.dailyLogList$ = this.store.changes.pluck('dailyLogList');
 
     this.dailyLogService.list();
   }

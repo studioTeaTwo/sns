@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 import { Store } from 'app/shared/store/store';
-import { Experience, Notification } from 'app/interfaces/api-models';
+import { Experience, NotificationViewModel } from 'app/interfaces/api-models';
 
 @Injectable()
 export class FeedService {
@@ -14,7 +14,7 @@ export class FeedService {
   ) { }
 
   listNotifications() {
-    this.httpClient.get<Notification[]>(`/api/feed/notifications`)
+    this.httpClient.get<NotificationViewModel[]>(`/api/feed/notifications`)
       .subscribe(
         response => {
           this.onSuccessNotificationList(response);
@@ -40,7 +40,7 @@ export class FeedService {
       );
   }
 
-  private onSuccessNotificationList(data: Notification[]) {
+  private onSuccessNotificationList(data: NotificationViewModel[]) {
     const currentState = this.store.getState();
     this.store.setState({
       ...currentState,

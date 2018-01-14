@@ -28,7 +28,7 @@ export class ChatComponent implements OnInit {
   height: number;
   animeState: string;
 
-  chats$: Observable<Chats>;
+  chats$ = this.store.select<Chats>(state => state.chats);
   chatThread: ChatThread;
   myself: User;
   opponents: User[];
@@ -50,7 +50,6 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.chats$ = this.store.changes.pluck('chats');
     this.accountService.get().subscribe(response => this.myself = response);
 
     this.route.params

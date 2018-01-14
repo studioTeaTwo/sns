@@ -11,7 +11,7 @@ import {
 import {
   ChatThread,
   Chats,
-  Chat,
+  ChatViewModel,
   CONTENT_TYPE,
 } from 'app/interfaces/api-models';
 
@@ -64,7 +64,7 @@ export class ChatService {
         body: content
       }
     };
-    this.httpClient.post<Chat>(`/api/chats/${chatThreadId}/say`, body)
+    this.httpClient.post<ChatViewModel>(`/api/chats/${chatThreadId}/say`, body)
       .subscribe(
         response => {
           this.onSuccessChats([response]);
@@ -92,9 +92,9 @@ export class ChatService {
     });
   }
 
-  private onSuccessChats(data: Chat[]) {
+  private onSuccessChats(data: ChatViewModel[]) {
     const currentState = this.store.getState();
-    data.sort((a, b) => compareCreated<Chat>(a, b));
+    data.sort((a, b) => compareCreated<ChatViewModel>(a, b));
     this.store.setState({
       ...currentState,
       chats: data,
