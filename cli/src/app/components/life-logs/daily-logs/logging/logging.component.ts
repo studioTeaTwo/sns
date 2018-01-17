@@ -5,6 +5,7 @@ import { DailyLogService } from 'app/shared/services/api';
 
 export enum DisplayState {
   HEALTH,
+  MEDICINA,
   PICTURE,
   BACK,
 }

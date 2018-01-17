@@ -24,22 +24,27 @@ import { ChatComponent } from 'app/components/chats/chat/chat.component';
 import { DisplayState } from 'app/components/life-logs/daily-logs/logging/logging.component';
 import { addChat, addChatAndFocus, NAVI_THREAD } from '../shared/chat-operation.function';
 
+enum STEP {
+  MEDICINA_YESNO,
+  MEMO_YESNO,
+}
+
 @Component({
-  selector: 'app-step-health',
+  selector: 'app-step-medicina',
   templateUrl: '../../components/chats/chat/chat.component.html',
   styleUrls: ['../../components/chats/chat/chat.component.scss'],
   animations: [
     trigger('wholeanimation', []) // ダミー
   ]
 })
-export class StepHealthComponent extends ChatComponent implements OnInit {
+export class StepMedicinaComponent extends ChatComponent implements OnInit {
   @ViewChild('replyText') inputElm: ElementRef;
   chatSource: Subject<ChatViewModel[]>;
   chatHistory: ChatViewModel[] = [];
 
   @Output() completed = new EventEmitter();
 
-  private selectedResult: number;
+  private step: number;
   private emitClick = () => setTimeout(() => this.inputElm.nativeElement.click(), 0);
 
   constructor(
@@ -73,97 +78,72 @@ export class StepHealthComponent extends ChatComponent implements OnInit {
 
     this.toggleReplyText(false);
 
-    // TODO: アンケートの初期化をもうちょいちゃんとやる
-    daily_log_script2[0].result = '';
-
+    this.step = STEP.MEDICINA_YESNO;
     addChat({
       body: daily_log_script1,
-      waitTime: 0
+      waitTime: 0,
+      tmp: true,
     }, this.chatHistory, this.chatSource);
-    addChat({
-      body: daily_log_script2,
-      waitTime: 1000
-    }, this.chatHistory, this.chatSource);
-  }
-
-  onChangeRadio(item: any) {
-    this.selectedResult = item.id;
-    daily_log_script2[0].result = item.name;
-    this.dailyLogService.saveHealth(item);
-
-    this.createReply(item);
   }
 
   onClickYes() {
-    this.toggleReplyText(true);
+    switch (this.step) {
+      case STEP.MEDICINA_YESNO:
+        this.dailyLogService.saveMedicina(true);
+
+        this.step = STEP.MEMO_YESNO;
+        addChat({
+          body: daily_log_script2,
+          waitTime: 0
+        }, this.chatHistory, this.chatSource);
+        break;
+
+      case STEP.MEMO_YESNO:
+        this.toggleReplyText(true);
+        break;
+    }
   }
 
   onClickNo() {
-    // 次のステップへ
-    this.completed.emit(DisplayState.MEDICINA);
+    switch (this.step) {
+      case STEP.MEDICINA_YESNO:
+        this.dailyLogService.saveMedicina(false);
+
+        this.step = STEP.MEMO_YESNO;
+        addChat({
+          body: daily_log_script2,
+          waitTime: 0
+        }, this.chatHistory, this.chatSource);
+        break;
+
+      case STEP.MEMO_YESNO:
+        // 次のステップへ
+        this.completed.emit(DisplayState.PICTURE);
+        break;
+    }
+
   }
 
   onClickReply(text: string) {
-    this.dailyLogService.saveHealthMemo(text);
+    this.dailyLogService.saveMedicinaMemo(text);
     // 次のステップへ
-    this.completed.emit(DisplayState.MEDICINA);
+    this.completed.emit(DisplayState.PICTURE);
   }
 
-  private createReply(result: any) {
-    const body = result.name + 'です。<br/>';
-    const reply: ChatViewModel[] = [{
-      id: 4,
-      senderId: this.myself.id,
-      contentType: CONTENT_TYPE.REPLY,
-      body: this.sanitizer.bypassSecurityTrustHtml(body),
-      createdAt: new Date().toString()
-    }];
-
-    addChat({
-      body: reply.concat(daily_log_script３),
-      waitTime: 0,
-      tmp: true
-    }, this.chatHistory, this.chatSource);
-    setTimeout(() => this.scrollToBottom(), 0);
-  }
 }
 
 const daily_log_script1: ChatViewModel[] = [
   {
     id: 1,
     senderId: NAVI_CHARA.id,
-    contentType: CONTENT_TYPE.REPLY,
-    body: '今日の調子はどうだった？',
+    contentType: CONTENT_TYPE.YESNO,
+    body: '薬はちゃんと服用した？',
     createdAt: new Date().toString()
   },
 ];
 const daily_log_script2: ChatViewModel[] = [
   {
     id: 2,
-    senderId: NAVI_CHARA.id,
-    contentType: CONTENT_TYPE.RADIOBUTTON,
-    body: 'さあ記録しよう！まずは気分を聞かせて',
-    itemList: [
-      {
-        id: 1,
-        name: '😄',
-      },
-      {
-        id: 2,
-        name: '☺️',
-      },
-      {
-        id: 3,
-        name: '😥',
-      },
-    ],
-    result: '',
-    createdAt: new Date().toString()
-  },
-];
-const daily_log_script３: ChatViewModel[] = [
-  {
-    id: 3,
     senderId: NAVI_CHARA.id,
     contentType: CONTENT_TYPE.YESNO,
     body: 'そうなんだ！何かメモしておく？（後でもできるよ）',

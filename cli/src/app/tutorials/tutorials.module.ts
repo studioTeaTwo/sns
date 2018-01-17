@@ -8,6 +8,7 @@ import { StepTypeComponent } from './signup-steps/step_type.component';
 import { StepSymptomComponent } from './signup-steps/step_symptom.component';
 import { StepEmailComponent } from './signup-steps/step_email.component';
 import { StepHealthComponent } from './daily-log-steps/step-health.component';
+import { StepMedicinaComponent } from './daily-log-steps/step-medicina.component';
 import { StepPictureComponent } from './daily-log-steps/step-picture.component';
 
 @NgModule({
@@ -22,6 +23,7 @@ import { StepPictureComponent } from './daily-log-steps/step-picture.component';
     StepSymptomComponent,
     StepEmailComponent,
     StepHealthComponent,
+    StepMedicinaComponent,
     StepPictureComponent,
   ],
   exports: [
@@ -30,6 +32,7 @@ import { StepPictureComponent } from './daily-log-steps/step-picture.component';
     StepSymptomComponent,
     StepEmailComponent,
     StepHealthComponent,
+    StepMedicinaComponent,
     StepPictureComponent,
   ]
 })

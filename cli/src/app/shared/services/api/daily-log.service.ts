@@ -105,6 +105,14 @@ export class DailyLogService {
     this.dailyLogParam.healthMemo = text;
   }
 
+  saveMedicina(item: boolean) {
+    this.dailyLogParam.medicina = item;
+  }
+
+  saveMedicinaMemo(text: string) {
+    this.dailyLogParam.medicinaMemo = text;
+  }
+
   savePhotograph(data: string) {
     this.dailyLogParam.photograph.push(data);
   }
