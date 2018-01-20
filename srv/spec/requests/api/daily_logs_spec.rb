@@ -39,6 +39,7 @@ RSpec.describe "Api::DailyLogs", type: :request do
     it "saves the new record in the database" do
       expect(DailyLog.count).to eq 2
       expect(Experience.count).to eq 1
+      expect(Experience.first.activity_type).to eq 'DailyLog'
     end
 
     it "completed today's check" do

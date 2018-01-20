@@ -37,6 +37,8 @@ RSpec.describe "Api::Users", type: :request do
       expect(User.first.atopic).to be true
       expect(PersonalAssistant.count).to eq 1
       expect(PersonalAssistant.first.user_id).to eq User.first.id
+      expect(Experience.count).to eq 1
+      expect(Experience.first.activity_type).to eq 'User'
     end
   end
 

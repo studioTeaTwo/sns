@@ -28,9 +28,10 @@ class Api::Users::UsersController < ApplicationController
       @user.save!
       @personal_assistant.save!
       createChatThread(@user)
+      record_experience(@user)
     end
     render json: @user, serializer: Rest::UserSerializer, sort: :session
-  rescue
+  rescue => e
     puts @user.errors.full_messages
     render json: { error: @user.errors.full_messages }, status: :unprocessable_entity
   end
@@ -48,7 +49,7 @@ class Api::Users::UsersController < ApplicationController
       if password_params.present?
         if current_user.update_with_password(password_params)
           # パスワードを変更するとログアウトしてしまうので、再ログインが必要
-          sign_in(current_user, bypass: true)
+          bypass_sign_in(current_user)
         else
           raise StandardError.new
         end
@@ -60,6 +61,7 @@ class Api::Users::UsersController < ApplicationController
       end
     end
   rescue => e
+    puts e
     render json: { error: @user.errors.full_messages }, status: :unprocessable_entity
   end
 
@@ -171,5 +173,9 @@ class Api::Users::UsersController < ApplicationController
         main_params = user_params
       end
       return main_params, password_params
+    end
+
+    def record_experience(user)
+      user.create_experience(user_id: user.id)
     end
 end

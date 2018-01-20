@@ -2,7 +2,8 @@ class Experience < ApplicationRecord
 
   TYPE_CLASS_MAP = {
     daily_log: 'DailyLog',
-    relationship: 'Relationship'
+    relationship: 'Relationship',
+    user: 'User'
   }.freeze
 
   belongs_to :user
@@ -13,6 +14,7 @@ class Experience < ApplicationRecord
   # https://github.com/studioTeaTwo/mastodon/blob/master/app/models/notification.rb
   # belongs_to :daily_log, foreign_type: 'DailyLog', foreign_key: 'activity_id'
   # belongs_to :relationship, foreign_type: 'Relationship', foreign_key: 'activity_id'
+  # belongs_to :user, foreign_type: 'User', foreign_key: 'activity_id'
 
   # Relationshipは複数回がありうる
   # validates :user_id, uniqueness: { scope: [:activity_type, :activity_id] }

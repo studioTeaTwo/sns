@@ -16,6 +16,7 @@ RSpec.describe "Api::Users::Relationships", type: :request do
       }.to change(Relationship, :count).by(1)
       expect(Notification.count).to eq 1
       expect(Experience.count).to eq 1
+      expect(Experience.first.activity_type).to eq 'Relationship'
     end
   end
 

@@ -34,6 +34,10 @@ class Api::Feed::ExperiencesController < ApplicationController
             user = current_user
             link_id = item.activity_id.to_s
             description = "治療日記を付けました！"
+          elsif (item.activity_type == 'User')
+            user = current_user
+            link_id = item.activity_id.to_s
+            description = "アレルギー王国に入国しました！"
           end
 
           experience = {}

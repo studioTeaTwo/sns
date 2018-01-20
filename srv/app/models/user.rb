@@ -20,6 +20,7 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :follower
   has_many :daily_logs
   has_many :iges
+  has_one :experience, as: :activity # experienceはdestroyしない
   has_many :experiences, dependent: :destroy
   has_many :notifications, dependent: :destroy
   
