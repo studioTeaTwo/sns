@@ -70,7 +70,7 @@ export class HomeComponent implements OnInit {
 
   private createBeginnerAdvice() {
     this.accountService.get().subscribe(user => {
-      if (user.selfIntroduction.length === 0) {
+      if (!user.selfIntroduction || user.selfIntroduction.length === 0) {
         this.beginners.push({
           type: 'selfIntroduction',
           description: '自己紹介を記入しよう',

@@ -18,7 +18,7 @@ export class SettingComponent implements OnInit {
   readonly SymptomName = SymptomName;
 
   account: User;
-  password = '';
+  oldPassword = '';
   rePassword = '';
   currentPassword = '';
 
@@ -42,24 +42,24 @@ export class SettingComponent implements OnInit {
   }
 
   onChangePassword() {
-    if (this.password.length === 0) {
+    if (this.oldPassword.length === 0) {
       this.isErrorPassword = false;
       this.isErrorRePassword = false;
       return;
     }
-    this.isErrorPassword = !this.accountService.passwordValidator(this.password);
-    this.isErrorRePassword = this.password !== this.rePassword;
+    this.isErrorPassword = !this.accountService.passwordValidator(this.oldPassword);
+    this.isErrorRePassword = this.oldPassword !== this.rePassword;
   }
 
   onChangeRePassword() {
-    this.isErrorRePassword = this.password !== this.rePassword;
+    this.isErrorRePassword = this.oldPassword !== this.rePassword;
   }
 
   update(form: NgForm) {
     if (form.invalid || this.isErrorRePassword) {
       return;
     }
-    this.accountService.update(this.account, this.password, this.currentPassword).subscribe(() => {
+    this.accountService.update(this.account, this.oldPassword, this.currentPassword).subscribe(() => {
       this.snackBar.open('変更しました！', null, {
         duration: 2000,
       });

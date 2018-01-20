@@ -8,19 +8,19 @@
     <span class="textfield-error" *ngIf="isErrorEmail">入力内容を見直してください</span>
   </mat-form-field>
   <mat-form-field class="setting-input setting-input-password">
-    <input type="password" name="password" matInput placeholder="新しいパスワード" [(ngModel)]="password" (change)="onChangePassword()" />
+    <input type="password" name="oldPassword" matInput placeholder="新しいパスワード" [(ngModel)]="oldPassword" (change)="onChangePassword()" autocomplete="new-password" />
     <span class="textfield-error" *ngIf="isErrorPassword">英数字6文字以上にしてください</span>
   </mat-form-field>
-  <mat-form-field class="setting-input setting-input-password" *ngIf="password.length > 0">
-    <input type="password" name="rePassword" matInput placeholder="パスワード再確認" #rePasswordRef="ngModel" required
+  <mat-form-field class="setting-input setting-input-password" *ngIf="oldPassword.length > 0">
+    <input type="password" name="rePassword" matInput placeholder="パスワード再確認" #rePasswordRef="ngModel" required autocomplete="new-password"
       [(ngModel)]="rePassword"
       (change)="onChangeRePassword()"
     />
     <span class="textfield-error" *ngIf="rePasswordRef.hasError('required')">必須です</span>
     <span class="textfield-error" *ngIf="isErrorRePassword">パスワードが一致しません</span>
   </mat-form-field>
-  <mat-form-field class="setting-input setting-input-password" *ngIf="password.length > 0">
-    <input type="password" name="currentPassword" matInput placeholder="今のパスワード" #currentPasswordRef="ngModel" required
+  <mat-form-field class="setting-input setting-input-password" *ngIf="oldPassword.length > 0">
+    <input type="password" name="currentPassword" matInput placeholder="今のパスワード" #currentPasswordRef="ngModel" required autocomplete="new-password"
       [(ngModel)]="currentPassword"
     />
     <span class="textfield-error" *ngIf="currentPasswordRef.hasError('required')">必須です</span>
