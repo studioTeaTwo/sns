@@ -51,7 +51,8 @@
     {  
       "src": "\/assets\/images\/android-chrome-384x384.png",  
       "sizes": "384x384",  
-      "type": "image/png"  
+      "type": "image/png",
+      "density": "8.0"
     },  
     {  
       "src": "\/assets\/images\/android-chrome-512x512.png",  
