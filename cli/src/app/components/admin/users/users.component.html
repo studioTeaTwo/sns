@@ -1,0 +1,18 @@
+<table>
+  <thead>
+    <tr>
+      <td>名前</td>
+      <td>登録日</td>
+      <td>メールアドレス</td>
+      <td>分類</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of (users | async)">
+      <td><a [routerLink]="['/user', user.id]">{{user.name}}</a></td>
+      <td>{{user.createdAt | formatToJapaneseDate}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.classification}}</td>
+    </tr>
+  </tbody>
+</table>

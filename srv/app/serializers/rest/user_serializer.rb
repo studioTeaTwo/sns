@@ -3,6 +3,7 @@
 # @attr [integer] id
 # @attr [string] email
 # @attr [string] name
+# @attr [boolean] admin
 # @attr [string] selfIntroduction
 # @attr [integer] rank
 # @attr [integer] titleOfHonor
@@ -18,7 +19,7 @@
 # @attr [date-time] createdAt
 class Rest::UserSerializer < ActiveModel::Serializer
 
-  attributes :id, :email, :name, :self_introduction, :rank, :title_of_honor,
+  attributes :id, :email, :name, :admin, :self_introduction, :rank, :title_of_honor,
              :classification, :atopic, :asthma, :rhinitis, :pollen, :gastroenteritis, :conjunctivitis,
              :avatar_url, :created_at
   attribute :access_token if :session?

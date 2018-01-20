@@ -1,27 +1,18 @@
 import { TestBed, async, inject } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { AuthGuard } from './auth.guard';
-
-import { Store } from 'app/shared/store/store';
-import {
-  ApiBaseService,
-  AccountService,
-} from 'app/shared/services/api';
+import { AdminGuard } from './admin.guard';
+import { AccountService } from 'app/shared/services/api';
 import { MockAccountService } from 'app/mock/api/mock-account-service';
 
-describe('AuthGuard', () => {
+describe('AdminGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        HttpClientTestingModule,
         RouterTestingModule,
       ],
       providers: [
-        AuthGuard,
-        Store,
-        ApiBaseService,
+        AdminGuard,
         {
           provide: AccountService,
           useClass: MockAccountService
@@ -30,7 +21,7 @@ describe('AuthGuard', () => {
     });
   });
 
-  it('should ...', inject([AuthGuard], (guard: AuthGuard) => {
+  it('should ...', inject([AdminGuard], (guard: AdminGuard) => {
     expect(guard).toBeTruthy();
   }));
 });

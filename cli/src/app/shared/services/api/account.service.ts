@@ -85,6 +85,7 @@ export class AccountService {
         this.onSuccessAccount(myself);
         return Observable.of(myself);
       } else {
+        // 通信するのではなくログインし直すべきである
         return Observable.throw(new Error());
       }
     }

@@ -5,6 +5,7 @@ import { TopComponent } from 'app/components/navigations/top/top.component';
 import { HomeComponent } from 'app/components/home/home.component';
 import { ContactComponent } from 'app/components/navigations/contact/contact.component';
 import { AuthGuard } from 'app/shared/guards/auth.guard';
+import { AdminGuard } from 'app/shared/guards/admin.guard';
 
 const routes: Routes = [
   {
@@ -45,6 +46,11 @@ const routes: Routes = [
   {
     path: 'contact',
     component: ContactComponent,
+  },
+  {
+    path: 'admin',
+    canActivate: [ AdminGuard ],
+    loadChildren: './components/admin/admin.module#AdminModule'
   }
 ];
 

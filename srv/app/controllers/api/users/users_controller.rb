@@ -2,7 +2,16 @@
 class Api::Users::UsersController < ApplicationController 
   skip_before_action :logged_in_user, only: [:create, :verify_email]
   before_action :correct_user, only: :update
-  before_action :admin_user, only: :destroy
+  before_action :admin_user, only: [:index, :destroy]
+
+  # Returns the list of users
+  #
+  # @response_status 200
+  # @response_class Array<Rest::UserSerializer>
+  def index
+    @users = User.all.order("updated_at DESC")
+    render json: @users, each_serializer: Rest::UserSerializer
+  end
 
   # Returns a user
   #

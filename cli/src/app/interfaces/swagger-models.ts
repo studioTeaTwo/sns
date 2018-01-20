@@ -645,6 +645,7 @@ export interface User {
     id?: number; // int32
     email?: string;
     name?: string;
+    admin?: boolean;
     selfIntroduction?: string;
     rank?: number; // int32
     titleOfHonor?: number; // int32

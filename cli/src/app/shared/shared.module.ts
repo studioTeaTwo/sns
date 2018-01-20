@@ -22,6 +22,7 @@ import {
   ShortenTextPipe,
 } from './pipes';
 import { AuthGuard } from 'app/shared/guards/auth.guard';
+import { AdminGuard } from 'app/shared/guards/admin.guard';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 
 @NgModule({
@@ -71,6 +72,7 @@ export class SharedModule {
         UserService,
 
         AuthGuard,
+        AdminGuard,
       ]
     };
   }

@@ -6,6 +6,21 @@ RSpec.describe "Api::Users", type: :request do
   let(:another_user) { create(:another_user) }
   let(:admin_user) { create(:admin_user) }
 
+  describe "GET /api/users" do
+    it "works!" do
+      get api_users_path, headers: { 'Authorization' => "#{admin_user.access_token}" }
+      expect(response).to have_http_status(:success)
+      expect(json.length).to eq(1)
+    end
+
+    context "when current user is not admin" do
+      it "should be error" do
+        get api_users_path, headers: { 'Authorization' => "#{current_user.access_token}" }
+        expect(response).to have_http_status(:forbidden)
+      end
+    end
+  end
+
   describe "GET /api/users/:id" do
     it "works!" do
       get api_user_path(another_user), headers: { 'Authorization' => "#{current_user.access_token}" }

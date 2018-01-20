@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Store } from 'app/shared/store/store';
 import {
-  Profile, RelationshipRequestBody,
+  Profile, RelationshipRequestBody, User,
 } from 'app/interfaces/api-models';
 import { ApiBaseService } from 'app/shared/services/api/api-base.service';
 
@@ -15,6 +15,16 @@ export class UserService {
     private store: Store,
     private apiBaseService: ApiBaseService,
   ) { }
+
+  list() {
+    this.apiBaseService.resetBeforeRequest({users: []});
+    this.httpClient.get<User[]>(`/api/users`)
+      .subscribe(
+        response => {
+          this.onSuccessUsers(response);
+        }
+      );
+  }
 
   getProfile(userId: string) {
     this.apiBaseService.resetBeforeRequest({profile: {}});
@@ -95,6 +105,16 @@ export class UserService {
           this.apiBaseService.onNotFound({searchUsers: []});
         }
       );
+  }
+
+  private onSuccessUsers(data: User[]) {
+    const currentState = this.store.getState();
+    this.store.setState({
+      ...currentState,
+      users: data,
+      loading: false,
+      error: false,
+    });
   }
 
   private onSuccessProfile(data: Profile) {

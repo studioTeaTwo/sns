@@ -25,6 +25,9 @@ const initialState = {
     loading: false,
     error: false,
     errorMsg: '',
+
+    // 開発用メニュー
+    users: [],
 };
 
 // ここに置かないと同一ストリーム内で何度も変える時（loadingなど）にdistinctUntilChanged()が効かなくなる
