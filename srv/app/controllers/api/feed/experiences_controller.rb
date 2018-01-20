@@ -70,10 +70,11 @@ class Api::Feed::ExperiencesController < ApplicationController
           experiences.each do |item|
 
             if (item.activity_type == 'Relationship')
-              follower = Relationship.find(item.activity_id)
-              user = User.find(follower.follower_id)
+              relation = Relationship.find(item.activity_id)
+              user = User.find(relation.followed_id)
+              follower = User.find(relation.follower_id)
               link_id = user.id.to_s
-              description = "#{user.name}さんにフォローされたよ！"
+              description = "#{follower.name}さんにフォローされたよ！"
             elsif (item.activity_type == 'DailyLog')
               user = User.find(item.user_id)
               link_id = item.activity_id.to_s
