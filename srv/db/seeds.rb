@@ -132,8 +132,8 @@ end
 
 # リレーションシップ
 users = User.all
-user  = users.first
+user  = users.find(2)
 following = users[2..50]
-followers = users[3..40]
+followers = users[3..90]
 following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }

@@ -2,15 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
+import * as Moment from 'moment';
 
 import { Store } from 'app/shared/store/store';
 import { FriendExperienceStrongParameter, NotificationViewModel, Notification } from 'app/interfaces/api-models';
-import { FeedService } from 'app/shared/services/api';
+import { FeedService, AccountService } from 'app/shared/services/api';
 
 interface Experience {
   date: string;
   name: string;
   activity: string;
+}
+interface BeginnerAdvice {
+  type: string;
+  description: string;
 }
 
 @Component({
@@ -22,6 +27,7 @@ export class HomeComponent implements OnInit {
 
   // 通知
   notifications$ = this.store.select<NotificationViewModel[]>(state => state.notificationList);
+  beginners: BeginnerAdvice[] = [];
 
   // 経験
   myExperienceDataSource: ExperienceDataSource | null;
@@ -32,6 +38,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private router: Router,
     private store: Store,
+    private accountService: AccountService,
     private feedService: FeedService,
   ) { }
 
@@ -40,6 +47,8 @@ export class HomeComponent implements OnInit {
     this.feedService.listExperiences();
     this.myExperienceDataSource = new ExperienceDataSource(this.store.select<Notification[]>(state => state.experienceList.mine));
     this.friendExperienceDataSource = new ExperienceDataSource(this.store.select<Notification[]>(state => state.experienceList.friend));
+
+    this.createBeginnerAdvice();
   }
 
   onClickNotification(value: NotificationViewModel) {
@@ -51,6 +60,23 @@ export class HomeComponent implements OnInit {
       this.feedService.readNotification(value.id);
       this.router.navigateByUrl(`/user/${value.linkId}`);
     }
+  }
+
+  onClickBeginner(beginner: BeginnerAdvice) {
+    if (beginner.type === 'selfIntroduction') {
+      this.router.navigateByUrl(`/user/setting`);
+    }
+  }
+
+  private createBeginnerAdvice() {
+    this.accountService.get().subscribe(user => {
+      if (user.selfIntroduction.length === 0) {
+        this.beginners.push({
+          type: 'selfIntroduction',
+          description: '自己紹介を記入しよう',
+        });
+      }
+    });
   }
 }
 

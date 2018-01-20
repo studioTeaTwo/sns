@@ -10,6 +10,7 @@ import {
   AccountService,
   ChatService,
  } from 'app/shared/services/api';
+import { MockAccountService } from 'app/mock/api/mock-account-service';
 
 describe('TopComponent', () => {
   let component: TopComponent;
@@ -25,7 +26,10 @@ describe('TopComponent', () => {
       providers: [
         Store,
         ApiBaseService,
-        AccountService,
+        {
+          provide: AccountService,
+          useClass: MockAccountService
+        },
         ChatService,
       ]
     })

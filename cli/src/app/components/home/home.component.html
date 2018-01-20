@@ -1,5 +1,6 @@
 <section id="home-header">
   <div class="home-notification">
+    <img src="assets/images/beginner.png" width="20" *ngIf="beginners.length > 0" [matMenuTriggerFor]="beginner"/>
     <span [attr.data-badge-notification]="(notifications$ | async).length" [matMenuTriggerFor]="notification">
       <mat-icon>notifications</mat-icon>
     </span>
@@ -14,6 +15,15 @@
       <span>{{notification.description}}</span>
     </a>
     <span *ngIf="(notifications$ | async).length === 0" class="home-notification-message">通知がありません</span>
+  </mat-menu>
+
+  <mat-menu #beginner="matMenu">
+    <a mat-menu-item *ngFor="let beginner of beginners"
+      routerLinkActive="active"
+      (click)="onClickBeginner(beginner)"
+    >
+      <span>{{beginner.description}}</span>
+    </a>
   </mat-menu>
 </section>
 

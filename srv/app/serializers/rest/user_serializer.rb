@@ -15,11 +15,12 @@
 # @attr [boolean] conjunctivitis
 # @attr [string] avatarUrl
 # @attr [string] accessToken
+# @attr [date-time] createdAt
 class Rest::UserSerializer < ActiveModel::Serializer
 
   attributes :id, :email, :name, :self_introduction, :rank, :title_of_honor,
              :classification, :atopic, :asthma, :rhinitis, :pollen, :gastroenteritis, :conjunctivitis,
-             :avatar_url
+             :avatar_url, :created_at
   attribute :access_token if :session?
 
   def avatar_url

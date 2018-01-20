@@ -657,6 +657,7 @@ export interface User {
     conjunctivitis?: boolean;
     avatarUrl?: string;
     accessToken?: string;
+    createdAt?: string; // date-time
 }
 export interface UserRequestBody {
     user?: UserStrongParameter;
