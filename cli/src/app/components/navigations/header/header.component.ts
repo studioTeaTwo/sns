@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { User } from 'app/interfaces/api-models';
 import { AccountService } from 'app/shared/services/api';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-header',
@@ -33,6 +34,10 @@ export class HeaderComponent implements OnInit {
   isLogin(): boolean {
     const token = localStorage.getItem('token');
     return token && token.length > 0;
+  }
+
+  isAdmin(): Observable<User> {
+    return this.accountService.get();
   }
 
   logout() {

@@ -17,11 +17,12 @@
 # @attr [string] avatarUrl
 # @attr [string] accessToken
 # @attr [date-time] createdAt
+# @attr [date-time] currentSignInAt
 class Rest::UserSerializer < ActiveModel::Serializer
 
   attributes :id, :email, :name, :admin, :self_introduction, :rank, :title_of_honor,
              :classification, :atopic, :asthma, :rhinitis, :pollen, :gastroenteritis, :conjunctivitis,
-             :avatar_url, :created_at
+             :avatar_url, :created_at, :current_sign_in_at
   attribute :access_token if :session?
 
   def avatar_url

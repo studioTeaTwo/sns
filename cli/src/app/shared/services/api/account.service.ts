@@ -75,7 +75,6 @@ export class AccountService {
   }
 
   get(): Observable<User> {
-    this.apiBaseService.resetBeforeRequest({profile: {}});
     let myself = this.store.getState().account;
     if (myself && myself.id) {
       return Observable.of(this.store.getState().account);

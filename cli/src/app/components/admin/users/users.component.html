@@ -3,6 +3,7 @@
     <tr>
       <td>名前</td>
       <td>登録日</td>
+      <td>最新ログイン</td>
       <td>メールアドレス</td>
       <td>分類</td>
     </tr>
@@ -10,7 +11,8 @@
   <tbody>
     <tr *ngFor="let user of (users | async)">
       <td><a [routerLink]="['/user', user.id]">{{user.name}}</a></td>
-      <td>{{user.createdAt | formatToJapaneseDate}}</td>
+      <td>{{user.createdAt | date:'yyy/MM/dd HH:mm'}}</td>
+      <td>{{user.currentSignInAt | date:'yyy/MM/dd HH:mm'}}</td>
       <td>{{user.email}}</td>
       <td>{{user.classification}}</td>
     </tr>

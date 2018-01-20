@@ -1,8 +1,17 @@
 <header>
   <a class="title-logo" routerLink="/" routerLinkActive="active">ALLERGY LOG</a>
+  <button *ngIf="(isAdmin() | async).admin" class="header-menu-button" mat-icon-button [matMenuTriggerFor]="adminmeu">
+    <mat-icon style="color: red">settings</mat-icon>
+  </button>
   <button class="header-menu-button" mat-icon-button [matMenuTriggerFor]="menu">
     <mat-icon>more_vert</mat-icon>
   </button>
+
+  <mat-menu #adminmeu="matMenu">
+    <button mat-menu-item routerLink="/admin/users">
+      <span>ユーザー一覧</span>
+    </button>
+  </mat-menu>
 
   <mat-menu #menu="matMenu">
     <div class="menu-login" *ngIf="isLogin()">

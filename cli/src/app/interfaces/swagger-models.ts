@@ -659,6 +659,7 @@ export interface User {
     avatarUrl?: string;
     accessToken?: string;
     createdAt?: string; // date-time
+    currentSignInAt?: string; // date-time
 }
 export interface UserRequestBody {
     user?: UserStrongParameter;
