@@ -101,7 +101,7 @@ export class HomeComponent implements OnInit {
           description: '自己紹介を記入しよう',
         });
       }
-      if (!this.hasAllergenGroup(user)) {
+      if ((user.classification === 1 || user.classification === 2) && !this.hasAllergenGroup(user)) {
         this.beginners.push({
           type: 'allergenGroup',
           description: 'アレルゲンを記入しよう',
