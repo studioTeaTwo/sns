@@ -32,6 +32,10 @@ User.create!(
   self_introduction: "自己紹介が入ります。自己紹介が入ります。自己紹介が入ります。",
   classification: 1,
   atopic: true,
+  allergen_group_chiri: true,
+  allergen_group_dani: true,
+  allergen_group_saikin: true,
+  allergen_group_komugi: true,
   admin: true
 )
 PersonalAssistant.create!(
@@ -65,7 +69,7 @@ Ige.create!(
               allergen_group_chiri: true,
               allergen_group_dani: true,
               allergen_group_saikin: true,
-              allergen_group_komugi: true
+              allergen_group_yasai: true
               )
 end
 
@@ -89,6 +93,10 @@ end
                title_of_honor: Random.rand(10 .. 14),
                classification: Random.rand(1 .. 4),
                atopic: true,
+               allergen_group_chiri: true,
+               allergen_group_dani: true,
+               allergen_group_gyorui: true,
+               allergen_group_inekakafun: true
               )
   # パーソナルアシスタントの作成
   PersonalAssistant.create!(

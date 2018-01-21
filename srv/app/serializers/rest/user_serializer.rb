@@ -14,15 +14,63 @@
 # @attr [boolean] pollen
 # @attr [boolean] gastroenteritis
 # @attr [boolean] conjunctivitis
+# @attr [boolean] allergenGroupInekakafun
+# @attr [boolean] allergenGroupZassoukafun
+# @attr [boolean] allergenGroupJyukikafun
+# @attr [boolean] allergenGroupChiri
+# @attr [boolean] allergenGroupDani
+# @attr [boolean] allergenGroupShinkin
+# @attr [boolean] allergenGroupSaikin
+# @attr [boolean] allergenGroupDoubutsu
+# @attr [boolean] allergenGroupSyokugyou
+# @attr [boolean] allergenGroupTamago
+# @attr [boolean] allergenGroupNyuuseihin
+# @attr [boolean] allergenGroupGyorui
+# @attr [boolean] allergenGroupKoukakurui
+# @attr [boolean] allergenGroupIkatako
+# @attr [boolean] allergenGroupKomugi
+# @attr [boolean] allergenGroupKomugiigai
+# @attr [boolean] allergenGroupNikurui
+# @attr [boolean] allergenGroupMamerui
+# @attr [boolean] allergenGroupKudamonorui
+# @attr [boolean] allergenGroupYasai
+# @attr [boolean] allergenGroupSonota
+# @attr [boolean] allergenGroupKiseityuu
+# @attr [boolean] allergenGroupYakubutsu
+# @attr [boolean] allergenGroupKontyuu
 # @attr [string] avatarUrl
 # @attr [string] accessToken
 # @attr [date-time] createdAt
 # @attr [date-time] currentSignInAt
 class Rest::UserSerializer < ActiveModel::Serializer
 
-  attributes :id, :email, :name, :admin, :self_introduction, :rank, :title_of_honor,
-             :classification, :atopic, :asthma, :rhinitis, :pollen, :gastroenteritis, :conjunctivitis,
-             :avatar_url, :created_at, :current_sign_in_at
+  attributes  :id, :email, :name, :admin, :self_introduction, :rank, :title_of_honor,
+              :classification, :atopic, :asthma, :rhinitis, :pollen, :gastroenteritis, :conjunctivitis,
+              :allergen_group_inekakafun,
+              :allergen_group_zassoukafun,
+              :allergen_group_jyukikafun,
+              :allergen_group_chiri,
+              :allergen_group_dani,
+              :allergen_group_shinkin,
+              :allergen_group_saikin,
+              :allergen_group_doubutsu,
+              :allergen_group_syokugyou,
+              :allergen_group_tamago,
+              :allergen_group_nyuuseihin,
+              :allergen_group_gyorui,
+              :allergen_group_koukakurui,
+              :allergen_group_ikatako,
+              :allergen_group_komugi,
+              :allergen_group_komugiigai,
+              :allergen_group_nikurui,
+              :allergen_group_mamerui,
+              :allergen_group_kudamonorui,
+              :allergen_group_yasai,
+              :allergen_group_sonota,
+              :allergen_group_kiseityuu,
+              :allergen_group_yakubutsu,
+              :allergen_group_kontyuu,
+              :avatar_url, :created_at, :current_sign_in_at
   attribute :access_token if :session?
 
   def avatar_url

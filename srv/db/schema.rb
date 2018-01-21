@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20180102030110) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["chat_thread_id"], name: "index_chat_statuses_on_chat_thread_id"
+    t.index ["has_unread"], name: "index_chat_statuses_on_has_unread"
     t.index ["user_id"], name: "index_chat_statuses_on_user_id"
   end
 
@@ -65,6 +66,7 @@ ActiveRecord::Schema.define(version: 20180102030110) do
     t.integer "user_id"
     t.integer "activity_id"
     t.string "activity_type"
+    t.integer "from_user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id", "activity_id", "activity_type"], name: "self_experience", unique: true
@@ -339,8 +341,12 @@ ActiveRecord::Schema.define(version: 20180102030110) do
     t.integer "user_id"
     t.integer "activity_id"
     t.string "activity_type"
+    t.integer "from_user_id"
+    t.boolean "is_read", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["is_read"], name: "index_notifications_on_is_read"
+    t.index ["user_id", "activity_id", "activity_type"], name: "self_notification", unique: true
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
@@ -397,8 +403,56 @@ ActiveRecord::Schema.define(version: 20180102030110) do
     t.boolean "pollen", default: false
     t.boolean "gastroenteritis", default: false
     t.boolean "conjunctivitis", default: false
+    t.boolean "allergen_group_inekakafun", default: false
+    t.boolean "allergen_group_zassoukafun", default: false
+    t.boolean "allergen_group_jyukikafun", default: false
+    t.boolean "allergen_group_chiri", default: false
+    t.boolean "allergen_group_dani", default: false
+    t.boolean "allergen_group_shinkin", default: false
+    t.boolean "allergen_group_saikin", default: false
+    t.boolean "allergen_group_doubutsu", default: false
+    t.boolean "allergen_group_syokugyou", default: false
+    t.boolean "allergen_group_tamago", default: false
+    t.boolean "allergen_group_nyuuseihin", default: false
+    t.boolean "allergen_group_gyorui", default: false
+    t.boolean "allergen_group_koukakurui", default: false
+    t.boolean "allergen_group_ikatako", default: false
+    t.boolean "allergen_group_komugi", default: false
+    t.boolean "allergen_group_komugiigai", default: false
+    t.boolean "allergen_group_nikurui", default: false
+    t.boolean "allergen_group_mamerui", default: false
+    t.boolean "allergen_group_kudamonorui", default: false
+    t.boolean "allergen_group_yasai", default: false
+    t.boolean "allergen_group_sonota", default: false
+    t.boolean "allergen_group_kiseityuu", default: false
+    t.boolean "allergen_group_yakubutsu", default: false
+    t.boolean "allergen_group_kontyuu", default: false
     t.string "access_token"
     t.index ["admin"], name: "index_users_on_admin"
+    t.index ["allergen_group_chiri"], name: "index_users_on_allergen_group_chiri"
+    t.index ["allergen_group_dani"], name: "index_users_on_allergen_group_dani"
+    t.index ["allergen_group_doubutsu"], name: "index_users_on_allergen_group_doubutsu"
+    t.index ["allergen_group_gyorui"], name: "index_users_on_allergen_group_gyorui"
+    t.index ["allergen_group_ikatako"], name: "index_users_on_allergen_group_ikatako"
+    t.index ["allergen_group_inekakafun"], name: "index_users_on_allergen_group_inekakafun"
+    t.index ["allergen_group_jyukikafun"], name: "index_users_on_allergen_group_jyukikafun"
+    t.index ["allergen_group_kiseityuu"], name: "index_users_on_allergen_group_kiseityuu"
+    t.index ["allergen_group_komugi"], name: "index_users_on_allergen_group_komugi"
+    t.index ["allergen_group_komugiigai"], name: "index_users_on_allergen_group_komugiigai"
+    t.index ["allergen_group_kontyuu"], name: "index_users_on_allergen_group_kontyuu"
+    t.index ["allergen_group_koukakurui"], name: "index_users_on_allergen_group_koukakurui"
+    t.index ["allergen_group_kudamonorui"], name: "index_users_on_allergen_group_kudamonorui"
+    t.index ["allergen_group_mamerui"], name: "index_users_on_allergen_group_mamerui"
+    t.index ["allergen_group_nikurui"], name: "index_users_on_allergen_group_nikurui"
+    t.index ["allergen_group_nyuuseihin"], name: "index_users_on_allergen_group_nyuuseihin"
+    t.index ["allergen_group_saikin"], name: "index_users_on_allergen_group_saikin"
+    t.index ["allergen_group_shinkin"], name: "index_users_on_allergen_group_shinkin"
+    t.index ["allergen_group_sonota"], name: "index_users_on_allergen_group_sonota"
+    t.index ["allergen_group_syokugyou"], name: "index_users_on_allergen_group_syokugyou"
+    t.index ["allergen_group_tamago"], name: "index_users_on_allergen_group_tamago"
+    t.index ["allergen_group_yakubutsu"], name: "index_users_on_allergen_group_yakubutsu"
+    t.index ["allergen_group_yasai"], name: "index_users_on_allergen_group_yasai"
+    t.index ["allergen_group_zassoukafun"], name: "index_users_on_allergen_group_zassoukafun"
     t.index ["asthma"], name: "index_users_on_asthma"
     t.index ["atopic"], name: "index_users_on_atopic"
     t.index ["classification"], name: "index_users_on_classification"

@@ -6,6 +6,7 @@
 # @attr [integer] userId
 # @attr [integer] activityId
 # @attr [string] activityType
+# @attr [integer] fromUserId
 # @attr [date-time] createdAt
 # @attr [date-time] updatedAt
 # @attr [string] name
