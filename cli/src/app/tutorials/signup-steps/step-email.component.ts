@@ -132,13 +132,7 @@ export class StepEmailComponent extends ChatComponent implements OnInit, AfterVi
     this.accountService.create()
       .subscribe(
         () => {
-          addChat(
-            {
-              body: tutorial_script1,
-              waitTime: 0
-            }, this.chatHistory, this.chatSource,
-          );
-          setTimeout(() => this.completed.emit(DisplayState.BACK), 2000);
+          setTimeout(() => this.completed.emit(DisplayState.GOAL), 1000);
         },
         error => {
           addChat(
@@ -147,7 +141,6 @@ export class StepEmailComponent extends ChatComponent implements OnInit, AfterVi
               waitTime: 0
             }, this.chatHistory, this.chatSource,
           );
-          setTimeout(() => this.completed.emit(DisplayState.BACK), 2000);
         }
       );
   }

@@ -12,6 +12,7 @@ import {
   ChatViewModel,
   CONTENT_TYPE,
   User,
+  RoutePram,
 } from 'app/interfaces/api-models';
 import { AccountService, ChatService } from 'app/shared/services/api';
 
@@ -50,23 +51,39 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.accountService.get().subscribe(response => this.myself = response);
+    const account$ = this.accountService.get().map(response => this.myself = response);
+    const params$ = this.route.params;
 
-    this.route.params
-      .map(params => {
-        this.chatThread = this.store.getState().chatList.find(value => value.id === +params['id']);
-        if (this.chatThread) {
-          this.opponents = this.chatThread.participants.filter(value => value.id !== this.myself.id);
-          // もう既存のスレッドがあった
-          if (this.chatThread.newestChat) {
-            this.chatService.getChatThread(this.chatThread.id);
-          } else {
-            this.chatService.resetChat();
-          }
-        } else {
-          throw new Error();
+    Observable.zip<User, RoutePram>(account$, params$).map(result => {
+
+        this.chatThread = this.store.getState().chatList.find(value => value.id === +result[1]['id']);
+        const chats = this.store.getState().chats.find(value => value.chatThreadId === +result[1]['id']);
+
+        // すでにチャットがあるのでそのまま始める
+        if (this.chatThread && chats) {
+          this.opponents = this.chatThread.participants.filter(value => value.id !== result[0].id);
+          return;
         }
+
+        this.chatService.resetChat();
+
+        // もう既存のスレッドがあるがチャットは無い
+        if (this.chatThread && !chats) {
+          this.opponents = this.chatThread.participants.filter(value => value.id !== result[0].id);
+          this.chatService.getChatThread(this.chatThread.id).subscribe();
+          return;
+        }
+
+        // キャッシュがないので新規で通信取得する
+        this.chatService.list()
+          .concatMap(response => {
+            this.chatThread = response.find(value => value.id === +result[1]['id']);
+            this.opponents = this.chatThread.participants.filter(value => value.id !== result[0].id);
+            return this.chatService.getChatThread(this.chatThread.id);
+          })
+          .subscribe();
       })
+      .take(1)
       .subscribe(
         (next: void) => this.scrollToBottom(),
         (error: any) => this.router.navigateByUrl('/chat/list'),
@@ -131,7 +148,7 @@ export class ChatComponent implements OnInit {
   }
 
   onClickReply(replyText: string) {
-    this.chatService.say(this.chatThread['id'], String(replyText).replace(/<[^>]+>/gm, ''));
+    this.chatService.say(this.chatThread.id, String(replyText).replace(/<[^>]+>/gm, ''));
   }
 
   // 継承先で使うためprivateにしていない

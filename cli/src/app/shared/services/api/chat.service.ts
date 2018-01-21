@@ -23,20 +23,22 @@ export class ChatService {
     private store: Store,
   ) { }
 
-  list() {
-    this.httpClient.get<ChatThread[]>(`/api/chats`)
-      .subscribe(
+  list(): Observable<ChatThread[]> {
+    return this.httpClient.get<ChatThread[]>(`/api/chats`)
+      .map(
         response => {
           this.onSuccessList(response);
+          return response;
         }
       );
   }
 
-  getChatThread(chatThreadId: number) {
-    this.httpClient.get<Chats>(`/api/chats/${chatThreadId}`)
-      .subscribe(
+  getChatThread(chatThreadId: number): Observable<Chats> {
+    return this.httpClient.get<Chats>(`/api/chats/${chatThreadId}`)
+      .map(
         response => {
           this.onSuccessChats(response);
+          return response;
         }
       );
   }
@@ -67,7 +69,7 @@ export class ChatService {
     this.httpClient.post<ChatViewModel>(`/api/chats/${chatThreadId}/say`, body)
       .subscribe(
         response => {
-          this.onSuccessChats([response]);
+          this.onSuccessSay(response);
         }
       );
   }
@@ -98,6 +100,18 @@ export class ChatService {
     this.store.setState({
       ...currentState,
       chats: data,
+      loading: false,
+      error: false,
+    });
+  }
+
+  private onSuccessSay(data: ChatViewModel) {
+    const currentState = this.store.getState();
+    const newState = currentState.chats.concat(data);
+    newState.sort((a, b) => compareCreated<ChatViewModel>(a, b));
+    this.store.setState({
+      ...currentState,
+      chats: newState,
       loading: false,
       error: false,
     });

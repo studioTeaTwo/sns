@@ -3,23 +3,18 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { SignupComponent } from './signup.component';
-
 import { SharedModule } from 'app/shared/shared.module';
 import { Store } from 'app/shared/store/store';
 import {
   AccountService,
   ChatService,
  } from 'app/shared/services/api';
-import { StepNameComponent } from 'app/tutorials/signup-steps/step-name.component';
-import { StepTypeComponent } from 'app/tutorials/signup-steps/step-type.component';
-import { StepSymptomComponent } from 'app/tutorials/signup-steps/step-symptom.component';
-import { StepEmailComponent } from 'app/tutorials/signup-steps/step-email.component';
-import { StepGoalComponent } from 'app/tutorials/signup-steps/step-goal.component';
+import { StepEmailComponent } from './step-email.component';
+import { MockAccountService } from 'app/mock/api/mock-account-service';
 
-describe('SignupComponent', () => {
-  let component: SignupComponent;
-  let fixture: ComponentFixture<SignupComponent>;
+describe('StepEmailComponent', () => {
+  let component: StepEmailComponent;
+  let fixture: ComponentFixture<StepEmailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -29,17 +24,13 @@ describe('SignupComponent', () => {
         NoopAnimationsModule,
         SharedModule,
       ],
-      declarations: [
-        SignupComponent,
-        StepNameComponent,
-        StepTypeComponent,
-        StepSymptomComponent,
-        StepEmailComponent,
-        StepGoalComponent,
-      ],
+      declarations: [ StepEmailComponent ],
       providers: [
         Store,
-        AccountService,
+        {
+          provide: AccountService,
+          useClass: MockAccountService
+        },
         ChatService,
       ]
     })
@@ -47,7 +38,7 @@ describe('SignupComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SignupComponent);
+    fixture = TestBed.createComponent(StepEmailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

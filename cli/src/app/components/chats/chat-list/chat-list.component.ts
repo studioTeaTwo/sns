@@ -27,7 +27,7 @@ export class ChatListComponent implements OnInit {
   ngOnInit() {
     this.accountService.get().subscribe(response => this.myself = response);
 
-    this.chatService.list();
+    this.chatService.list().subscribe();
   }
 
   getImgSrc(chatThread: ChatThread): string {

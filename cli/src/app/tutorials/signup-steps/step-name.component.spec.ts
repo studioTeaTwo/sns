@@ -9,12 +9,12 @@ import {
   AccountService,
   ChatService,
  } from 'app/shared/services/api';
-import { StepEmailComponent } from './step_email.component';
+import { StepNameComponent } from './step-name.component';
 import { MockAccountService } from 'app/mock/api/mock-account-service';
 
-describe('StepEmailComponent', () => {
-  let component: StepEmailComponent;
-  let fixture: ComponentFixture<StepEmailComponent>;
+describe('StepNameComponent', () => {
+  let component: StepNameComponent;
+  let fixture: ComponentFixture<StepNameComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -24,7 +24,7 @@ describe('StepEmailComponent', () => {
         NoopAnimationsModule,
         SharedModule,
       ],
-      declarations: [ StepEmailComponent ],
+      declarations: [ StepNameComponent ],
       providers: [
         Store,
         {
@@ -38,7 +38,7 @@ describe('StepEmailComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StepEmailComponent);
+    fixture = TestBed.createComponent(StepNameComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

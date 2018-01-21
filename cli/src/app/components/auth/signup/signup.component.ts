@@ -6,6 +6,7 @@ export enum DisplayState {
   TYPE,
   SYMPTOM,
   EMAIL,
+  GOAL,
   BACK,
 }
 

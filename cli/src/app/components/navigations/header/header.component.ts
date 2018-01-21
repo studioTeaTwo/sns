@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit {
   }
 
   isAdmin(): Observable<User> {
-    return this.accountService.get();
+    return this.accountService.get().filter(response => !!response);
   }
 
   logout() {

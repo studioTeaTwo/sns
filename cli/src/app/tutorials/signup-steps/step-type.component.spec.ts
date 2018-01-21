@@ -9,12 +9,12 @@ import {
   AccountService,
   ChatService,
  } from 'app/shared/services/api';
-import { StepSymptomComponent } from './step_symptom.component';
+import { StepTypeComponent } from './step-type.component';
 import { MockAccountService } from 'app/mock/api/mock-account-service';
 
-describe('StepSymptomComponent', () => {
-  let component: StepSymptomComponent;
-  let fixture: ComponentFixture<StepSymptomComponent>;
+describe('StepTypeComponent', () => {
+  let component: StepTypeComponent;
+  let fixture: ComponentFixture<StepTypeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -24,7 +24,7 @@ describe('StepSymptomComponent', () => {
         NoopAnimationsModule,
         SharedModule,
       ],
-      declarations: [ StepSymptomComponent ],
+      declarations: [ StepTypeComponent ],
       providers: [
         Store,
         {
@@ -38,7 +38,7 @@ describe('StepSymptomComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StepSymptomComponent);
+    fixture = TestBed.createComponent(StepTypeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

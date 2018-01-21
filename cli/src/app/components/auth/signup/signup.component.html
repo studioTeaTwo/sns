@@ -3,4 +3,5 @@
   <app-step-type *ngSwitchCase="DisplayState.TYPE" (completed)="onCompleted($event)"></app-step-type>
   <app-step-symptom *ngSwitchCase="DisplayState.SYMPTOM" (completed)="onCompleted($event)"></app-step-symptom>
   <app-step-email *ngSwitchCase="DisplayState.EMAIL" (completed)="onCompleted($event)"></app-step-email>
+  <app-step-goal *ngSwitchCase="DisplayState.GOAL" (completed)="onCompleted($event)"></app-step-goal>
 </div>

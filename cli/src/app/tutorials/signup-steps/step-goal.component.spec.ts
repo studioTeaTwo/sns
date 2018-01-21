@@ -3,18 +3,19 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
+import { StepGoalComponent } from './step-goal.component';
+
 import { SharedModule } from 'app/shared/shared.module';
 import { Store } from 'app/shared/store/store';
 import {
   AccountService,
   ChatService,
  } from 'app/shared/services/api';
-import { StepNameComponent } from './step_name.component';
 import { MockAccountService } from 'app/mock/api/mock-account-service';
 
-describe('StepNameComponent', () => {
-  let component: StepNameComponent;
-  let fixture: ComponentFixture<StepNameComponent>;
+describe('StepGoalComponent', () => {
+  let component: StepGoalComponent;
+  let fixture: ComponentFixture<StepGoalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -24,7 +25,7 @@ describe('StepNameComponent', () => {
         NoopAnimationsModule,
         SharedModule,
       ],
-      declarations: [ StepNameComponent ],
+      declarations: [ StepGoalComponent ],
       providers: [
         Store,
         {
@@ -38,12 +39,12 @@ describe('StepNameComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StepNameComponent);
+    fixture = TestBed.createComponent(StepGoalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should be created', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });
