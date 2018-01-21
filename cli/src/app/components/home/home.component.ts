@@ -65,8 +65,9 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.feedService.listNotifications();
-    this.feedService.listExperiences();
+    this.feedService.listNotifications()
+      .concatMap(response => this.feedService.listExperiences())
+      .subscribe();
     this.myExperienceDataSource = new ExperienceDataSource(this.store.select<Notification[]>(state => state.experienceList.mine));
     this.friendExperienceDataSource = new ExperienceDataSource(this.store.select<Notification[]>(state => state.experienceList.friend));
 

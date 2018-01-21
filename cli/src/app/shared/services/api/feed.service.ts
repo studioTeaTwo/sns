@@ -13,18 +13,18 @@ export class FeedService {
     private store: Store,
   ) { }
 
-  listNotifications() {
-    this.httpClient.get<NotificationViewModel[]>(`/api/feed/notifications`)
-      .subscribe(
+  listNotifications(): Observable<void> {
+    return this.httpClient.get<NotificationViewModel[]>(`/api/feed/notifications`)
+      .map(
         response => {
           this.onSuccessNotificationList(response);
         }
       );
   }
 
-  listExperiences() {
-    this.httpClient.get<Experience>(`/api/feed/experiences`)
-      .subscribe(
+  listExperiences(): Observable<void> {
+    return this.httpClient.get<Experience>(`/api/feed/experiences`)
+      .map(
         response => {
           this.onSuccessExperienceList(response);
         }
