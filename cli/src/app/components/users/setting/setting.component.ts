@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 
@@ -7,7 +8,7 @@ import { Store } from 'app/shared/store/store';
 import { AccountService } from 'app/shared/services/api';
 import { NgForm, NgModel } from '@angular/forms';
 
-import { SymptomName } from 'app/constants/constants';
+import { SymptomName, AllergenGroupName } from 'app/constants/constants';
 
 @Component({
   selector: 'app-setting',
@@ -16,22 +17,45 @@ import { SymptomName } from 'app/constants/constants';
 })
 export class SettingComponent implements OnInit {
   readonly SymptomName = SymptomName;
+  readonly AllergenGroupName = AllergenGroupName;
 
   account: User;
   oldPassword = '';
   rePassword = '';
   currentPassword = '';
 
+  showBasic = false;
+  showSymptom = false;
+  showAllergenGroup = false;
+
   isErrorEmail = false;
   isErrorPassword = false;
   isErrorRePassword = false;
 
   constructor(
+    private route: ActivatedRoute,
     private snackBar: MatSnackBar,
     private accountService: AccountService,
   ) { }
 
   ngOnInit() {
+    this.route
+      .queryParams
+      .subscribe(params => {
+        if (params['open'] === 'showBasic') {
+          this.showBasic = true;
+          this.showSymptom = false;
+          this.showAllergenGroup = false;
+        } else if (params['open'] === 'showAllergenGroup') {
+          this.showBasic = false;
+          this.showSymptom = false;
+          this.showAllergenGroup = true;
+        } else {
+          this.showBasic = false;
+          this.showSymptom = true;
+          this.showAllergenGroup = false;
+        }
+      });
     this.accountService.get().subscribe(
       response => this.account = response
     );

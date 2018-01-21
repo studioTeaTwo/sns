@@ -32,6 +32,59 @@ SymptomMap.set('gastroenteritis', '胃腸炎');
 SymptomMap.set('conjunctivitis', '結膜炎');
 export const SymptomName = SymptomMap;
 
+export type AllergenGroup =
+  'allergenGroupInekakafun' |
+  'allergenGroupZassoukafun' |
+  'allergenGroupJyukikafun' |
+  'allergenGroupChiri' |
+  'allergenGroupDani' |
+  'allergenGroupShinkin' |
+  'allergenGroupSaikin' |
+  'allergenGroupDoubutsu' |
+  'allergenGroupSyokugyou' |
+  'allergenGroupTamago' |
+  'allergenGroupNyuuseihin' |
+  'allergenGroupGyorui' |
+  'allergenGroupKoukakurui' |
+  'allergenGroupIkatako' |
+  'allergenGroupKomugi' |
+  'allergenGroupKomugiigai' |
+  'allergenGroupNikurui' |
+  'allergenGroupMamerui' |
+  'allergenGroupKudamonorui' |
+  'allergenGroupYasai' |
+  'allergenGroupSonota' |
+  'allergenGroupKiseityuu' |
+  'allergenGroupYakubutsu' |
+  'allergenGroupKontyuu' |
+  '' ;
+const AllergenGroupMap: Map<AllergenGroup, string> = new Map();
+AllergenGroupMap.set('allergenGroupInekakafun', 'イネ科植物花粉');
+AllergenGroupMap.set('allergenGroupZassoukafun', '雑草花粉');
+AllergenGroupMap.set('allergenGroupJyukikafun', '樹木花粉');
+AllergenGroupMap.set('allergenGroupChiri', '室内塵');
+AllergenGroupMap.set('allergenGroupDani', 'ダニ');
+AllergenGroupMap.set('allergenGroupShinkin', '真菌');
+AllergenGroupMap.set('allergenGroupSaikin', '細菌');
+AllergenGroupMap.set('allergenGroupDoubutsu', '動物');
+AllergenGroupMap.set('allergenGroupSyokugyou', '職業性アレルゲン');
+AllergenGroupMap.set('allergenGroupTamago', '卵');
+AllergenGroupMap.set('allergenGroupNyuuseihin', '乳製品');
+AllergenGroupMap.set('allergenGroupGyorui', '魚類');
+AllergenGroupMap.set('allergenGroupKoukakurui', '甲殻類');
+AllergenGroupMap.set('allergenGroupIkatako', 'イカ・タコ');
+AllergenGroupMap.set('allergenGroupKomugi', '穀穀類（小麦）');
+AllergenGroupMap.set('allergenGroupKomugiigai', '穀類（小麦以外）');
+AllergenGroupMap.set('allergenGroupNikurui', '肉類');
+AllergenGroupMap.set('allergenGroupMamerui', '豆類');
+AllergenGroupMap.set('allergenGroupKudamonorui', '果物類');
+AllergenGroupMap.set('allergenGroupYasai', '野菜');
+AllergenGroupMap.set('allergenGroupSonota', '食物その他');
+AllergenGroupMap.set('allergenGroupKiseityuu', '寄生虫');
+AllergenGroupMap.set('allergenGroupYakubutsu', '薬物');
+AllergenGroupMap.set('allergenGroupKontyuu', '昆虫');
+export const AllergenGroupName = AllergenGroupMap;
+
 export const API_ERROR_MSGS = {
   BAD_REQUEST_400: '入力項目の確認をし、もう一度お試しください。',
   UNAUTHORIZED_401: '認証の有効期限が切れました\nお手数ですが、再度ログインをお願い致します。',

@@ -87,6 +87,7 @@ export interface FriendExperienceStrongParameter {
     userId?: number; // int32
     activityId?: number; // int32
     activityType?: string;
+    fromUserId?: number; // int32
     createdAt?: string; // date-time
     updatedAt?: string; // date-time
     name?: string;
@@ -590,6 +591,7 @@ export interface MyExperienceStrongParameter {
     userId?: number; // int32
     activityId?: number; // int32
     activityType?: string;
+    fromUserId?: number; // int32
     createdAt?: string; // date-time
     updatedAt?: string; // date-time
 }
@@ -656,6 +658,30 @@ export interface User {
     pollen?: boolean;
     gastroenteritis?: boolean;
     conjunctivitis?: boolean;
+    allergenGroupInekakafun?: boolean;
+    allergenGroupZassoukafun?: boolean;
+    allergenGroupJyukikafun?: boolean;
+    allergenGroupChiri?: boolean;
+    allergenGroupDani?: boolean;
+    allergenGroupShinkin?: boolean;
+    allergenGroupSaikin?: boolean;
+    allergenGroupDoubutsu?: boolean;
+    allergenGroupSyokugyou?: boolean;
+    allergenGroupTamago?: boolean;
+    allergenGroupNyuuseihin?: boolean;
+    allergenGroupGyorui?: boolean;
+    allergenGroupKoukakurui?: boolean;
+    allergenGroupIkatako?: boolean;
+    allergenGroupKomugi?: boolean;
+    allergenGroupKomugiigai?: boolean;
+    allergenGroupNikurui?: boolean;
+    allergenGroupMamerui?: boolean;
+    allergenGroupKudamonorui?: boolean;
+    allergenGroupYasai?: boolean;
+    allergenGroupSonota?: boolean;
+    allergenGroupKiseityuu?: boolean;
+    allergenGroupYakubutsu?: boolean;
+    allergenGroupKontyuu?: boolean;
     avatarUrl?: string;
     accessToken?: string;
     createdAt?: string; // date-time
@@ -692,5 +718,29 @@ export interface UserStrongParameter {
     pollen?: boolean;
     gastroenteritis?: boolean;
     conjunctivitis?: boolean;
+    allergenGroupInekakafun?: boolean;
+    allergenGroupZassoukafun?: boolean;
+    allergenGroupJyukikafun?: boolean;
+    allergenGroupChiri?: boolean;
+    allergenGroupDani?: boolean;
+    allergenGroupShinkin?: boolean;
+    allergenGroupSaikin?: boolean;
+    allergenGroupDoubutsu?: boolean;
+    allergenGroupSyokugyou?: boolean;
+    allergenGroupTamago?: boolean;
+    allergenGroupNyuuseihin?: boolean;
+    allergenGroupGyorui?: boolean;
+    allergenGroupKoukakurui?: boolean;
+    allergenGroupIkatako?: boolean;
+    allergenGroupKomugi?: boolean;
+    allergenGroupKomugiigai?: boolean;
+    allergenGroupNikurui?: boolean;
+    allergenGroupMamerui?: boolean;
+    allergenGroupKudamonorui?: boolean;
+    allergenGroupYasai?: boolean;
+    allergenGroupSonota?: boolean;
+    allergenGroupKiseityuu?: boolean;
+    allergenGroupYakubutsu?: boolean;
+    allergenGroupKontyuu?: boolean;
     accessToken?: string;
 }

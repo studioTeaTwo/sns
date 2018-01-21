@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import * as Moment from 'moment';
 
 import { Store } from 'app/shared/store/store';
-import { FriendExperienceStrongParameter, NotificationViewModel, Notification } from 'app/interfaces/api-models';
+import { FriendExperienceStrongParameter, NotificationViewModel, Notification, User } from 'app/interfaces/api-models';
 import { FeedService, AccountService } from 'app/shared/services/api';
 
 interface Experience {
@@ -43,7 +43,11 @@ export class HomeComponent implements OnInit {
     },
     {
       type: 'tips',
-      description: '[TIPS]治療日記にメモを書いてお医者さんに忘れずに症状を伝えよう',
+      description: '[TIPS]治療日記にメモを書いてお医者さんに症状を伝えよう',
+    },
+    {
+      type: 'tips',
+      description: '[TIPS]アレルゲン検索から同じ症状の人を探せるよ',
     },
   ];
 
@@ -82,7 +86,10 @@ export class HomeComponent implements OnInit {
 
   onClickBeginner(beginner: BeginnerAdvice) {
     if (beginner.type === 'selfIntroduction') {
-      this.router.navigateByUrl(`/user/setting`);
+      this.router.navigate([`/user/setting`], { queryParams: { open: 'showBasic' } });
+    }
+    if (beginner.type === 'allergenGroup') {
+      this.router.navigate([`/user/setting`], { queryParams: { open: 'showAllergenGroup' } });
     }
   }
 
@@ -94,15 +101,27 @@ export class HomeComponent implements OnInit {
           description: '自己紹介を記入しよう',
         });
       }
+      if (!this.hasAllergenGroup(user)) {
+        this.beginners.push({
+          type: 'allergenGroup',
+          description: 'アレルゲンを記入しよう',
+        });
+      }
       if (this.beginners.length < 3) {
         const tmp = [...this.randomTips];
-        for (let i = 3; i > this.beginners.length; i--) {
+        const legth = this.beginners.length;
+        for (let i = 3; i > length; i--) {
           const random = Math.floor(Math.random() * ((tmp.length - 1) - 0) + 0);
           const newItem = tmp.splice(random, 1);
           this.beginners.push(newItem[0]);
         }
       }
     });
+  }
+
+  private hasAllergenGroup(user: User): boolean {
+    const result = Object.keys(user).find(key => key.includes('allergenGroup') && user[key]);
+    return result ? true : false;
   }
 }
 

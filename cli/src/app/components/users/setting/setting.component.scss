@@ -17,4 +17,18 @@
     margin-top: 20px;
     text-align: center;
   }
+
+  .setting-allergen-text {
+    display: inline-block;
+    max-width: 60px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .setting-allergen-img {
+    display: inline-block;
+    max-width: 32px;
+    max-height: 32px;
+  }
 }

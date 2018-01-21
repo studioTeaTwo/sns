@@ -1,5 +1,6 @@
 <form id="setting-content" #form="ngForm">
-  <mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="showBasic">
     <mat-expansion-panel-header>
       <mat-panel-title>
         基本項目
@@ -38,7 +39,7 @@
     
   </mat-expansion-panel>
 
-  <mat-expansion-panel [expanded]="true">
+  <mat-expansion-panel [expanded]="showSymptom">
     <mat-expansion-panel-header>
       <mat-panel-title>
         症状
@@ -52,6 +53,114 @@
       <mat-grid-tile><mat-checkbox name="pollen" [(ngModel)]="account.pollen">{{SymptomName.get('pollen')}}</mat-checkbox></mat-grid-tile>
       <mat-grid-tile><mat-checkbox name="gastroenteritis" [(ngModel)]="account.gastroenteritis">{{SymptomName.get('gastroenteritis')}}</mat-checkbox></mat-grid-tile>
       <mat-grid-tile><mat-checkbox name="conjunctivitis" [(ngModel)]="account.conjunctivitis">{{SymptomName.get('conjunctivitis')}}</mat-checkbox></mat-grid-tile>
+    </mat-grid-list>
+
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="showAllergenGroup">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        アレルゲン
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-grid-list cols="2" rowHeight="2:1">
+      <mat-grid-tile><mat-checkbox name="allergenGroupInekakafun" [(ngModel)]="account.allergenGroupInekakafun">
+        <span class="setting-allergen-text" [matTooltip]="AllergenGroupName.get('allergenGroupInekakafun')">{{AllergenGroupName.get('allergenGroupInekakafun')}}</span>
+        <img class="setting-allergen-img" [src]="'assets/images/allergenGroupInekakafun.png'"/>
+      </mat-checkbox></mat-grid-tile>
+      <mat-grid-tile><mat-checkbox name="allergenGroupZassoukafun" [(ngModel)]="account.allergenGroupZassoukafun">
+        <span class="setting-allergen-text" [matTooltip]="AllergenGroupName.get('allergenGroupZassoukafun')">{{AllergenGroupName.get('allergenGroupZassoukafun')}}</span>
+        <img class="setting-allergen-img" [src]="'assets/images/allergenGroupZassoukafun.png'"/>
+      </mat-checkbox></mat-grid-tile>
+      <mat-grid-tile><mat-checkbox name="allergenGroupJyukikafun" [(ngModel)]="account.allergenGroupJyukikafun">
+        <span class="setting-allergen-text" [matTooltip]="AllergenGroupName.get('allergenGroupJyukikafun')">{{AllergenGroupName.get('allergenGroupJyukikafun')}}</span>
+        <img class="setting-allergen-img" [src]="'assets/images/allergenGroupJyukikafun.png'"/>
+      </mat-checkbox></mat-grid-tile>
+      <mat-grid-tile><mat-checkbox name="allergenGroupChiri" [(ngModel)]="account.allergenGroupChiri">
+        <span class="setting-allergen-text" [matTooltip]="AllergenGroupName.get('allergenGroupChiri')">{{AllergenGroupName.get('allergenGroupChiri')}}</span>
+        <img class="setting-allergen-img" [src]="'assets/images/allergenGroupChiri.png'"/>
+      </mat-checkbox></mat-grid-tile>
+      <mat-grid-tile><mat-checkbox name="allergenGroupDani" [(ngModel)]="account.allergenGroupDani">
+        <span class="setting-allergen-text" [matTooltip]="AllergenGroupName.get('allergenGroupDani')">{{AllergenGroupName.get('allergenGroupDani')}}</span>
+        <img class="setting-allergen-img" [src]="'assets/images/allergenGroupDani.png'"/>
+      </mat-checkbox></mat-grid-tile>
+      <mat-grid-tile><mat-checkbox name="allergenGroupShinkin" [(ngModel)]="account.allergenGroupShinkin">
+        <span class="setting-allergen-text" [matTooltip]="AllergenGroupName.get('allergenGroupShinkin')">{{AllergenGroupName.get('allergenGroupShinkin')}}</span>
+        <img class="setting-allergen-img" [src]="'assets/images/allergenGroupShinkin.png'"/>
+      </mat-checkbox></mat-grid-tile>
+      <mat-grid-tile><mat-checkbox name="allergenGroupSaikin" [(ngModel)]="account.allergenGroupSaikin">
+        <span class="setting-allergen-text" [matTooltip]="AllergenGroupName.get('allergenGroupSaikin')">{{AllergenGroupName.get('allergenGroupSaikin')}}</span>
+        <img class="setting-allergen-img" [src]="'assets/images/allergenGroupSaikin.png'"/>
+      </mat-checkbox></mat-grid-tile>
+      <mat-grid-tile><mat-checkbox name="allergenGroupDoubutsu" [(ngModel)]="account.allergenGroupDoubutsu">
+        <span class="setting-allergen-text" [matTooltip]="AllergenGroupName.get('allergenGroupDoubutsu')">{{AllergenGroupName.get('allergenGroupDoubutsu')}}</span>
+        <img class="setting-allergen-img" [src]="'assets/images/allergenGroupDoubutsu.png'"/>
+      </mat-checkbox></mat-grid-tile>
+      <mat-grid-tile><mat-checkbox name="allergenGroupSyokugyou" [(ngModel)]="account.allergenGroupSyokugyou">
+        <span class="setting-allergen-text" [matTooltip]="AllergenGroupName.get('allergenGroupSyokugyou')">{{AllergenGroupName.get('allergenGroupSyokugyou')}}</span>
+        <img class="setting-allergen-img" [src]="'assets/images/allergenGroupSyokugyou.png'"/>
+      </mat-checkbox></mat-grid-tile>
+      <mat-grid-tile><mat-checkbox name="allergenGroupTamago" [(ngModel)]="account.allergenGroupTamago">
+        <span class="setting-allergen-text" [matTooltip]="AllergenGroupName.get('allergenGroupTamago')">{{AllergenGroupName.get('allergenGroupTamago')}}</span>
+        <img class="setting-allergen-img" [src]="'assets/images/allergenGroupTamago.png'"/>
+      </mat-checkbox></mat-grid-tile>
+      <mat-grid-tile><mat-checkbox name="allergenGroupNyuuseihin" [(ngModel)]="account.allergenGroupNyuuseihin">
+        <span class="setting-allergen-text" [matTooltip]="AllergenGroupName.get('allergenGroupNyuuseihin')">{{AllergenGroupName.get('allergenGroupNyuuseihin')}}</span>
+        <img class="setting-allergen-img" [src]="'assets/images/allergenGroupNyuuseihin.png'"/>
+      </mat-checkbox></mat-grid-tile>
+      <mat-grid-tile><mat-checkbox name="allergenGroupGyorui" [(ngModel)]="account.allergenGroupGyorui">
+        <span class="setting-allergen-text" [matTooltip]="AllergenGroupName.get('allergenGroupGyorui')">{{AllergenGroupName.get('allergenGroupGyorui')}}</span>
+        <img class="setting-allergen-img" [src]="'assets/images/allergenGroupGyorui.png'"/>
+      </mat-checkbox></mat-grid-tile>
+      <mat-grid-tile><mat-checkbox name="allergenGroupKoukakurui" [(ngModel)]="account.allergenGroupKoukakurui">
+        <span class="setting-allergen-text" [matTooltip]="AllergenGroupName.get('allergenGroupKoukakurui')">{{AllergenGroupName.get('allergenGroupKoukakurui')}}</span>
+        <img class="setting-allergen-img" [src]="'assets/images/allergenGroupKoukakurui.png'"/>
+      </mat-checkbox></mat-grid-tile>
+      <mat-grid-tile><mat-checkbox name="allergenGroupIkatako" [(ngModel)]="account.allergenGroupIkatako">
+        <span class="setting-allergen-text" [matTooltip]="AllergenGroupName.get('allergenGroupIkatako')">{{AllergenGroupName.get('allergenGroupIkatako')}}</span>
+        <img class="setting-allergen-img" [src]="'assets/images/allergenGroupIkatako.png'"/>
+      </mat-checkbox></mat-grid-tile>
+      <mat-grid-tile><mat-checkbox name="allergenGroupKomugi" [(ngModel)]="account.allergenGroupKomugi">
+        <span class="setting-allergen-text" [matTooltip]="AllergenGroupName.get('allergenGroupKomugi')">{{AllergenGroupName.get('allergenGroupKomugi')}}</span>
+        <img class="setting-allergen-img" [src]="'assets/images/allergenGroupKomugi.png'"/>
+      </mat-checkbox></mat-grid-tile>
+      <mat-grid-tile><mat-checkbox name="allergenGroupKomugiigai" [(ngModel)]="account.allergenGroupKomugiigai">
+        <span class="setting-allergen-text" [matTooltip]="AllergenGroupName.get('allergenGroupKomugiigai')">{{AllergenGroupName.get('allergenGroupKomugiigai')}}</span>
+        <img class="setting-allergen-img" [src]="'assets/images/allergenGroupKomugiigai.png'"/>
+      </mat-checkbox></mat-grid-tile>
+      <mat-grid-tile><mat-checkbox name="allergenGroupInekakafun" [(ngModel)]="account.allergenGroupInekakafun">
+        <span class="setting-allergen-text" [matTooltip]="AllergenGroupName.get('allergenGroupInekakafun')">{{AllergenGroupName.get('allergenGroupInekakafun')}}</span>
+        <img class="setting-allergen-img" [src]="'assets/images/allergenGroupInekakafun.png'"/>
+      </mat-checkbox></mat-grid-tile>
+      <mat-grid-tile><mat-checkbox name="allergenGroupNikurui" [(ngModel)]="account.allergenGroupNikurui">
+        <span class="setting-allergen-text" [matTooltip]="AllergenGroupName.get('allergenGroupNikurui')">{{AllergenGroupName.get('allergenGroupNikurui')}}</span>
+        <img class="setting-allergen-img" [src]="'assets/images/allergenGroupNikurui.png'"/>
+      </mat-checkbox></mat-grid-tile>
+      <mat-grid-tile><mat-checkbox name="allergenGroupMamerui" [(ngModel)]="account.allergenGroupMamerui">
+        <span class="setting-allergen-text" [matTooltip]="AllergenGroupName.get('allergenGroupMamerui')">{{AllergenGroupName.get('allergenGroupMamerui')}}</span>
+        <img class="setting-allergen-img" [src]="'assets/images/allergenGroupMamerui.png'"/>
+      </mat-checkbox></mat-grid-tile>
+      <mat-grid-tile><mat-checkbox name="allergenGroupYasai" [(ngModel)]="account.allergenGroupYasai">
+        <span class="setting-allergen-text" [matTooltip]="AllergenGroupName.get('allergenGroupYasai')">{{AllergenGroupName.get('allergenGroupYasai')}}</span>
+        <img class="setting-allergen-img" [src]="'assets/images/allergenGroupYasai.png'"/>
+      </mat-checkbox></mat-grid-tile>
+      <mat-grid-tile><mat-checkbox name="allergenGroupSonota" [(ngModel)]="account.allergenGroupSonota">
+        <span class="setting-allergen-text" [matTooltip]="AllergenGroupName.get('allergenGroupSonota')">{{AllergenGroupName.get('allergenGroupSonota')}}</span>
+        <img class="setting-allergen-img" [src]="'assets/images/allergenGroupSonota.png'"/>
+      </mat-checkbox></mat-grid-tile>
+      <mat-grid-tile><mat-checkbox name="allergenGroupKiseityuu" [(ngModel)]="account.allergenGroupKiseityuu">
+        <span class="setting-allergen-text" [matTooltip]="AllergenGroupName.get('allergenGroupKiseityuu')">{{AllergenGroupName.get('allergenGroupKiseityuu')}}</span>
+        <img class="setting-allergen-img" [src]="'assets/images/allergenGroupKiseityuu.png'"/>
+      </mat-checkbox></mat-grid-tile>
+      <mat-grid-tile><mat-checkbox name="allergenGroupYakubutsu" [(ngModel)]="account.allergenGroupYakubutsu">
+        <span class="setting-allergen-text" [matTooltip]="AllergenGroupName.get('allergenGroupYakubutsu')">{{AllergenGroupName.get('allergenGroupYakubutsu')}}</span>
+        <img class="setting-allergen-img" [src]="'assets/images/allergenGroupYakubutsu.png'"/>
+      </mat-checkbox></mat-grid-tile>
+      <mat-grid-tile><mat-checkbox name="allergenGroupKontyuu" [(ngModel)]="account.allergenGroupKontyuu">
+        <span class="setting-allergen-text" [matTooltip]="AllergenGroupName.get('allergenGroupKontyuu')">{{AllergenGroupName.get('allergenGroupKontyuu')}}</span>
+        <img class="setting-allergen-img" [src]="'assets/images/allergenGroupKontyuu.png'"/>
+      </mat-checkbox></mat-grid-tile>
     </mat-grid-list>
 
   </mat-expansion-panel>
