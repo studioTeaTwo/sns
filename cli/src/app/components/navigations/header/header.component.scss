@@ -25,4 +25,11 @@ header {
         font-size: 2em; 
       }
   }
+  .header-back-button {
+    float: left;
+    .material-icons {
+      color: #000;
+      font-size: 3em; 
+    }
+  }
 }

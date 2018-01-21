@@ -17,6 +17,7 @@ export class GlobalMenuComponent implements OnInit {
   ngOnInit() {
   }
 
+  // HeaderComponentにも同じメソッドあり
   isDisplay(): boolean {
     return !this.location.path().match(/(signup|chat+\/[0-9-]|life-log\/daily\/logging)/);
   }

@@ -24,6 +24,9 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    @media screen and (min-width: 600px) {
+      max-width: 120px;
+    }
   }
 
   .setting-allergen-img {

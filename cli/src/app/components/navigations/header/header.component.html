@@ -1,4 +1,7 @@
 <header>
+  <button *ngIf="!isDisplay()" class="header-back-button" mat-icon-button (click)="onClickBack()">
+    <mat-icon>chevron_left</mat-icon>
+  </button>
   <a class="title-logo" routerLink="/" routerLinkActive="active">ALLERGY LOG</a>
   <button *ngIf="(isAdmin() | async).admin" class="header-menu-button" mat-icon-button [matMenuTriggerFor]="adminmeu">
     <mat-icon style="color: red">settings</mat-icon>

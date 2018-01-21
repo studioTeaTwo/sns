@@ -31,6 +31,10 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  onClickBack() {
+    this.router.navigateByUrl(`/home`);
+  }
+
   isLogin(): boolean {
     const token = localStorage.getItem('token');
     return token && token.length > 0;
@@ -38,6 +42,11 @@ export class HeaderComponent implements OnInit {
 
   isAdmin(): Observable<User> {
     return this.accountService.get().filter(response => !!response);
+  }
+
+  // GlobalMenuComponentにも同じメソッドあり
+  isDisplay(): boolean {
+    return !this.location.path().match(/(signup|chat+\/[0-9-]|life-log\/daily\/logging)/);
   }
 
   logout() {
