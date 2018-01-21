@@ -28,6 +28,24 @@ export class HomeComponent implements OnInit {
   // 通知
   notifications$ = this.store.select<NotificationViewModel[]>(state => state.notificationList);
   beginners: BeginnerAdvice[] = [];
+  readonly randomTips: BeginnerAdvice[] = [
+    {
+      type: 'tips',
+      description: '[TIPS]症状を登録していると毎日5時に通知が来るよ',
+    },
+    {
+      type: 'tips',
+      description: '[TIPS]プロフィールのメッセージアイコンからチャットができるよ',
+    },
+    {
+      type: 'tips',
+      description: '[TIPS]治療日記に写真を撮っておこう',
+    },
+    {
+      type: 'tips',
+      description: '[TIPS]治療日記にメモを書いてお医者さんに忘れずに症状を伝えよう',
+    },
+  ];
 
   // 経験
   myExperienceDataSource: ExperienceDataSource | null;
@@ -75,6 +93,14 @@ export class HomeComponent implements OnInit {
           type: 'selfIntroduction',
           description: '自己紹介を記入しよう',
         });
+      }
+      if (this.beginners.length < 3) {
+        const tmp = [...this.randomTips];
+        for (let i = 3; i > this.beginners.length; i--) {
+          const random = Math.floor(Math.random() * ((tmp.length - 1) - 0) + 0);
+          const newItem = tmp.splice(random, 1);
+          this.beginners.push(newItem[0]);
+        }
       }
     });
   }

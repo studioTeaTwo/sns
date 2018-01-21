@@ -22,7 +22,7 @@
       routerLinkActive="active"
       (click)="onClickBeginner(beginner)"
     >
-      <span>{{beginner.description}}</span>
+      <span [matTooltip]="beginner.description">{{beginner.description}}</span>
     </a>
   </mat-menu>
 </section>
