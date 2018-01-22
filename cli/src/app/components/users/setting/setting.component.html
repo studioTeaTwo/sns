@@ -129,10 +129,6 @@
         <span class="setting-allergen-text" [matTooltip]="AllergenGroupName.get('allergenGroupKomugiigai')">{{AllergenGroupName.get('allergenGroupKomugiigai')}}</span>
         <img class="setting-allergen-img" [src]="'assets/images/allergenGroupKomugiigai.png'"/>
       </mat-checkbox></mat-grid-tile>
-      <mat-grid-tile><mat-checkbox name="allergenGroupInekakafun" [(ngModel)]="account.allergenGroupInekakafun">
-        <span class="setting-allergen-text" [matTooltip]="AllergenGroupName.get('allergenGroupInekakafun')">{{AllergenGroupName.get('allergenGroupInekakafun')}}</span>
-        <img class="setting-allergen-img" [src]="'assets/images/allergenGroupInekakafun.png'"/>
-      </mat-checkbox></mat-grid-tile>
       <mat-grid-tile><mat-checkbox name="allergenGroupNikurui" [(ngModel)]="account.allergenGroupNikurui">
         <span class="setting-allergen-text" [matTooltip]="AllergenGroupName.get('allergenGroupNikurui')">{{AllergenGroupName.get('allergenGroupNikurui')}}</span>
         <img class="setting-allergen-img" [src]="'assets/images/allergenGroupNikurui.png'"/>
@@ -140,6 +136,10 @@
       <mat-grid-tile><mat-checkbox name="allergenGroupMamerui" [(ngModel)]="account.allergenGroupMamerui">
         <span class="setting-allergen-text" [matTooltip]="AllergenGroupName.get('allergenGroupMamerui')">{{AllergenGroupName.get('allergenGroupMamerui')}}</span>
         <img class="setting-allergen-img" [src]="'assets/images/allergenGroupMamerui.png'"/>
+      </mat-checkbox></mat-grid-tile>
+      <mat-grid-tile><mat-checkbox name="allergenGroupKudamonorui" [(ngModel)]="account.allergenGroupKudamonorui">
+        <span class="setting-allergen-text" [matTooltip]="AllergenGroupName.get('allergenGroupKudamonorui')">{{AllergenGroupName.get('allergenGroupKudamonorui')}}</span>
+        <img class="setting-allergen-img" [src]="'assets/images/allergenGroupKudamonorui.png'"/>
       </mat-checkbox></mat-grid-tile>
       <mat-grid-tile><mat-checkbox name="allergenGroupYasai" [(ngModel)]="account.allergenGroupYasai">
         <span class="setting-allergen-text" [matTooltip]="AllergenGroupName.get('allergenGroupYasai')">{{AllergenGroupName.get('allergenGroupYasai')}}</span>

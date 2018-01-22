@@ -1,3 +1,3 @@
 <div *ngFor="let allergen of masterAllergenGroups" class="allergen-groups mt15" (click)="onClick(allergen)">
-  <img [src]="'assets/images/' + allergen.en + '.png'" *ngIf="allergen.en !== 'allergenGroupMaruti'" />
+  <img [src]="'assets/images/' + allergen.en + '.png'" [matTooltip]="allergen.ja" *ngIf="allergen.en !== 'allergenGroupMaruti'" />
 </div>

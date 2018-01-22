@@ -27,5 +27,15 @@
         "/assets/**"
       ]
     }
+  }],
+  "dataGroups": [{
+    "name": "masterAllergenGroups",
+    "urls": ["https://allelog.herokuapp.com/api/master_data/allergen_groups"],
+    "cacheConfig": {
+      "maxSize": 1,
+      "maxAge": "14d",
+      "timeout": "5s",
+      "strategy": "performance"
+    }
   }]
 }
