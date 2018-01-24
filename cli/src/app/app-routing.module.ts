@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { TopComponent } from 'app/components/navigations/top/top.component';
 import { HomeComponent } from 'app/components/home/home.component';
+import { TipsComponent } from 'app/components/navigations/tips/tips.component';
 import { ContactComponent } from 'app/components/navigations/contact/contact.component';
 import { AuthGuard } from 'app/shared/guards/auth.guard';
 import { AdminGuard } from 'app/shared/guards/admin.guard';
@@ -16,6 +17,14 @@ const routes: Routes = [
     path: 'home',
     canActivate: [ AuthGuard ],
     component: HomeComponent,
+  },
+  {
+    path: 'tips',
+    component: TipsComponent,
+  },
+  {
+    path: 'contact',
+    component: ContactComponent,
   },
   {
     path: 'chat',
@@ -42,10 +51,6 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: './components/auth/auth.module#AuthModule'
-  },
-  {
-    path: 'contact',
-    component: ContactComponent,
   },
   {
     path: 'admin',

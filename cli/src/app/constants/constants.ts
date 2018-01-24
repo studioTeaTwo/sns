@@ -1,24 +1,59 @@
 import { User } from 'app/interfaces/api-models';
+import { BeginnerAdvice } from 'app/interfaces/view-models';
 
-export const NAVI_CHARA: User = {
-  id: 0,
-  avatarUrl: 'assets/images/naviAvatar.png',
-  email: '',
-  name: '',
-  selfIntroduction: '',
-  rank: 0,
-  titleOfHonor: 0,
-};
-
-export const SIGNUP_USER: User = {
-  id: -1,
-  avatarUrl: 'assets/images/newUserAvatar.png',
-  email: '',
-  name: '',
-  selfIntroduction: '',
-  rank: 0,
-  titleOfHonor: 0,
-};
+export type TipsType =
+  // プロフィール
+  'profile-symptom' |'profile-messageicon' |
+  // 治療日記
+  'log-memo' | 'log-photo-record' | 'log-photo-camera' | 'log-photo-form' |
+  // 検索
+  'search-allergen';
+export namespace TipsType {
+  export const ProfileSymptom: TipsType = 'profile-symptom';
+  export const ProfileMessageicon: TipsType = 'profile-messageicon';
+  export const LogMemo: TipsType = 'log-memo';
+  export const LogPhotoRecord: TipsType = 'log-photo-record';
+  export const LogPhotoCamera: TipsType = 'log-photo-camera';
+  export const LogPhotoForm: TipsType = 'log-photo-form';
+  export const SearchAllergen: TipsType = 'search-allergen';
+}
+export const TipsCollection: BeginnerAdvice[] = [
+  {
+    adviceType: 'tips',
+    tipsType: 'profile-symptom',
+    description: '[TIPS]症状を登録していると毎日5時に通知が来るよ',
+  },
+  {
+    adviceType: 'tips',
+    tipsType: 'profile-messageicon',
+    description: '[TIPS]プロフィールのメッセージアイコンからチャットを送れるよ',
+  },
+  {
+    adviceType: 'tips',
+    tipsType: 'log-memo',
+    description: '[TIPS]治療日記にメモを書いてお医者さんに症状を伝えよう',
+  },
+  {
+    adviceType: 'tips',
+    tipsType: 'log-photo-record',
+    description: '[TIPS]治療日記に写真を撮っておこう',
+  },
+  {
+    adviceType: 'tips',
+    tipsType: 'log-photo-camera',
+    description: '[TIPS]治療日記ではその場でカメラで写真撮ることもできるよ',
+  },
+  {
+    adviceType: 'tips',
+    tipsType: 'log-photo-form',
+    description: '[TIPS]写真は正方形で保存されるよ',
+  },
+  {
+    adviceType: 'tips',
+    tipsType: 'search-allergen',
+    description: '[TIPS]アレルゲン検索から同じ症状の人を探せるよ',
+  },
+];
 
 export type NotificationType = 'DailyLog' | 'Chat' | 'Followed';
 
@@ -84,6 +119,26 @@ AllergenGroupMap.set('allergenGroupKiseityuu', '寄生虫');
 AllergenGroupMap.set('allergenGroupYakubutsu', '薬物');
 AllergenGroupMap.set('allergenGroupKontyuu', '昆虫');
 export const AllergenGroupName = AllergenGroupMap;
+
+export const NAVI_CHARA: User = {
+  id: 0,
+  avatarUrl: 'assets/images/naviAvatar.png',
+  email: '',
+  name: '',
+  selfIntroduction: '',
+  rank: 0,
+  titleOfHonor: 0,
+};
+
+export const SIGNUP_USER: User = {
+  id: -1,
+  avatarUrl: 'assets/images/newUserAvatar.png',
+  email: '',
+  name: '',
+  selfIntroduction: '',
+  rank: 0,
+  titleOfHonor: 0,
+};
 
 export const API_ERROR_MSGS = {
   BAD_REQUEST_400: '入力項目の確認をし、もう一度お試しください。',

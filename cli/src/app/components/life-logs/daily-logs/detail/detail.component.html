@@ -61,11 +61,8 @@
       <div class="form-photograph-upload">
         <div class="form-photograph-upload-button" (click)="file.click()">
           <input type="file" accept="image/*" #file (change)="onChangeFile(file)" [style.display]="'none'" />
-          <mat-icon *ngIf="displayMode !== MODE.ROM">photo_library</mat-icon>
+          <button mat-button type="button"><mat-icon *ngIf="displayMode !== MODE.ROM">add_a_photo</mat-icon></button>
         </div>
-        <button type="button" mat-raised-button (click)="onClickCamera()" *ngIf="displayMode !== MODE.ROM" disabled>
-          <mat-icon>add_a_photo</mat-icon>(工事中)
-        </button>
       </div>
     </mat-card-header>
     <mat-card-content>

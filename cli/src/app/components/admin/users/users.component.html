@@ -6,6 +6,8 @@
       <td>最新ログイン</td>
       <td>メールアドレス</td>
       <td>分類</td>
+      <td></td>
+      <td></td>
     </tr>
   </thead>
   <tbody>
@@ -15,6 +17,8 @@
       <td>{{user.currentSignInAt | date:'yyy/MM/dd HH:mm'}}</td>
       <td>{{user.email}}</td>
       <td>{{user.classification}}</td>
+      <td><button type="button">削除</button></td>
+      <td><button type="button">管理権限</button></td>
     </tr>
   </tbody>
 </table>

@@ -13,6 +13,7 @@ import { HeaderComponent } from './components/navigations/header/header.componen
 import { GlobalMenuComponent } from './components/navigations/global-menu/global-menu.component';
 import { HomeComponent } from './components/home/home.component';
 import { ContactComponent } from './components/navigations/contact/contact.component';
+import { TipsComponent } from './components/navigations/tips/tips.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ContactComponent } from './components/navigations/contact/contact.compo
     GlobalMenuComponent,
     HomeComponent,
     ContactComponent,
+    TipsComponent,
   ],
   imports: [
     BrowserModule,

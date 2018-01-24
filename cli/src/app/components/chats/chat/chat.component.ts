@@ -12,8 +12,8 @@ import {
   ChatViewModel,
   CONTENT_TYPE,
   User,
-  RoutePram,
 } from 'app/interfaces/api-models';
+import { RoutePram } from 'app/interfaces/view-models';
 import { AccountService, ChatService } from 'app/shared/services/api';
 
 @Component({

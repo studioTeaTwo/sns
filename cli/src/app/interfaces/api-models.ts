@@ -8,12 +8,8 @@ import {
 
 export * from './swagger-models';
 
-export interface RoutePram {
-  [key: string]: any;
-}
-
 /**
- * viewのためにswagger-modelsのプロパティを変更する
+ * viewのためにswagger-modelsをオーバーライドする
  */
 
 export enum CONTENT_TYPE {

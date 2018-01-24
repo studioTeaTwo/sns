@@ -7,15 +7,13 @@ import * as Moment from 'moment';
 import { Store } from 'app/shared/store/store';
 import { FriendExperienceStrongParameter, NotificationViewModel, Notification, User } from 'app/interfaces/api-models';
 import { FeedService, AccountService } from 'app/shared/services/api';
+import { BeginnerAdvice } from 'app/interfaces/view-models';
+import { TipsCollection } from 'app/constants/constants';
 
 interface Experience {
   date: string;
   name: string;
   activity: string;
-}
-interface BeginnerAdvice {
-  type: string;
-  description: string;
 }
 
 @Component({
@@ -28,28 +26,7 @@ export class HomeComponent implements OnInit {
   // 通知
   notifications$ = this.store.select<NotificationViewModel[]>(state => state.notificationList);
   beginners: BeginnerAdvice[] = [];
-  readonly randomTips: BeginnerAdvice[] = [
-    {
-      type: 'tips',
-      description: '[TIPS]症状を登録していると毎日5時に通知が来るよ',
-    },
-    {
-      type: 'tips',
-      description: '[TIPS]プロフィールのメッセージアイコンからチャットができるよ',
-    },
-    {
-      type: 'tips',
-      description: '[TIPS]治療日記に写真を撮っておこう',
-    },
-    {
-      type: 'tips',
-      description: '[TIPS]治療日記にメモを書いてお医者さんに症状を伝えよう',
-    },
-    {
-      type: 'tips',
-      description: '[TIPS]アレルゲン検索から同じ症状の人を探せるよ',
-    },
-  ];
+  readonly randomTips = TipsCollection;
 
   // 経験
   myExperienceDataSource: ExperienceDataSource | null;
@@ -86,11 +63,15 @@ export class HomeComponent implements OnInit {
   }
 
   onClickBeginner(beginner: BeginnerAdvice) {
-    if (beginner.type === 'selfIntroduction') {
+    if (beginner.adviceType === 'selfIntroduction') {
       this.router.navigate([`/user/setting`], { queryParams: { open: 'showBasic' } });
     }
-    if (beginner.type === 'allergenGroup') {
+    if (beginner.adviceType === 'allergenGroup') {
       this.router.navigate([`/user/setting`], { queryParams: { open: 'showAllergenGroup' } });
+    }
+    if (beginner.adviceType === 'tips') {
+      // this.router.navigate([`/tips\#${beginner.tipsType}`]);
+      this.router.navigate([`/tips`]);
     }
   }
 
@@ -98,13 +79,13 @@ export class HomeComponent implements OnInit {
     this.accountService.get().subscribe(user => {
       if (!user.selfIntroduction || user.selfIntroduction.length === 0) {
         this.beginners.push({
-          type: 'selfIntroduction',
+          adviceType: 'selfIntroduction',
           description: '自己紹介を記入しよう',
         });
       }
       if ((user.classification === 1 || user.classification === 2) && !this.hasAllergenGroup(user)) {
         this.beginners.push({
-          type: 'allergenGroup',
+          adviceType: 'allergenGroup',
           description: 'アレルゲンを記入しよう',
         });
       }
