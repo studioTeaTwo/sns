@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { UrlSerializer } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
-import { Store } from 'app/shared/store/store';
+import { Store } from 'app/core/store/store';
 
 @Component({
   selector: 'app-root',

@@ -1,24 +1,24 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-import { ChatService } from './chat.service';
+import { DailyLogService } from './daily-log.service';
 
-import { Store } from 'app/shared/store/store';
+import { Store } from 'app/core/store/store';
 
-describe('ChatService', () => {
+describe('DailyLogService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
       ],
       providers: [
+        DailyLogService,
         Store,
-        ChatService,
       ]
     });
   });
 
-  it('should be created', inject([ChatService], (service: ChatService) => {
+  it('should be created', inject([DailyLogService], (service: DailyLogService) => {
     expect(service).toBeTruthy();
   }));
 });

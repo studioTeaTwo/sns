@@ -4,13 +4,13 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { TopComponent } from './top.component';
 
-import { Store } from 'app/shared/store/store';
+import { Store } from 'app/core/store/store';
 import {
   ApiBaseService,
   AccountService,
   ChatService,
- } from 'app/shared/services/api';
-import { MockAccountService } from 'app/mock/api/mock-account-service';
+ } from 'app/core/services/api';
+import { MockAccountService } from 'testing/api';
 
 describe('TopComponent', () => {
   let component: TopComponent;

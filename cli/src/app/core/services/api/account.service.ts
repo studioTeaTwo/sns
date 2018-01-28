@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
-import { Store } from 'app/shared/store/store';
+import { Store } from 'app/core/store/store';
 import {
   User,
 } from 'app/interfaces/api-models';
-import { ApiBaseService } from 'app/shared/services/api/api-base.service';
+import { ApiBaseService } from 'app/core/services/api/api-base.service';
 
 interface UserRequestBody extends User {
   password?: string;

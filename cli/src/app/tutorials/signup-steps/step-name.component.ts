@@ -4,7 +4,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
-import { Store } from 'app/shared/store/store';
+import { Store } from 'app/core/store/store';
 import { NAVI_CHARA, SIGNUP_USER } from 'app/constants/constants';
 import {
   ChatThread,
@@ -16,7 +16,7 @@ import {
 import {
   AccountService,
   ChatService,
-} from 'app/shared/services/api';
+} from 'app/core/services/api';
 import { ChatComponent } from 'app/components/chats/chat/chat.component';
 import { DisplayState } from 'app/components/auth/signup/signup.component';
 import { addChat, addChatAndFocus, NAVI_THREAD } from '../shared/chat-operation.function';

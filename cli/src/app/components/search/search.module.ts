@@ -12,7 +12,7 @@ import { NameComponent } from './name/name.component';
   imports: [
     CommonModule,
     SearchRoutingModule,
-    SharedModule.forRoot(),
+    SharedModule,
   ],
   declarations: [
     AllergensComponent,

@@ -4,13 +4,13 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { AllergensComponent } from './allergens.component';
 
-import { SharedModule } from 'app/shared/shared.module';
-import { Store } from 'app/shared/store/store';
+import { MaterialModule } from 'app/shared/material/material.module';
+import { Store } from 'app/core/store/store';
 import {
   ApiBaseService,
   MasterDataService,
   UserService,
-} from 'app/shared/services/api';
+} from 'app/core/services/api';
 
 describe('AllergensComponent', () => {
   let component: AllergensComponent;
@@ -21,7 +21,7 @@ describe('AllergensComponent', () => {
       imports: [
         HttpClientTestingModule,
         RouterTestingModule,
-        SharedModule,
+        MaterialModule,
       ],
       declarations: [ AllergensComponent ],
       providers: [

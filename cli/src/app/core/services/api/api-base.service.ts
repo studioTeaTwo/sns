@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Store } from 'app/shared/store/store';
+import { Store } from 'app/core/store/store';
 
 @Injectable()
 export class ApiBaseService {

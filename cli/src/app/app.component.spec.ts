@@ -3,11 +3,13 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SpyLocation } from '@angular/common/testing';
 
-import { SharedModule } from 'app/shared/shared.module';
-import { Store } from 'app/shared/store/store';
+import { MaterialModule } from 'app/shared/material/material.module';
+import { Store } from 'app/core/store/store';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/navigations/header/header.component';
 import { GlobalMenuComponent } from './components/navigations/global-menu/global-menu.component';
+import { AccountService } from 'app/core/services/api';
+import { MockAccountService } from 'testing/api';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -15,7 +17,7 @@ describe('AppComponent', () => {
       imports: [
         HttpClientTestingModule,
         RouterTestingModule,
-        SharedModule.forRoot(),
+        MaterialModule,
       ],
       declarations: [
         AppComponent,
@@ -24,6 +26,10 @@ describe('AppComponent', () => {
       ],
       providers: [
         Store,
+        {
+          provide: AccountService,
+          useClass: MockAccountService
+        },
       ]
     }).compileComponents();
   }));

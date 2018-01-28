@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
-import { Store } from 'app/shared/store/store';
+import { Store } from 'app/core/store/store';
 import {
   compareCreated,
   compareUpdated,

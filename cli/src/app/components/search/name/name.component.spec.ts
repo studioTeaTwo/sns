@@ -4,12 +4,12 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { NameComponent } from './name.component';
 
-import { SharedModule } from 'app/shared/shared.module';
-import { Store } from 'app/shared/store/store';
+import { MaterialModule } from 'app/shared/material/material.module';
+import { Store } from 'app/core/store/store';
 import {
   ApiBaseService,
   UserService,
-} from 'app/shared/services/api';
+} from 'app/core/services/api';
 import { ResultsComponent } from '../results/results.component';
 
 describe('NameComponent', () => {
@@ -21,7 +21,7 @@ describe('NameComponent', () => {
       imports: [
         RouterTestingModule,
         HttpClientTestingModule,
-        SharedModule,
+        MaterialModule,
       ],
       declarations: [
         NameComponent,

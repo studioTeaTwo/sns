@@ -4,8 +4,8 @@ import { MatSnackBar } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 
 import { User } from 'app/interfaces/api-models';
-import { Store } from 'app/shared/store/store';
-import { AccountService } from 'app/shared/services/api';
+import { Store } from 'app/core/store/store';
+import { AccountService } from 'app/core/services/api';
 import { NgForm, NgModel } from '@angular/forms';
 
 import { SymptomName, AllergenGroupName } from 'app/constants/constants';

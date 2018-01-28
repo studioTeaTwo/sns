@@ -1,11 +1,11 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-import { MasterDataService } from './master-data.service';
+import { ChatService } from './chat.service';
 
-import { Store } from 'app/shared/store/store';
+import { Store } from 'app/core/store/store';
 
-describe('MasterDataService', () => {
+describe('ChatService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -13,12 +13,12 @@ describe('MasterDataService', () => {
       ],
       providers: [
         Store,
-        MasterDataService,
+        ChatService,
       ]
     });
   });
 
-  it('should be created', inject([MasterDataService], (service: MasterDataService) => {
+  it('should be created', inject([ChatService], (service: ChatService) => {
     expect(service).toBeTruthy();
   }));
 });

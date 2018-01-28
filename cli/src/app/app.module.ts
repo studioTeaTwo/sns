@@ -5,13 +5,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { environment } from 'environments/environment';
-import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TopComponent } from './components/navigations/top/top.component';
 import { HeaderComponent } from './components/navigations/header/header.component';
 import { GlobalMenuComponent } from './components/navigations/global-menu/global-menu.component';
-import { HomeComponent } from './components/home/home.component';
 import { ContactComponent } from './components/navigations/contact/contact.component';
 import { TipsComponent } from './components/navigations/tips/tips.component';
 
@@ -21,7 +20,6 @@ import { TipsComponent } from './components/navigations/tips/tips.component';
     TopComponent,
     HeaderComponent,
     GlobalMenuComponent,
-    HomeComponent,
     ContactComponent,
     TipsComponent,
   ],
@@ -30,7 +28,7 @@ import { TipsComponent } from './components/navigations/tips/tips.component';
     BrowserAnimationsModule,
     HttpClientModule,
     ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
-    SharedModule.forRoot(),
+    CoreModule.forRoot(),
     AppRoutingModule,
   ],
   providers: [

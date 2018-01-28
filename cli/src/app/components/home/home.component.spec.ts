@@ -4,10 +4,10 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { HomeComponent } from './home.component';
 
-import { SharedModule } from 'app/shared/shared.module';
-import { Store } from 'app/shared/store/store';
-import { FeedService, AccountService } from 'app/shared/services/api';
-import { MockAccountService } from 'app/mock/api/mock-account-service';
+import { MaterialModule } from 'app/shared/material/material.module';
+import { Store } from 'app/core/store/store';
+import { FeedService, AccountService } from 'app/core/services/api';
+import { MockAccountService } from 'testing/api';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -18,7 +18,7 @@ describe('HomeComponent', () => {
       imports: [
         HttpClientTestingModule,
         RouterTestingModule,
-        SharedModule,
+        MaterialModule,
       ],
       declarations: [ HomeComponent ],
       providers: [

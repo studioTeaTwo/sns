@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import {
   UserService,
-} from 'app/shared/services/api';
+} from 'app/core/services/api';
 
 @Component({
   selector: 'app-name',

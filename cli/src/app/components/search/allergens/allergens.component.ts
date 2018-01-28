@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import {
   MasterDataService,
   UserService,
-} from 'app/shared/services/api';
+} from 'app/core/services/api';
 import {
   MasterAllergenGroup,
 } from 'app/interfaces/api-models';

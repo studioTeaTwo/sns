@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
-import { AccountService } from 'app/shared/services/api';
+import { AccountService } from 'app/core/services/api';
 
 @Injectable()
 export class AdminGuard implements CanActivate {

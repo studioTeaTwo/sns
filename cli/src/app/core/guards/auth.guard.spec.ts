@@ -4,12 +4,12 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { AuthGuard } from './auth.guard';
 
-import { Store } from 'app/shared/store/store';
+import { Store } from '../store/store';
 import {
   ApiBaseService,
   AccountService,
-} from 'app/shared/services/api';
-import { MockAccountService } from 'app/mock/api/mock-account-service';
+} from '../services/api';
+import { MockAccountService } from 'testing/api';
 
 describe('AuthGuard', () => {
   beforeEach(() => {

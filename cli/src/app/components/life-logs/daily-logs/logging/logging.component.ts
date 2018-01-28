@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { DailyLogService } from 'app/shared/services/api';
+import { DailyLogService } from 'app/core/services/api';
 
 export enum DisplayState {
   HEALTH,

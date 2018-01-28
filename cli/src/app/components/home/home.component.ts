@@ -4,9 +4,9 @@ import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
 import * as Moment from 'moment';
 
-import { Store } from 'app/shared/store/store';
+import { Store } from 'app/core/store/store';
 import { FriendExperienceStrongParameter, NotificationViewModel, Notification, User } from 'app/interfaces/api-models';
-import { FeedService, AccountService } from 'app/shared/services/api';
+import { FeedService, AccountService } from 'app/core/services/api';
 import { BeginnerAdvice } from 'app/interfaces/view-models';
 import { TipsCollection } from 'app/constants/constants';
 

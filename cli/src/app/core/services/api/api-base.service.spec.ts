@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { ApiBaseService } from './api-base.service';
 
-import { Store } from 'app/shared/store/store';
+import { Store } from 'app/core/store/store';
 
 describe('ApiBaseService', () => {
   beforeEach(() => {

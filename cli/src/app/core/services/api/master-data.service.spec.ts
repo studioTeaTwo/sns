@@ -1,24 +1,24 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-import { FeedService } from './feed.service';
+import { MasterDataService } from './master-data.service';
 
-import { Store } from 'app/shared/store/store';
+import { Store } from 'app/core/store/store';
 
-describe('FeedService', () => {
+describe('MasterDataService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
       ],
       providers: [
-        FeedService,
         Store,
+        MasterDataService,
       ]
     });
   });
 
-  it('should be created', inject([FeedService], (service: FeedService) => {
+  it('should be created', inject([MasterDataService], (service: MasterDataService) => {
     expect(service).toBeTruthy();
   }));
 });

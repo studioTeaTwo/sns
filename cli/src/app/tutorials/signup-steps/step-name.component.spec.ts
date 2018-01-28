@@ -2,15 +2,17 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
-import { SharedModule } from 'app/shared/shared.module';
-import { Store } from 'app/shared/store/store';
+import { MaterialModule } from 'app/shared/material/material.module';
+import { Store } from 'app/core/store/store';
 import {
   AccountService,
   ChatService,
- } from 'app/shared/services/api';
+ } from 'app/core/services/api';
 import { StepNameComponent } from './step-name.component';
-import { MockAccountService } from 'app/mock/api/mock-account-service';
+import { MockAccountService } from 'testing/api';
+import { FormatToJapaneseDatePipe } from 'app/shared/pipes';
 
 describe('StepNameComponent', () => {
   let component: StepNameComponent;
@@ -22,9 +24,13 @@ describe('StepNameComponent', () => {
         HttpClientTestingModule,
         RouterTestingModule,
         NoopAnimationsModule,
-        SharedModule,
+        FormsModule,
+        MaterialModule,
       ],
-      declarations: [ StepNameComponent ],
+      declarations: [
+        StepNameComponent,
+        FormatToJapaneseDatePipe,
+      ],
       providers: [
         Store,
         {

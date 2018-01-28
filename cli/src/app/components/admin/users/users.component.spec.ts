@@ -4,9 +4,10 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { UsersComponent } from './users.component';
 
-import { Store } from 'app/shared/store/store';
-import { SharedModule } from 'app/shared/shared.module';
-import { UserService } from 'app/shared/services/api';
+import { Store } from 'app/core/store/store';
+import { MaterialModule } from 'app/shared/material/material.module';
+import { UserService } from 'app/core/services/api';
+import { MockUserService } from 'testing/api';
 
 describe('UsersComponent', () => {
   let component: UsersComponent;
@@ -17,12 +18,15 @@ describe('UsersComponent', () => {
       imports: [
         HttpClientTestingModule,
         RouterTestingModule,
-        SharedModule,
+        MaterialModule,
       ],
       declarations: [ UsersComponent ],
       providers: [
         Store,
-        UserService,
+        {
+          provide: UserService,
+          useClass: MockUserService
+        },
       ]
     })
     .compileComponents();

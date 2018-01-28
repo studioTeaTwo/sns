@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
-import { Store } from 'app/shared/store/store';
+import { Store } from 'app/core/store/store';
 import { ChatThread, User } from 'app/interfaces/api-models';
-import { AccountService, ChatService } from 'app/shared/services/api';
+import { AccountService, ChatService } from 'app/core/services/api';
 
 @Component({
   selector: 'app-chat-list',

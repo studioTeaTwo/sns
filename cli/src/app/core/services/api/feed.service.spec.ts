@@ -1,24 +1,24 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-import { DailyLogService } from './daily-log.service';
+import { FeedService } from './feed.service';
 
-import { Store } from 'app/shared/store/store';
+import { Store } from 'app/core/store/store';
 
-describe('DailyLogService', () => {
+describe('FeedService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
       ],
       providers: [
-        DailyLogService,
+        FeedService,
         Store,
       ]
     });
   });
 
-  it('should be created', inject([DailyLogService], (service: DailyLogService) => {
+  it('should be created', inject([FeedService], (service: FeedService) => {
     expect(service).toBeTruthy();
   }));
 });

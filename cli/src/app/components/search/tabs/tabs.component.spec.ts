@@ -5,15 +5,16 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { TabsComponent } from './tabs.component';
 
-import { SharedModule } from 'app/shared/shared.module';
-import { Store } from 'app/shared/store/store';
+import { MaterialModule } from 'app/shared/material/material.module';
+import { Store } from 'app/core/store/store';
 import {
   MasterDataService,
   UserService,
-} from 'app/shared/services/api';
+} from 'app/core/services/api';
 import { AllergensComponent } from '../allergens/allergens.component';
 import { NameComponent } from '../name/name.component';
 import { ResultsComponent } from '../results/results.component';
+import { MockUserService } from 'testing/api';
 
 describe('TabComponent', () => {
   let component: TabsComponent;
@@ -25,7 +26,7 @@ describe('TabComponent', () => {
         HttpClientTestingModule,
         RouterTestingModule,
         NoopAnimationsModule,
-        SharedModule,
+        MaterialModule,
       ],
       declarations: [
         TabsComponent,
@@ -36,7 +37,10 @@ describe('TabComponent', () => {
       providers: [
         Store,
         MasterDataService,
-        UserService,
+        {
+          provide: UserService,
+          useClass: MockUserService
+        },
       ]
     })
     .compileComponents();

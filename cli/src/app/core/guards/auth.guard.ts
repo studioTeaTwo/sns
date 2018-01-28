@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 
 import {
   AccountService,
-} from 'app/shared/services/api';
+} from 'app/core/services/api';
 
 @Injectable()
 export class AuthGuard implements CanActivate {

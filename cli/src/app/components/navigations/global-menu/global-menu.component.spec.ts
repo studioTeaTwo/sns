@@ -4,7 +4,7 @@ import { SpyLocation } from '@angular/common/testing';
 
 import { GlobalMenuComponent } from './global-menu.component';
 
-import { SharedModule } from 'app/shared/shared.module';
+import { MaterialModule } from 'app/shared/material/material.module';
 
 describe('GlobalMenuComponent', () => {
   let component: GlobalMenuComponent;
@@ -14,7 +14,7 @@ describe('GlobalMenuComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        SharedModule,
+        MaterialModule,
       ],
       declarations: [ GlobalMenuComponent ],
       providers: [

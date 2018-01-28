@@ -5,7 +5,7 @@ import { trigger } from '@angular/animations';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
-import { Store } from 'app/shared/store/store';
+import { Store } from 'app/core/store/store';
 import { NAVI_CHARA } from 'app/constants/constants';
 import {
   ChatThread,
@@ -19,7 +19,7 @@ import {
   AccountService,
   ChatService,
   DailyLogService,
-} from 'app/shared/services/api';
+} from 'app/core/services/api';
 import { ChatComponent } from 'app/components/chats/chat/chat.component';
 import { DisplayState } from 'app/components/life-logs/daily-logs/logging/logging.component';
 import { addChat, addChatAndFocus, NAVI_THREAD } from '../shared/chat-operation.function';

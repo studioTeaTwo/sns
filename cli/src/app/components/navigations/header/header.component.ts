@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { User } from 'app/interfaces/api-models';
-import { AccountService } from 'app/shared/services/api';
+import { AccountService } from 'app/core/services/api';
 import { Observable } from 'rxjs/Observable';
 
 @Component({

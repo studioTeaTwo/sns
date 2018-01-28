@@ -3,8 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { trigger } from '@angular/animations';
 import { Observable } from 'rxjs/Observable';
 
-import { MaterialModule } from 'app/shared/material/material.module';
-import { Store } from 'app/shared/store/store';
+import { Store } from 'app/core/store/store';
 import { KEY_CODE } from 'app/constants/constants';
 import {
   ChatThread,
@@ -14,7 +13,7 @@ import {
   User,
 } from 'app/interfaces/api-models';
 import { RoutePram } from 'app/interfaces/view-models';
-import { AccountService, ChatService } from 'app/shared/services/api';
+import { AccountService, ChatService } from 'app/core/services/api';
 
 @Component({
   selector: 'app-chat',

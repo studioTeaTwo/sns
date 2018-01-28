@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { environment } from 'environments/environment';
 import { API_ERROR_MSGS } from 'app/constants/constants';
-import { ApiBaseService } from 'app/shared/services/api/api-base.service';
+import { ApiBaseService } from 'app/core/services/api/api-base.service';
 
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {

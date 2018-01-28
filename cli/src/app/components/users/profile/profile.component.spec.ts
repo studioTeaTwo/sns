@@ -4,10 +4,10 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { ProfileComponent } from './profile.component';
 
-import { SharedModule } from 'app/shared/shared.module';
-import { Store } from 'app/shared/store/store';
-import { AccountService, UserService, ChatService } from 'app/shared/services/api';
-import { MockAccountService } from 'app/mock/api/mock-account-service';
+import { MaterialModule } from 'app/shared/material/material.module';
+import { Store } from 'app/core/store/store';
+import { AccountService, UserService, ChatService } from 'app/core/services/api';
+import { MockAccountService, MockUserService } from 'testing/api';
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
@@ -18,7 +18,7 @@ describe('ProfileComponent', () => {
       imports: [
         HttpClientTestingModule,
         RouterTestingModule,
-        SharedModule,
+        MaterialModule,
       ],
       declarations: [ ProfileComponent ],
       providers: [
@@ -27,7 +27,10 @@ describe('ProfileComponent', () => {
           provide: AccountService,
           useClass: MockAccountService
         },
-        UserService,
+        {
+          provide: UserService,
+          useClass: MockUserService
+        },
         ChatService,
       ]
     })

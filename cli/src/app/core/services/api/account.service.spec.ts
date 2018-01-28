@@ -3,7 +3,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { AccountService } from './account.service';
 
-import { Store } from 'app/shared/store/store';
+import { Store } from 'app/core/store/store';
 import { ApiBaseService } from './api-base.service';
 
 describe('AccountService', () => {

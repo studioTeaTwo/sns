@@ -2,20 +2,23 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 import { SignupComponent } from './signup.component';
 
-import { SharedModule } from 'app/shared/shared.module';
-import { Store } from 'app/shared/store/store';
+import { MaterialModule } from 'app/shared/material/material.module';
+import { Store } from 'app/core/store/store';
 import {
   AccountService,
   ChatService,
- } from 'app/shared/services/api';
+ } from 'app/core/services/api';
 import { StepNameComponent } from 'app/tutorials/signup-steps/step-name.component';
 import { StepTypeComponent } from 'app/tutorials/signup-steps/step-type.component';
 import { StepSymptomComponent } from 'app/tutorials/signup-steps/step-symptom.component';
 import { StepEmailComponent } from 'app/tutorials/signup-steps/step-email.component';
 import { StepGoalComponent } from 'app/tutorials/signup-steps/step-goal.component';
+import { FormatToJapaneseDatePipe } from 'app/shared/pipes';
+import { MockAccountService } from 'testing/api';
 
 describe('SignupComponent', () => {
   let component: SignupComponent;
@@ -27,7 +30,8 @@ describe('SignupComponent', () => {
         HttpClientTestingModule,
         RouterTestingModule,
         NoopAnimationsModule,
-        SharedModule,
+        FormsModule,
+        MaterialModule,
       ],
       declarations: [
         SignupComponent,
@@ -36,10 +40,14 @@ describe('SignupComponent', () => {
         StepSymptomComponent,
         StepEmailComponent,
         StepGoalComponent,
+        FormatToJapaneseDatePipe,
       ],
       providers: [
         Store,
-        AccountService,
+        {
+          provide: AccountService,
+          useClass: MockAccountService
+        },
         ChatService,
       ]
     })

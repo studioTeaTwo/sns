@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
-import { Store } from 'app/shared/store/store';
+import { Store } from 'app/core/store/store';
 import {
   Profile, RelationshipRequestBody, User,
 } from 'app/interfaces/api-models';
-import { ApiBaseService } from 'app/shared/services/api/api-base.service';
+import { ApiBaseService } from 'app/core/services/api/api-base.service';
 
 @Injectable()
 export class UserService {

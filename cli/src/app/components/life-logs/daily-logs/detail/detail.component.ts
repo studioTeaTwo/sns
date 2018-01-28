@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { MatSnackBar } from '@angular/material';
 import * as moment from 'moment';
 
-import { Store } from 'app/shared/store/store';
+import { Store } from 'app/core/store/store';
 import {
   DailyLog,
   DailyLogStrongParameter,
@@ -12,7 +12,7 @@ import {
   User,
 } from 'app/interfaces/api-models';
 import { SymptomName, Symptom } from 'app/constants/constants';
-import { AccountService, DailyLogService } from 'app/shared/services/api';
+import { AccountService, DailyLogService } from 'app/core/services/api';
 
 enum MODE {
   CREATE = 1,

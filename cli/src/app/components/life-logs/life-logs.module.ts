@@ -13,7 +13,7 @@ import { DetailComponent } from './daily-logs/detail/detail.component';
     CommonModule,
     SharedModule,
     TutorialsModule,
-    LifeLogsRoutingModule
+    LifeLogsRoutingModule,
   ],
   declarations: [
     ListComponent,

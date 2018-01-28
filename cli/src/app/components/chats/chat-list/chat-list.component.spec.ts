@@ -4,11 +4,11 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { ChatListComponent } from './chat-list.component';
 
-import { SharedModule } from 'app/shared/shared.module';
-import { Store } from 'app/shared/store/store';
-import { AccountService, ChatService } from 'app/shared/services/api';
-import { ShortenTextPipe } from 'app/shared/pipes';
-import { MockAccountService } from 'app/mock/api/mock-account-service';
+import { MaterialModule } from 'app/shared/material/material.module';
+import { Store } from 'app/core/store/store';
+import { AccountService, ChatService } from 'app/core/services/api';
+import { ShortenTextPipe, RoundOffDatePipe } from 'app/shared/pipes';
+import { MockAccountService } from 'testing/api';
 
 describe('ChatListComponent', () => {
   let component: ChatListComponent;
@@ -19,10 +19,12 @@ describe('ChatListComponent', () => {
       imports: [
         HttpClientTestingModule,
         RouterTestingModule,
-        SharedModule,
+        MaterialModule,
       ],
       declarations: [
         ChatListComponent,
+        RoundOffDatePipe,
+        ShortenTextPipe,
       ],
       providers: [
         Store,
