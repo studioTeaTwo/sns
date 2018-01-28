@@ -8,6 +8,7 @@ import {
   ChatService,
 } from 'app/shared/services/api';
 import { NAVI_CHARA } from 'app/constants/constants';
+import { User } from 'app/interfaces/api-models';
 
 @Component({
   selector: 'app-top',
@@ -37,6 +38,10 @@ export class TopComponent implements OnInit {
 
   login() {
     this.accountService.login('t2.tide@gmail.com', 'allergy');
+  }
+
+  isAdmin(): Observable<User> {
+    return this.accountService.get().filter(response => !!response);
   }
 
   private getMe() {
