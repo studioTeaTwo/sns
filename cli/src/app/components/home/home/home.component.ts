@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit {
     }
     if (beginner.adviceType === 'tips') {
       // this.router.navigate([`/tips\#${beginner.tipsType}`]);
-      this.router.navigate([`/tips`]);
+      this.router.navigate([`/home/tips`]);
     }
   }
 

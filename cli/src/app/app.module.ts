@@ -12,7 +12,6 @@ import { TopComponent } from './components/navigations/top/top.component';
 import { HeaderComponent } from './components/navigations/header/header.component';
 import { GlobalMenuComponent } from './components/navigations/global-menu/global-menu.component';
 import { ContactComponent } from './components/navigations/contact/contact.component';
-import { TipsComponent } from './components/navigations/tips/tips.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +20,6 @@ import { TipsComponent } from './components/navigations/tips/tips.component';
     HeaderComponent,
     GlobalMenuComponent,
     ContactComponent,
-    TipsComponent,
   ],
   imports: [
     BrowserModule,

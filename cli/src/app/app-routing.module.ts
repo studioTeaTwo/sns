@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { TopComponent } from 'app/components/navigations/top/top.component';
-import { TipsComponent } from 'app/components/navigations/tips/tips.component';
+
 import { ContactComponent } from 'app/components/navigations/contact/contact.component';
 import { AuthGuard } from 'app/core/guards/auth.guard';
 import { AdminGuard } from 'app/core/guards/admin.guard';
@@ -11,10 +11,6 @@ const routes: Routes = [
   {
     path: '',
     component: TopComponent,
-  },
-  {
-    path: 'tips',
-    component: TipsComponent,
   },
   {
     path: 'contact',
