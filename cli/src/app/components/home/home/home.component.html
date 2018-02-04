@@ -22,7 +22,7 @@
       routerLinkActive="active"
       (click)="onClickBeginner(beginner)"
     >
-      <span [matTooltip]="beginner.description">{{beginner.description}}</span>
+      <mat-icon *ngIf="beginner.adviceType !== 'tips'" style="color: red">check_box</mat-icon><span [matTooltip]="beginner.description">{{beginner.description}}</span>
     </a>
   </mat-menu>
 </section>
