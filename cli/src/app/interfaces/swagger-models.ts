@@ -51,6 +51,7 @@ export interface ChatThreadStrongParameter {
 }
 export interface DailyLog {
     id?: number; // int32
+    userId?: number; // int32
     date?: string; // date
     symptom?: string;
     health?: number; // int32
@@ -66,6 +67,7 @@ export interface DailyLogRequestBody {
 }
 export interface DailyLogStrongParameter {
     id?: number; // int32
+    userId?: number; // int32
     date?: string; // date
     symptom?: string;
     health?: number; // int32

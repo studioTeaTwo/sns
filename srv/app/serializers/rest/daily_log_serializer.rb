@@ -1,6 +1,7 @@
 # @name DailyLog
 #
 # @attr [integer] id
+# @attr [integer] userId
 # @attr [date] date
 # @attr [string] symptom
 # @attr [integer] health
@@ -11,7 +12,7 @@
 # @attr [string] photographMemo
 # @attr [date-time] updatedAt
 class Rest::DailyLogSerializer < ActiveModel::Serializer
-  attributes :id, :date, :symptom, 
+  attributes :id, :user_id, :date, :symptom, 
              :health, :health_memo,
              :medicina, :medicina_memo,
              :photograph, :photograph_memo,

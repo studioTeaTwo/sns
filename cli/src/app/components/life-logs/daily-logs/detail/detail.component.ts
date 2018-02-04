@@ -32,6 +32,7 @@ export class DetailComponent implements OnInit {
   inputFiles: any;
 
   user: User;
+  isMine = false;
   isMultipleSymptom = true;
   dailyLogParam: DailyLogStrongParameter = this.initialState;
   readonly SymptomName = SymptomName;
@@ -67,8 +68,12 @@ export class DetailComponent implements OnInit {
         const result = this.store.getState().dailyLogList.find(value => value.id === +url[0].path);
         if (result) {
           this.dailyLogParam = result;
+          this.isMine = this.user.id === this.dailyLogParam.userId;
         } else {
-          this.dailyLogService.get(+url[0].path).subscribe(response => this.dailyLogParam = response);
+          this.dailyLogService.get(+url[0].path).subscribe(response => {
+            this.dailyLogParam = response;
+            this.isMine = this.user.id === this.dailyLogParam.userId;
+          });
         }
       }
     });

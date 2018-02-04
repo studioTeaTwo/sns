@@ -2,7 +2,7 @@
   <mat-form-field class="form-date">
     <input matInput type="date" [(ngModel)]="dailyLogParam.date" />
   </mat-form-field>
-  <div class="log-detail-button">
+  <div class="log-detail-button" *ngIf="isMine">
     <button type="button" mat-raised-button color="primary" *ngIf="displayMode === MODE.CREATE" (click)="onClickCreate()">記録する</button>
     <button type="button" mat-raised-button color="primary" *ngIf="displayMode === MODE.EDIT" (click)="onClickUpdate()">変更する</button>
     <button type="button" mat-raised-button *ngIf="displayMode === MODE.ROM" (click)="onClickEdit()">編集する</button>
