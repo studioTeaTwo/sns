@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
 import { Store } from 'app/core/store/store';
-import { NAVI_CHARA } from 'app/constants/constants';
+import { NAVI_CHARA, SymptomName } from 'app/constants/constants';
 import {
   ChatThread,
   Chats,
@@ -76,14 +76,17 @@ export class StepHealthComponent extends ChatComponent implements OnInit {
     // TODO: アンケートの初期化をもうちょいちゃんとやる
     daily_log_script2[0].result = '';
 
-    addChat({
-      body: daily_log_script1,
-      waitTime: 0
-    }, this.chatHistory, this.chatSource);
-    addChat({
-      body: daily_log_script2,
-      waitTime: 1000
-    }, this.chatHistory, this.chatSource);
+    this.route.params.subscribe(param => {
+      daily_log_script1[0].body = `今日の${SymptomName.get(param['id'])}の調子はどうだった？`;
+      addChat({
+        body: daily_log_script1,
+        waitTime: 0
+      }, this.chatHistory, this.chatSource);
+      addChat({
+        body: daily_log_script2,
+        waitTime: 1000
+      }, this.chatHistory, this.chatSource);
+    });
   }
 
   onChangeRadio(item: any) {
@@ -133,7 +136,7 @@ const daily_log_script1: ChatViewModel[] = [
     id: 1,
     senderId: NAVI_CHARA.id,
     contentType: CONTENT_TYPE.REPLY,
-    body: '今日の調子はどうだった？',
+    body: '',
     createdAt: new Date().toString()
   },
 ];

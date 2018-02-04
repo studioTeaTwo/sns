@@ -21,37 +21,37 @@ export const TipsCollection: BeginnerAdvice[] = [
   {
     adviceType: 'tips',
     tipsType: 'profile-symptom',
-    description: '[TIPS]症状を登録していると毎日5時に通知が来るよ',
+    description: '症状を登録していると毎日5時に通知が来るよ',
   },
   {
     adviceType: 'tips',
     tipsType: 'profile-messageicon',
-    description: '[TIPS]プロフィールのメッセージアイコンからチャットを送れるよ',
+    description: 'プロフィールのメッセージアイコンからチャットを送れるよ',
   },
   {
     adviceType: 'tips',
     tipsType: 'log-memo',
-    description: '[TIPS]治療日記にメモを書いてお医者さんに症状を伝えよう',
+    description: '治療日記にメモを書いてお医者さんに症状を伝えよう',
   },
   {
     adviceType: 'tips',
     tipsType: 'log-photo-record',
-    description: '[TIPS]治療日記に写真を撮っておこう',
+    description: '治療日記に写真を撮っておこう',
   },
   {
     adviceType: 'tips',
     tipsType: 'log-photo-camera',
-    description: '[TIPS]治療日記ではその場でカメラで写真撮ることもできるよ',
+    description: '治療日記ではその場でカメラで写真撮ることもできるよ',
   },
   {
     adviceType: 'tips',
     tipsType: 'log-photo-form',
-    description: '[TIPS]写真は正方形で保存されるよ',
+    description: '写真は正方形で保存されるよ',
   },
   {
     adviceType: 'tips',
     tipsType: 'search-allergen',
-    description: '[TIPS]アレルゲン検索から同じ症状の人を探せるよ',
+    description: 'アレルゲン検索から同じ症状の人を探せるよ',
   },
 ];
 
