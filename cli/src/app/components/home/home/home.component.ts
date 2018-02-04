@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
+import { concatMap, filter, map } from 'rxjs/operators';
 import * as Moment from 'moment';
 
 import { Store } from 'app/core/store/store';
@@ -43,7 +44,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.feedService.listNotifications()
-      .concatMap(response => this.feedService.listExperiences())
+      .pipe(concatMap(response => this.feedService.listExperiences()))
       .subscribe();
     this.myExperienceDataSource = new ExperienceDataSource(this.store.select<Notification[]>(state => state.experienceList.mine));
     this.friendExperienceDataSource = new ExperienceDataSource(this.store.select<Notification[]>(state => state.experienceList.friend));
@@ -118,9 +119,9 @@ class ExperienceDataSource extends DataSource<any> {
 
   /** Connect function called by the table to retrieve one stream containing the data to render. */
   connect(): Observable<Experience[]> {
-    return this.feedSource
-      .filter(data => data && data.length > 0)
-      .map(data => {
+    return this.feedSource.pipe(
+      filter(data => data && data.length > 0),
+      map(data => {
         const newData: Experience[] = [];
         // データを表示形式に整形する
         data.forEach(value => {
@@ -132,7 +133,8 @@ class ExperienceDataSource extends DataSource<any> {
         });
         this.rowCount = newData.length;
         return newData;
-      });
+      })
+    );
   }
 
   disconnect() {}

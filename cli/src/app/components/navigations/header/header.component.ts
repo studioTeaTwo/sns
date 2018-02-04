@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import { filter } from 'rxjs/operators';
 
 import { User } from 'app/interfaces/api-models';
 import { AccountService } from 'app/core/services/api';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-header',
@@ -41,7 +42,7 @@ export class HeaderComponent implements OnInit {
   }
 
   isAdmin(): Observable<User> {
-    return this.accountService.get().filter(response => !!response);
+    return this.accountService.get().pipe(filter(response => !!response));
   }
 
   // GlobalMenuComponentにも同じメソッドあり

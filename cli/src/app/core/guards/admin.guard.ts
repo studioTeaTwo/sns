@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operators';
 
 import { AccountService } from 'app/core/services/api';
 
@@ -12,14 +13,15 @@ export class AdminGuard implements CanActivate {
   ) { }
 
   canActivate(): Observable<boolean> {
-      return this.accountService.get()
-        .map(user => {
+      return this.accountService.get().pipe(
+        map(user => {
           if (user.admin) {
             return true;
           } else {
             this.router.navigate(['/auth/login']);
             return false;
           }
-        });
+        })
+      );
   }
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operators';
 
 import { Store } from 'app/core/store/store';
 import { Experience, NotificationViewModel } from 'app/interfaces/api-models';
@@ -14,21 +15,23 @@ export class FeedService {
   ) { }
 
   listNotifications(): Observable<void> {
-    return this.httpClient.get<NotificationViewModel[]>(`/api/feed/notifications`)
-      .map(
+    return this.httpClient.get<NotificationViewModel[]>(`/api/feed/notifications`).pipe(
+      map(
         response => {
           this.onSuccessNotificationList(response);
         }
-      );
+      )
+    );
   }
 
   listExperiences(): Observable<void> {
-    return this.httpClient.get<Experience>(`/api/feed/experiences`)
-      .map(
+    return this.httpClient.get<Experience>(`/api/feed/experiences`).pipe(
+      map(
         response => {
           this.onSuccessExperienceList(response);
         }
-      );
+      )
+    );
   }
 
   readNotification(id: number) {

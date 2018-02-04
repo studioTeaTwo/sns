@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChange} from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
+import { filter, map, concatMap } from 'rxjs/operators';
 
 interface ImageFile {
   type: string;
@@ -30,14 +32,15 @@ export class ImageUploadComponent implements OnInit, OnChanges {
   }
 
   handleChangeImage(): void {
-    Observable.of(this.imgSrc[0])
-      // 画像だけ読み込む
-      .filter(file => file.type.match(/image\/(jpeg|png|gif)/))
-      .concatMap(file => this.readFile(file))
-      // DOM領域にロードする
-      .map((fileData) => this.loadFile(fileData))
-      // canvasでリサイズする
-      .concatMap((img) => this.resize(img))
+    of(this.imgSrc[0]).pipe(
+        // 画像だけ読み込む
+        filter(file => file.type.match(/image\/(jpeg|png|gif)/)),
+        concatMap(file => this.readFile(file)),
+        // DOM領域にロードする
+        map((fileData) => this.loadFile(fileData)),
+        // canvasでリサイズする
+        concatMap((img) => this.resize(img))
+      )
       .subscribe((resizedImg) => {
         // ユーザーに見せる
         this.loadResizedFile(resizedImg);

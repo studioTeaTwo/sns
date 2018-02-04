@@ -1,21 +1,23 @@
 import { Observable } from 'rxjs/Observable';
-import 'app/core/rxjs-operators';
+import { of } from 'rxjs/observable/of';
+
+import { User } from 'app/interfaces/api-models';
 
 export class MockAccountService {
   login() {
-    return Observable.of();
+    return of();
   }
 
   logout() {
-    return Observable.of();
+    return of();
   }
 
   isLoggedIn() {
     return Promise.resolve(true);
   }
 
-  get() {
-    return Observable.of({
+  get(): Observable<User> {
+    return of({
       id: 1,
       atopic: true,
       asthma: true,
@@ -42,7 +44,7 @@ export class MockAccountService {
   }
 
   verifyEmail() {
-    return Observable.of();
+    return of();
   }
 
   emailValidator() {

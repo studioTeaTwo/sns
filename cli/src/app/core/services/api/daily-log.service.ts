@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 
 import { Store } from 'app/core/store/store';
@@ -48,13 +49,14 @@ export class DailyLogService {
   }
 
   get(id: number): Observable<DailyLog> {
-    return this.httpClient.get<DailyLog>(`/api/daily_logs/${id}`)
-      .map(
+    return this.httpClient.get<DailyLog>(`/api/daily_logs/${id}`).pipe(
+      map(
         response => {
           this.onSuccessLog(response);
           return response;
         }
-      );
+      )
+    );
   }
 
   create(param?: DailyLogStrongParameter): Observable<void> {
@@ -68,25 +70,27 @@ export class DailyLogService {
       this.dailyLogParam.photograph.forEach(photo => fileData.append('imageFile', this.Base64ToImage(photo)));
     }
 
-    return this.httpClient.post<DailyLog>(`/api/daily_logs`, body)
-      .map(
+    return this.httpClient.post<DailyLog>(`/api/daily_logs`, body).pipe(
+      map(
         response => {
           this.onSuccessLog(response);
           this.dailyLogParam = this.initialState;
         }
-      );
+      )
+    );
   }
 
   update(param: DailyLogStrongParameter): Observable<void> {
     const body: DailyLogRequestBody = {
       daily_log: param,
     };
-    return this.httpClient.put<DailyLog>(`/api/daily_logs/${param.id}`, body)
-      .map(
+    return this.httpClient.put<DailyLog>(`/api/daily_logs/${param.id}`, body).pipe(
+      map(
         response => {
           this.onSuccessLog(response);
         }
-      );
+      )
+    );
   }
 
   storeData(dailyLog: DailyLog) {

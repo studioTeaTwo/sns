@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { UrlSerializer } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
 
 import { Store } from 'app/core/store/store';
 

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
+import { map } from 'rxjs/operators';
 
 import { Store } from 'app/core/store/store';
 import {
@@ -38,8 +40,8 @@ export class AccountService {
         password: password
       }
     };
-    return this.http.post<User>(`/api/login`, body)
-      .map(
+    return this.http.post<User>(`/api/login`, body).pipe(
+      map(
         response => {
           this.userId = response.id;
           localStorage.setItem('token', response.accessToken);
@@ -47,18 +49,20 @@ export class AccountService {
           this.onSuccessAccount(response);
           return response;
         }
-      );
+      )
+    );
   }
 
   logout(): Observable<void> {
-    return this.http.delete(`/api/logout`)
-      .map(
+    return this.http.delete(`/api/logout`).pipe(
+      map(
         response => {
           localStorage.removeItem('token');
           localStorage.removeItem('account');
           this.onSuccessAccount({});
         }
-      );
+      )
+    );
   }
 
   isLoggedIn(): Promise<boolean> {
@@ -77,15 +81,15 @@ export class AccountService {
   get(): Observable<User> {
     let myself = this.store.getState().account;
     if (myself && myself.id) {
-      return Observable.of(this.store.getState().account);
+      return of(this.store.getState().account);
     } else {
       myself = JSON.parse(localStorage.getItem('account')) as User;
       if (myself && myself.id) {
         this.onSuccessAccount(myself);
-        return Observable.of(myself);
+        return of(myself);
       } else {
         // 通信するのではなくログインし直すべきである
-        return Observable.of({});
+        return of({});
       }
     }
   }
@@ -102,25 +106,27 @@ export class AccountService {
     } else {
       requestBody = user;
     }
-    return this.http.put<User>(`/api/users/${user.id}`, {user: requestBody})
-      .map(
+    return this.http.put<User>(`/api/users/${user.id}`, {user: requestBody}).pipe(
+      map(
         response => {
           localStorage.setItem('account', JSON.stringify(response));
           this.onSuccessAccount(response);
         }
-      );
+      )
+    );
   }
 
   create(): Observable<void> {
-    return this.http.post<User>(`/api/users`, {user: this.signupData})
-      .map(
+    return this.http.post<User>(`/api/users`, {user: this.signupData}).pipe(
+      map(
         response => {
           this.userId = response.id;
           localStorage.setItem('token', response.accessToken);
           localStorage.setItem('account', JSON.stringify(response));
           this.onSuccessAccount(response);
         }
-      );
+      )
+    );
   }
 
   saveSignupdataName(name: string) {
@@ -155,14 +161,15 @@ export class AccountService {
 
   verifyEmail(email: string): Observable<HttpResponse<any>> {
     return this.http.post<any>(
-              `/api/users/emailverification`,
-              {user: { email: email }},
-              {observe: 'response'}
-            )
-            .map(response => {
-              this.apiBaseService.onSuccess();
-              return response;
-            });
+        `/api/users/emailverification`,
+        {user: { email: email }},
+        {observe: 'response'}
+      ).pipe(
+      map(response => {
+        this.apiBaseService.onSuccess();
+        return response;
+      })
+    );
   }
 
   emailValidator(email: string): boolean {

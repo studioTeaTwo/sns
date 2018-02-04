@@ -2,6 +2,8 @@ import { Component, OnInit, Renderer2, ViewChild, ElementRef, SecurityContext } 
 import { ActivatedRoute, Router } from '@angular/router';
 import { trigger } from '@angular/animations';
 import { Observable } from 'rxjs/Observable';
+import { zip } from 'rxjs/observable/zip';
+import { map, concatMap, take } from 'rxjs/operators';
 
 import { Store } from 'app/core/store/store';
 import { KEY_CODE } from 'app/constants/constants';
@@ -50,10 +52,11 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit() {
-    const account$ = this.accountService.get().map(response => this.myself = response);
+    const account$ = this.accountService.get().pipe(map(response => this.myself = response));
     const params$ = this.route.params;
 
-    Observable.zip<User, RoutePram>(account$, params$).map(result => {
+    zip<User, RoutePram>(account$, params$).pipe(
+      map(result => {
 
         this.chatThread = this.store.getState().chatList.find(value => value.id === +result[1]['id']);
         const chats = this.store.getState().chats.find(value => value.chatThreadId === +result[1]['id']);
@@ -75,18 +78,19 @@ export class ChatComponent implements OnInit {
 
         // キャッシュがないので新規で通信取得する
         this.chatService.list()
-          .concatMap(response => {
+          .pipe(concatMap(response => {
             this.chatThread = response.find(value => value.id === +result[1]['id']);
             this.opponents = this.chatThread.participants.filter(value => value.id !== result[0].id);
             return this.chatService.getChatThread(this.chatThread.id);
-          })
+          }))
           .subscribe();
-      })
-      .take(1)
-      .subscribe(
-        (next: void) => this.scrollToBottom(),
-        (error: any) => this.router.navigateByUrl('/chat/list'),
-      );
+      }),
+      take(1)
+    )
+    .subscribe(
+      (next: void) => this.scrollToBottom(),
+      (error: any) => this.router.navigateByUrl('/chat/list'),
+    );
   }
 
   isDisplayDate() {}

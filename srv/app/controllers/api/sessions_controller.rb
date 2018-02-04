@@ -35,10 +35,10 @@ class Api::SessionsController < ApplicationController
     end
 
     def invalid_email
-      render json: { error: 'invalid_email' }, status: :unauthorized
+      render json: { error: 'eメールかパスワードが合っていません' }, status: :unauthorized
     end
 
     def invalid_password
-      render json: { error: 'invalid_password' }, status: :unauthorized
+      render json: { error: 'eメールかパスワードが合っていません' }, status: :unauthorized
     end
 end

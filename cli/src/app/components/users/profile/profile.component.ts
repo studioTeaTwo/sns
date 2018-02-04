@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { map, concatMap, take } from 'rxjs/operators';
 
 import { Store } from 'app/core/store/store';
 import {
@@ -50,13 +51,15 @@ export class ProfileComponent implements OnInit {
   }
 
   forwardChat() {
-    this.profile$.map(data => data.id)
-      .concatMap(id => this.chatService.createChatThread(id))
-      .take(1)
-      .subscribe(response => {
-        this.router.navigate(['/chat', response.id]);
-      });
-  }
+    this.profile$.pipe(
+      map(data => data.id),
+      concatMap(id => this.chatService.createChatThread(id)),
+      take(1)
+    )
+    .subscribe(response => {
+      this.router.navigate(['/chat', response.id]);
+    });
+}
 
   onClickSearch(value: string) {
     this.userService.searchByAllergenGroup(value);

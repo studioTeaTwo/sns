@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operators';
 
 import { Store } from 'app/core/store/store';
 import {
@@ -24,23 +25,25 @@ export class ChatService {
   ) { }
 
   list(): Observable<ChatThread[]> {
-    return this.httpClient.get<ChatThread[]>(`/api/chats`)
-      .map(
+    return this.httpClient.get<ChatThread[]>(`/api/chats`).pipe(
+      map(
         response => {
           this.onSuccessList(response);
           return response;
         }
-      );
+      )
+    );
   }
 
   getChatThread(chatThreadId: number): Observable<Chats> {
-    return this.httpClient.get<Chats>(`/api/chats/${chatThreadId}`)
-      .map(
+    return this.httpClient.get<Chats>(`/api/chats/${chatThreadId}`).pipe(
+      map(
         response => {
           this.onSuccessChats(response);
           return response;
         }
-      );
+      )
+    );
   }
 
   createChatThread(opponentUserId: number): Observable<ChatThread> {
@@ -49,13 +52,14 @@ export class ChatService {
         participants: [opponentUserId]
       }
     };
-    return this.httpClient.post<ChatThread>(`/api/chats`, body)
-      .map(
+    return this.httpClient.post<ChatThread>(`/api/chats`, body).pipe(
+      map(
         response => {
           this.onSuccessList([response]);
           return response;
         }
-      );
+      )
+    );
   }
 
   say(chatThreadId: number, content: string) {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { filter } from 'rxjs/operators';
 
 import { Store } from 'app/core/store/store';
 import {
@@ -41,7 +42,7 @@ export class TopComponent implements OnInit {
   }
 
   isAdmin(): Observable<User> {
-    return this.accountService.get().filter(response => !!response);
+    return this.accountService.get().pipe(filter(response => !!response));
   }
 
   private getMe() {
