@@ -11,7 +11,7 @@
 
 <section id="log-content">
 
-  <mat-card *ngIf="isMultipleSymptom">
+  <mat-card *ngIf="isMine && isMultipleSymptom">
     <mat-card-content>
       <mat-radio-group id="symptom" [(ngModel)]="dailyLogParam.symptom" [disabled]="displayMode === MODE.ROM">
         <mat-radio-button *ngIf="user.atopic" value="atopic">{{SymptomName.get('atopic')}}</mat-radio-button>
@@ -22,6 +22,10 @@
         <mat-radio-button *ngIf="user.conjunctivitis" value="conjunctivitis">{{SymptomName.get('conjunctivitis')}}</mat-radio-button>
       </mat-radio-group>
     </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="!isMine">
+    <mat-card-content>{{SymptomName.get(dailyLogParam.symptom)}}の治療日記</mat-card-content>
   </mat-card>
 
   <mat-card>

@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { ActivatedRoute, UrlSegment } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { Observable } from 'rxjs/Observable';
+import { zip } from 'rxjs/observable/zip';
 import * as moment from 'moment';
 
 import { Store } from 'app/core/store/store';
@@ -53,12 +54,16 @@ export class DetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.accountService.get().subscribe(user => {
+    const account$ = this.accountService.get();
+    const url$ = this.route.url;
+
+    zip<User, UrlSegment[]>(account$, url$).subscribe(response => {
+      const user = response[0];
+      const url = response[1];
+
       this.user = user;
       this.judgeMultipleSymptom(user);
-    });
 
-    this.route.url.subscribe(url => {
       // 新規作成ページ
       if (url[0].path === 'create') {
         this.displayMode = MODE.CREATE;
@@ -68,11 +73,11 @@ export class DetailComponent implements OnInit {
         const result = this.store.getState().dailyLogList.find(value => value.id === +url[0].path);
         if (result) {
           this.dailyLogParam = result;
-          this.isMine = this.user.id === this.dailyLogParam.userId;
+          this.isMine = user.id === this.dailyLogParam.userId;
         } else {
-          this.dailyLogService.get(+url[0].path).subscribe(response => {
-            this.dailyLogParam = response;
-            this.isMine = this.user.id === this.dailyLogParam.userId;
+          this.dailyLogService.get(+url[0].path).subscribe(dailyLog => {
+            this.dailyLogParam = dailyLog;
+            this.isMine = user.id === this.dailyLogParam.userId;
           });
         }
       }
