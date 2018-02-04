@@ -73,7 +73,7 @@ class Api::Feed::ExperiencesController < ApplicationController
               relation = Relationship.find(item.activity_id)
               user = User.find(relation.followed_id)
               follower = User.find(relation.follower_id)
-              link_id = user.id.to_s
+              link_id = follower.id.to_s
               description = "#{follower.name}さんにフォローされたよ！"
             elsif (item.activity_type == 'DailyLog')
               user = User.find(item.user_id)
