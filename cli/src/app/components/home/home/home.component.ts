@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
-import { concatMap, filter, map } from 'rxjs/operators';
+import { concatMap, filter, map, take } from 'rxjs/operators';
 import * as Moment from 'moment';
 
 import { Store } from 'app/core/store/store';
@@ -45,9 +45,11 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.feedService.listNotifications()
-      .pipe(concatMap(response => this.feedService.listExperiences()))
-      .subscribe();
+    this.feedService.listNotifications().pipe(
+      concatMap(response => this.feedService.listExperiences()),
+      take(1),
+    )
+    .subscribe();
     this.myExperienceDataSource = new ExperienceDataSource(this.store.select<Notification[]>(state => state.experienceList.mine));
     this.friendExperienceDataSource = new ExperienceDataSource(this.store.select<Notification[]>(state => state.experienceList.friend));
 

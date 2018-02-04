@@ -22,7 +22,7 @@ RSpec.describe "Api::Feed::Experiences", type: :request do
 
       expect(json['friend'][0]['type']).to eq('Relationship')
       expect(json['friend'][0]['userId']).to eq(other_user.id)
-      expect(json['friend'][0]['linkId']).to eq(other_user.id.to_s)
+      expect(json['friend'][0]['linkId']).to eq(current_user.id.to_s)
 
       expect(json['friend'][1]['type']).to eq(friend_experience.activity_type)
       expect(json['friend'][1]['userId']).to eq(other_user.id)

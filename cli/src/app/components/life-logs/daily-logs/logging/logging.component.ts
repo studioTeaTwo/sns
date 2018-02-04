@@ -26,8 +26,8 @@ export class LoggingComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params =>
-      this.dailyLogService.dailyLogParam.symptom = params['id']
+    this.route.paramMap.subscribe(paramMap =>
+      this.dailyLogService.dailyLogParam.symptom = paramMap.get('id')
     );
 
     this.displayState = DisplayState.HEALTH;

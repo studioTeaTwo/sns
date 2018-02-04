@@ -32,11 +32,11 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe((params: Params) => {
-        this.userService.getProfile(params['userId']);
+    this.route.paramMap.subscribe(params => {
+        this.userService.getProfile(params.get('userId'));
         this.accountService.get()
           .subscribe(
-            response => this.isMyself = params['userId'] === response.id.toString(),
+            response => this.isMyself = params.get('userId') === response.id.toString(),
             error => this.isMyself = true // ログイン外からのアクセス
           );
       });

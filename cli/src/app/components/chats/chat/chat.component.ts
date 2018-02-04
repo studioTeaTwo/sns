@@ -1,5 +1,5 @@
 import { Component, OnInit, Renderer2, ViewChild, ElementRef, SecurityContext } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { trigger } from '@angular/animations';
 import { Observable } from 'rxjs/Observable';
 import { zip } from 'rxjs/observable/zip';
@@ -14,7 +14,6 @@ import {
   CONTENT_TYPE,
   User,
 } from 'app/interfaces/api-models';
-import { RoutePram } from 'app/interfaces/view-models';
 import { AccountService, ChatService } from 'app/core/services/api';
 
 @Component({
@@ -53,17 +52,19 @@ export class ChatComponent implements OnInit {
 
   ngOnInit() {
     const account$ = this.accountService.get().pipe(map(response => this.myself = response));
-    const params$ = this.route.params;
+    const params$ = this.route.paramMap;
 
-    zip<User, RoutePram>(account$, params$).pipe(
+    zip<User, ParamMap>(account$, params$).pipe(
       map(result => {
+        const account = result[0];
+        const chatId = result[1].get('id');
 
-        this.chatThread = this.store.getState().chatList.find(value => value.id === +result[1]['id']);
-        const chats = this.store.getState().chats.find(value => value.chatThreadId === +result[1]['id']);
+        this.chatThread = this.store.getState().chatList.find(value => value.id === +chatId);
+        const chats = this.store.getState().chats.find(value => value.chatThreadId === +chatId);
 
         // すでにチャットがあるのでそのまま始める
         if (this.chatThread && chats) {
-          this.opponents = this.chatThread.participants.filter(value => value.id !== result[0].id);
+          this.opponents = this.chatThread.participants.filter(value => value.id !== account.id);
           return;
         }
 
@@ -71,7 +72,7 @@ export class ChatComponent implements OnInit {
 
         // もう既存のスレッドがあるがチャットは無い
         if (this.chatThread && !chats) {
-          this.opponents = this.chatThread.participants.filter(value => value.id !== result[0].id);
+          this.opponents = this.chatThread.participants.filter(value => value.id !== account.id);
           this.chatService.getChatThread(this.chatThread.id).subscribe();
           return;
         }
@@ -79,8 +80,8 @@ export class ChatComponent implements OnInit {
         // キャッシュがないので新規で通信取得する
         this.chatService.list()
           .pipe(concatMap(response => {
-            this.chatThread = response.find(value => value.id === +result[1]['id']);
-            this.opponents = this.chatThread.participants.filter(value => value.id !== result[0].id);
+            this.chatThread = response.find(value => value.id === +chatId);
+            this.opponents = this.chatThread.participants.filter(value => value.id !== account.id);
             return this.chatService.getChatThread(this.chatThread.id);
           }))
           .subscribe();

@@ -40,13 +40,13 @@ export class SettingComponent implements OnInit {
 
   ngOnInit() {
     this.route
-      .queryParams
+      .queryParamMap
       .subscribe(params => {
-        if (params['open'] === 'showBasic') {
+        if (params.get('open') === 'showBasic') {
           this.showBasic = true;
           this.showSymptom = false;
           this.showAllergenGroup = false;
-        } else if (params['open'] === 'showAllergenGroup') {
+        } else if (params.get('open') === 'showAllergenGroup') {
           this.showBasic = false;
           this.showSymptom = false;
           this.showAllergenGroup = true;
