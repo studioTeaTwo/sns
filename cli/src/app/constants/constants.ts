@@ -55,7 +55,7 @@ export const TipsCollection: BeginnerAdvice[] = [
   },
 ];
 
-export type NotificationType = 'DailyLog' | 'Chat' | 'Followed';
+export type NotificationType = 'DailyLog' | 'Chat' | 'Followed' | 'Relationship';
 
 export type Symptom = 'atopic' | 'asthma' | 'rhinitis' | 'pollen' | 'gastroenteritis' | 'conjunctivitis';
 const SymptomMap: Map<Symptom, string> = new Map();

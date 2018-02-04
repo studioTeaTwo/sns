@@ -14,7 +14,9 @@ import { TipsCollection } from 'app/constants/constants';
 interface Experience {
   date: string;
   name: string;
-  activity: string;
+  description: string;
+  userLink: string;
+  contentLink: string;
 }
 
 @Component({
@@ -32,8 +34,8 @@ export class HomeComponent implements OnInit {
   // 経験
   myExperienceDataSource: ExperienceDataSource | null;
   friendExperienceDataSource: ExperienceDataSource | null;
-  myDisplayColumns = ['date', 'activity'];
-  friendDisplayColumns = ['date', 'name', 'activity'];
+  myDisplayColumns = ['date', 'description'];
+  friendDisplayColumns = ['date', 'name', 'description'];
 
   constructor(
     private router: Router,
@@ -124,11 +126,21 @@ class ExperienceDataSource extends DataSource<any> {
       map(data => {
         const newData: Experience[] = [];
         // データを表示形式に整形する
-        data.forEach(value => {
+        data.forEach((value: NotificationViewModel) => {
+          let contentLink: string;
+          if (value.type === 'DailyLog') {
+            contentLink = `/life-log/daily/${value.linkId}`;
+          } else if (value.type === 'Relationship') {
+            contentLink = `/user/${value.linkId}`;
+          } else {
+            contentLink = '';
+          }
           newData.push({
             date: value.createdAt,
             name: value.name,
-            activity: value.description,
+            description: value.description,
+            userLink: `/user/${value.userId}`,
+            contentLink: contentLink,
           });
         });
         this.rowCount = newData.length;
