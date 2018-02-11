@@ -32,7 +32,7 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.pipe(take(1)).subscribe(params => {
         this.userService.getProfile(params.get('userId'));
         this.accountService.get()
           .subscribe(

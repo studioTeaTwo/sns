@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
+import { take } from 'rxjs/operators';
 
 import { User } from 'app/interfaces/api-models';
 import { Store } from 'app/core/store/store';
@@ -41,6 +42,7 @@ export class SettingComponent implements OnInit {
   ngOnInit() {
     this.route
       .queryParamMap
+      .pipe(take(1))
       .subscribe(params => {
         if (params.get('open') === 'showBasic') {
           this.showBasic = true;

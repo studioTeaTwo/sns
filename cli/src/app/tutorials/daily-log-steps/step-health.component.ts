@@ -3,6 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { trigger } from '@angular/animations';
 import { Observable } from 'rxjs/Observable';
+import { take } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
 
 import { Store } from 'app/core/store/store';
@@ -76,7 +77,7 @@ export class StepHealthComponent extends ChatComponent implements OnInit {
     // TODO: アンケートの初期化をもうちょいちゃんとやる
     daily_log_script2[0].result = '';
 
-    this.route.paramMap.subscribe(param => {
+    this.route.paramMap.pipe(take(1)).subscribe(param => {
       daily_log_script1[0].body = `今日の${SymptomName.get(param.get('id') as Symptom)}の調子はどうだった？`;
       addChat({
         body: daily_log_script1,

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { take } from 'rxjs/operators';
 
 import { DailyLogService } from 'app/core/services/api';
 
@@ -26,7 +27,7 @@ export class LoggingComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(paramMap =>
+    this.route.paramMap.pipe(take(1)).subscribe(paramMap =>
       this.dailyLogService.dailyLogParam.symptom = paramMap.get('id')
     );
 
