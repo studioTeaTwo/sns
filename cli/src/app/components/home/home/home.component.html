@@ -27,7 +27,7 @@
   </mat-menu>
 </section>
 
-<section id="home-content" #homeContent>
+<section id="home-content" [style]="backgroundImageStyle">
   <mat-table [dataSource]="myExperienceDataSource">
     <ng-container matColumnDef="date">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>

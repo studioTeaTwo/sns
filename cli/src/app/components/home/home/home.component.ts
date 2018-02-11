@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
 import { concatMap, filter, map, take } from 'rxjs/operators';
@@ -10,6 +11,8 @@ import { FriendExperienceStrongParameter, NotificationViewModel, Notification, U
 import { FeedService, AccountService } from 'app/core/services/api';
 import { BeginnerAdvice } from 'app/interfaces/view-models';
 import { TipsCollection } from 'app/constants/constants';
+import { ViewRef } from '@angular/core/src/linker/view_ref';
+import { Subscription } from 'rxjs/Subscription';
 
 interface Experience {
   date: string;
@@ -24,12 +27,14 @@ interface Experience {
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
+  backgroundImageStyle: SafeStyle;
 
   // 通知
   notifications$ = this.store.select<NotificationViewModel[]>(state => state.notificationList);
   beginners: BeginnerAdvice[] = [];
   readonly randomTips = TipsCollection;
+  private subscriptions: Array<Subscription>;
 
   // 経験
   myExperienceDataSource: ExperienceDataSource | null;
@@ -40,20 +45,37 @@ export class HomeComponent implements OnInit {
   constructor(
     private router: Router,
     private store: Store,
+    private sanitizer: DomSanitizer,
     private accountService: AccountService,
     private feedService: FeedService,
   ) { }
 
   ngOnInit() {
-    this.feedService.listNotifications().pipe(
-      concatMap(response => this.feedService.listExperiences()),
-      take(1),
-    )
-    .subscribe();
+    this.subscriptions = [
+      this.feedService.listNotifications().pipe(
+          // TODO: intervalするか要検討
+          concatMap(response => this.feedService.listExperiences()),
+        )
+        .subscribe(),
+      this.notifications$.subscribe(data => {
+        if (data.length > 0) {
+          const style = `background-image: url('/assets/images/home_bg_notice.jpg')`;
+          this.backgroundImageStyle = this.sanitizer.bypassSecurityTrustStyle(style);
+        } else {
+          const style = `background-image: url('/assets/images/home_bg.jpg')`;
+          this.backgroundImageStyle = this.sanitizer.bypassSecurityTrustStyle(style);
+        }
+      })
+    ];
+
     this.myExperienceDataSource = new ExperienceDataSource(this.store.select<Notification[]>(state => state.experienceList.mine));
     this.friendExperienceDataSource = new ExperienceDataSource(this.store.select<Notification[]>(state => state.experienceList.friend));
 
     this.createBeginnerAdvice();
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
   onClickNotification(value: NotificationViewModel) {
