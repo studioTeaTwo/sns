@@ -75,13 +75,17 @@ export class HomeComponent implements OnInit, OnDestroy {
         )
         .subscribe(),
       this.notifications$.subscribe(data => {
-        if (data.length > 0) {
-          const image = `background-image: url('/assets/images/home_bg_notice.jpg')`;
-          this.backgroundImageStyle = this.sanitizer.bypassSecurityTrustStyle(image);
+        let image: string;
+        if (data.length === 1) {
+          image = `background-image: url('/assets/images/home_bg_notice_1.jpg')`;
+        } else if (data.length === 2) {
+          image = `background-image: url('/assets/images/home_bg_notice_2.jpg')`;
+        } else if (data.length > 2) {
+          image = `background-image: url('/assets/images/home_bg_notice_3.jpg')`;
         } else {
-          const image = `background-image: url('/assets/images/home_bg.jpg')`;
-          this.backgroundImageStyle = this.sanitizer.bypassSecurityTrustStyle(image);
+          image = `background-image: url('/assets/images/home_bg_normal_1.jpg')`;
         }
+        this.backgroundImageStyle = this.sanitizer.bypassSecurityTrustStyle(image);
       })
     ];
 
