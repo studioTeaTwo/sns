@@ -1,6 +1,6 @@
 <section id="home-header">
   <div class="home-notification">
-    <img src="assets/images/beginner.png" width="20" *ngIf="beginners.length > 0" [matMenuTriggerFor]="beginner"/>
+    <img *ngIf="beginners.length > 0" src="assets/images/beginner.png" width="20" [matMenuTriggerFor]="beginner" [@adviceanimation]="animeState" (@adviceanimation.done)="onAnimeEnd($event)"/>
     <span [attr.data-badge-notification]="(notifications$ | async).length" [matMenuTriggerFor]="notification">
       <mat-icon>notifications</mat-icon>
     </span>

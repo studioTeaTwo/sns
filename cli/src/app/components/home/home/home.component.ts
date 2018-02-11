@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
+import { trigger, style, transition, animate, state, keyframes } from '@angular/animations';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
 import { concatMap, filter, map, take } from 'rxjs/operators';
@@ -25,13 +26,29 @@ interface Experience {
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  animations: [
+    trigger('adviceanimation', [
+      transition('default => attention', [
+        animate('250ms ease-in', style({transform: 'scale(1.0)'})),
+        animate('500ms ease-in', style({transform: 'scale(1.2)'})),
+        animate('750ms ease-in', style({transform: 'scale(1.0)'})),
+      ]),
+      transition('attention => default', [
+        animate('250ms ease-in', style({transform: 'scale(1.0)'})),
+        animate('500ms ease-in', style({transform: 'scale(1.2)'})),
+        animate('750ms ease-in', style({transform: 'scale(1.0)'})),
+      ])
+    ])
+  ]
 })
 export class HomeComponent implements OnInit, OnDestroy {
   backgroundImageStyle: SafeStyle;
+  animeState = 'default';
+  hasTutorial = false;
 
   // 通知
-  notifications$ = this.store.select<NotificationViewModel[]>(state => state.notificationList);
+  notifications$ = this.store.select<NotificationViewModel[]>(states => states.notificationList);
   beginners: BeginnerAdvice[] = [];
   readonly randomTips = TipsCollection;
   private subscriptions: Array<Subscription>;
@@ -59,23 +76,39 @@ export class HomeComponent implements OnInit, OnDestroy {
         .subscribe(),
       this.notifications$.subscribe(data => {
         if (data.length > 0) {
-          const style = `background-image: url('/assets/images/home_bg_notice.jpg')`;
-          this.backgroundImageStyle = this.sanitizer.bypassSecurityTrustStyle(style);
+          const image = `background-image: url('/assets/images/home_bg_notice.jpg')`;
+          this.backgroundImageStyle = this.sanitizer.bypassSecurityTrustStyle(image);
         } else {
-          const style = `background-image: url('/assets/images/home_bg.jpg')`;
-          this.backgroundImageStyle = this.sanitizer.bypassSecurityTrustStyle(style);
+          const image = `background-image: url('/assets/images/home_bg.jpg')`;
+          this.backgroundImageStyle = this.sanitizer.bypassSecurityTrustStyle(image);
         }
       })
     ];
 
-    this.myExperienceDataSource = new ExperienceDataSource(this.store.select<Notification[]>(state => state.experienceList.mine));
-    this.friendExperienceDataSource = new ExperienceDataSource(this.store.select<Notification[]>(state => state.experienceList.friend));
+    this.myExperienceDataSource = new ExperienceDataSource(this.store.select<Notification[]>(states => states.experienceList.mine));
+    this.friendExperienceDataSource = new ExperienceDataSource(this.store.select<Notification[]>(states => states.experienceList.friend));
 
     this.createBeginnerAdvice();
   }
 
   ngOnDestroy() {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
+
+  onAnimeEnd(event) {
+    if (!this.hasTutorial) {
+      return;
+    }
+
+    if (event.toState === 'attention') {
+      setTimeout(() => {
+        this.animeState = 'default';
+      }, 0);
+    } else {
+      setTimeout(() => {
+        this.animeState = 'attention';
+      }, 0);
+    }
   }
 
   onClickNotification(value: NotificationViewModel) {
@@ -104,6 +137,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private createBeginnerAdvice() {
     this.accountService.get().subscribe(user => {
+      // チュートリアルを設定
       if (!user.selfIntroduction || user.selfIntroduction.length === 0) {
         this.beginners.push({
           adviceType: 'selfIntroduction',
@@ -116,6 +150,12 @@ export class HomeComponent implements OnInit, OnDestroy {
           description: 'アレルゲンを記入しよう',
         });
       }
+      // チュートリアルがあればアイコンをアニメーションさせる
+      if (this.beginners.length > 0) {
+        this.animeState = 'attention';
+        this.hasTutorial = true;
+      }
+      // TIPSで埋める
       if (this.beginners.length < 3) {
         const tmp = [...this.randomTips];
         const legth = this.beginners.length;
