@@ -56,7 +56,7 @@ export class StepGoalComponent extends ChatComponent implements OnInit, AfterVie
       accountService,
       chatService,
     );
-    this.height = window.innerHeight;
+    this.height = window.innerHeight - 42 - 50; // 42 = header.height 50 = footer.height
 
     this.chatSource = new Subject<ChatViewModel[]>();
     this.chats$ = this.chatSource.asObservable();
@@ -84,7 +84,7 @@ export class StepGoalComponent extends ChatComponent implements OnInit, AfterVie
   }
 
   ngAfterViewInit() {
-    document.body.scrollTop = 0;
+    window.scrollTo(0, 0);
   }
 
   onClickYes() {

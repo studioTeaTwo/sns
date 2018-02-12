@@ -56,7 +56,7 @@ export class StepSymptomComponent extends ChatComponent implements OnInit, After
       accountService,
       chatService,
     );
-    this.height = window.innerHeight;
+    this.height = window.innerHeight - 42 - 50; // 42 = header.height 50 = footer.height
 
     this.chatSource = new Subject<ChatViewModel[]>();
     this.chats$ = this.chatSource.asObservable();
@@ -78,7 +78,7 @@ export class StepSymptomComponent extends ChatComponent implements OnInit, After
   }
 
   ngAfterViewInit() {
-    document.body.scrollTop = 0;
+    window.scrollTo(0, 0);
   }
 
   onChangeChecked(item) {

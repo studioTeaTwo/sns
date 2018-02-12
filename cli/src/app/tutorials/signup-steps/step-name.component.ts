@@ -72,7 +72,7 @@ export class StepNameComponent extends ChatComponent implements OnInit {
       accountService,
       chatService,
     );
-    this.height = window.innerHeight;
+    this.height = window.innerHeight - 42 - 50; // 42 = header.height 50 = footer.height
 
     this.animeState = 'default';
 

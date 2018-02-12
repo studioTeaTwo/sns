@@ -159,6 +159,18 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     this.chatService.say(this.chatThread.id, String(replyText).replace(/<[^>]+>/gm, ''));
   }
 
+  setFocus(event: Event) {
+    const element = this.renderer.selectRootElement('#replyText') as HTMLInputElement;
+    element.focus();
+  }
+
+  onKeyPress(event: KeyboardEvent) {
+    if (event.keyCode === KEY_CODE.KEY_ENTER) {
+      const element = this.renderer.selectRootElement('#replyText') as HTMLInputElement;
+      element.blur();
+    }
+  }
+
   // 継承先で使うためprivateにしていない
   protected scrollToTop() {
     this.scrollContainer.nativeElement.scrollTop = 0;
@@ -174,18 +186,6 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     this.showReplyText = checked;
     if (navigator.userAgent.indexOf('iPhone') > -1 || navigator.userAgent.indexOf('iPad') > -1) {
       this.isActive = checked;
-    }
-  }
-
-  private setFocus(event: Event) {
-    const element = this.renderer.selectRootElement('#replyText') as HTMLInputElement;
-    element.focus();
-  }
-
-  private onKeyPress(event: KeyboardEvent) {
-    if (event.keyCode === KEY_CODE.KEY_ENTER) {
-      const element = this.renderer.selectRootElement('#replyText') as HTMLInputElement;
-      element.blur();
     }
   }
 }

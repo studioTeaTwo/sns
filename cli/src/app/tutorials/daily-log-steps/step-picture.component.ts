@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Renderer2, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ElementRef, Renderer2, ViewChild, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { trigger } from '@angular/animations';
@@ -39,7 +39,7 @@ enum STEP {
     trigger('wholeanimation', []) // ダミー
   ]
 })
-export class StepPictureComponent extends ChatComponent implements OnInit {
+export class StepPictureComponent extends ChatComponent implements OnInit, AfterViewInit {
   @ViewChild('replyText') inputElm: ElementRef;
   @ViewChild('video') videoElm: ElementRef;
   @ViewChild('canvas') canvasElm: ElementRef;
@@ -77,7 +77,7 @@ export class StepPictureComponent extends ChatComponent implements OnInit {
       accountService,
       chatService,
     );
-    this.height = window.innerHeight;
+    this.height = window.innerHeight - 42 - 50; // 42 = header.height 50 = footer.height
 
     this.chatSource = new Subject<ChatViewModel[]>();
     this.chats$ = this.chatSource.asObservable();
@@ -97,6 +97,10 @@ export class StepPictureComponent extends ChatComponent implements OnInit {
     }, this.chatHistory, this.chatSource);
 
     this.step = STEP.CAMERA_YESNO;
+  }
+
+  ngAfterViewInit() {
+    window.scrollTo(0, 0);
   }
 
   onClickYes() {
