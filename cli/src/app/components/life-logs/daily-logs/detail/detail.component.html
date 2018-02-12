@@ -38,8 +38,8 @@
         <mat-button-toggle value="2">☺️</mat-button-toggle>
         <mat-button-toggle value="3">😥</mat-button-toggle>
       </mat-button-toggle-group>
-      <mat-form-field class="form-memo">
-        <textarea matInput matTextareaAutosize placeholder="メモ" [(ngModel)]="dailyLogParam.healthMemo" [readonly]="displayMode === MODE.ROM"></textarea>
+      <mat-form-field class="form-memo" *ngIf="!(displayMode === MODE.ROM && dailyLogParam.healthMemo.length === 0)">
+          <textarea matInput matTextareaAutosize placeholder="メモ" [(ngModel)]="dailyLogParam.healthMemo" [readonly]="displayMode === MODE.ROM"></textarea>
       </mat-form-field>
     </mat-card-content>
   </mat-card>
@@ -53,13 +53,13 @@
         <mat-radio-button [value]="true">OK！</mat-radio-button>
         <mat-radio-button [value]="false">忘れた</mat-radio-button>
       </mat-radio-group>
-      <mat-form-field class="form-memo">
+      <mat-form-field class="form-memo" *ngIf="!(displayMode === MODE.ROM && dailyLogParam.medicinaMemo.length === 0)">
         <textarea matInput matTextareaAutosize placeholder="メモ" [(ngModel)]="dailyLogParam.medicinaMemo" [readonly]="displayMode === MODE.ROM"></textarea>
       </mat-form-field>
     </mat-card-content>
   </mat-card>
   
-  <mat-card>
+  <mat-card *ngIf="!(displayMode === MODE.ROM && dailyLogParam.photograph.length === 0)">
     <mat-card-header>
       <mat-card-title><mat-icon>photo_camera</mat-icon>写真の記録</mat-card-title>
       <div class="form-photograph-upload">
@@ -75,7 +75,7 @@
         <mat-icon *ngIf="!(displayMode === MODE.ROM)" (click)="onClickPhotoDel(photo)">cancel</mat-icon>
         <img class="photo" [src]="photo">
       </div>
-      <mat-form-field class="form-memo">
+      <mat-form-field class="form-memo" *ngIf="!(displayMode === MODE.ROM && dailyLogParam.photographMemo.length === 0)">
         <textarea matInput matTextareaAutosize placeholder="メモ" [(ngModel)]="dailyLogParam.photographMemo" [readonly]="displayMode === MODE.ROM"></textarea>
       </mat-form-field>
     </mat-card-content>
