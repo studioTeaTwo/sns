@@ -27,7 +27,7 @@ export class AppComponent {
   }
 
   onDeactive() {
-    if (this.location.path().match(/(results|user)/)) {
+    if (this.location.path().match(/(results|user|chat)/)) {
       return;
     }
     window.scrollTo(0, 0);

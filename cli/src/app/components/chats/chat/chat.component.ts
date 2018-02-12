@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, ViewChild, ElementRef, SecurityContext } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild, ElementRef, SecurityContext, AfterViewChecked } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { trigger } from '@angular/animations';
 import { Observable } from 'rxjs/Observable';
@@ -24,7 +24,7 @@ import { AccountService, ChatService } from 'app/core/services/api';
     trigger('wholeanimation', []) // ダミー
   ]
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, AfterViewChecked {
   @ViewChild('scrollMove') scrollContainer: ElementRef;
   height: number;
   animeState: string;
@@ -89,9 +89,13 @@ export class ChatComponent implements OnInit {
       take(1)
     )
     .subscribe(
-      (next: void) => this.scrollToBottom(),
+      (next: void) => {},
       (error: any) => this.router.navigateByUrl('/chat/list'),
     );
+  }
+
+  ngAfterViewChecked() {
+    this.scrollToBottom();
   }
 
   isDisplayDate() {}
