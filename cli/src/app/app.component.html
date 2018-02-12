@@ -1,6 +1,6 @@
 <app-header></app-header>
 
-<div id="main">
+<div id="main" [style.height.px]="height">
   <mat-spinner class="main-loading" *ngIf="loading$ | async"></mat-spinner>
   <p class="error-message" *ngIf="!(loading$ | async) && error$ | async">{{errorMsg$ | async}}</p>
   <router-outlet (deactivate)="onDeactive()"></router-outlet>

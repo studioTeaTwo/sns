@@ -47,7 +47,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     protected accountService: AccountService,
     protected chatService: ChatService,
   ) {
-    this.height = window.innerHeight - 50; // chat.footer.height
+    this.height = window.innerHeight - 42 - 50; // 42 = header.height 50 = footer.height
   }
 
   ngOnInit() {

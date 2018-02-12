@@ -13,12 +13,14 @@ export class AppComponent {
   loading$ = this.store.select<boolean>(state => state.loading);
   error$ = this.store.select<boolean>(state => state.error);
   errorMsg$ = this.store.select<string>(state => state.errorMsg);
+  height: number;
 
   constructor(
     private location: Location,
     private urlSerializer: UrlSerializer,
     private store: Store,
   ) {
+    this.height = window.innerHeight - 42 - 50; // 42 = header.height 50 = footer.height
     // フロントのURLでサーバに飛んだ時の対応
     if (this.location.path().match(/url/)) {
       const urlTree = this.urlSerializer.parse(this.location.path());

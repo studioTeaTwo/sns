@@ -1,18 +1,20 @@
-<mat-card *ngFor="let user of (searchUsers$ | async)" (click)="onClickUser(user)">
-  <mat-grid-list cols="4">
-    <mat-grid-tile [colspan]="1" [rowspan]="1">
-      <img [src]="user.avatarUrl" />
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="3" [rowspan]="1">
-      <div class="discription">
-        <div class="user-name">{{user.name}}</div>
-        <div class="possession-allergen">
-          <img *ngFor="let allergen of user.positiveAllergenGroups"
-            [src]="'assets/images/' + allergen + '.png'"
-            (click)="onClickAllergen(allergen)" />
+<div id="results-container">
+  <mat-card *ngFor="let user of (searchUsers$ | async)" (click)="onClickUser(user)">
+    <mat-grid-list cols="4">
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <img [src]="user.avatarUrl" />
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="3" [rowspan]="1">
+        <div class="discription">
+          <div class="user-name">{{user.name}}</div>
+          <div class="possession-allergen">
+            <img *ngFor="let allergen of user.positiveAllergenGroups"
+              [src]="'assets/images/' + allergen + '.png'"
+              (click)="onClickAllergen(allergen)" />
+          </div>
         </div>
-      </div>
-    </mat-grid-tile>
-  </mat-grid-list>
-</mat-card>
-<div *ngIf="!(loading$ | async) && (searchUsers$ | async).length === 0">ユーザーはいませんでした。</div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card>
+  <div *ngIf="!(loading$ | async) && (searchUsers$ | async).length === 0">ユーザーはいませんでした。</div>
+</div>

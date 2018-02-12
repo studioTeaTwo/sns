@@ -8,6 +8,7 @@
 }
 
 #container-chat {
+    position: relative;
     width: 100%;
     height: 100%;
     background-color: #f0f0f0;
@@ -21,18 +22,15 @@
     }
     
     #contents-chat {
-        padding: 5px;
-        // padding-top: 46px; // =chat.header.height
-        padding-bottom: 50px; // =chat.footer.height
         // height: auto; →directiveで端末サイズから計算する
     }
     
     #footer-chat {
-        position: fixed;
+        position: absolute;
+        bottom: -50px;
         z-index: 9999;
         transform: translate3d(0, 0, 0);
         background-color: #fff;
-        bottom: 0;
         width: 100%;
         @media screen and (min-width: 1280px) {
             width: 780px;
@@ -66,6 +64,7 @@
 
 .history-scrollbox {
     overflow: scroll;
+    -webkit-overflow-scrolling: touch;
 
     .chats {
         width: 100%;
