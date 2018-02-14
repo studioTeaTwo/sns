@@ -2,7 +2,7 @@
   <mat-card *ngFor="let user of (searchUsers$ | async)" (click)="onClickUser(user)">
     <mat-grid-list cols="4">
       <mat-grid-tile [colspan]="1" [rowspan]="1">
-        <img [src]="user.avatarUrl" />
+        <img class="user-avatar" [src]="user.avatarUrl" />
       </mat-grid-tile>
       <mat-grid-tile [colspan]="3" [rowspan]="1">
         <div class="discription">

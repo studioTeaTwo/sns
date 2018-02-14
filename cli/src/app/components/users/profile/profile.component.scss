@@ -4,6 +4,14 @@
   aside {
     padding-top: 42px; // header.height
 
+    .profile-avatar {
+      font-size: 0;
+      width: 45px;
+      height: 45px;
+      border: 1px solid #eaeaea;
+      border-radius: 50%;
+    }
+
     .possession-allergen {
       display: inline-block;
       img {

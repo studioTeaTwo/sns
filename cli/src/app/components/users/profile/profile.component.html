@@ -4,7 +4,7 @@
 
     <mat-grid-list cols="4">
       
-      <img [src]="(profile$ | async).avatarUrl" />
+      <img class="profile-avatar" [src]="(profile$ | async).avatarUrl" />
       <div class="matl-cell matl-cell--3-col">
         <h1 class="user-name">
           {{(profile$ | async).name}}
@@ -47,9 +47,9 @@
     <button type="button" mat-raised-button color="primary" *ngIf="!isMyself && !(profile$ | async).isFollow" (click)="onClickFollow()">フォローする</button>
     <button type="button" mat-raised-button color="primary" *ngIf="!isMyself && (profile$ | async).isFollow" (click)="onClickUnfollow()">フォローを外す</button>
 
-    <a *ngIf="!isMyself" routerLinkActive="active" (click)="forwardChat()" class="global-menu-item">
+    <button *ngIf="!isMyself" mat-icon-button color="primary" (click)="forwardChat()" class="global-menu-item">
       <mat-icon>chat</mat-icon>
-    </a>
+    </button>
     
     </mat-grid-list>
 

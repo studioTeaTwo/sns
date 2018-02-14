@@ -2,6 +2,14 @@
   padding-top: 10px;
 }
 
+.user-avatar {
+  font-size: 0;
+  width: 45px;
+  height: 45px;
+  border: 1px solid #eaeaea;
+  border-radius: 50%;
+}
+
 .discription {
   display: flex;
   flex-direction: column;
