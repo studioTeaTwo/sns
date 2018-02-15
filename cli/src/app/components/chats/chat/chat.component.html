@@ -102,6 +102,7 @@
   </div>
 
   <div id="footer-chat" [ngStyle]="showReplyText ? {'background-color': '#fff'} : {'background-color': '#f0f0f0'}" >
+    <!-- buttonのreplayTextが死ぬのでngIfは使わない -->
     <input id="replyText" type="text" #replyText
       (click)="setFocus($event)"
       (keypress)="onKeyPress($event)"
@@ -110,9 +111,8 @@
       [class.is-active]="isActive"
       [hidden]="!showReplyText"
     />
-    <button mat-raised-button color="primary" class="footer-chat-item footer-chat-replyButton"
+    <button *ngIf="showReplyText" mat-raised-button color="primary" class="footer-chat-item footer-chat-replyButton"
       (click)="onClickReply(replyText.value); replyText.value=''"
-      [hidden]="!showReplyText"
     >送信</button>
   </div>
 
