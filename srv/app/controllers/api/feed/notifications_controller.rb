@@ -58,7 +58,7 @@ class Api::Feed::NotificationsController < ApplicationController
       if my_personal_assistant.daily_asthma
         notification = template.dup
         notification[:id] = nil
-        notification[:description] = '喘息の治療日記を書こう！'
+        notification[:description] = '喘息・気管支炎の治療日記を書こう！'
         notification[:link_id] = 'asthma'
         @personal_assistant_notification.push(notification)
       end
