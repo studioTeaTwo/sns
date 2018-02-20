@@ -21,6 +21,9 @@ export class AppComponent {
     private store: Store,
   ) {
     this.height = window.innerHeight - 42 - 50; // 42 = header.height 50 = footer.height
+    const initialElm = document.getElementById('initial-paint') as HTMLDivElement;
+    if (initialElm) { initialElm.remove(); }
+
     // フロントのURLでサーバに飛んだ時の対応
     if (this.location.path().match(/url/)) {
       const urlTree = this.urlSerializer.parse(this.location.path());
