@@ -1,9 +1,9 @@
 <section id="home-header">
-  <div class="home-notification">
-    <img *ngIf="beginners.length > 0" src="assets/images/beginner.png" width="20" [matMenuTriggerFor]="beginner" [@adviceanimation]="animeState" (@adviceanimation.done)="onAnimeEnd($event)"/>
-    <span [attr.data-badge-notification]="(notifications$ | async).length" [matMenuTriggerFor]="notification">
+  <div class="home-header-space">
+    <span class="notification-icon" [attr.data-badge-notification]="(notifications$ | async).length" [matMenuTriggerFor]="notification">
       <mat-icon>notifications</mat-icon>
     </span>
+    <img *ngIf="beginners.length > 0" class="beginner-icon" src="assets/images/beginner.png" width="20" [matMenuTriggerFor]="beginner" [@adviceanimation]="animeState" (@adviceanimation.done)="onAnimeEnd($event)"/>
   </div>
 
   <mat-menu #notification="matMenu">
@@ -27,7 +27,8 @@
   </mat-menu>
 </section>
 
-<section id="home-content" [style]="backgroundImageStyle">
+<section id="home-content">
+  <img class="home-background" [src]="backgroundImageStyle" (click)="onClickBackground()">
   <mat-table [dataSource]="myExperienceDataSource">
     <ng-container matColumnDef="date">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>

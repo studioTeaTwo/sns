@@ -1,9 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { trigger, style, transition, animate, state, keyframes } from '@angular/animations';
 import { DataSource } from '@angular/cdk/collections';
+import { MatMenuTrigger } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 import { concatMap, filter, map, take } from 'rxjs/operators';
 import * as Moment from 'moment';
 
@@ -12,8 +14,6 @@ import { FriendExperienceStrongParameter, NotificationViewModel, Notification, U
 import { FeedService, AccountService } from 'app/core/services/api';
 import { BeginnerAdvice } from 'app/interfaces/view-models';
 import { TipsCollection } from 'app/constants/constants';
-import { ViewRef } from '@angular/core/src/linker/view_ref';
-import { Subscription } from 'rxjs/Subscription';
 
 interface Experience {
   date: string;
@@ -43,6 +43,8 @@ interface Experience {
   ]
 })
 export class HomeComponent implements OnInit, OnDestroy {
+  @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
+  @ViewChild('notification') notificationElm;
   backgroundImageStyle: SafeStyle;
   animeState = 'default';
   hasTutorial = false;
@@ -77,15 +79,15 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.notifications$.subscribe(data => {
         let image: string;
         if (data.length === 1) {
-          image = `background-image: url('/assets/images/home_bg_notice_1.jpg')`;
+          image = `/assets/images/home_bg_notice_1.jpg`;
         } else if (data.length === 2) {
-          image = `background-image: url('/assets/images/home_bg_notice_2.jpg')`;
+          image = `/assets/images/home_bg_notice_2.jpg`;
         } else if (data.length > 2) {
-          image = `background-image: url('/assets/images/home_bg_notice_3.jpg')`;
+          image = `/assets/images/home_bg_notice_3.jpg`;
         } else {
-          image = `background-image: url('/assets/images/home_bg_normal_1.jpg')`;
+          image = `/assets/images/home_bg_normal_1.jpg`;
         }
-        this.backgroundImageStyle = this.sanitizer.bypassSecurityTrustStyle(image);
+        this.backgroundImageStyle = image;
       })
     ];
 
@@ -137,6 +139,14 @@ export class HomeComponent implements OnInit, OnDestroy {
       // this.router.navigate([`/tips\#${beginner.tipsType}`]);
       this.router.navigate([`/home/tips`]);
     }
+  }
+
+  onClickBackground() {
+    this.notifications$.pipe(take(1)).subscribe(notification => {
+      if (notification.length > 0) {
+        this.trigger.openMenu();
+      }
+    });
   }
 
   private createBeginnerAdvice() {
