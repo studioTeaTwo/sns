@@ -156,15 +156,15 @@ const tutorial_script2: ChatViewModel[] = [
     itemList: [
       {
         id: 1,
-        name: '患者',
+        name: 'アレルギーの症状がある',
       },
       {
         id: 2,
-        name: '元患者',
+        name: '昔、症状があった',
       },
       {
         id: 3,
-        name: '患者の家族',
+        name: '家族が患者である',
       },
       {
         id: 4,
