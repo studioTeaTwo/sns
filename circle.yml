@@ -40,4 +40,3 @@ deployment:
       - git add srv/public && git commit --amend --no-edit
       - git push git@heroku.com:allelog.git `git subtree split --prefix srv HEAD`:master --force
       - heroku run rails db:migrate --app allelog
-      # - heroku run bundle exec whenever --update-crontab Herokuのaddonを使う
