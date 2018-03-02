@@ -15,6 +15,8 @@ import {
 import { MockAccountService } from 'testing/api';
 import { FormatToJapaneseDatePipe } from 'app/shared/pipes';
 
+declare var window: any;
+
 describe('StepGoalComponent', () => {
   let component: StepGoalComponent;
   let fixture: ComponentFixture<StepGoalComponent>;
@@ -42,6 +44,7 @@ describe('StepGoalComponent', () => {
       ]
     })
     .compileComponents();
+    window.ga = jasmine.createSpy('ga');
   }));
 
   beforeEach(() => {

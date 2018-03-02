@@ -10,6 +10,8 @@ import { Store } from 'app/core/store/store';
 import { FeedService, AccountService } from 'app/core/services/api';
 import { MockAccountService } from 'testing/api';
 
+declare var window: any;
+
 describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
@@ -33,6 +35,7 @@ describe('HomeComponent', () => {
       ]
     })
     .compileComponents();
+    window.ga = jasmine.createSpy('ga');
   }));
 
   beforeEach(() => {

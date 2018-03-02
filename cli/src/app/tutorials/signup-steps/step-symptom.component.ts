@@ -65,6 +65,8 @@ export class StepSymptomComponent extends ChatComponent implements OnInit, After
   }
 
   ngOnInit() {
+    ga('send', 'event', 'Signup', 'symptom');
+
     this.myself = SIGNUP_USER;
     this.opponents = [{...NAVI_CHARA}];
     this.chatThread = NAVI_THREAD;

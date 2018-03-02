@@ -20,6 +20,8 @@ import { StepGoalComponent } from 'app/tutorials/signup-steps/step-goal.componen
 import { FormatToJapaneseDatePipe } from 'app/shared/pipes';
 import { MockAccountService } from 'testing/api';
 
+declare var window: any;
+
 describe('SignupComponent', () => {
   let component: SignupComponent;
   let fixture: ComponentFixture<SignupComponent>;
@@ -52,6 +54,7 @@ describe('SignupComponent', () => {
       ]
     })
     .compileComponents();
+    window.ga = jasmine.createSpy('ga');
   }));
 
   beforeEach(() => {

@@ -84,6 +84,8 @@ export class StepPictureComponent extends ChatComponent implements OnInit, After
   }
 
   ngOnInit() {
+    ga('send', 'event', 'DailyLog-Logging', 'picture');
+
     this.accountService.get().subscribe(response => this.myself = response);
     this.opponents = [{...NAVI_CHARA}];
     this.chatThread = NAVI_THREAD;

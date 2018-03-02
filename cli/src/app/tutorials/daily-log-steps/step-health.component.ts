@@ -68,6 +68,8 @@ export class StepHealthComponent extends ChatComponent implements OnInit, AfterV
   }
 
   ngOnInit() {
+    ga('send', 'event', 'DailyLog-Logging', 'health');
+
     this.accountService.get().subscribe(response => this.myself = response);
     this.opponents = [{...NAVI_CHARA}];
     this.chatThread = NAVI_THREAD;

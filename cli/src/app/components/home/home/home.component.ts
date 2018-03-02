@@ -70,6 +70,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    ga('send', 'event', 'Home', 'load');
+
     this.subscriptions = [
       this.feedService.listNotifications().pipe(
           // TODO: intervalするか要検討

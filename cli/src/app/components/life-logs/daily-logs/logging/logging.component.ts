@@ -27,6 +27,8 @@ export class LoggingComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    ga('send', 'event', 'DailyLog-Logging', 'start');
+
     this.route.paramMap.pipe(take(1)).subscribe(paramMap =>
       this.dailyLogService.dailyLogParam.symptom = paramMap.get('id')
     );
@@ -36,6 +38,7 @@ export class LoggingComponent implements OnInit {
 
   onCompleted(displayState: DisplayState) {
     if (displayState === DisplayState.BACK) {
+      ga('send', 'event', 'DailyLog-Logging', 'end');
       this.router.navigate(['/home']);
       return;
     }

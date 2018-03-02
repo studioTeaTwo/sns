@@ -19,6 +19,8 @@ import { StepPictureComponent } from 'app/tutorials/daily-log-steps/step-picture
 import { MockAccountService } from 'testing/api';
 import { FormatToJapaneseDatePipe } from 'app/shared/pipes';
 
+declare var window: any;
+
 describe('LoggingComponent', () => {
   let component: LoggingComponent;
   let fixture: ComponentFixture<LoggingComponent>;
@@ -50,6 +52,7 @@ describe('LoggingComponent', () => {
       ]
     })
     .compileComponents();
+    window.ga = jasmine.createSpy('ga');
   }));
 
   beforeEach(() => {

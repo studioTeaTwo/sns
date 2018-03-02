@@ -72,6 +72,8 @@ export class StepMedicinaComponent extends ChatComponent implements OnInit, Afte
   }
 
   ngOnInit() {
+    ga('send', 'event', 'DailyLog-Logging', 'medicina');
+
     this.accountService.get().subscribe(response => this.myself = response);
     this.opponents = [{...NAVI_CHARA}];
     this.chatThread = NAVI_THREAD;

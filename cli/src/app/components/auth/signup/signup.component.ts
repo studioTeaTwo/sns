@@ -24,11 +24,13 @@ export class SignupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    ga('send', 'event', 'Signup', 'start');
     this.displayState = DisplayState.NAME;
   }
 
   onCompleted(displayState: DisplayState) {
     if (displayState === DisplayState.BACK) {
+      ga('send', 'event', 'Signup', 'end');
       this.router.navigate(['/home']);
       return;
     }

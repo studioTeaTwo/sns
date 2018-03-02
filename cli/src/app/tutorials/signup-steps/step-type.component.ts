@@ -65,6 +65,8 @@ export class StepTypeComponent extends ChatComponent implements OnInit, AfterVie
   }
 
   ngOnInit() {
+    ga('send', 'event', 'Signup', 'type');
+
     this.myself = SIGNUP_USER;
     this.opponents = [{...NAVI_CHARA}];
     this.chatThread = NAVI_THREAD;

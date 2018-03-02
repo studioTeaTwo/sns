@@ -82,6 +82,8 @@ export class StepNameComponent extends ChatComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (ga) { ga('send', 'event', 'Signup', 'name'); }
+
     this.myself = SIGNUP_USER;
     this.opponents = [{...NAVI_CHARA}];
     this.chatThread = NAVI_THREAD;

@@ -63,6 +63,8 @@ export class StepEmailComponent extends ChatComponent implements OnInit, AfterVi
   }
 
   ngOnInit() {
+    ga('send', 'event', 'Signup', 'email');
+
     this.myself = SIGNUP_USER;
     this.opponents = [{...NAVI_CHARA}];
     this.chatThread = NAVI_THREAD;
