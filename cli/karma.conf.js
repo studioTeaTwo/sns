@@ -13,9 +13,9 @@ module.exports = function (config) {
       require('@angular/cli/plugins/karma')
     ],
     files: [
-      {pattern: './config/karma-test-shim.js', watched: false},
+      // {pattern: './config/karma-test-shim.js', watched: false},
       // Include a Material theme in the test suite.
-      {pattern: './node_modules/@angular/material/prebuilt-themes/indigo-pink.css', included: true, watched: false},
+      {pattern: './node_modules/@angular/material/prebuilt-themes/indigo-pink.css', watched: false}
     ],
     client:{
       clearContext: false // leave Jasmine Spec Runner output visible in browser
