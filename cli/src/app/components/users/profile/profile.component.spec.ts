@@ -13,29 +13,26 @@ describe('ProfileComponent', () => {
   let component: ProfileComponent;
   let fixture: ComponentFixture<ProfileComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule,
-        MaterialModule,
-      ],
-      declarations: [ ProfileComponent ],
-      providers: [
-        Store,
-        {
-          provide: AccountService,
-          useClass: MockAccountService
-        },
-        {
-          provide: UserService,
-          useClass: MockUserService
-        },
-        ChatService,
-      ]
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        imports: [HttpClientTestingModule, RouterTestingModule, MaterialModule],
+        declarations: [ProfileComponent],
+        providers: [
+          Store,
+          {
+            provide: AccountService,
+            useClass: MockAccountService,
+          },
+          {
+            provide: UserService,
+            useClass: MockUserService,
+          },
+          ChatService,
+        ],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ProfileComponent);

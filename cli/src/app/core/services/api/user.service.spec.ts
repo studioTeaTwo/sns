@@ -9,18 +9,15 @@ import { ApiBaseService } from 'app/core/services/api/api-base.service';
 describe('UserService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule
-      ],
-      providers: [
-        Store,
-        ApiBaseService,
-        UserService
-      ]
+      imports: [HttpClientTestingModule],
+      providers: [Store, ApiBaseService, UserService],
     });
   });
 
-  it('should be created', inject([UserService], (service: UserService) => {
-    expect(service).toBeTruthy();
-  }));
+  it(
+    'should be created',
+    inject([UserService], (service: UserService) => {
+      expect(service).toBeTruthy();
+    }),
+  );
 });

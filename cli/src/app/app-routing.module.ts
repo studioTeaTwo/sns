@@ -18,26 +18,26 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    canActivate: [ AuthGuard ],
+    canActivate: [AuthGuard],
     loadChildren: './components/home/home.module#HomeModule',
   },
   {
     path: 'chat',
-    canActivate: [ AuthGuard ],
-    loadChildren: './components/chats/chats.module#ChatsModule'
+    canActivate: [AuthGuard],
+    loadChildren: './components/chats/chats.module#ChatsModule',
   },
   {
     path: 'life-log',
-    canActivate: [ AuthGuard ],
-    loadChildren: './components/life-logs/life-logs.module#LifeLogsModule'
+    canActivate: [AuthGuard],
+    loadChildren: './components/life-logs/life-logs.module#LifeLogsModule',
   },
   {
     path: 'user',
-    loadChildren: './components/users/users.module#UsersModule'
+    loadChildren: './components/users/users.module#UsersModule',
   },
   {
     path: 'search',
-    loadChildren: './components/search/search.module#SearchModule'
+    loadChildren: './components/search/search.module#SearchModule',
   },
   // {
   //   path: 'account',
@@ -45,17 +45,17 @@ const routes: Routes = [
   // },
   {
     path: 'auth',
-    loadChildren: './components/auth/auth.module#AuthModule'
+    loadChildren: './components/auth/auth.module#AuthModule',
   },
   {
     path: 'admin',
-    canActivate: [ AdminGuard ],
-    loadChildren: './components/admin/admin.module#AdminModule'
-  }
+    canActivate: [AdminGuard],
+    loadChildren: './components/admin/admin.module#AdminModule',
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -14,29 +14,22 @@ describe('ChatListComponent', () => {
   let component: ChatListComponent;
   let fixture: ComponentFixture<ChatListComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule,
-        MaterialModule,
-      ],
-      declarations: [
-        ChatListComponent,
-        RoundOffDatePipe,
-        ShortenTextPipe,
-      ],
-      providers: [
-        Store,
-        {
-          provide: AccountService,
-          useClass: MockAccountService
-        },
-        ChatService,
-      ]
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        imports: [HttpClientTestingModule, RouterTestingModule, MaterialModule],
+        declarations: [ChatListComponent, RoundOffDatePipe, ShortenTextPipe],
+        providers: [
+          Store,
+          {
+            provide: AccountService,
+            useClass: MockAccountService,
+          },
+          ChatService,
+        ],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ChatListComponent);

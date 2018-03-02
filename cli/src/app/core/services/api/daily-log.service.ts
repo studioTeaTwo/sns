@@ -5,26 +5,14 @@ import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 
 import { Store } from 'app/core/store/store';
-import {
-  compareCreated,
-  compareUpdated,
-  unique
-} from 'app/shared/functions/array-util.function';
-import {
-  DailyLog,
-  DailyLogRequestBody,
-  DailyLogStrongParameter,
-} from 'app/interfaces/api-models';
+import { compareCreated, compareUpdated, unique } from 'app/shared/functions/array-util.function';
+import { DailyLog, DailyLogRequestBody, DailyLogStrongParameter } from 'app/interfaces/api-models';
 
 @Injectable()
 export class DailyLogService {
-
   dailyLogParam: DailyLogStrongParameter = this.initialState;
 
-  constructor(
-    private httpClient: HttpClient,
-    private store: Store,
-  ) { }
+  constructor(private httpClient: HttpClient, private store: Store) {}
 
   get initialState(): DailyLogStrongParameter {
     return {
@@ -40,22 +28,17 @@ export class DailyLogService {
   }
 
   list() {
-    this.httpClient.get<DailyLog[]>(`/api/daily_logs`)
-      .subscribe(
-        response => {
-          this.onSuccessList(response);
-        }
-      );
+    this.httpClient.get<DailyLog[]>(`/api/daily_logs`).subscribe(response => {
+      this.onSuccessList(response);
+    });
   }
 
   get(id: number): Observable<DailyLog> {
     return this.httpClient.get<DailyLog>(`/api/daily_logs/${id}`).pipe(
-      map(
-        response => {
-          this.onSuccessLog(response);
-          return response;
-        }
-      )
+      map(response => {
+        this.onSuccessLog(response);
+        return response;
+      }),
     );
   }
 
@@ -67,16 +50,16 @@ export class DailyLogService {
     // TODO: multi-partで送るなら
     if (this.dailyLogParam.photograph && this.dailyLogParam.photograph.length > 0) {
       const fileData: FormData = new FormData();
-      this.dailyLogParam.photograph.forEach(photo => fileData.append('imageFile', this.Base64ToImage(photo)));
+      this.dailyLogParam.photograph.forEach(photo =>
+        fileData.append('imageFile', this.Base64ToImage(photo)),
+      );
     }
 
     return this.httpClient.post<DailyLog>(`/api/daily_logs`, body).pipe(
-      map(
-        response => {
-          this.onSuccessLog(response);
-          this.dailyLogParam = this.initialState;
-        }
-      )
+      map(response => {
+        this.onSuccessLog(response);
+        this.dailyLogParam = this.initialState;
+      }),
     );
   }
 
@@ -85,11 +68,9 @@ export class DailyLogService {
       daily_log: param,
     };
     return this.httpClient.put<DailyLog>(`/api/daily_logs/${param.id}`, body).pipe(
-      map(
-        response => {
-          this.onSuccessLog(response);
-        }
-      )
+      map(response => {
+        this.onSuccessLog(response);
+      }),
     );
   }
 
@@ -138,7 +119,9 @@ export class DailyLogService {
   private onSuccessLog(data: DailyLog) {
     const currentState = this.store.getState();
     let newState: DailyLog[];
-    newState = unique(currentState.dailyLogList.concat(data)).sort((a, b) => compareUpdated<DailyLog>(a, b));
+    newState = unique(currentState.dailyLogList.concat(data)).sort((a, b) =>
+      compareUpdated<DailyLog>(a, b),
+    );
     console.log('新しいDailyLog', newState);
     this.store.setState({
       ...currentState,
@@ -152,12 +135,11 @@ export class DailyLogService {
     const bin = atob(uploadFile.replace(/^.*,/, ''));
     const buffer = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; i++) {
-        buffer[i] = bin.charCodeAt(i);
+      buffer[i] = bin.charCodeAt(i);
     }
     const blob = new Blob([buffer.buffer], {
-        type: 'png'
+      type: 'png',
     });
     return blob;
   }
-
 }

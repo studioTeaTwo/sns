@@ -20,6 +20,6 @@ export function compareUpdated<T>(a: T, b: T): number {
 
 export function unique(array: Array<any>): Array<any> {
   return array.filter((value, index, self) => {
-    return self.findIndex(value2 => value.id === value2.id ) === index;
+    return self.findIndex(value2 => value.id === value2.id) === index;
   });
 }

@@ -14,7 +14,7 @@ import { SymptomName, AllergenGroupName } from 'app/constants/constants';
 @Component({
   selector: 'app-setting',
   templateUrl: './setting.component.html',
-  styleUrls: ['./setting.component.scss']
+  styleUrls: ['./setting.component.scss'],
 })
 export class SettingComponent implements OnInit {
   readonly SymptomName = SymptomName;
@@ -37,30 +37,25 @@ export class SettingComponent implements OnInit {
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
     private accountService: AccountService,
-  ) { }
+  ) {}
 
   ngOnInit() {
-    this.route
-      .queryParamMap
-      .pipe(take(1))
-      .subscribe(params => {
-        if (params.get('open') === 'showBasic') {
-          this.showBasic = true;
-          this.showSymptom = false;
-          this.showAllergenGroup = false;
-        } else if (params.get('open') === 'showAllergenGroup') {
-          this.showBasic = false;
-          this.showSymptom = false;
-          this.showAllergenGroup = true;
-        } else {
-          this.showBasic = false;
-          this.showSymptom = true;
-          this.showAllergenGroup = false;
-        }
-      });
-    this.accountService.get().subscribe(
-      response => this.account = response
-    );
+    this.route.queryParamMap.pipe(take(1)).subscribe(params => {
+      if (params.get('open') === 'showBasic') {
+        this.showBasic = true;
+        this.showSymptom = false;
+        this.showAllergenGroup = false;
+      } else if (params.get('open') === 'showAllergenGroup') {
+        this.showBasic = false;
+        this.showSymptom = false;
+        this.showAllergenGroup = true;
+      } else {
+        this.showBasic = false;
+        this.showSymptom = true;
+        this.showAllergenGroup = false;
+      }
+    });
+    this.accountService.get().subscribe(response => (this.account = response));
   }
 
   onChangeEmail() {
@@ -85,11 +80,12 @@ export class SettingComponent implements OnInit {
     if (form.invalid || this.isErrorRePassword) {
       return;
     }
-    this.accountService.update(this.account, this.oldPassword, this.currentPassword).subscribe(() => {
-      this.snackBar.open('変更しました！', null, {
-        duration: 2000,
+    this.accountService
+      .update(this.account, this.oldPassword, this.currentPassword)
+      .subscribe(() => {
+        this.snackBar.open('変更しました！', null, {
+          duration: 2000,
+        });
       });
-    });
   }
-
 }

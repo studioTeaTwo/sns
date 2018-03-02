@@ -14,7 +14,7 @@ export enum DisplayState {
 @Component({
   selector: 'app-logging',
   templateUrl: './logging.component.html',
-  styleUrls: ['./logging.component.scss']
+  styleUrls: ['./logging.component.scss'],
 })
 export class LoggingComponent implements OnInit {
   readonly DisplayState = DisplayState;
@@ -24,14 +24,14 @@ export class LoggingComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private dailyLogService: DailyLogService,
-  ) { }
+  ) {}
 
   ngOnInit() {
     ga('send', 'event', 'DailyLog-Logging', 'start');
 
-    this.route.paramMap.pipe(take(1)).subscribe(paramMap =>
-      this.dailyLogService.dailyLogParam.symptom = paramMap.get('id')
-    );
+    this.route.paramMap
+      .pipe(take(1))
+      .subscribe(paramMap => (this.dailyLogService.dailyLogParam.symptom = paramMap.get('id')));
 
     this.displayState = DisplayState.HEALTH;
   }

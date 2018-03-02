@@ -15,26 +15,27 @@ describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule,
-        NoopAnimationsModule,
-        FormsModule,
-        MaterialModule,
-      ],
-      declarations: [ LoginComponent ],
-      providers: [
-        Store,
-        {
-          provide: AccountService,
-          useClass: MockAccountService
-        },
-      ]
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        imports: [
+          HttpClientTestingModule,
+          RouterTestingModule,
+          NoopAnimationsModule,
+          FormsModule,
+          MaterialModule,
+        ],
+        declarations: [LoginComponent],
+        providers: [
+          Store,
+          {
+            provide: AccountService,
+            useClass: MockAccountService,
+          },
+        ],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoginComponent);

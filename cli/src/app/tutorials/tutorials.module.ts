@@ -13,11 +13,7 @@ import { StepMedicinaComponent } from './daily-log-steps/step-medicina.component
 import { StepPictureComponent } from './daily-log-steps/step-picture.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    SharedModule,
-    ChatsModule,
-  ],
+  imports: [CommonModule, SharedModule, ChatsModule],
   declarations: [
     StepNameComponent,
     StepTypeComponent,
@@ -39,6 +35,6 @@ import { StepPictureComponent } from './daily-log-steps/step-picture.component';
     StepHealthComponent,
     StepMedicinaComponent,
     StepPictureComponent,
-  ]
+  ],
 })
-export class TutorialsModule { }
+export class TutorialsModule {}

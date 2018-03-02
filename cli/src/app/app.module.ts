@@ -25,12 +25,11 @@ import { ContactComponent } from './components/navigations/contact/contact.compo
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     CoreModule.forRoot(),
     AppRoutingModule,
   ],
-  providers: [
-  ],
-  bootstrap: [AppComponent]
+  providers: [],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

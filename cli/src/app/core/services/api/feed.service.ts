@@ -8,39 +8,28 @@ import { Experience, NotificationViewModel } from 'app/interfaces/api-models';
 
 @Injectable()
 export class FeedService {
-
-  constructor(
-    private httpClient: HttpClient,
-    private store: Store,
-  ) { }
+  constructor(private httpClient: HttpClient, private store: Store) {}
 
   listNotifications(): Observable<void> {
     return this.httpClient.get<NotificationViewModel[]>(`/api/feed/notifications`).pipe(
-      map(
-        response => {
-          this.onSuccessNotificationList(response);
-        }
-      )
+      map(response => {
+        this.onSuccessNotificationList(response);
+      }),
     );
   }
 
   listExperiences(): Observable<void> {
     return this.httpClient.get<Experience>(`/api/feed/experiences`).pipe(
-      map(
-        response => {
-          this.onSuccessExperienceList(response);
-        }
-      )
+      map(response => {
+        this.onSuccessExperienceList(response);
+      }),
     );
   }
 
   readNotification(id: number) {
-    this.httpClient.delete(`/api/feed/notifications/${id}`)
-      .subscribe(
-        response => {
-          this.onSuccessReadNotification(id);
-        }
-      );
+    this.httpClient.delete(`/api/feed/notifications/${id}`).subscribe(response => {
+      this.onSuccessReadNotification(id);
+    });
   }
 
   private onSuccessNotificationList(data: NotificationViewModel[]) {
@@ -73,5 +62,4 @@ export class FeedService {
       error: false,
     });
   }
-
 }

@@ -6,35 +6,22 @@ import { NameComponent } from './name.component';
 
 import { MaterialModule } from 'app/shared/material/material.module';
 import { Store } from 'app/core/store/store';
-import {
-  ApiBaseService,
-  UserService,
-} from 'app/core/services/api';
+import { ApiBaseService, UserService } from 'app/core/services/api';
 import { ResultsComponent } from '../results/results.component';
 
 describe('NameComponent', () => {
   let component: NameComponent;
   let fixture: ComponentFixture<NameComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule,
-        HttpClientTestingModule,
-        MaterialModule,
-      ],
-      declarations: [
-        NameComponent,
-        ResultsComponent,
-      ],
-      providers: [
-        Store,
-        ApiBaseService,
-        UserService,
-      ]
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        imports: [RouterTestingModule, HttpClientTestingModule, MaterialModule],
+        declarations: [NameComponent, ResultsComponent],
+        providers: [Store, ApiBaseService, UserService],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NameComponent);

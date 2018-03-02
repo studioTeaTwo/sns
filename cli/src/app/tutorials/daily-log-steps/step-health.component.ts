@@ -1,4 +1,13 @@
-import { Component, OnInit, ElementRef, Renderer2, ViewChild, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ElementRef,
+  Renderer2,
+  ViewChild,
+  Output,
+  EventEmitter,
+  AfterViewInit,
+} from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { trigger } from '@angular/animations';
@@ -16,11 +25,7 @@ import {
   User,
   DailyLogRequestBody,
 } from 'app/interfaces/api-models';
-import {
-  AccountService,
-  ChatService,
-  DailyLogService,
-} from 'app/core/services/api';
+import { AccountService, ChatService, DailyLogService } from 'app/core/services/api';
 import { ChatComponent } from 'app/components/chats/chat/chat.component';
 import { DisplayState } from 'app/components/life-logs/daily-logs/logging/logging.component';
 import { addChat, addChatAndFocus, NAVI_THREAD } from '../shared/chat-operation.function';
@@ -30,8 +35,8 @@ import { addChat, addChatAndFocus, NAVI_THREAD } from '../shared/chat-operation.
   templateUrl: '../../components/chats/chat/chat.component.html',
   styleUrls: ['../../components/chats/chat/chat.component.scss'],
   animations: [
-    trigger('wholeanimation', []) // ダミー
-  ]
+    trigger('wholeanimation', []), // ダミー
+  ],
 })
 export class StepHealthComponent extends ChatComponent implements OnInit, AfterViewInit {
   @ViewChild('replyText') inputElm: ElementRef;
@@ -53,14 +58,7 @@ export class StepHealthComponent extends ChatComponent implements OnInit, AfterV
     private sanitizer: DomSanitizer,
     private dailyLogService: DailyLogService,
   ) {
-    super(
-      router,
-      route,
-      renderer,
-      store,
-      accountService,
-      chatService,
-    );
+    super(router, route, renderer, store, accountService, chatService);
     this.height = window.innerHeight - 42 - 50; // 42 = header.height 50 = footer.height
 
     this.chatSource = new Subject<ChatViewModel[]>();
@@ -70,8 +68,8 @@ export class StepHealthComponent extends ChatComponent implements OnInit, AfterV
   ngOnInit() {
     ga('send', 'event', 'DailyLog-Logging', 'health');
 
-    this.accountService.get().subscribe(response => this.myself = response);
-    this.opponents = [{...NAVI_CHARA}];
+    this.accountService.get().subscribe(response => (this.myself = response));
+    this.opponents = [{ ...NAVI_CHARA }];
     this.chatThread = NAVI_THREAD;
 
     this.toggleReplyText(false);
@@ -80,15 +78,25 @@ export class StepHealthComponent extends ChatComponent implements OnInit, AfterV
     daily_log_script2[0].result = '';
 
     this.route.paramMap.pipe(take(1)).subscribe(param => {
-      daily_log_script1[0].body = `今日の${SymptomName.get(param.get('id') as Symptom)}の調子はどうだった？`;
-      addChat({
-        body: daily_log_script1,
-        waitTime: 0
-      }, this.chatHistory, this.chatSource);
-      addChat({
-        body: daily_log_script2,
-        waitTime: 1000
-      }, this.chatHistory, this.chatSource);
+      daily_log_script1[0].body = `今日の${SymptomName.get(param.get(
+        'id',
+      ) as Symptom)}の調子はどうだった？`;
+      addChat(
+        {
+          body: daily_log_script1,
+          waitTime: 0,
+        },
+        this.chatHistory,
+        this.chatSource,
+      );
+      addChat(
+        {
+          body: daily_log_script2,
+          waitTime: 1000,
+        },
+        this.chatHistory,
+        this.chatSource,
+      );
     });
   }
 
@@ -121,19 +129,25 @@ export class StepHealthComponent extends ChatComponent implements OnInit, AfterV
 
   private createReply(result: any) {
     const body = result.name + 'です。<br/>';
-    const reply: ChatViewModel[] = [{
-      id: 4,
-      senderId: this.myself.id,
-      contentType: CONTENT_TYPE.REPLY,
-      body: this.sanitizer.bypassSecurityTrustHtml(body),
-      createdAt: new Date().toString()
-    }];
+    const reply: ChatViewModel[] = [
+      {
+        id: 4,
+        senderId: this.myself.id,
+        contentType: CONTENT_TYPE.REPLY,
+        body: this.sanitizer.bypassSecurityTrustHtml(body),
+        createdAt: new Date().toString(),
+      },
+    ];
 
-    addChat({
-      body: reply.concat(daily_log_script３),
-      waitTime: 0,
-      tmp: true
-    }, this.chatHistory, this.chatSource);
+    addChat(
+      {
+        body: reply.concat(daily_log_script３),
+        waitTime: 0,
+        tmp: true,
+      },
+      this.chatHistory,
+      this.chatSource,
+    );
     setTimeout(() => this.scrollToBottom(), 0);
   }
 }
@@ -144,7 +158,7 @@ const daily_log_script1: ChatViewModel[] = [
     senderId: NAVI_CHARA.id,
     contentType: CONTENT_TYPE.REPLY,
     body: '',
-    createdAt: new Date().toString()
+    createdAt: new Date().toString(),
   },
 ];
 const daily_log_script2: ChatViewModel[] = [
@@ -168,7 +182,7 @@ const daily_log_script2: ChatViewModel[] = [
       },
     ],
     result: '',
-    createdAt: new Date().toString()
+    createdAt: new Date().toString(),
   },
 ];
 const daily_log_script３: ChatViewModel[] = [
@@ -177,6 +191,6 @@ const daily_log_script３: ChatViewModel[] = [
     senderId: NAVI_CHARA.id,
     contentType: CONTENT_TYPE.YESNO,
     body: 'そうなんだ！何かメモしておく？（後でもできるよ）',
-    createdAt: new Date().toString()
+    createdAt: new Date().toString(),
   },
 ];

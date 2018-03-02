@@ -4,17 +4,14 @@ import { Observable } from 'rxjs/Observable';
 import { filter } from 'rxjs/operators';
 
 import { Store } from 'app/core/store/store';
-import {
-  AccountService,
-  ChatService,
-} from 'app/core/services/api';
+import { AccountService, ChatService } from 'app/core/services/api';
 import { NAVI_CHARA } from 'app/constants/constants';
 import { User } from 'app/interfaces/api-models';
 
 @Component({
   selector: 'app-top',
   templateUrl: './top.component.html',
-  styleUrls: ['./top.component.scss']
+  styleUrls: ['./top.component.scss'],
 })
 export class TopComponent implements OnInit {
   JSON = JSON;
@@ -30,8 +27,7 @@ export class TopComponent implements OnInit {
     window.scrollTo(0, 0);
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   sighup() {
     this.router.navigate(['auth/signup']);

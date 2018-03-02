@@ -17,35 +17,34 @@ describe('ChatComponent', () => {
   let component: ChatComponent;
   let fixture: ComponentFixture<ChatComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule.withRoutes([
-          { path: 'chat/list', component: ChatListComponent}
-        ]),
-        NoopAnimationsModule,
-        FormsModule,
-        MaterialModule,
-      ],
-      declarations: [
-        ChatComponent,
-        ChatListComponent,
-        FormatToJapaneseDatePipe,
-        RoundOffDatePipe,
-        ShortenTextPipe,
-      ],
-      providers: [
-        Store,
-        {
-          provide: AccountService,
-          useClass: MockAccountService
-        },
-        ChatService,
-      ]
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        imports: [
+          HttpClientTestingModule,
+          RouterTestingModule.withRoutes([{ path: 'chat/list', component: ChatListComponent }]),
+          NoopAnimationsModule,
+          FormsModule,
+          MaterialModule,
+        ],
+        declarations: [
+          ChatComponent,
+          ChatListComponent,
+          FormatToJapaneseDatePipe,
+          RoundOffDatePipe,
+          ShortenTextPipe,
+        ],
+        providers: [
+          Store,
+          {
+            provide: AccountService,
+            useClass: MockAccountService,
+          },
+          ChatService,
+        ],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ChatComponent);

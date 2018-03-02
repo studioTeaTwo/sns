@@ -6,10 +6,7 @@ import { FormsModule } from '@angular/forms';
 
 import { MaterialModule } from 'app/shared/material/material.module';
 import { Store } from 'app/core/store/store';
-import {
-  AccountService,
-  ChatService,
- } from 'app/core/services/api';
+import { AccountService, ChatService } from 'app/core/services/api';
 import { StepNameComponent } from './step-name.component';
 import { MockAccountService } from 'testing/api';
 import { FormatToJapaneseDatePipe } from 'app/shared/pipes';
@@ -20,31 +17,29 @@ describe('StepNameComponent', () => {
   let component: StepNameComponent;
   let fixture: ComponentFixture<StepNameComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule,
-        NoopAnimationsModule,
-        FormsModule,
-        MaterialModule,
-      ],
-      declarations: [
-        StepNameComponent,
-        FormatToJapaneseDatePipe,
-      ],
-      providers: [
-        Store,
-        {
-          provide: AccountService,
-          useClass: MockAccountService
-        },
-        ChatService,
-      ]
-    })
-    .compileComponents();
-    window.ga = jasmine.createSpy('ga');
-  }));
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        imports: [
+          HttpClientTestingModule,
+          RouterTestingModule,
+          NoopAnimationsModule,
+          FormsModule,
+          MaterialModule,
+        ],
+        declarations: [StepNameComponent, FormatToJapaneseDatePipe],
+        providers: [
+          Store,
+          {
+            provide: AccountService,
+            useClass: MockAccountService,
+          },
+          ChatService,
+        ],
+      }).compileComponents();
+      window.ga = jasmine.createSpy('ga');
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(StepNameComponent);

@@ -8,11 +8,7 @@ import { LoggingComponent } from './logging.component';
 
 import { MaterialModule } from 'app/shared/material/material.module';
 import { Store } from 'app/core/store/store';
-import {
-  AccountService,
-  ChatService,
-  DailyLogService,
- } from 'app/core/services/api';
+import { AccountService, ChatService, DailyLogService } from 'app/core/services/api';
 import { StepHealthComponent } from 'app/tutorials/daily-log-steps/step-health.component';
 import { StepMedicinaComponent } from 'app/tutorials/daily-log-steps/step-medicina.component';
 import { StepPictureComponent } from 'app/tutorials/daily-log-steps/step-picture.component';
@@ -25,35 +21,36 @@ describe('LoggingComponent', () => {
   let component: LoggingComponent;
   let fixture: ComponentFixture<LoggingComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule,
-        NoopAnimationsModule,
-        FormsModule,
-        MaterialModule,
-      ],
-      declarations: [
-        LoggingComponent,
-        StepHealthComponent,
-        StepMedicinaComponent,
-        StepPictureComponent,
-        FormatToJapaneseDatePipe,
-      ],
-      providers: [
-        Store,
-        {
-          provide: AccountService,
-          useClass: MockAccountService
-        },
-        ChatService,
-        DailyLogService,
-      ]
-    })
-    .compileComponents();
-    window.ga = jasmine.createSpy('ga');
-  }));
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        imports: [
+          HttpClientTestingModule,
+          RouterTestingModule,
+          NoopAnimationsModule,
+          FormsModule,
+          MaterialModule,
+        ],
+        declarations: [
+          LoggingComponent,
+          StepHealthComponent,
+          StepMedicinaComponent,
+          StepPictureComponent,
+          FormatToJapaneseDatePipe,
+        ],
+        providers: [
+          Store,
+          {
+            provide: AccountService,
+            useClass: MockAccountService,
+          },
+          ChatService,
+          DailyLogService,
+        ],
+      }).compileComponents();
+      window.ga = jasmine.createSpy('ga');
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoggingComponent);

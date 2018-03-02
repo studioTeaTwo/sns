@@ -1,10 +1,5 @@
-import {
-  Chat,
-  Notification,
-} from './swagger-models';
-import {
-  NotificationType,
-} from 'app/constants/constants';
+import { Chat, Notification } from './swagger-models';
+import { NotificationType } from 'app/constants/constants';
 
 export * from './swagger-models';
 

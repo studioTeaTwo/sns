@@ -9,7 +9,7 @@ import { AccountService, ChatService } from 'app/core/services/api';
 @Component({
   selector: 'app-chat-list',
   templateUrl: './chat-list.component.html',
-  styleUrls: ['./chat-list.component.scss']
+  styleUrls: ['./chat-list.component.scss'],
 })
 export class ChatListComponent implements OnInit {
   chatList$ = this.store.select<ChatThread[]>(state => state.chatList);
@@ -22,10 +22,10 @@ export class ChatListComponent implements OnInit {
     private store: Store,
     private accountService: AccountService,
     private chatService: ChatService,
-  ) { }
+  ) {}
 
   ngOnInit() {
-    this.accountService.get().subscribe(response => this.myself = response);
+    this.accountService.get().subscribe(response => (this.myself = response));
 
     this.chatService.list().subscribe();
   }
@@ -39,5 +39,4 @@ export class ChatListComponent implements OnInit {
   onClick(chatThread: ChatThread) {
     this.router.navigate([`/chat/${chatThread.id}`]);
   }
-
 }

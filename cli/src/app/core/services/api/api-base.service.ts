@@ -4,10 +4,7 @@ import { Store } from 'app/core/store/store';
 
 @Injectable()
 export class ApiBaseService {
-
-  constructor(
-    private store: Store,
-  ) { }
+  constructor(private store: Store) {}
 
   resetBeforeRequest(data: any) {
     const currentState = this.store.getState();

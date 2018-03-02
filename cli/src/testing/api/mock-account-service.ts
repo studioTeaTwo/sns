@@ -28,20 +28,15 @@ export class MockAccountService {
     });
   }
 
-  saveSignupdataName() {
-  }
+  saveSignupdataName() {}
 
-  saveSignupdataSymptom() {
-  }
+  saveSignupdataSymptom() {}
 
-  saveSignupdataClassification() {
-  }
+  saveSignupdataClassification() {}
 
-  saveSignupdataEmail() {
-  }
+  saveSignupdataEmail() {}
 
-  saveSignupdataPassword() {
-  }
+  saveSignupdataPassword() {}
 
   verifyEmail() {
     return of();

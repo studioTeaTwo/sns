@@ -17,38 +17,38 @@ import { TopComponent } from './components/navigations/top/top.component';
 import { ContactComponent } from './components/navigations/contact/contact.component';
 
 describe('AppComponent', () => {
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule,
-        MaterialModule,
-        AppRoutingModule,
-      ],
-      declarations: [
-        AppComponent,
-        HeaderComponent,
-        GlobalMenuComponent,
-        TopComponent,
-        ContactComponent,
-      ],
-      providers: [
-        Store,
-        {
-          provide: AccountService,
-          useClass: MockAccountService
-        },
-        {
-          provide: APP_BASE_HREF,
-          useValue: '/'
-        }
-      ]
-    }).compileComponents();
-  }));
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        imports: [HttpClientTestingModule, RouterTestingModule, MaterialModule, AppRoutingModule],
+        declarations: [
+          AppComponent,
+          HeaderComponent,
+          GlobalMenuComponent,
+          TopComponent,
+          ContactComponent,
+        ],
+        providers: [
+          Store,
+          {
+            provide: AccountService,
+            useClass: MockAccountService,
+          },
+          {
+            provide: APP_BASE_HREF,
+            useValue: '/',
+          },
+        ],
+      }).compileComponents();
+    }),
+  );
 
-  it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
-  }));
+  it(
+    'should create the app',
+    async(() => {
+      const fixture = TestBed.createComponent(AppComponent);
+      const app = fixture.debugElement.componentInstance;
+      expect(app).toBeTruthy();
+    }),
+  );
 });

@@ -10,7 +10,12 @@ import { concatMap, filter, map, take } from 'rxjs/operators';
 import * as Moment from 'moment';
 
 import { Store } from 'app/core/store/store';
-import { FriendExperienceStrongParameter, NotificationViewModel, Notification, User } from 'app/interfaces/api-models';
+import {
+  FriendExperienceStrongParameter,
+  NotificationViewModel,
+  Notification,
+  User,
+} from 'app/interfaces/api-models';
 import { FeedService, AccountService } from 'app/core/services/api';
 import { BeginnerAdvice } from 'app/interfaces/view-models';
 import { TipsCollection } from 'app/constants/constants';
@@ -30,17 +35,17 @@ interface Experience {
   animations: [
     trigger('adviceanimation', [
       transition('default => attention', [
-        animate('250ms ease-in', style({transform: 'scale(1.0)'})),
-        animate('500ms ease-in', style({transform: 'scale(1.2)'})),
-        animate('750ms ease-in', style({transform: 'scale(1.0)'})),
+        animate('250ms ease-in', style({ transform: 'scale(1.0)' })),
+        animate('500ms ease-in', style({ transform: 'scale(1.2)' })),
+        animate('750ms ease-in', style({ transform: 'scale(1.0)' })),
       ]),
       transition('attention => default', [
-        animate('250ms ease-in', style({transform: 'scale(1.0)'})),
-        animate('500ms ease-in', style({transform: 'scale(1.2)'})),
-        animate('750ms ease-in', style({transform: 'scale(1.0)'})),
-      ])
-    ])
-  ]
+        animate('250ms ease-in', style({ transform: 'scale(1.0)' })),
+        animate('500ms ease-in', style({ transform: 'scale(1.2)' })),
+        animate('750ms ease-in', style({ transform: 'scale(1.0)' })),
+      ]),
+    ]),
+  ],
 })
 export class HomeComponent implements OnInit, OnDestroy {
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
@@ -67,13 +72,15 @@ export class HomeComponent implements OnInit, OnDestroy {
     private sanitizer: DomSanitizer,
     private accountService: AccountService,
     private feedService: FeedService,
-  ) { }
+  ) {}
 
   ngOnInit() {
     ga('send', 'event', 'Home', 'load');
 
     this.subscriptions = [
-      this.feedService.listNotifications().pipe(
+      this.feedService
+        .listNotifications()
+        .pipe(
           // TODO: intervalするか要検討
           concatMap(response => this.feedService.listExperiences()),
         )
@@ -90,11 +97,15 @@ export class HomeComponent implements OnInit, OnDestroy {
           image = `/assets/images/home_bg_normal_1.jpg`;
         }
         this.backgroundImageStyle = image;
-      })
+      }),
     ];
 
-    this.myExperienceDataSource = new ExperienceDataSource(this.store.select<Notification[]>(states => states.experienceList.mine));
-    this.friendExperienceDataSource = new ExperienceDataSource(this.store.select<Notification[]>(states => states.experienceList.friend));
+    this.myExperienceDataSource = new ExperienceDataSource(
+      this.store.select<Notification[]>(states => states.experienceList.mine),
+    );
+    this.friendExperienceDataSource = new ExperienceDataSource(
+      this.store.select<Notification[]>(states => states.experienceList.friend),
+    );
 
     this.createBeginnerAdvice();
   }
@@ -160,7 +171,10 @@ export class HomeComponent implements OnInit, OnDestroy {
           description: '自己紹介を記入しよう',
         });
       }
-      if ((user.classification === 1 || user.classification === 2) && !this.hasAllergenGroup(user)) {
+      if (
+        (user.classification === 1 || user.classification === 2) &&
+        !this.hasAllergenGroup(user)
+      ) {
         this.beginners.push({
           adviceType: 'allergenGroup',
           description: 'アレルゲンを記入しよう',
@@ -176,7 +190,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         const tmp = [...this.randomTips];
         const legth = this.beginners.length;
         for (let i = 3; i > length; i--) {
-          const random = Math.floor(Math.random() * ((tmp.length - 1) - 0) + 0);
+          const random = Math.floor(Math.random() * (tmp.length - 1 - 0) + 0);
           const newItem = tmp.splice(random, 1);
           this.beginners.push(newItem[0]);
         }
@@ -193,9 +207,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 class ExperienceDataSource extends DataSource<any> {
   rowCount: number;
 
-  constructor(
-    private feedSource: Observable<Notification[]>
-  ) {
+  constructor(private feedSource: Observable<Notification[]>) {
     super();
   }
 
@@ -225,7 +237,7 @@ class ExperienceDataSource extends DataSource<any> {
         });
         this.rowCount = newData.length;
         return newData;
-      })
+      }),
     );
   }
 

@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpHandler, HttpRequest, HttpEvent, HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpInterceptor,
+  HttpHandler,
+  HttpRequest,
+  HttpEvent,
+  HttpResponse,
+  HttpErrorResponse,
+} from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
@@ -13,10 +20,7 @@ import { ApiBaseService } from 'app/core/services/api/api-base.service';
 export class ApiInterceptor implements HttpInterceptor {
   readonly domain: string = environment.domain;
 
-  constructor(
-    private router: Router,
-    private apiBaseService: ApiBaseService,
-  ) {}
+  constructor(private router: Router, private apiBaseService: ApiBaseService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = localStorage.getItem('token');
@@ -38,7 +42,7 @@ export class ApiInterceptor implements HttpInterceptor {
         }
         return event;
       }),
-      catchError(error => this.handleError(error))
+      catchError(error => this.handleError(error)),
     );
   }
 

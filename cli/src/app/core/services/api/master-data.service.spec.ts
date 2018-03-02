@@ -8,17 +8,15 @@ import { Store } from 'app/core/store/store';
 describe('MasterDataService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-      ],
-      providers: [
-        Store,
-        MasterDataService,
-      ]
+      imports: [HttpClientTestingModule],
+      providers: [Store, MasterDataService],
     });
   });
 
-  it('should be created', inject([MasterDataService], (service: MasterDataService) => {
-    expect(service).toBeTruthy();
-  }));
+  it(
+    'should be created',
+    inject([MasterDataService], (service: MasterDataService) => {
+      expect(service).toBeTruthy();
+    }),
+  );
 });

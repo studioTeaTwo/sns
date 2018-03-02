@@ -1,4 +1,13 @@
-import { Component, OnInit, ElementRef, Renderer2, ViewChild, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ElementRef,
+  Renderer2,
+  ViewChild,
+  Output,
+  EventEmitter,
+  AfterViewInit,
+} from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { trigger } from '@angular/animations';
@@ -7,17 +16,8 @@ import { Subject } from 'rxjs/Subject';
 
 import { Store } from 'app/core/store/store';
 import { NAVI_CHARA, SIGNUP_USER, SymptomName } from 'app/constants/constants';
-import {
-  ChatThread,
-  Chats,
-  ChatViewModel,
-  CONTENT_TYPE,
-  User,
-} from 'app/interfaces/api-models';
-import {
-  AccountService,
-  ChatService,
-} from 'app/core/services/api';
+import { ChatThread, Chats, ChatViewModel, CONTENT_TYPE, User } from 'app/interfaces/api-models';
+import { AccountService, ChatService } from 'app/core/services/api';
 import { ChatComponent } from 'app/components/chats/chat/chat.component';
 import { DisplayState } from 'app/components/auth/signup/signup.component';
 import { addChat, addChatAndFocus, NAVI_THREAD } from '../shared/chat-operation.function';
@@ -27,8 +27,8 @@ import { addChat, addChatAndFocus, NAVI_THREAD } from '../shared/chat-operation.
   templateUrl: '../../components/chats/chat/chat.component.html',
   styleUrls: ['../../components/chats/chat/chat.component.scss'],
   animations: [
-    trigger('wholeanimation', []) // ダミー
-  ]
+    trigger('wholeanimation', []), // ダミー
+  ],
 })
 export class StepSymptomComponent extends ChatComponent implements OnInit, AfterViewInit {
   @ViewChild('replyText') input: ElementRef;
@@ -48,14 +48,7 @@ export class StepSymptomComponent extends ChatComponent implements OnInit, After
     chatService: ChatService,
     private sanitizer: DomSanitizer,
   ) {
-    super(
-      router,
-      route,
-      renderer,
-      store,
-      accountService,
-      chatService,
-    );
+    super(router, route, renderer, store, accountService, chatService);
     this.height = window.innerHeight - 42 - 50; // 42 = header.height 50 = footer.height
 
     this.chatSource = new Subject<ChatViewModel[]>();
@@ -68,15 +61,19 @@ export class StepSymptomComponent extends ChatComponent implements OnInit, After
     ga('send', 'event', 'Signup', 'symptom');
 
     this.myself = SIGNUP_USER;
-    this.opponents = [{...NAVI_CHARA}];
+    this.opponents = [{ ...NAVI_CHARA }];
     this.chatThread = NAVI_THREAD;
 
     this.toggleReplyText(false);
 
-    addChat({
-      body: tutorial_script1,
-      waitTime: 0
-    }, this.chatHistory, this.chatSource);
+    addChat(
+      {
+        body: tutorial_script1,
+        waitTime: 0,
+      },
+      this.chatHistory,
+      this.chatSource,
+    );
   }
 
   ngAfterViewInit() {
@@ -101,23 +98,29 @@ export class StepSymptomComponent extends ChatComponent implements OnInit, After
   }
 
   private createReply(result) {
-    this.selectedSymptoms = result.checked ?
-      this.selectedSymptoms.concat(result.name + 'です。<br>') :
-      this.selectedSymptoms.replace(result.name + 'です。<br>', '');
+    this.selectedSymptoms = result.checked
+      ? this.selectedSymptoms.concat(result.name + 'です。<br>')
+      : this.selectedSymptoms.replace(result.name + 'です。<br>', '');
     const body = this.selectedSymptoms.length !== 0 ? this.selectedSymptoms : '特に無い。';
 
-    const reply: ChatViewModel[] = [{
-      id: 4,
-      senderId: this.myself.id,
-      contentType: CONTENT_TYPE.REPLY,
-      body: this.sanitizer.bypassSecurityTrustHtml(body),
-      createdAt: new Date().toString()
-    }];
-    addChat({
-      body: reply.concat(tutorial_script2),
-      waitTime: 0,
-      tmp: true
-    }, this.chatHistory, this.chatSource);
+    const reply: ChatViewModel[] = [
+      {
+        id: 4,
+        senderId: this.myself.id,
+        contentType: CONTENT_TYPE.REPLY,
+        body: this.sanitizer.bypassSecurityTrustHtml(body),
+        createdAt: new Date().toString(),
+      },
+    ];
+    addChat(
+      {
+        body: reply.concat(tutorial_script2),
+        waitTime: 0,
+        tmp: true,
+      },
+      this.chatHistory,
+      this.chatSource,
+    );
     setTimeout(() => this.scrollToBottom(), 0);
   }
 
@@ -129,7 +132,7 @@ export class StepSymptomComponent extends ChatComponent implements OnInit, After
   }
 
   private resetData() {
-    tutorial_script1[0].itemList.forEach(value => value.checked = false);
+    tutorial_script1[0].itemList.forEach(value => (value.checked = false));
     tutorial_script1[0].expired = false;
 
     this.selectedSymptoms = '';
@@ -175,7 +178,7 @@ const tutorial_script1: ChatViewModel[] = [
         checked: false,
       },
     ],
-    createdAt: new Date().toString()
+    createdAt: new Date().toString(),
   },
 ];
 const tutorial_script2: ChatViewModel[] = [
@@ -184,6 +187,6 @@ const tutorial_script2: ChatViewModel[] = [
     senderId: NAVI_CHARA.id,
     contentType: CONTENT_TYPE.YESNO,
     body: 'これでいいかい？',
-    createdAt: new Date().toString()
+    createdAt: new Date().toString(),
   },
 ];

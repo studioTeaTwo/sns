@@ -9,16 +9,7 @@ import { LoggingComponent } from './daily-logs/logging/logging.component';
 import { DetailComponent } from './daily-logs/detail/detail.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    SharedModule,
-    TutorialsModule,
-    LifeLogsRoutingModule,
-  ],
-  declarations: [
-    ListComponent,
-    LoggingComponent,
-    DetailComponent
-  ]
+  imports: [CommonModule, SharedModule, TutorialsModule, LifeLogsRoutingModule],
+  declarations: [ListComponent, LoggingComponent, DetailComponent],
 })
-export class LifeLogsModule { }
+export class LifeLogsModule {}

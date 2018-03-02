@@ -7,10 +7,7 @@ import { TabsComponent } from './tabs.component';
 
 import { MaterialModule } from 'app/shared/material/material.module';
 import { Store } from 'app/core/store/store';
-import {
-  MasterDataService,
-  UserService,
-} from 'app/core/services/api';
+import { MasterDataService, UserService } from 'app/core/services/api';
 import { AllergensComponent } from '../allergens/allergens.component';
 import { NameComponent } from '../name/name.component';
 import { ResultsComponent } from '../results/results.component';
@@ -20,31 +17,27 @@ describe('TabComponent', () => {
   let component: TabsComponent;
   let fixture: ComponentFixture<TabsComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule,
-        NoopAnimationsModule,
-        MaterialModule,
-      ],
-      declarations: [
-        TabsComponent,
-        AllergensComponent,
-        NameComponent,
-        ResultsComponent,
-      ],
-      providers: [
-        Store,
-        MasterDataService,
-        {
-          provide: UserService,
-          useClass: MockUserService
-        },
-      ]
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        imports: [
+          HttpClientTestingModule,
+          RouterTestingModule,
+          NoopAnimationsModule,
+          MaterialModule,
+        ],
+        declarations: [TabsComponent, AllergensComponent, NameComponent, ResultsComponent],
+        providers: [
+          Store,
+          MasterDataService,
+          {
+            provide: UserService,
+            useClass: MockUserService,
+          },
+        ],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TabsComponent);

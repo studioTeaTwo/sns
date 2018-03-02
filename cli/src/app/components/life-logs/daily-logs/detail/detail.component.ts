@@ -24,7 +24,7 @@ enum MODE {
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
-  styleUrls: ['./detail.component.scss']
+  styleUrls: ['./detail.component.scss'],
 })
 export class DetailComponent implements OnInit {
   MODE = MODE;
@@ -40,9 +40,12 @@ export class DetailComponent implements OnInit {
 
   @ViewChild('video') videoElm: ElementRef;
   @ViewChild('canvas') canvasElm: ElementRef;
-  readonly medias: MediaStreamConstraints = {audio: false, video: {
-    facingMode: 'user'
-  }};
+  readonly medias: MediaStreamConstraints = {
+    audio: false,
+    video: {
+      facingMode: 'user',
+    },
+  };
   private captureData: string;
 
   constructor(
@@ -51,7 +54,7 @@ export class DetailComponent implements OnInit {
     private store: Store,
     private accountService: AccountService,
     private dailyLogService: DailyLogService,
-  ) { }
+  ) {}
 
   ngOnInit() {
     const account$ = this.accountService.get();
@@ -67,7 +70,7 @@ export class DetailComponent implements OnInit {
       // 新規作成ページ
       if (url[0].path === 'create') {
         this.displayMode = MODE.CREATE;
-      // 詳細ページ
+        // 詳細ページ
       } else {
         this.displayMode = MODE.ROM;
         const result = this.store.getState().dailyLogList.find(value => value.id === +url[0].path);
@@ -102,29 +105,26 @@ export class DetailComponent implements OnInit {
   }
 
   onClickUpdate() {
-    this.dailyLogService.update(this.dailyLogParam)
-      .subscribe(
-        () => {
-          this.displayMode = MODE.ROM;
-          this.snackBar.open('修正しました！', null, {
-            duration: 2000,
-          });
-        });
+    this.dailyLogService.update(this.dailyLogParam).subscribe(() => {
+      this.displayMode = MODE.ROM;
+      this.snackBar.open('修正しました！', null, {
+        duration: 2000,
+      });
+    });
   }
 
   onClickCreate() {
-    this.dailyLogService.create(this.dailyLogParam)
-      .subscribe(
-        () => {
-          this.snackBar.open('記録しました！', null, {
-            duration: 2000,
-          });
-        });
+    this.dailyLogService.create(this.dailyLogParam).subscribe(() => {
+      this.snackBar.open('記録しました！', null, {
+        duration: 2000,
+      });
+    });
   }
 
   onClickCamera() {
-    window.navigator.mediaDevices.getUserMedia(this.medias)
-      .then(stream => this.videoElm.nativeElement.srcObject = stream)
+    window.navigator.mediaDevices
+      .getUserMedia(this.medias)
+      .then(stream => (this.videoElm.nativeElement.srcObject = stream))
       .catch(error => {
         console.error(error);
         alert(error);
@@ -148,12 +148,24 @@ export class DetailComponent implements OnInit {
 
   private judgeMultipleSymptom(user: User) {
     const symptomList: Symptom[] = [];
-    if (user.atopic) { symptomList.push('atopic'); }
-    if (user.asthma) { symptomList.push('asthma'); }
-    if (user.rhinitis) { symptomList.push('rhinitis'); }
-    if (user.pollen) { symptomList.push('pollen'); }
-    if (user.gastroenteritis) { symptomList.push('gastroenteritis'); }
-    if (user.conjunctivitis) { symptomList.push('conjunctivitis'); }
+    if (user.atopic) {
+      symptomList.push('atopic');
+    }
+    if (user.asthma) {
+      symptomList.push('asthma');
+    }
+    if (user.rhinitis) {
+      symptomList.push('rhinitis');
+    }
+    if (user.pollen) {
+      symptomList.push('pollen');
+    }
+    if (user.gastroenteritis) {
+      symptomList.push('gastroenteritis');
+    }
+    if (user.conjunctivitis) {
+      symptomList.push('conjunctivitis');
+    }
 
     // trueが一つだけならsingle。2つ以上と0個はmultiple扱い。0個は任意で指定させる必要があるため。
     if (symptomList.length === 1) {
@@ -161,5 +173,4 @@ export class DetailComponent implements OnInit {
       this.dailyLogParam.symptom = symptomList[0];
     }
   }
-
 }

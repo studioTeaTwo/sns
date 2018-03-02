@@ -4,18 +4,12 @@ import { Location } from '@angular/common';
 @Component({
   selector: 'app-global-menu',
   templateUrl: './global-menu.component.html',
-  styleUrls: ['./global-menu.component.scss']
+  styleUrls: ['./global-menu.component.scss'],
 })
 export class GlobalMenuComponent implements OnInit {
+  constructor(private location: Location, private renderer: Renderer2) {}
 
-  constructor(
-    private location: Location,
-    private renderer: Renderer2,
-  ) {
-  }
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   // HeaderComponentにも同じメソッドあり
   isDisplay(): boolean {

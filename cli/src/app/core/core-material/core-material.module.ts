@@ -26,6 +26,6 @@ import {
     MatProgressSpinnerModule,
     MatSidenavModule,
     MatToolbarModule,
-  ]
+  ],
 })
-export class CoreMaterialModule { }
+export class CoreMaterialModule {}

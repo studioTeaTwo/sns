@@ -5,9 +5,7 @@ import { of } from 'rxjs/observable/of';
 import { map } from 'rxjs/operators';
 
 import { Store } from 'app/core/store/store';
-import {
-  User,
-} from 'app/interfaces/api-models';
+import { User } from 'app/interfaces/api-models';
 import { ApiBaseService } from 'app/core/services/api/api-base.service';
 
 interface UserRequestBody extends User {
@@ -31,37 +29,33 @@ export class AccountService {
     private http: HttpClient,
     private store: Store,
     private apiBaseService: ApiBaseService,
-  ) { }
+  ) {}
 
   login(email: string, password: string): Observable<User> {
     const body = {
       session: {
         email: email,
-        password: password
-      }
+        password: password,
+      },
     };
     return this.http.post<User>(`/api/login`, body).pipe(
-      map(
-        response => {
-          this.userId = response.id;
-          localStorage.setItem('token', response.accessToken);
-          localStorage.setItem('account', JSON.stringify(response));
-          this.onSuccessAccount(response);
-          return response;
-        }
-      )
+      map(response => {
+        this.userId = response.id;
+        localStorage.setItem('token', response.accessToken);
+        localStorage.setItem('account', JSON.stringify(response));
+        this.onSuccessAccount(response);
+        return response;
+      }),
     );
   }
 
   logout(): Observable<void> {
     return this.http.delete(`/api/logout`).pipe(
-      map(
-        response => {
-          localStorage.removeItem('token');
-          localStorage.removeItem('account');
-          this.onSuccessAccount({});
-        }
-      )
+      map(response => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('account');
+        this.onSuccessAccount({});
+      }),
     );
   }
 
@@ -106,26 +100,22 @@ export class AccountService {
     } else {
       requestBody = user;
     }
-    return this.http.put<User>(`/api/users/${user.id}`, {user: requestBody}).pipe(
-      map(
-        response => {
-          localStorage.setItem('account', JSON.stringify(response));
-          this.onSuccessAccount(response);
-        }
-      )
+    return this.http.put<User>(`/api/users/${user.id}`, { user: requestBody }).pipe(
+      map(response => {
+        localStorage.setItem('account', JSON.stringify(response));
+        this.onSuccessAccount(response);
+      }),
     );
   }
 
   create(): Observable<void> {
-    return this.http.post<User>(`/api/users`, {user: this.signupData}).pipe(
-      map(
-        response => {
-          this.userId = response.id;
-          localStorage.setItem('token', response.accessToken);
-          localStorage.setItem('account', JSON.stringify(response));
-          this.onSuccessAccount(response);
-        }
-      )
+    return this.http.post<User>(`/api/users`, { user: this.signupData }).pipe(
+      map(response => {
+        this.userId = response.id;
+        localStorage.setItem('token', response.accessToken);
+        localStorage.setItem('account', JSON.stringify(response));
+        this.onSuccessAccount(response);
+      }),
     );
   }
 
@@ -139,9 +129,9 @@ export class AccountService {
       return;
     }
 
-    this.signupData.symptoms = item.checked ?
-      this.signupData.symptoms.concat(item.id) :
-      this.signupData.symptoms.filter(value => item.id !== value);
+    this.signupData.symptoms = item.checked
+      ? this.signupData.symptoms.concat(item.id)
+      : this.signupData.symptoms.filter(value => item.id !== value);
   }
 
   saveSignupdataClassification(item?: any) {
@@ -160,16 +150,18 @@ export class AccountService {
   }
 
   verifyEmail(email: string): Observable<HttpResponse<any>> {
-    return this.http.post<any>(
+    return this.http
+      .post<any>(
         `/api/users/emailverification`,
-        {user: { email: email }},
-        {observe: 'response'}
-      ).pipe(
-      map(response => {
-        this.apiBaseService.onSuccess();
-        return response;
-      })
-    );
+        { user: { email: email } },
+        { observe: 'response' },
+      )
+      .pipe(
+        map(response => {
+          this.apiBaseService.onSuccess();
+          return response;
+        }),
+      );
   }
 
   emailValidator(email: string): boolean {
@@ -196,5 +188,4 @@ export class AccountService {
       error: false,
     });
   }
-
 }

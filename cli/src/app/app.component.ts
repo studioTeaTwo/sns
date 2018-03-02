@@ -8,7 +8,7 @@ import { AccountService } from 'app/core/services/api';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   loading$ = this.store.select<boolean>(state => state.loading);
@@ -27,16 +27,17 @@ export class AppComponent {
 
     // index.htmlの初回ロード用タグを消去する
     const initialElm = document.getElementById('initial-paint') as HTMLDivElement;
-    if (initialElm) { initialElm.remove(); }
+    if (initialElm) {
+      initialElm.remove();
+    }
 
     // ログインしてたらホームに移動する
     if (this.location.path() === '') {
-      this.accountService.isLoggedIn()
-        .then((isLoggedIn: boolean) => {
-          if (isLoggedIn) {
-            this.router.navigateByUrl('/home');
-          }
-        });
+      this.accountService.isLoggedIn().then((isLoggedIn: boolean) => {
+        if (isLoggedIn) {
+          this.router.navigateByUrl('/home');
+        }
+      });
     }
 
     // フロントのURLでサーバに飛んだ時の対応

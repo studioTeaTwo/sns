@@ -3,11 +3,15 @@ import { BeginnerAdvice } from 'app/interfaces/view-models';
 
 export type TipsType =
   // プロフィール
-  'profile-symptom' |'profile-messageicon' |
+  | 'profile-symptom'
+  | 'profile-messageicon'
   // 治療日記
-  'log-memo' | 'log-photo-record' | 'log-photo-camera' | 'log-photo-form' |
+  | 'log-memo'
+  | 'log-photo-record'
+  | 'log-photo-camera'
+  | 'log-photo-form'
   // 検索
-  'search-allergen';
+  | 'search-allergen';
 export namespace TipsType {
   export const ProfileSymptom: TipsType = 'profile-symptom';
   export const ProfileMessageicon: TipsType = 'profile-messageicon';
@@ -57,7 +61,13 @@ export const TipsCollection: BeginnerAdvice[] = [
 
 export type NotificationType = 'DailyLog' | 'Chat' | 'Followed' | 'Relationship';
 
-export type Symptom = 'atopic' | 'asthma' | 'rhinitis' | 'pollen' | 'gastroenteritis' | 'conjunctivitis';
+export type Symptom =
+  | 'atopic'
+  | 'asthma'
+  | 'rhinitis'
+  | 'pollen'
+  | 'gastroenteritis'
+  | 'conjunctivitis';
 const SymptomMap: Map<Symptom, string> = new Map();
 SymptomMap.set('atopic', 'アトピー');
 SymptomMap.set('asthma', '喘息・気管支炎');
@@ -68,31 +78,31 @@ SymptomMap.set('conjunctivitis', '結膜炎');
 export const SymptomName = SymptomMap;
 
 export type AllergenGroup =
-  'allergenGroupInekakafun' |
-  'allergenGroupZassoukafun' |
-  'allergenGroupJyukikafun' |
-  'allergenGroupChiri' |
-  'allergenGroupDani' |
-  'allergenGroupShinkin' |
-  'allergenGroupSaikin' |
-  'allergenGroupDoubutsu' |
-  'allergenGroupSyokugyou' |
-  'allergenGroupTamago' |
-  'allergenGroupNyuuseihin' |
-  'allergenGroupGyorui' |
-  'allergenGroupKoukakurui' |
-  'allergenGroupIkatako' |
-  'allergenGroupKomugi' |
-  'allergenGroupKomugiigai' |
-  'allergenGroupNikurui' |
-  'allergenGroupMamerui' |
-  'allergenGroupKudamonorui' |
-  'allergenGroupYasai' |
-  'allergenGroupSonota' |
-  'allergenGroupKiseityuu' |
-  'allergenGroupYakubutsu' |
-  'allergenGroupKontyuu' |
-  '' ;
+  | 'allergenGroupInekakafun'
+  | 'allergenGroupZassoukafun'
+  | 'allergenGroupJyukikafun'
+  | 'allergenGroupChiri'
+  | 'allergenGroupDani'
+  | 'allergenGroupShinkin'
+  | 'allergenGroupSaikin'
+  | 'allergenGroupDoubutsu'
+  | 'allergenGroupSyokugyou'
+  | 'allergenGroupTamago'
+  | 'allergenGroupNyuuseihin'
+  | 'allergenGroupGyorui'
+  | 'allergenGroupKoukakurui'
+  | 'allergenGroupIkatako'
+  | 'allergenGroupKomugi'
+  | 'allergenGroupKomugiigai'
+  | 'allergenGroupNikurui'
+  | 'allergenGroupMamerui'
+  | 'allergenGroupKudamonorui'
+  | 'allergenGroupYasai'
+  | 'allergenGroupSonota'
+  | 'allergenGroupKiseityuu'
+  | 'allergenGroupYakubutsu'
+  | 'allergenGroupKontyuu'
+  | '';
 const AllergenGroupMap: Map<AllergenGroup, string> = new Map();
 AllergenGroupMap.set('allergenGroupInekakafun', 'イネ科植物花粉');
 AllergenGroupMap.set('allergenGroupZassoukafun', '雑草花粉');
@@ -149,8 +159,10 @@ export const API_ERROR_MSGS = {
   NOT_ACCEPTABLE_406: '入力項目の確認をし、もう一度お試しください。',
   REQUEST_TIMEOUT_408: '要求がキャンセルされました。\n時間を置いてからもう一度お試しください。',
   CONFLICT_409: '他のユーザにデータが更新されています。\n再度画面を開いて処理を行ってください。',
-  OTHER_CLIENT_ERROR: 'エラーが発生しました。\n入力項目の確認をし、もう一度お試しいただくか、時間を置いてからもう一度お試しください。',
-  OTHER_SERVER_ERROR: 'サーバー側でエラーが発生しました。\n時間を置いてからもう一度お試しください。'
+  OTHER_CLIENT_ERROR:
+    'エラーが発生しました。\n入力項目の確認をし、もう一度お試しいただくか、時間を置いてからもう一度お試しください。',
+  OTHER_SERVER_ERROR:
+    'サーバー側でエラーが発生しました。\n時間を置いてからもう一度お試しください。',
 };
 
 export enum KEY_CODE {

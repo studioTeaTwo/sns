@@ -8,15 +8,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { RelationshipComponent } from './relationship/relationship.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    SharedModule,
-    UsersRoutingModule
-  ],
-  declarations: [
-    SettingComponent,
-    ProfileComponent,
-    RelationshipComponent,
-  ]
+  imports: [CommonModule, SharedModule, UsersRoutingModule],
+  declarations: [SettingComponent, ProfileComponent, RelationshipComponent],
 })
-export class UsersModule { }
+export class UsersModule {}

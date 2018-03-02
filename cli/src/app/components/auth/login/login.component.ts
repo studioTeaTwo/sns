@@ -6,7 +6,7 @@ import { AccountService } from 'app/core/services/api';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
   email = '';
@@ -15,13 +15,9 @@ export class LoginComponent implements OnInit {
   isErrorEmail = false;
   isErrorPassword = false;
 
-  constructor(
-    private router: Router,
-    private accountService: AccountService,
-  ) { }
+  constructor(private router: Router, private accountService: AccountService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onChangeEmail() {
     this.isErrorEmail = !this.accountService.emailValidator(this.email);
@@ -32,8 +28,8 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.accountService.login(this.email, this.password)
-     .subscribe(() => this.router.navigate(['home']));
+    this.accountService
+      .login(this.email, this.password)
+      .subscribe(() => this.router.navigate(['home']));
   }
-
 }

@@ -2,20 +2,15 @@ import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
-import {
-  AccountService,
-} from 'app/core/services/api';
+import { AccountService } from 'app/core/services/api';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-
-  constructor(
-    private router: Router,
-    private accountService: AccountService,
-  ) { }
+  constructor(private router: Router, private accountService: AccountService) {}
 
   canActivate(): Promise<boolean> {
-    return this.accountService.isLoggedIn()
+    return this.accountService
+      .isLoggedIn()
       .then((isLoggedIn: boolean) => {
         if (isLoggedIn) {
           return true;

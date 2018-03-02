@@ -8,17 +8,15 @@ import { Store } from 'app/core/store/store';
 describe('ChatService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-      ],
-      providers: [
-        Store,
-        ChatService,
-      ]
+      imports: [HttpClientTestingModule],
+      providers: [Store, ChatService],
     });
   });
 
-  it('should be created', inject([ChatService], (service: ChatService) => {
-    expect(service).toBeTruthy();
-  }));
+  it(
+    'should be created',
+    inject([ChatService], (service: ChatService) => {
+      expect(service).toBeTruthy();
+    }),
+  );
 });

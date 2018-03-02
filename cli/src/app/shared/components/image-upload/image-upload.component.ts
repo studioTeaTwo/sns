@@ -1,4 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChange} from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+  SimpleChange,
+} from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { filter, map, concatMap } from 'rxjs/operators';
@@ -11,37 +19,38 @@ interface ImageFile {
 @Component({
   selector: 'app-image-upload',
   templateUrl: './image-upload.component.html',
-  styleUrls: ['./image-upload.component.scss']
+  styleUrls: ['./image-upload.component.scss'],
 })
 export class ImageUploadComponent implements OnInit, OnChanges {
   @Input() imgSrc: any;
-  @Output() imageUploaded  = new EventEmitter<string>();
+  @Output() imageUploaded = new EventEmitter<string>();
   private newFile: ImageFile = {
     type: null,
-    data: null
+    data: null,
   };
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
-  ngOnChanges(changes: {[propName: string]: SimpleChange}) {
+  ngOnChanges(changes: { [propName: string]: SimpleChange }) {
     if (changes['imgSrc']) {
       this.handleChangeImage();
     }
   }
 
   handleChangeImage(): void {
-    of(this.imgSrc[0]).pipe(
+    of(this.imgSrc[0])
+      .pipe(
         // 画像だけ読み込む
         filter(file => file.type.match(/image\/(jpeg|png|gif)/)),
         concatMap(file => this.readFile(file)),
         // DOM領域にロードする
-        map((fileData) => this.loadFile(fileData)),
+        map(fileData => this.loadFile(fileData)),
         // canvasでリサイズする
-        concatMap((img) => this.resize(img))
+        concatMap(img => this.resize(img)),
       )
-      .subscribe((resizedImg) => {
+      .subscribe(resizedImg => {
         // ユーザーに見せる
         this.loadResizedFile(resizedImg);
       });
@@ -55,8 +64,8 @@ export class ImageUploadComponent implements OnInit, OnChanges {
     return new Observable(obs => {
       const reader = new FileReader();
       reader.onload = () => {
-          obs.next(reader.result);
-          obs.complete();
+        obs.next(reader.result);
+        obs.complete();
       };
       reader.readAsDataURL(file);
       this.newFile.type = file.type;
@@ -82,13 +91,13 @@ export class ImageUploadComponent implements OnInit, OnChanges {
         let height = img.height;
         if (width > height) {
           if (width > MAX_WIDTH) {
-              height *= MAX_WIDTH / width;
-              width = MAX_WIDTH;
+            height *= MAX_WIDTH / width;
+            width = MAX_WIDTH;
           }
         } else {
           if (height > MAX_HEIGHT) {
-              width *= MAX_HEIGHT / height;
-              height = MAX_HEIGHT;
+            width *= MAX_HEIGHT / height;
+            height = MAX_HEIGHT;
           }
         }
         // canvasでリサイズする

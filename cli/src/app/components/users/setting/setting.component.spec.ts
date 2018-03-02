@@ -16,43 +16,44 @@ describe('SettingComponent', () => {
   let component: SettingComponent;
   let fixture: ComponentFixture<SettingComponent>;
   const initialState: User = {
-      id: 0, // int32
-      email: '',
-      name: '',
-      selfIntroduction: '',
-      rank: 0, // int32
-      titleOfHonor: 0, // int32
-      classification: 0, // int32
-      atopic: false,
-      asthma: false,
-      rhinitis: false,
-      pollen: false,
-      gastroenteritis: false,
-      conjunctivitis: false,
-      avatarUrl: '',
-      accessToken: '',
+    id: 0, // int32
+    email: '',
+    name: '',
+    selfIntroduction: '',
+    rank: 0, // int32
+    titleOfHonor: 0, // int32
+    classification: 0, // int32
+    atopic: false,
+    asthma: false,
+    rhinitis: false,
+    pollen: false,
+    gastroenteritis: false,
+    conjunctivitis: false,
+    avatarUrl: '',
+    accessToken: '',
   };
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule,
-        NoopAnimationsModule,
-        FormsModule,
-        MaterialModule,
-      ],
-      declarations: [ SettingComponent ],
-      providers: [
-        Store,
-        {
-          provide: AccountService,
-          useClass: MockAccountService
-        },
-      ]
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        imports: [
+          HttpClientTestingModule,
+          RouterTestingModule,
+          NoopAnimationsModule,
+          FormsModule,
+          MaterialModule,
+        ],
+        declarations: [SettingComponent],
+        providers: [
+          Store,
+          {
+            provide: AccountService,
+            useClass: MockAccountService,
+          },
+        ],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SettingComponent);

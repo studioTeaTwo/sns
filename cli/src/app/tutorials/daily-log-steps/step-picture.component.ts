@@ -1,4 +1,13 @@
-import { Component, OnInit, ElementRef, Renderer2, ViewChild, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ElementRef,
+  Renderer2,
+  ViewChild,
+  Output,
+  EventEmitter,
+  AfterViewInit,
+} from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { trigger } from '@angular/animations';
@@ -15,11 +24,7 @@ import {
   User,
   DailyLogRequestBody,
 } from 'app/interfaces/api-models';
-import {
-  AccountService,
-  ChatService,
-  DailyLogService,
-} from 'app/core/services/api';
+import { AccountService, ChatService, DailyLogService } from 'app/core/services/api';
 import { ChatComponent } from 'app/components/chats/chat/chat.component';
 import { DisplayState } from 'app/components/life-logs/daily-logs/logging/logging.component';
 import { addChat, addChatAndFocus, NAVI_THREAD } from '../shared/chat-operation.function';
@@ -36,8 +41,8 @@ enum STEP {
   templateUrl: '../../components/chats/chat/chat.component.html',
   styleUrls: ['../../components/chats/chat/chat.component.scss'],
   animations: [
-    trigger('wholeanimation', []) // ダミー
-  ]
+    trigger('wholeanimation', []), // ダミー
+  ],
 })
 export class StepPictureComponent extends ChatComponent implements OnInit, AfterViewInit {
   @ViewChild('replyText') inputElm: ElementRef;
@@ -46,12 +51,15 @@ export class StepPictureComponent extends ChatComponent implements OnInit, After
   chatSource: Subject<ChatViewModel[]>;
   chatHistory: ChatViewModel[] = [];
 
-  readonly medias: MediaStreamConstraints = {audio: false, video: {
-    // facingMode: {
-    //   exact : 'environment'
-    // }
-    facingMode: 'user'
-  }};
+  readonly medias: MediaStreamConstraints = {
+    audio: false,
+    video: {
+      // facingMode: {
+      //   exact : 'environment'
+      // }
+      facingMode: 'user',
+    },
+  };
   private captureData: string;
 
   @Output() completed = new EventEmitter();
@@ -69,14 +77,7 @@ export class StepPictureComponent extends ChatComponent implements OnInit, After
     private sanitizer: DomSanitizer,
     private dailyLogService: DailyLogService,
   ) {
-    super(
-      router,
-      route,
-      renderer,
-      store,
-      accountService,
-      chatService,
-    );
+    super(router, route, renderer, store, accountService, chatService);
     this.height = window.innerHeight - 42 - 50; // 42 = header.height 50 = footer.height
 
     this.chatSource = new Subject<ChatViewModel[]>();
@@ -86,17 +87,21 @@ export class StepPictureComponent extends ChatComponent implements OnInit, After
   ngOnInit() {
     ga('send', 'event', 'DailyLog-Logging', 'picture');
 
-    this.accountService.get().subscribe(response => this.myself = response);
-    this.opponents = [{...NAVI_CHARA}];
+    this.accountService.get().subscribe(response => (this.myself = response));
+    this.opponents = [{ ...NAVI_CHARA }];
     this.chatThread = NAVI_THREAD;
 
     this.toggleReplyText(false);
 
-    addChat({
-      body: daily_log_script1,
-      waitTime: 0,
-      tmp: true,
-    }, this.chatHistory, this.chatSource);
+    addChat(
+      {
+        body: daily_log_script1,
+        waitTime: 0,
+        tmp: true,
+      },
+      this.chatHistory,
+      this.chatSource,
+    );
 
     this.step = STEP.CAMERA_YESNO;
   }
@@ -119,12 +124,14 @@ export class StepPictureComponent extends ChatComponent implements OnInit, After
           {
             body: [daily_log_script2[0], ...daily_log_script3],
             waitTime: 0,
-          }, this.chatHistory = [], this.chatSource,
+          },
+          (this.chatHistory = []),
+          this.chatSource,
           () => {
             this.captureData = this.draw();
             this.pauseCamera();
             return true;
-          }
+          },
         );
 
         this.step = STEP.PICTURE_YESNO;
@@ -135,10 +142,14 @@ export class StepPictureComponent extends ChatComponent implements OnInit, After
         this.dailyLogService.savePhotograph(this.captureData);
         this.localSave();
 
-        addChat({
-          body: [daily_log_script2[0], ...daily_log_script4],
-          waitTime: 0,
-        }, this.chatHistory = [], this.chatSource);
+        addChat(
+          {
+            body: [daily_log_script2[0], ...daily_log_script4],
+            waitTime: 0,
+          },
+          (this.chatHistory = []),
+          this.chatSource,
+        );
 
         this.step = STEP.PICTUREMEMO_YESNO;
         break;
@@ -149,8 +160,11 @@ export class StepPictureComponent extends ChatComponent implements OnInit, After
           {
             body: [daily_log_script2[0]],
             waitTime: 0,
-          }, this.chatHistory, this.chatSource,
-          () => this.toggleReplyText(true), this.emitClick
+          },
+          this.chatHistory,
+          this.chatSource,
+          () => this.toggleReplyText(true),
+          this.emitClick,
         );
         break;
     }
@@ -166,11 +180,15 @@ export class StepPictureComponent extends ChatComponent implements OnInit, After
 
       case STEP.CAMERA_ON:
         // 初めに戻る
-        addChat({
-          body: daily_log_script1,
-          waitTime: 0,
-          tmp: true,
-        }, this.chatHistory = [], this.chatSource);
+        addChat(
+          {
+            body: daily_log_script1,
+            waitTime: 0,
+            tmp: true,
+          },
+          (this.chatHistory = []),
+          this.chatSource,
+        );
 
         this.step = STEP.CAMERA_YESNO;
         break;
@@ -198,20 +216,27 @@ export class StepPictureComponent extends ChatComponent implements OnInit, After
     const HEIGHT = this.videoElm.nativeElement.clientHeight;
 
     const ctx = this.canvasElm.nativeElement.getContext('2d') as CanvasRenderingContext2D;
-    this.canvasElm.nativeElement.width  = WIDTH;
+    this.canvasElm.nativeElement.width = WIDTH;
     this.canvasElm.nativeElement.height = HEIGHT;
 
-    return this.canvasElm.nativeElement.toDataURL(ctx.drawImage(this.videoElm.nativeElement, 0, 0, WIDTH, HEIGHT));
+    return this.canvasElm.nativeElement.toDataURL(
+      ctx.drawImage(this.videoElm.nativeElement, 0, 0, WIDTH, HEIGHT),
+    );
   }
 
   private startCamera() {
-    addChat({
-      body: daily_log_script2,
-      waitTime: 0,
-    }, this.chatHistory, this.chatSource);
+    addChat(
+      {
+        body: daily_log_script2,
+        waitTime: 0,
+      },
+      this.chatHistory,
+      this.chatSource,
+    );
 
-    window.navigator.mediaDevices.getUserMedia(this.medias)
-      .then(stream => this.videoElm.nativeElement.srcObject = stream)
+    window.navigator.mediaDevices
+      .getUserMedia(this.medias)
+      .then(stream => (this.videoElm.nativeElement.srcObject = stream))
       .catch(error => {
         console.error(error);
         alert(error);
@@ -233,10 +258,14 @@ export class StepPictureComponent extends ChatComponent implements OnInit, After
   private end() {
     this.stopCamera();
 
-    addChat({
-      body: daily_log_script5,
-      waitTime: 0,
-    }, this.chatHistory = [], this.chatSource);
+    addChat(
+      {
+        body: daily_log_script5,
+        waitTime: 0,
+      },
+      (this.chatHistory = []),
+      this.chatSource,
+    );
 
     // データ送信
     this.dailyLogService.create().subscribe();
@@ -259,7 +288,7 @@ const daily_log_script1: ChatViewModel[] = [
     senderId: NAVI_CHARA.id,
     contentType: CONTENT_TYPE.YESNO,
     body: '写真で記録する？',
-    createdAt: new Date().toString()
+    createdAt: new Date().toString(),
   },
 ];
 const daily_log_script2: ChatViewModel[] = [
@@ -268,14 +297,14 @@ const daily_log_script2: ChatViewModel[] = [
     senderId: NAVI_CHARA.id,
     contentType: CONTENT_TYPE.CAMERA,
     body: '',
-    createdAt: new Date().toString()
+    createdAt: new Date().toString(),
   },
   {
     id: 3,
     senderId: NAVI_CHARA.id,
     contentType: CONTENT_TYPE.YESNO,
     body: '写真にしたい時に「はい」を押してね',
-    createdAt: new Date().toString()
+    createdAt: new Date().toString(),
   },
 ];
 const daily_log_script3: ChatViewModel[] = [
@@ -284,7 +313,7 @@ const daily_log_script3: ChatViewModel[] = [
     senderId: NAVI_CHARA.id,
     contentType: CONTENT_TYPE.YESNO,
     body: 'これでいいかな？',
-    createdAt: new Date().toString()
+    createdAt: new Date().toString(),
   },
 ];
 const daily_log_script4: ChatViewModel[] = [
@@ -293,7 +322,7 @@ const daily_log_script4: ChatViewModel[] = [
     senderId: NAVI_CHARA.id,
     contentType: CONTENT_TYPE.YESNO,
     body: '何か写真にコメントしておく？',
-    createdAt: new Date().toString()
+    createdAt: new Date().toString(),
   },
 ];
 const daily_log_script5: ChatViewModel[] = [
@@ -302,6 +331,6 @@ const daily_log_script5: ChatViewModel[] = [
     senderId: NAVI_CHARA.id,
     contentType: CONTENT_TYPE.REPLY,
     body: 'おつかれさま！',
-    createdAt: new Date().toString()
+    createdAt: new Date().toString(),
   },
 ];

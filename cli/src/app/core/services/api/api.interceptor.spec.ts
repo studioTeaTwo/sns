@@ -8,18 +8,15 @@ import { ApiBaseService } from 'app/core/services/api/api-base.service';
 describe('ApiInterceptor', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule,
-      ],
-      providers: [
-        ApiInterceptor,
-        Store,
-        ApiBaseService,
-      ]
+      imports: [RouterTestingModule],
+      providers: [ApiInterceptor, Store, ApiBaseService],
     });
   });
 
-  it('should be created', inject([ApiInterceptor], (service: ApiInterceptor) => {
-    expect(service).toBeTruthy();
-  }));
+  it(
+    'should be created',
+    inject([ApiInterceptor], (service: ApiInterceptor) => {
+      expect(service).toBeTruthy();
+    }),
+  );
 });

@@ -7,21 +7,18 @@ import { AccountService } from 'app/core/services/api';
 
 @Injectable()
 export class AdminGuard implements CanActivate {
-  constructor(
-    private router: Router,
-    private accountService: AccountService,
-  ) { }
+  constructor(private router: Router, private accountService: AccountService) {}
 
   canActivate(): Observable<boolean> {
-      return this.accountService.get().pipe(
-        map(user => {
-          if (user.admin) {
-            return true;
-          } else {
-            this.router.navigate(['/auth/login']);
-            return false;
-          }
-        })
-      );
+    return this.accountService.get().pipe(
+      map(user => {
+        if (user.admin) {
+          return true;
+        } else {
+          this.router.navigate(['/auth/login']);
+          return false;
+        }
+      }),
+    );
   }
 }

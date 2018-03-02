@@ -2,10 +2,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 import * as moment from 'moment';
 
 @Pipe({
-  name: 'roundOffDate'
+  name: 'roundOffDate',
 })
 export class RoundOffDatePipe implements PipeTransform {
-
   transform(value: string): string {
     const nowDate = moment();
     const sendDate = moment(value);
@@ -31,5 +30,4 @@ export class RoundOffDatePipe implements PipeTransform {
         return moment(sendDate).format('M/D');
     }
   }
-
 }

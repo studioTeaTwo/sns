@@ -1,4 +1,13 @@
-import { Component, OnInit, ElementRef, Renderer2, ViewChild, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ElementRef,
+  Renderer2,
+  ViewChild,
+  Output,
+  EventEmitter,
+  AfterViewInit,
+} from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { trigger } from '@angular/animations';
@@ -7,17 +16,8 @@ import { Subject } from 'rxjs/Subject';
 
 import { Store } from 'app/core/store/store';
 import { NAVI_CHARA, SIGNUP_USER } from 'app/constants/constants';
-import {
-  ChatThread,
-  Chats,
-  ChatViewModel,
-  CONTENT_TYPE,
-  User,
-} from 'app/interfaces/api-models';
-import {
-  AccountService,
-  ChatService,
-} from 'app/core/services/api';
+import { ChatThread, Chats, ChatViewModel, CONTENT_TYPE, User } from 'app/interfaces/api-models';
+import { AccountService, ChatService } from 'app/core/services/api';
 import { ChatComponent } from 'app/components/chats/chat/chat.component';
 import { DisplayState } from 'app/components/auth/signup/signup.component';
 import { addChat, addChatAndFocus, NAVI_THREAD } from '../shared/chat-operation.function';
@@ -27,8 +27,8 @@ import { addChat, addChatAndFocus, NAVI_THREAD } from '../shared/chat-operation.
   templateUrl: '../../components/chats/chat/chat.component.html',
   styleUrls: ['../../components/chats/chat/chat.component.scss'],
   animations: [
-    trigger('wholeanimation', []) // ダミー
-  ]
+    trigger('wholeanimation', []), // ダミー
+  ],
 })
 export class StepGoalComponent extends ChatComponent implements OnInit, AfterViewInit {
   @ViewChild('replyText') inputElm: ElementRef;
@@ -48,14 +48,7 @@ export class StepGoalComponent extends ChatComponent implements OnInit, AfterVie
     chatService: ChatService,
     private sanitizer: DomSanitizer,
   ) {
-    super(
-      router,
-      route,
-      renderer,
-      store,
-      accountService,
-      chatService,
-    );
+    super(router, route, renderer, store, accountService, chatService);
     this.height = window.innerHeight - 42 - 50; // 42 = header.height 50 = footer.height
 
     this.chatSource = new Subject<ChatViewModel[]>();
@@ -66,23 +59,35 @@ export class StepGoalComponent extends ChatComponent implements OnInit, AfterVie
     ga('send', 'event', 'Signup', 'goal');
 
     this.myself = SIGNUP_USER;
-    this.opponents = [{...NAVI_CHARA}];
+    this.opponents = [{ ...NAVI_CHARA }];
     this.chatThread = NAVI_THREAD;
 
     this.toggleReplyText(false);
 
-    addChat({
-      body: tutorial_script1,
-      waitTime: 0,
-    }, this.chatHistory, this.chatSource);
-    addChat({
-      body: tutorial_script2,
-      waitTime: 2000
-    }, this.chatHistory, this.chatSource);
-    addChat({
-      body: tutorial_script3,
-      waitTime: 5000
-    }, this.chatHistory, this.chatSource);
+    addChat(
+      {
+        body: tutorial_script1,
+        waitTime: 0,
+      },
+      this.chatHistory,
+      this.chatSource,
+    );
+    addChat(
+      {
+        body: tutorial_script2,
+        waitTime: 2000,
+      },
+      this.chatHistory,
+      this.chatSource,
+    );
+    addChat(
+      {
+        body: tutorial_script3,
+        waitTime: 5000,
+      },
+      this.chatHistory,
+      this.chatSource,
+    );
   }
 
   ngAfterViewInit() {
@@ -92,7 +97,6 @@ export class StepGoalComponent extends ChatComponent implements OnInit, AfterVie
   onClickYes() {
     this.completed.emit(DisplayState.BACK);
   }
-
 }
 
 const tutorial_script1: ChatViewModel[] = [
@@ -101,7 +105,7 @@ const tutorial_script1: ChatViewModel[] = [
     senderId: NAVI_CHARA.id,
     contentType: CONTENT_TYPE.REPLY,
     body: 'OK！君の入国を許可するよ！',
-    createdAt: new Date().toString()
+    createdAt: new Date().toString(),
   },
 ];
 const tutorial_script2: ChatViewModel[] = [
@@ -110,7 +114,7 @@ const tutorial_script2: ChatViewModel[] = [
     senderId: NAVI_CHARA.id,
     contentType: CONTENT_TYPE.REPLY,
     body: 'お家を用意したのでまずはそこへ向かってみて。',
-    createdAt: new Date().toString()
+    createdAt: new Date().toString(),
   },
   {
     id: 3,
@@ -118,7 +122,7 @@ const tutorial_script2: ChatViewModel[] = [
     contentType: CONTENT_TYPE.REPLY,
     // TODO: マークアップを反映する
     body: `家には<span color="Red">郵便物が来たりマニュアルがある</span>から、何をしたらいいかヒントがあるはずさ。`,
-    createdAt: new Date().toString()
+    createdAt: new Date().toString(),
   },
 ];
 const tutorial_script3: ChatViewModel[] = [
@@ -127,13 +131,13 @@ const tutorial_script3: ChatViewModel[] = [
     senderId: NAVI_CHARA.id,
     contentType: CONTENT_TYPE.REPLY,
     body: 'さあ準備ができたらYESを押してくれ。僕もそっちへ向かう。',
-    createdAt: new Date().toString()
+    createdAt: new Date().toString(),
   },
   {
     id: 5,
     senderId: NAVI_CHARA.id,
     contentType: CONTENT_TYPE.YESNO,
     body: 'そこで君のことを待ってるよ！',
-    createdAt: new Date().toString()
+    createdAt: new Date().toString(),
   },
 ];

@@ -8,20 +8,21 @@ import { MockAccountService } from 'testing/api';
 describe('AdminGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule,
-      ],
+      imports: [RouterTestingModule],
       providers: [
         AdminGuard,
         {
           provide: AccountService,
-          useClass: MockAccountService
+          useClass: MockAccountService,
         },
-      ]
+      ],
     });
   });
 
-  it('should ...', inject([AdminGuard], (guard: AdminGuard) => {
-    expect(guard).toBeTruthy();
-  }));
+  it(
+    'should ...',
+    inject([AdminGuard], (guard: AdminGuard) => {
+      expect(guard).toBeTruthy();
+    }),
+  );
 });

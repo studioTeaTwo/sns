@@ -13,15 +13,13 @@ export enum DisplayState {
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss']
+  styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent implements OnInit {
   readonly DisplayState = DisplayState;
   displayState: DisplayState;
 
-  constructor(
-    private router: Router,
-  ) { }
+  constructor(private router: Router) {}
 
   ngOnInit() {
     ga('send', 'event', 'Signup', 'start');

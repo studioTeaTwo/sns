@@ -7,14 +7,7 @@ import { HomeComponent } from 'app/components/home/home/home.component';
 import { TipsComponent } from 'app/components/home/tips/tips.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    SharedModule,
-    HomeRoutingModule
-  ],
-  declarations: [
-    HomeComponent,
-    TipsComponent,
-  ]
+  imports: [CommonModule, SharedModule, HomeRoutingModule],
+  declarations: [HomeComponent, TipsComponent],
 })
-export class HomeModule { }
+export class HomeModule {}

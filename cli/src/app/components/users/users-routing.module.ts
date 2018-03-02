@@ -24,13 +24,13 @@ const routes: Routes = [
       {
         path: 'followers',
         component: RelationshipComponent,
-      }
-    ]
+      },
+    ],
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class UsersRoutingModule { }
+export class UsersRoutingModule {}

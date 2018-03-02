@@ -1,10 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'shortenText'
+  name: 'shortenText',
 })
 export class ShortenTextPipe implements PipeTransform {
-
   transform(value: string, limitNumber: number): string {
     let val = '';
     let sum = 0;
@@ -14,11 +13,14 @@ export class ShortenTextPipe implements PipeTransform {
       } else {
         sum += 2;
       }
-      if (sum <= limitNumber) { val += value.charAt(i); }
+      if (sum <= limitNumber) {
+        val += value.charAt(i);
+      }
     }
     // 三点リーダーを表示する
-    if (sum > limitNumber) { val += '...'; }
+    if (sum > limitNumber) {
+      val += '...';
+    }
     return val;
   }
-
 }

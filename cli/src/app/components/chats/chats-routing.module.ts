@@ -12,11 +12,11 @@ const routes: Routes = [
   {
     path: ':id',
     component: ChatComponent,
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class ChatsRoutingModule { }
+export class ChatsRoutingModule {}

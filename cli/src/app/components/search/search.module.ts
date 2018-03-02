@@ -9,16 +9,7 @@ import { TabsComponent } from './tabs/tabs.component';
 import { NameComponent } from './name/name.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    SearchRoutingModule,
-    SharedModule,
-  ],
-  declarations: [
-    AllergensComponent,
-    ResultsComponent,
-    TabsComponent,
-    NameComponent
-  ]
+  imports: [CommonModule, SearchRoutingModule, SharedModule],
+  declarations: [AllergensComponent, ResultsComponent, TabsComponent, NameComponent],
 })
-export class SearchModule { }
+export class SearchModule {}

@@ -13,24 +13,21 @@ describe('ResultsComponent', () => {
   let component: ResultsComponent;
   let fixture: ComponentFixture<ResultsComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule,
-        MaterialModule,
-      ],
-      declarations: [ ResultsComponent ],
-      providers: [
-        Store,
-        {
-          provide: UserService,
-          useClass: MockUserService
-        },
-      ]
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        imports: [HttpClientTestingModule, RouterTestingModule, MaterialModule],
+        declarations: [ResultsComponent],
+        providers: [
+          Store,
+          {
+            provide: UserService,
+            useClass: MockUserService,
+          },
+        ],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ResultsComponent);

@@ -8,17 +8,15 @@ import { Store } from 'app/core/store/store';
 describe('FeedService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-      ],
-      providers: [
-        FeedService,
-        Store,
-      ]
+      imports: [HttpClientTestingModule],
+      providers: [FeedService, Store],
     });
   });
 
-  it('should be created', inject([FeedService], (service: FeedService) => {
-    expect(service).toBeTruthy();
-  }));
+  it(
+    'should be created',
+    inject([FeedService], (service: FeedService) => {
+      expect(service).toBeTruthy();
+    }),
+  );
 });

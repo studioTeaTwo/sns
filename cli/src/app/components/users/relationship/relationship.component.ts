@@ -9,7 +9,7 @@ import { UserService } from 'app/core/services/api';
 @Component({
   selector: 'app-relationship',
   templateUrl: './relationship.component.html',
-  styleUrls: ['./relationship.component.scss']
+  styleUrls: ['./relationship.component.scss'],
 })
 export class RelationshipComponent implements OnInit {
   users$ = this.store.select<Profile[]>(state => state.searchUsers);
@@ -20,7 +20,7 @@ export class RelationshipComponent implements OnInit {
     private route: ActivatedRoute,
     private store: Store,
     private userService: UserService,
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.route.url.subscribe(urls => {

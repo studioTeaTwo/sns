@@ -5,17 +5,11 @@ import { of } from 'rxjs/observable/of';
 import { map } from 'rxjs/operators';
 
 import { Store } from 'app/core/store/store';
-import {
-  MasterAllergenGroup,
-} from 'app/interfaces/api-models';
+import { MasterAllergenGroup } from 'app/interfaces/api-models';
 
 @Injectable()
 export class MasterDataService {
-
-  constructor(
-    private httpClient: HttpClient,
-    private store: Store,
-  ) { }
+  constructor(private httpClient: HttpClient, private store: Store) {}
 
   getAllergenGroups(): Observable<MasterAllergenGroup[]> {
     const masterAllergenGroups = this.store.getState().masterAllergenGroups;
@@ -23,12 +17,10 @@ export class MasterDataService {
       return of(masterAllergenGroups);
     } else {
       return this.httpClient.get<MasterAllergenGroup[]>(`/api/master_data/allergen_groups`).pipe(
-        map(
-          response => {
-            this.onSuccessAllergenGroups(response);
-            return response;
-          }
-        )
+        map(response => {
+          this.onSuccessAllergenGroups(response);
+          return response;
+        }),
       );
     }
   }

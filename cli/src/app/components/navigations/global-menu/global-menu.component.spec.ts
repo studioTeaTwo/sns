@@ -10,19 +10,15 @@ describe('GlobalMenuComponent', () => {
   let component: GlobalMenuComponent;
   let fixture: ComponentFixture<GlobalMenuComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule,
-        MaterialModule,
-      ],
-      declarations: [ GlobalMenuComponent ],
-      providers: [
-        SpyLocation
-      ],
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        imports: [RouterTestingModule, MaterialModule],
+        declarations: [GlobalMenuComponent],
+        providers: [SpyLocation],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(GlobalMenuComponent);

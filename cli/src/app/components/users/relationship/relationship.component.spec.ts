@@ -13,24 +13,21 @@ describe('RelationshipComponent', () => {
   let component: RelationshipComponent;
   let fixture: ComponentFixture<RelationshipComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule,
-        MaterialModule,
-      ],
-      declarations: [ RelationshipComponent ],
-      providers: [
-        Store,
-        {
-          provide: UserService,
-          useClass: MockUserService
-        },
-      ]
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        imports: [HttpClientTestingModule, RouterTestingModule, MaterialModule],
+        declarations: [RelationshipComponent],
+        providers: [
+          Store,
+          {
+            provide: UserService,
+            useClass: MockUserService,
+          },
+        ],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RelationshipComponent);

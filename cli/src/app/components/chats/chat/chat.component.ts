@@ -1,4 +1,12 @@
-import { Component, OnInit, Renderer2, ViewChild, ElementRef, SecurityContext, AfterViewChecked } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Renderer2,
+  ViewChild,
+  ElementRef,
+  SecurityContext,
+  AfterViewChecked,
+} from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { trigger } from '@angular/animations';
 import { Observable } from 'rxjs/Observable';
@@ -7,13 +15,7 @@ import { map, concatMap, take } from 'rxjs/operators';
 
 import { Store } from 'app/core/store/store';
 import { KEY_CODE } from 'app/constants/constants';
-import {
-  ChatThread,
-  Chats,
-  ChatViewModel,
-  CONTENT_TYPE,
-  User,
-} from 'app/interfaces/api-models';
+import { ChatThread, Chats, ChatViewModel, CONTENT_TYPE, User } from 'app/interfaces/api-models';
 import { AccountService, ChatService } from 'app/core/services/api';
 
 @Component({
@@ -21,8 +23,8 @@ import { AccountService, ChatService } from 'app/core/services/api';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss'],
   animations: [
-    trigger('wholeanimation', []) // ダミー
-  ]
+    trigger('wholeanimation', []), // ダミー
+  ],
 })
 export class ChatComponent implements OnInit, AfterViewChecked {
   @ViewChild('scrollMove') scrollContainer: ElementRef;
@@ -51,47 +53,50 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   }
 
   ngOnInit() {
-    const account$ = this.accountService.get().pipe(map(response => this.myself = response));
+    const account$ = this.accountService.get().pipe(map(response => (this.myself = response)));
     const params$ = this.route.paramMap;
 
-    zip<User, ParamMap>(account$, params$).pipe(
-      map(result => {
-        const account = result[0];
-        const chatId = result[1].get('id');
+    zip<User, ParamMap>(account$, params$)
+      .pipe(
+        map(result => {
+          const account = result[0];
+          const chatId = result[1].get('id');
 
-        this.chatThread = this.store.getState().chatList.find(value => value.id === +chatId);
-        const chats = this.store.getState().chats.find(value => value.chatThreadId === +chatId);
+          this.chatThread = this.store.getState().chatList.find(value => value.id === +chatId);
+          const chats = this.store.getState().chats.find(value => value.chatThreadId === +chatId);
 
-        // すでにチャットがあるのでそのまま始める
-        if (this.chatThread && chats) {
-          this.opponents = this.chatThread.participants.filter(value => value.id !== account.id);
-          return;
-        }
-
-        this.chatService.resetChat();
-
-        // もう既存のスレッドがあるがチャットは無い
-        if (this.chatThread && !chats) {
-          this.opponents = this.chatThread.participants.filter(value => value.id !== account.id);
-          this.chatService.getChatThread(this.chatThread.id).subscribe();
-          return;
-        }
-
-        // キャッシュがないので新規で通信取得する
-        this.chatService.list()
-          .pipe(concatMap(response => {
-            this.chatThread = response.find(value => value.id === +chatId);
+          // すでにチャットがあるのでそのまま始める
+          if (this.chatThread && chats) {
             this.opponents = this.chatThread.participants.filter(value => value.id !== account.id);
-            return this.chatService.getChatThread(this.chatThread.id);
-          }))
-          .subscribe();
-      }),
-      take(1)
-    )
-    .subscribe(
-      (next: void) => {},
-      (error: any) => this.router.navigateByUrl('/chat/list'),
-    );
+            return;
+          }
+
+          this.chatService.resetChat();
+
+          // もう既存のスレッドがあるがチャットは無い
+          if (this.chatThread && !chats) {
+            this.opponents = this.chatThread.participants.filter(value => value.id !== account.id);
+            this.chatService.getChatThread(this.chatThread.id).subscribe();
+            return;
+          }
+
+          // キャッシュがないので新規で通信取得する
+          this.chatService
+            .list()
+            .pipe(
+              concatMap(response => {
+                this.chatThread = response.find(value => value.id === +chatId);
+                this.opponents = this.chatThread.participants.filter(
+                  value => value.id !== account.id,
+                );
+                return this.chatService.getChatThread(this.chatThread.id);
+              }),
+            )
+            .subscribe();
+        }),
+        take(1),
+      )
+      .subscribe((next: void) => {}, (error: any) => this.router.navigateByUrl('/chat/list'));
   }
 
   ngAfterViewChecked() {
@@ -101,29 +106,36 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   isDisplayDate() {}
 
   isMyself(chat: ChatViewModel): boolean {
-    if (!chat.body) { return false; }
-    return (chat.contentType === CONTENT_TYPE.REPLY) && (chat.senderId === this.myself.id);
+    if (!chat.body) {
+      return false;
+    }
+    return chat.contentType === CONTENT_TYPE.REPLY && chat.senderId === this.myself.id;
   }
 
   isOpponents(chat: ChatViewModel): boolean {
-    if (!chat.body) { return false; }
-    return (chat.contentType === CONTENT_TYPE.REPLY) && (this.opponents.some(value => value.id === chat.senderId));
+    if (!chat.body) {
+      return false;
+    }
+    return (
+      chat.contentType === CONTENT_TYPE.REPLY &&
+      this.opponents.some(value => value.id === chat.senderId)
+    );
   }
 
   isYesNo(chat: ChatViewModel): boolean {
-    return (chat.contentType === CONTENT_TYPE.YESNO);
+    return chat.contentType === CONTENT_TYPE.YESNO;
   }
 
   isCheckbox(chat: ChatViewModel): boolean {
-    return (chat.contentType === CONTENT_TYPE.CHECKBOX) && chat.itemList ? true : false;
+    return chat.contentType === CONTENT_TYPE.CHECKBOX && chat.itemList ? true : false;
   }
 
   isRadiobutton(chat: ChatViewModel): boolean {
-    return (chat.contentType === CONTENT_TYPE.RADIOBUTTON) && chat.itemList ? true : false;
+    return chat.contentType === CONTENT_TYPE.RADIOBUTTON && chat.itemList ? true : false;
   }
 
   isCamera(chat: ChatViewModel): boolean {
-    return (chat.contentType === CONTENT_TYPE.CAMERA);
+    return chat.contentType === CONTENT_TYPE.CAMERA;
   }
 
   getImgSrc(chat: ChatViewModel): string {
@@ -149,11 +161,9 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   onClickNo() {}
 
-  onChangeChecked(item) {
-  }
+  onChangeChecked(item) {}
 
-  onChangeRadio(item) {
-  }
+  onChangeRadio(item) {}
 
   onClickReply(replyText: string) {
     this.chatService.say(this.chatThread.id, String(replyText).replace(/<[^>]+>/gm, ''));

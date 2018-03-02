@@ -8,17 +8,15 @@ import { Store } from 'app/core/store/store';
 describe('DailyLogService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-      ],
-      providers: [
-        DailyLogService,
-        Store,
-      ]
+      imports: [HttpClientTestingModule],
+      providers: [DailyLogService, Store],
     });
   });
 
-  it('should be created', inject([DailyLogService], (service: DailyLogService) => {
-    expect(service).toBeTruthy();
-  }));
+  it(
+    'should be created',
+    inject([DailyLogService], (service: DailyLogService) => {
+      expect(service).toBeTruthy();
+    }),
+  );
 });

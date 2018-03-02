@@ -14,25 +14,22 @@ describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule,
-        MaterialModule,
-      ],
-      declarations: [ HeaderComponent ],
-      providers: [
-        SpyLocation,
-        Store,
-        {
-          provide: AccountService,
-          useClass: MockAccountService
-        },
-      ]
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        imports: [HttpClientTestingModule, RouterTestingModule, MaterialModule],
+        declarations: [HeaderComponent],
+        providers: [
+          SpyLocation,
+          Store,
+          {
+            provide: AccountService,
+            useClass: MockAccountService,
+          },
+        ],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(HeaderComponent);

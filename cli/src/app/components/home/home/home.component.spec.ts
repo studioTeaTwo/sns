@@ -16,27 +16,28 @@ describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule,
-        NoopAnimationsModule,
-        MaterialModule,
-      ],
-      declarations: [ HomeComponent ],
-      providers: [
-        Store,
-        {
-          provide: AccountService,
-          useClass: MockAccountService
-        },
-        FeedService,
-      ]
-    })
-    .compileComponents();
-    window.ga = jasmine.createSpy('ga');
-  }));
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        imports: [
+          HttpClientTestingModule,
+          RouterTestingModule,
+          NoopAnimationsModule,
+          MaterialModule,
+        ],
+        declarations: [HomeComponent],
+        providers: [
+          Store,
+          {
+            provide: AccountService,
+            useClass: MockAccountService,
+          },
+          FeedService,
+        ],
+      }).compileComponents();
+      window.ga = jasmine.createSpy('ga');
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(HomeComponent);

@@ -10,7 +10,7 @@ import { AccountService } from 'app/core/services/api';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
   private currentLocation;
@@ -23,8 +23,7 @@ export class HeaderComponent implements OnInit {
     this.currentLocation = location;
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   getMyProfile() {
     this.accountService.get().subscribe(response => {
