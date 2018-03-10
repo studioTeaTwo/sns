@@ -1,0 +1,143 @@
+version: 2
+
+references:
+  container_config: &container_config
+    docker:
+      - image: circleci/ruby:2.4-stretch-node-browsers
+    working_directory: ~/sns
+
+  workspace_root: &workspace_root
+      /tmp/workspace
+
+  attach_workspace: &attach_workspace
+    attach_workspace:
+      at: *workspace_root
+
+  deploy-requires: &deploy-requires
+    requires:
+      - front-test
+      - front-build
+      - server-test
+
+jobs:
+
+  front-test:
+    <<: *container_config
+    steps:
+      # Checkout with cache https://circleci.com/docs/2.0/caching/#source-caching
+      - restore_cache:
+          keys:
+            - dot-git-cache-{{ .Branch }}-{{ .Revision }}
+            - dot-git-cache-{{ .Branch }}-
+            - dot-git-cache-
+      - checkout
+      - restore_cache:
+          key: npm-cache-{{ checksum "cli/package.json" }}
+      - run:
+          name: install dependencies
+          command: yarn install
+          working_directory: ./cli
+      - save_cache:
+          key: npm-cache-{{ checksum "cli/package.json" }}
+          paths:
+            - ./cli/node_modules
+      - run:
+          name: test client
+          command: |
+            npm run lint
+            npm run test
+          working_directory: ./cli
+
+  front-build:
+    <<: *container_config
+    steps:
+      # Checkout with cache https://circleci.com/docs/2.0/caching/#source-caching
+      - restore_cache:
+          keys:
+            - dot-git-cache-{{ .Branch }}-{{ .Revision }}
+            - dot-git-cache-{{ .Branch }}-
+            - dot-git-cache-
+      - checkout
+      - restore_cache:
+          key: npm-cache-{{ checksum "cli/package.json" }}
+      - run:
+          name: install dependencies
+          command: yarn install
+          working_directory: ./cli
+      - save_cache:
+          key: npm-cache-{{ checksum "cli/package.json" }}
+          paths:
+            - ./cli/node_modules
+      - run:
+          name: build client
+          command:
+            npm run build:prod
+            && mkdir -p /tmp/workspace
+            && cp -r dist /tmp/workspace
+          working_directory: ./cli
+      - persist_to_workspace:
+          root: *workspace_root
+          paths:
+            - dist
+
+  server-test:
+    <<: *container_config
+    steps:
+      # Checkout with cache https://circleci.com/docs/2.0/caching/#source-caching
+      - restore_cache:
+          keys:
+            - dot-git-cache-{{ .Branch }}-{{ .Revision }}
+            - dot-git-cache-{{ .Branch }}-
+            - dot-git-cache-
+      - checkout
+      - restore_cache:
+          key: gem-cache-{{ checksum "srv/Gemfile.lock" }}
+      - run:
+          name: install dependencies
+          command: bundle install --path vendor/bundle
+          working_directory: ./srv
+      - save_cache:
+          key: gem-cache-{{ checksum "srv/Gemfile.lock" }}
+          paths:
+            - ./srv/vendor/bundle
+      - run:
+          name: test server
+          command: RAILS_ENV=test bundle exec rspec spec/
+          working_directory: ./srv
+
+  # 各環境向けデプロイjob
+  heroku-deploy-production:
+    <<: *container_config
+    steps:
+      - *attach_workspace
+      - checkout
+      - add_ssh_keys:  # add key from CircleCI account based on fingerprint
+          fingerprints:
+            - "3d:7a:de:6a:c2:6d:91:31:22:27:7f:2e:a6:40:1a:b8"
+      - run:
+          name: setup heroku
+          command: bash .circleci/setup-heroku.sh
+      - run:
+          name: copy client file
+          command: cp -r /tmp/workspace/dist ./srv/public
+      - run:
+          name: deploy to heroku
+          command: |
+            echo "git status"
+            git add srv/public
+            git commit --amend --no-edit
+            git push git@heroku.com:allelog.git `git subtree split --prefix srv HEAD`:master --force
+          command: heroku run rails db:migrate --app allelog
+
+workflows:
+  version: 2
+  build-test-and-deploy:
+    jobs:
+      - front-test
+      - front-build
+      - server-test
+      - heroku-deploy-production:
+          <<: *deploy-requires
+          filters:
+            branches:
+              only: master

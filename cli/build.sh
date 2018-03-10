@@ -1,7 +1,7 @@
 #!/bin/sh
 
 clear() {
-    cd ./srv/public && \
+    cd ../srv/public && \
     ls | grep -v -E 'robots.txt' | xargs rm -rff && \
     cd $HOME
 }
@@ -9,8 +9,6 @@ clear() {
 HOME=`pwd`
 
 echo $HOME
-
-cd ./cli
 
 # ビルド実行
 
@@ -25,11 +23,9 @@ fi
 
 # ファイル配置
 
-cd $HOME
-
 echo 'Move Static Files to Public folder.'
 clear && \
-cp -r ./cli/dist/* ./srv/public/
+cp -r ./dist/* ../srv/public/
 [ $? -ne 0 ] && exit 1
 
 exit 0
