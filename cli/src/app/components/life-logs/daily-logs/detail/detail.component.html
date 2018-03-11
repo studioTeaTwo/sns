@@ -30,7 +30,7 @@
 
   <mat-card>
     <mat-card-header>
-      <mat-card-title><mat-icon>face</mat-icon>今日の気分は？</mat-card-title>
+      <mat-card-title><mat-icon>face</mat-icon><strong>今日の気分は？</strong></mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <mat-button-toggle-group id="health" [(ngModel)]="dailyLogParam.health" [disabled]="displayMode === MODE.ROM">
@@ -46,7 +46,7 @@
 
   <mat-card>
     <mat-card-header>
-      <mat-card-title><mat-icon>local_pharmacy</mat-icon>薬は服用した？</mat-card-title>
+      <mat-card-title><mat-icon>local_pharmacy</mat-icon><strong>薬は服用した？</strong></mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <mat-radio-group id="medicina" [(ngModel)]="dailyLogParam.medicina" [disabled]="displayMode === MODE.ROM">
@@ -61,7 +61,7 @@
   
   <mat-card *ngIf="!(displayMode === MODE.ROM && dailyLogParam.photograph.length === 0)">
     <mat-card-header>
-      <mat-card-title><mat-icon>photo_camera</mat-icon>写真の記録</mat-card-title>
+      <mat-card-title><mat-icon>photo_camera</mat-icon><strong>写真の記録</strong></mat-card-title>
       <div class="form-photograph-upload">
         <div class="form-photograph-upload-button" (click)="file.click()">
           <input type="file" accept="image/*" #file (change)="onChangeFile(file)" [style.display]="'none'" />
