@@ -72,6 +72,7 @@ jobs:
           name: build client
           command:
             npm run build:prod
+            && gzip -k ./dist/*.js ./dist/*.css
             && mkdir -p /tmp/workspace
             && cp -r dist /tmp/workspace
           working_directory: ./cli
