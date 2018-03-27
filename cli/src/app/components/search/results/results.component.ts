@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 import { Store } from 'app/core/store/store';
-import { Profile } from 'app/interfaces/api-models';
+import { User } from 'app/interfaces/api-models';
 import { UserService } from 'app/core/services/api';
 
 @Component({
@@ -12,18 +12,22 @@ import { UserService } from 'app/core/services/api';
   styleUrls: ['./results.component.scss'],
 })
 export class ResultsComponent implements OnInit {
-  searchUsers$ = this.store.select<Profile[]>(state => state.searchUsers);
+  searchUsers$ = this.store.select<User[]>(state => state.searchUsers);
   loading$ = this.store.select<boolean>(state => state.loading);
 
   constructor(private router: Router, private store: Store, private userService: UserService) {}
 
   ngOnInit() {}
 
-  onClickUser(value: Profile) {
+  onClickUser(value: User) {
     this.router.navigate([`/user/${value.id}`]);
   }
 
   onClickAllergen(value: string) {
     this.userService.searchByAllergenGroup(value);
+  }
+
+  getPositiveAllergenGroups(user: User): string[] {
+    return Object.keys(user).filter(key => key.match(/^allergen/) && user[key]);
   }
 }

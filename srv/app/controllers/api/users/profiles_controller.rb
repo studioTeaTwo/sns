@@ -10,7 +10,7 @@ class Api::Users::ProfilesController < ApplicationController
     @user = User.find(params[:id])
     followcheck_if_login
     render json: @user, include: [:iges, :microposts], serializer: Rest::ProfileSerializer,
-      option: {sort: :profile, isFollow: @isFollow}
+      option: {isFollow: @isFollow}
   end
 
   private

@@ -15,4 +15,13 @@ FactoryGirl.define do
 
     allergen_group_yasai true
   end
+
+  factory :yasai_ige, class: Ige do
+    test_date Faker::Time.between(1.years.ago, 1.months.ago, :day)
+    ige_value 300
+    latest_test_result true
+
+    allergen_group_yasai true
+    allergen_group_komugi true
+  end
 end

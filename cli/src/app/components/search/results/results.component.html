@@ -8,7 +8,7 @@
         <div class="discription">
           <div class="user-name">{{user.name}}</div>
           <div class="possession-allergen">
-            <img *ngFor="let allergen of user.positiveAllergenGroups"
+            <img *ngFor="let allergen of getPositiveAllergenGroups(user)"
               [src]="'assets/images/' + allergen + '.png'"
               (click)="onClickAllergen(allergen)" />
           </div>

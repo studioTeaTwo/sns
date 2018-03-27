@@ -17,7 +17,7 @@ class Api::Search::AllergensController < ApplicationController
     end
     
     if @users.present?
-      render json: @users, each_serializer: Rest::ProfileSerializer, option: {sort: :search}
+      render json: @users, each_serializer: Rest::UserSerializer
     else
       render json: { error: 'not_found' }, status: :not_found
     end

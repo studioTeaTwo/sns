@@ -65,7 +65,7 @@ export class UserService {
   searchByAllergenGroup(keyword: string) {
     this.apiBaseService.resetBeforeRequest({ searchUsers: [] });
     const params = new HttpParams().set('keyword', keyword);
-    this.httpClient.get<Profile[]>(`/api/search/allergens`, { params: params }).subscribe(
+    this.httpClient.get<User[]>(`/api/search/allergens`, { params: params }).subscribe(
       response => {
         this.onSuccessSearchUsers(response);
       },
@@ -78,7 +78,7 @@ export class UserService {
   searchByName(keyword: string) {
     this.apiBaseService.resetBeforeRequest({ searchUsers: [] });
     const params = new HttpParams().set('keyword', keyword);
-    this.httpClient.get<Profile[]>(`/api/search/usernames`, { params: params }).subscribe(
+    this.httpClient.get<User[]>(`/api/search/usernames`, { params: params }).subscribe(
       response => {
         this.onSuccessSearchUsers(response);
       },
@@ -108,7 +108,7 @@ export class UserService {
     });
   }
 
-  private onSuccessSearchUsers(data: Profile[]) {
+  private onSuccessSearchUsers(data: User[]) {
     const currentState = this.store.getState();
     this.store.setState({
       ...currentState,

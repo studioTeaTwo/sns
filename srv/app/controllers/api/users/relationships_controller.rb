@@ -11,7 +11,7 @@ class Api::Users::RelationshipsController < ApplicationController
     current_user.follow(user)
     record_activity(relationship_params[:followed_id])
     render json: user, include: [:iges, :microposts], serializer: Rest::ProfileSerializer,
-      option: {sort: :profile, isFollow: true}
+      option: {isFollow: true}
   end
 
   # Destroys a relationship
@@ -21,7 +21,7 @@ class Api::Users::RelationshipsController < ApplicationController
     user = User.find(params[:id])
     current_user.unfollow(user)
     render json: user, include: [:iges, :microposts], serializer: Rest::ProfileSerializer,
-      option: {sort: :profile, isFollow: false}
+      option: {isFollow: false}
   end
 
   private

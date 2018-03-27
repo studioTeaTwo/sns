@@ -29,6 +29,18 @@ FactoryGirl.define do
     classification 1
   end
 
+  factory :allergen_user, class: User do
+    name 'yasai'
+    email 'yasai@example.com'
+    password 'testtest3'
+    encrypted_password User.digest('testtest3')
+    access_token 'T2DRTjL5m2Zpz6ieMVGi'
+    
+    allergen_group_komugi true
+
+    classification 1
+  end
+
   factory :admin_user, class: User do
     name 'admin'
     email 'admin@example.com'

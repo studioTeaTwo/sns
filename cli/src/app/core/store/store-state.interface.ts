@@ -8,7 +8,7 @@ export interface StoreState {
   experienceList: API.Experience;
   chatList: API.ChatThread[];
   chats: API.ChatViewModel[];
-  searchUsers: API.Profile[];
+  searchUsers: API.User[];
   dailyLogList: API.DailyLog[];
   dailyLog: API.DailyLog;
 

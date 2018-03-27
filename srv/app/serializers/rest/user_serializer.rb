@@ -97,7 +97,6 @@ class Rest::UserSerializer < ActiveModel::Serializer
     end
   end
 
-  # Searchならmicropotやigeは返さない
   def session?
     instance_options[:sort] == :session
   end

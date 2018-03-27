@@ -4,8 +4,10 @@ RSpec.describe "Api::Search::Allergens", type: :request do
   let(:current_user) { create(:user) }
   # 以下!をつける
   let!(:view_user) { create(:another_user) }
+  let!(:allergen_user) { create(:allergen_user) }
   let!(:new_ige) { create(:new_ige, { user_id: view_user.id}) }
   let!(:existing_ige) { create(:existing_ige, { user_id: view_user.id}) }
+  let!(:yasai_ige) { create(:yasai_ige, { user_id: allergen_user.id}) }
 
   describe "GET /api/search/allergens" do
 
@@ -13,8 +15,9 @@ RSpec.describe "Api::Search::Allergens", type: :request do
       it "works!" do
         get api_search_allergens_path, params: { keyword: :initial } , headers: { 'Authorization' => "#{current_user.access_token}" }
         expect(response).to have_http_status(:success)
-        expect(json.length).to eq(1)
+        expect(json.length).to eq(2)
         expect(json.to_s).to match(/#{view_user.name}/)
+        expect(json.to_s).to match(/#{allergen_user.name}/)
 
         expect(json[0]).not_to have_key('iges')
         expect(json[0]).not_to have_key('microposts')
@@ -23,14 +26,12 @@ RSpec.describe "Api::Search::Allergens", type: :request do
 
     context "when user input search_key" do
       it "works!" do
-        get api_search_allergens_path, params: { keyword: :allergenGroupYasai } , headers: { 'Authorization' => "#{current_user.access_token}" }
+        get api_search_allergens_path, params: { keyword: :allergenGroupKomugi } , headers: { 'Authorization' => "#{current_user.access_token}" }
         expect(response).to have_http_status(:success)
         expect(json.length).to eq(1)
 
-        expect(json[0]['email']).to eq(view_user.email)
-        expect(json[0]['avatarUrl']).to eq('https://secure.gravatar.com/avatar/66be054e58f234aa64b5af7f0159a74d?s=50')
-        expect(json[0]['latestIge']).to eq(existing_ige.ige_value)
-        expect(json[0]['positiveAllergenGroups']).to include('allergenGroupYasai')
+        expect(json[0]['email']).to eq(allergen_user.email)
+        expect(json[0]['allergenGroupKomugi']).to eq true
 
         expect(json[0]).not_to have_key('iges')
         expect(json[0]).not_to have_key('microposts')
