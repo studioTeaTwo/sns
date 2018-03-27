@@ -23,6 +23,10 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
   declarations: [],
   exports: [CoreMaterialModule],
   providers: [
+    AuthGuard,
+    AdminGuard,
+
+    Store,
     ApiInterceptor,
     ApiBaseService,
     MasterDataService,
