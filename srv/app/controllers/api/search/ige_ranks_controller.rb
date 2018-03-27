@@ -42,7 +42,7 @@ class Api::Search::IgeRanksController < ApplicationController
         range = 10
         users = User.search_by_ige(ige_value - range, ige_value + range)
         # IgE範囲を±10ずつ増やしていく
-        while users.count < 10 do
+        while users.size < 10 do
           range += 10
           users = User.search_by_ige(ige_value - range, ige_value + range)
         end

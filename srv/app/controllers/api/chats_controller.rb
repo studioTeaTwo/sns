@@ -43,7 +43,7 @@ class Api::ChatsController < ApplicationController
   def show
     @chat_thread = ChatThread.find(params[:id])
     # 既読つける
-    readChat(@chat_thread.id, @chat_thread.chats.last.id) if @chat_thread.chats.count > 0
+    readChat(@chat_thread.id, @chat_thread.chats.last.id) if @chat_thread.chats.size > 0
     render json: @chat_thread.chats, each_serializer: Rest::ChatSerializer
   end
 

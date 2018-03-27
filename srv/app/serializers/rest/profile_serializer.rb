@@ -48,11 +48,11 @@ class Rest::ProfileSerializer < Rest::UserSerializer
   end
 
   def followers
-    object.followers.count
+    object.followers.size
   end
 
   def followings
-    object.followings.count
+    object.followings.size
   end
 
   def isFollow

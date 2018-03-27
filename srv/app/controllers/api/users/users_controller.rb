@@ -80,7 +80,7 @@ class Api::Users::UsersController < ApplicationController
   # @body_parameter [string] email
   # @response_status 200
   def verify_email
-    if (User.where("email = ?" ,user_params[:email]).count == 0)
+    if (User.where("email = ?" ,user_params[:email]).size == 0)
       render json: {}, status: :ok
     else
       head :bad_request

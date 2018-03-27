@@ -94,12 +94,12 @@ class Api::IgesController < ApplicationController
       current_iges = current_user.iges.order("test_date DESC")
       if method == 'new'
         # ige検査がこれしかない
-        current_iges.count == 0 ||
+        current_iges.size == 0 ||
         # 今回入力された検査日付は一番新しい
         ige_data[:test_date] >= current_iges[0][:test_date]
       else
         # ige検査がこれしかない
-        current_iges.count == 1  ||
+        current_iges.size == 1  ||
         # 今回の検査データは最新検査の更新であり、かつ今回入力された検査日付が1個前の検査より新しい
         (ige_data[:id] == current_iges[0][:id] && ige_data[:test_date] >= current_iges[1][:test_date]) || 
         # 今回の検査データは最新検査の更新では無いが、今回入力された検査日付は一番新しい
@@ -144,7 +144,7 @@ class Api::IgesController < ApplicationController
       end
 
       # TODO: 結果が１つ以外だったらアラート上げる
-      # if allergen_info.count != 1
+      # if allergen_info.size != 1
 
       allergenGroup = Masterdata::AllergenGroup.all.select do |item| 
         item.ja == allergen_info[0].allergenGroup
