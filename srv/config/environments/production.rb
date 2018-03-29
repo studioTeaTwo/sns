@@ -82,5 +82,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.serve_static_files = true
-  config.assets.prefix = '/'
+  # config.assets.prefix = '/'
 end
