@@ -1,23 +1,54 @@
 version: 2
 
 references:
+
   container_config: &container_config
     docker:
       - image: circleci/ruby:2.4-stretch-node-browsers
     working_directory: ~/sns
+  
+  restore_cache: &restore_cache
+    restore_cache:
+        keys:
+          - dot-git-cache-{{ .Branch }}-{{ .Revision }}
+          - dot-git-cache-{{ .Branch }}-
+          - dot-git-cache-
 
   workspace_root: &workspace_root
-      /tmp/workspace
+    /tmp/workspace
 
   attach_workspace: &attach_workspace
     attach_workspace:
       at: *workspace_root
 
-  deploy-requires: &deploy-requires
+  deploy_requires: &deploy_requires
     requires:
       - front-test
       - front-build
       - server-test
+
+  heroku_common_command: 
+    add_ssh_keys: &add_ssh_keys # add key from CircleCI account based on fingerprint
+      add_ssh_keys:
+        fingerprints:
+          - "3d:7a:de:6a:c2:6d:91:31:22:27:7f:2e:a6:40:1a:b8"
+    setup_heroku: &setup_heroku
+      run:
+        name: setup
+        command: bash .circleci/setup-heroku.sh
+    copy_file: &copy_file
+      run:
+        name: copy file
+        command: cp -r /tmp/workspace/dist/* ./srv/public
+    prepare_deploy: &prepare_deploy
+      run:
+        name: prepare to deploy
+        command: |
+          git config --global user.email $HEROKU_EMAIL
+          git config --global user.name "T2"
+          echo "git status"
+          git add srv/public
+          git commit --amend --no-edit
 
 jobs:
 
@@ -25,11 +56,7 @@ jobs:
     <<: *container_config
     steps:
       # Checkout with cache https://circleci.com/docs/2.0/caching/#source-caching
-      - restore_cache:
-          keys:
-            - dot-git-cache-{{ .Branch }}-{{ .Revision }}
-            - dot-git-cache-{{ .Branch }}-
-            - dot-git-cache-
+      - *restore_cache
       - checkout
       - restore_cache:
           key: npm-cache-{{ checksum "cli/package.json" }}
@@ -52,11 +79,7 @@ jobs:
     <<: *container_config
     steps:
       # Checkout with cache https://circleci.com/docs/2.0/caching/#source-caching
-      - restore_cache:
-          keys:
-            - dot-git-cache-{{ .Branch }}-{{ .Revision }}
-            - dot-git-cache-{{ .Branch }}-
-            - dot-git-cache-
+      - *restore_cache
       - checkout
       - restore_cache:
           key: npm-cache-{{ checksum "cli/package.json" }}
@@ -85,11 +108,7 @@ jobs:
     <<: *container_config
     steps:
       # Checkout with cache https://circleci.com/docs/2.0/caching/#source-caching
-      - restore_cache:
-          keys:
-            - dot-git-cache-{{ .Branch }}-{{ .Revision }}
-            - dot-git-cache-{{ .Branch }}-
-            - dot-git-cache-
+      - *restore_cache
       - checkout
       - restore_cache:
           key: gem-cache-{{ checksum "srv/Gemfile.lock" }}
@@ -112,23 +131,34 @@ jobs:
     steps:
       - *attach_workspace
       - checkout
-      - add_ssh_keys:  # add key from CircleCI account based on fingerprint
-          fingerprints:
-            - "3d:7a:de:6a:c2:6d:91:31:22:27:7f:2e:a6:40:1a:b8"
+      - *add_ssh_keys
+      - *setup_heroku
+      - *copy_file
+      - *prepare_deploy
       - run:
-          name: setup heroku
-          command: bash .circleci/setup-heroku.sh
-      - run:
-          name: copy client file
-          command: cp -r /tmp/workspace/dist ./srv/public
-      - run:
-          name: deploy to heroku
-          command: |
-            echo "git status"
-            git add srv/public
-            git commit --amend --no-edit
+          name: deploy to heroku production
+          command:
             git push git@heroku.com:allelog.git `git subtree split --prefix srv HEAD`:master --force
+      - run:
+          name: migrate heroku production
           command: heroku run rails db:migrate --app allelog
+
+  heroku-deploy-staging:
+    <<: *container_config
+    steps:
+      - *attach_workspace
+      - checkout
+      - *add_ssh_keys
+      - *setup_heroku
+      - *copy_file
+      - *prepare_deploy
+      - run:
+          name: deploy to heroku staging
+          command:
+            git push git@heroku.com:allelog-st.git `git subtree split --prefix srv HEAD`:master --force
+      - run:
+          name: migrate heroku staging
+          command: heroku run rails db:migrate --app allelog-st
 
 workflows:
   version: 2
@@ -138,7 +168,12 @@ workflows:
       - front-build
       - server-test
       - heroku-deploy-production:
-          <<: *deploy-requires
+          <<: *deploy_requires
+          filters:
+            branches:
+              only: production
+      - heroku-deploy-staging:
+          <<: *deploy_requires
           filters:
             branches:
               only: master
