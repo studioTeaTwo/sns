@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { Observable ,  Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 import { Store } from 'app/core/store/store';
 import { NAVI_CHARA, SIGNUP_USER } from 'app/constants/constants';

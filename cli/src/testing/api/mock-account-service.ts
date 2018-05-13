@@ -1,4 +1,4 @@
-import { Observable ,  of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import { User } from 'app/interfaces/api-models';
 
