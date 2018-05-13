@@ -7,8 +7,7 @@ import {
   OnChanges,
   SimpleChange,
 } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
+import { Observable ,  of } from 'rxjs';
 import { filter, map, concatMap } from 'rxjs/operators';
 
 interface ImageFile {

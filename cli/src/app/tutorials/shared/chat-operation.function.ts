@@ -1,4 +1,4 @@
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 import { ChatThread, Chats, Chat } from 'app/interfaces/api-models';
 import { NAVI_CHARA } from 'app/constants/constants';
 

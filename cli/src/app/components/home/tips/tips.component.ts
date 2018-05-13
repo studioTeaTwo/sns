@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Inject } from '@angular/core';
 import { PlatformLocation, DOCUMENT } from '@angular/common';
-import { fromEvent } from 'rxjs/observable/fromEvent';
+import { fromEvent } from 'rxjs';
 
 import { TipsType, TipsCollection } from 'app/constants/constants';
 

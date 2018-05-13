@@ -8,8 +8,7 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
+import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { environment } from 'environments/environment';
@@ -57,7 +56,7 @@ export class ApiInterceptor implements HttpInterceptor {
       this.apiBaseService.onError(API_ERROR_MSGS.OTHER_SERVER_ERROR);
     }
     // return an ErrorObservable with a user-facing error message
-    return new ErrorObservable(error.message);
+    return throwError(error.message);
   }
 
   private goBackLogin() {

@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, UrlSegment } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
-import { Observable } from 'rxjs/Observable';
-import { zip } from 'rxjs/observable/zip';
+import { Observable ,  zip } from 'rxjs';
 import * as moment from 'moment';
 
 import { Store } from 'app/core/store/store';

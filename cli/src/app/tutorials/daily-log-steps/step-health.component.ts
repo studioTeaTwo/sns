@@ -11,9 +11,8 @@ import {
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { trigger } from '@angular/animations';
-import { Observable } from 'rxjs/Observable';
+import { Observable ,  Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { Subject } from 'rxjs/Subject';
 
 import { Store } from 'app/core/store/store';
 import { NAVI_CHARA, SymptomName, Symptom } from 'app/constants/constants';

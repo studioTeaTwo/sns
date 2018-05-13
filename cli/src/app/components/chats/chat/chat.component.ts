@@ -9,8 +9,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { trigger } from '@angular/animations';
-import { Observable } from 'rxjs/Observable';
-import { zip } from 'rxjs/observable/zip';
+import { Observable, zip } from 'rxjs';
 import { map, concatMap, take } from 'rxjs/operators';
 
 import { Store } from 'app/core/store/store';

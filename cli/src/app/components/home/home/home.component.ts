@@ -4,8 +4,7 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { trigger, style, transition, animate, state, keyframes } from '@angular/animations';
 import { DataSource } from '@angular/cdk/collections';
 import { MatMenuTrigger } from '@angular/material';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
+import { Observable ,  Subscription } from 'rxjs';
 import { concatMap, filter, map, take } from 'rxjs/operators';
 import * as Moment from 'moment';
 
