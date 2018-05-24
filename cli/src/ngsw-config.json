@@ -7,12 +7,9 @@
       "files": [
         "/favicon.ico",
         "/index.html",
+        "/*.css",
+        "/*.js",
         "/manifest.json"
-      ],
-      "versionedFiles": [
-        "/*.bundle.css",
-        "/*.bundle.js",
-        "/*.chunk.js"
       ],
       "urls": [
         "https://fonts.googleapis.com/icon?family=Material+Icons"
